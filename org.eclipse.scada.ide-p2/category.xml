@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/org.eclipse.scada.configuration_0.1.0.qualifier.jar" id="org.eclipse.scada.configuration" version="0.1.0.qualifier">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><site>
+   <feature id="org.eclipse.scada.configuration" url="features/org.eclipse.scada.configuration_0.1.0.v20131025-1053.jar" version="0.1.0.v20131025-1053">
       <category name="org.eclipse.scada.configuration.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.configuration.sdk_0.1.0.qualifier.jar" id="org.eclipse.scada.configuration.sdk" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.configuration.sdk" url="features/org.eclipse.scada.configuration.sdk_0.1.0.v20131022-1312.jar" version="0.1.0.v20131022-1312">
       <category name="org.eclipse.scada.configuration.sdk.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.ide.protocol.ngp_0.1.0.qualifier.jar" id="org.eclipse.scada.ide.protocol.ngp" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.ide.protocol.ngp" url="features/org.eclipse.scada.ide.protocol.ngp_0.1.0.v20131120-0830.jar" version="0.1.0.v20131120-0830">
       <category name="org.eclipse.scada.ide.protocol"/>
    </feature>
-   <feature url="features/org.eclipse.scada.ide.da.server.ui_0.1.0.qualifier.jar" id="org.eclipse.scada.ide.da.server.ui" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.ide.da.server.ui" url="features/org.eclipse.scada.ide.da.server.ui_0.1.0.v20131120-0830.jar" version="0.1.0.v20131120-0830">
       <category name="org.eclipse.scada.ide.da.server.ui"/>
    </feature>
-   <category-def name="org.eclipse.scada.configuration.category" label="Eclipse SCADA Configuration (Incubation)"/>
-   <category-def name="org.eclipse.scada.configuration.sdk.category" label="Eclipse SCADA Configuration SDK (Incubation)"/>
-   <category-def name="org.eclipse.scada.ide.protocol" label="Eclipse SCADA Protocol Editing Additions (Incubation)">
+   <category-def label="Eclipse SCADA Configuration (Incubation)" name="org.eclipse.scada.configuration.category"/>
+   <category-def label="Eclipse SCADA Configuration SDK (Incubation)" name="org.eclipse.scada.configuration.sdk.category"/>
+   <category-def label="Eclipse SCADA Protocol Editing Additions (Incubation)" name="org.eclipse.scada.ide.protocol">
       <description>
          Installs some editing additions for the NGP protocol model.
       </description>
    </category-def>
-   <category-def name="org.eclipse.scada.ide.da.server.ui" label="Eclipse SCADA Server Starter (Incubation)">
+   <category-def label="Eclipse SCADA Server Starter (Incubation)" name="org.eclipse.scada.ide.da.server.ui">
       <description>
          A user interface that allows starting server configurations inside the IDE for testing purposes.
       </description>
