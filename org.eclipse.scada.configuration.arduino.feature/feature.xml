@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="org.eclipse.scada.configuration.arduino.feature"
-      label="%featureName"
-      version="0.1.0.qualifier"
-      provider-name="%providerName"
-      license-feature="org.eclipse.scada.license"
-      license-feature-version="0.1.0.qualifier">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><feature id="org.eclipse.scada.configuration.arduino.feature" label="%featureName" license-feature="org.eclipse.scada.license" license-feature-version="0.1.0.qualifier" provider-name="%providerName" version="0.1.0.v20131213-1406">
 
    <description>
       %description
@@ -19,18 +12,8 @@
       %license
    </license>
 
-   <plugin
-         id="org.eclipse.scada.configuration.arduino"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <plugin download-size="0" id="org.eclipse.scada.configuration.arduino" install-size="0" unpack="false" version="0.0.0"/>
 
-   <plugin
-         id="org.eclipse.scada.configuration.arduino.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <plugin download-size="0" id="org.eclipse.scada.configuration.arduino.edit" install-size="0" unpack="false" version="0.0.0"/>
 
 </feature>
