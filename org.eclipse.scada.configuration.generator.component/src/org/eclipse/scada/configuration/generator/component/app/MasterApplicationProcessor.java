@@ -10,8 +10,10 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.generator.component.app;
 
+import javax.inject.Inject;
+
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.scada.configuration.component.System;
+import org.eclipse.scada.configuration.component.ComponentWorld;
 import org.eclipse.scada.configuration.generator.GeneratorContext.MasterContext;
 import org.eclipse.scada.configuration.infrastructure.MasterServer;
 import org.eclipse.scada.configuration.infrastructure.lib.WorldGenerator;
@@ -19,9 +21,15 @@ import org.eclipse.scada.configuration.infrastructure.lib.WorldGenerator;
 public abstract class MasterApplicationProcessor extends EquinoxApplicationProcessor<MasterServer>
 {
 
-    protected final WorldGenerator worldGenerator;
+    @Inject
+    protected WorldGenerator worldGenerator;
 
-    public MasterApplicationProcessor ( final System system, final WorldGenerator worldGenerator )
+    public MasterApplicationProcessor ()
+    {
+        super ( MasterServer.class );
+    }
+
+    public MasterApplicationProcessor ( final ComponentWorld system, final WorldGenerator worldGenerator )
     {
         super ( MasterServer.class, system );
         this.worldGenerator = worldGenerator;
@@ -30,9 +38,9 @@ public abstract class MasterApplicationProcessor extends EquinoxApplicationProce
     @Override
     protected void process ( final MasterServer app, final IProgressMonitor monitor ) throws Exception
     {
-        process ( this.worldGenerator.getMasterContext ( app ), monitor );
+        processContext ( this.worldGenerator.getMasterContext ( app ), monitor );
     }
 
-    protected abstract void process ( MasterContext masterContext, IProgressMonitor monitor ) throws Exception;
+    protected abstract void processContext ( MasterContext masterContext, IProgressMonitor monitor ) throws Exception;
 
 }

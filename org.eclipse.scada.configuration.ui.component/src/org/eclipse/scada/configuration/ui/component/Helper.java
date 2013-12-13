@@ -12,7 +12,6 @@ package org.eclipse.scada.configuration.ui.component;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,19 +19,17 @@ import java.util.Set;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.core.databinding.observable.set.WritableSet;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.scada.configuration.component.Component;
 import org.eclipse.scada.configuration.component.DataComponent;
 import org.eclipse.scada.configuration.component.generator.util.Components;
 import org.eclipse.scada.configuration.component.lib.create.AbstractComponentItemCreator;
 import org.eclipse.scada.configuration.component.lib.create.ItemSource;
+import org.eclipse.scada.configuration.component.lib.create.ItemSources;
 import org.eclipse.scada.configuration.component.lib.create.MasterListener;
-import org.eclipse.scada.configuration.generator.Generator;
-import org.eclipse.scada.configuration.generator.component.ComponentGeneratorPlugin;
 import org.eclipse.scada.configuration.infrastructure.MasterServer;
 import org.eclipse.scada.configuration.item.CustomizationRequest;
 import org.eclipse.scada.configuration.world.osgi.Item;
-import org.eclipse.scada.ui.databinding.AdapterHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +49,7 @@ public class Helper
         }
 
         @Override
-        public void createMarker ( final Status status )
+        public void createMarker ( final IStatus status )
         {
             // TODO: add real UI marker
         }
@@ -96,21 +93,16 @@ public class Helper
 
     public static class Master
     {
-        private final MasterServer master;
-
         private final WritableSet entries;
 
-        public Master ( final Realm realm, final MasterServer master, final DataComponent component )
+        private final MasterServer master;
+
+        public Master ( final Realm realm, final MasterServer master, final Component component )
         {
             this.master = master;
             this.entries = new WritableSet ( realm );
 
-            logger.debug ( "Filling master with entries" );
-            for ( final Map.Entry<List<String>, Item> entry : createOutputFor ( component, master ).entrySet () )
-            {
-                logger.debug ( "Adding entry for master - key: {}, value: {}", entry.getKey (), entry.getValue () );
-                this.entries.add ( new ItemEntry ( entry.getKey (), entry.getValue () ) );
-            }
+            fillWithEntries ( component, this.entries );
         }
 
         public void dispose ()
@@ -177,39 +169,52 @@ public class Helper
 
     public static IObservableSet createObversableInput ( final Realm realm, final Component component )
     {
-        final WritableSet result = new WritableSet ( realm ) {
-            @Override
-            public synchronized void dispose ()
-            {
-                for ( final Object o : this.wrappedSet )
-                {
-                    if ( o instanceof Master )
-                    {
-                        ( (Master)o ).dispose ();
-                    }
-                }
-                super.dispose ();
-            }
-        };
-
-        if ( ! ( component instanceof DataComponent ) )
+        if ( component instanceof DataComponent )
         {
+            final WritableSet result = new WritableSet ( realm ) {
+                @Override
+                public synchronized void dispose ()
+                {
+                    for ( final Object o : this.wrappedSet )
+                    {
+                        if ( o instanceof Master )
+                        {
+                            ( (Master)o ).dispose ();
+                        }
+                    }
+                    super.dispose ();
+                }
+            };
+
+            final DataComponent dc = (DataComponent)component;
+
+            for ( final MasterServer master : dc.getMasterOn () )
+            {
+                result.add ( new Master ( realm, master, dc ) );
+            }
             return result;
         }
-
-        final DataComponent dc = (DataComponent)component;
-
-        for ( final MasterServer master : dc.getMasterOn () )
+        else
         {
-            result.add ( new Master ( realm, master, dc ) );
+            final WritableSet result = new WritableSet ( realm );
+            fillWithEntries ( component, result );
+            return result;
         }
-
-        return result;
     }
 
-    private static Map<List<String>, Item> createOutputFor ( final DataComponent dc, final MasterServer master )
+    private static void fillWithEntries ( final Component component, final WritableSet result )
     {
-        final ItemSource source = createItemSource ( dc );
+        logger.debug ( "Filling result with entries" );
+        for ( final Map.Entry<List<String>, Item> entry : createOutputFor ( component ).entrySet () )
+        {
+            logger.debug ( "Adding entry for result - key: {}, value: {}", entry.getKey (), entry.getValue () );
+            result.add ( new ItemEntry ( entry.getKey (), entry.getValue () ) );
+        }
+    }
+
+    private static Map<List<String>, Item> createOutputFor ( final Component dc )
+    {
+        final ItemSource source = ItemSources.createItemSource ( dc );
         if ( source == null )
         {
             return Collections.emptyMap ();
@@ -225,30 +230,4 @@ public class Helper
         return entries;
     }
 
-    public static ItemSource createItemSource ( final DataComponent dc )
-    {
-        final ItemSource itemSource = AdapterHelper.adapt ( dc, ItemSource.class );
-        if ( itemSource != null )
-        {
-            return itemSource;
-        }
-
-        final Set<Generator> generators = ComponentGeneratorPlugin.createGeneratorsFor ( dc );
-        final Set<ItemSource> sources = new HashSet<> ();
-
-        for ( final Generator generator : generators )
-        {
-            final ItemSource source = AdapterHelper.adapt ( generator, ItemSource.class );
-            if ( source != null )
-            {
-                sources.add ( source );
-            }
-        }
-
-        if ( sources.isEmpty () )
-        {
-            return null;
-        }
-        return new CompositeItemSource ( sources );
-    }
 }

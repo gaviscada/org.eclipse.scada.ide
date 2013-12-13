@@ -20,12 +20,12 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.scada.configuration.generator.Profiles;
-import org.eclipse.scada.configuration.generator.world.oscar.OscarContext;
-import org.eclipse.scada.configuration.generator.world.oscar.OscarProcessor;
 import org.eclipse.scada.configuration.modbus.ModbusExporter;
 import org.eclipse.scada.configuration.modbus.ModbusExporterDevice;
 import org.eclipse.scada.configuration.modbus.ModbusExporterItem;
 import org.eclipse.scada.configuration.modbus.ModbusPackage;
+import org.eclipse.scada.configuration.world.lib.oscar.OscarContext;
+import org.eclipse.scada.configuration.world.lib.oscar.OscarProcessor;
 import org.eclipse.scada.configuration.world.osgi.EquinoxApplication;
 import org.eclipse.scada.configuration.world.osgi.PropertyEntry;
 import org.eclipse.scada.configuration.world.osgi.profile.Profile;
@@ -102,6 +102,7 @@ public class ModbusExporterProcessor implements OscarProcessor
         final Map<String, String> data = new HashMap<String, String> ();
         data.put ( "port", Integer.toString ( device.getPort ().getPortNumber () ) ); //$NON-NLS-1$
         data.put ( "slaveId", Integer.toString ( device.getSlaveId () ) ); //$NON-NLS-1$
+        data.put ( "dataOrder", "" + device.getDataOrder () );
         // Add device properties
         for ( final PropertyEntry property : device.getProperties () )
         {

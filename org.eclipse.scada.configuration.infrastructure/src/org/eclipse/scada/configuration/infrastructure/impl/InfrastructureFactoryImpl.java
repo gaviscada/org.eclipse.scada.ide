@@ -16,6 +16,25 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.scada.configuration.infrastructure.*;
+import org.eclipse.scada.configuration.infrastructure.ApplicationConfiguration;
+import org.eclipse.scada.configuration.infrastructure.CommonDriver;
+import org.eclipse.scada.configuration.infrastructure.Configurations;
+import org.eclipse.scada.configuration.infrastructure.EquinoxDriver;
+import org.eclipse.scada.configuration.infrastructure.ExternalDriver;
+import org.eclipse.scada.configuration.infrastructure.ExternalDriverPlaceholder;
+import org.eclipse.scada.configuration.infrastructure.ExternalNode;
+import org.eclipse.scada.configuration.infrastructure.HttpServiceModule;
+import org.eclipse.scada.configuration.infrastructure.InfrastructureFactory;
+import org.eclipse.scada.configuration.infrastructure.InfrastructurePackage;
+import org.eclipse.scada.configuration.infrastructure.JdbcUserService;
+import org.eclipse.scada.configuration.infrastructure.MasterImport;
+import org.eclipse.scada.configuration.infrastructure.MasterServer;
+import org.eclipse.scada.configuration.infrastructure.Options;
+import org.eclipse.scada.configuration.infrastructure.SystemNode;
+import org.eclipse.scada.configuration.infrastructure.SystemPropertyUserService;
+import org.eclipse.scada.configuration.infrastructure.UserEntry;
+import org.eclipse.scada.configuration.infrastructure.ValueArchiveServer;
+import org.eclipse.scada.configuration.infrastructure.World;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,6 +116,14 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
                 return createExternalDriver ();
             case InfrastructurePackage.EXTERNAL_DRIVER_PLACEHOLDER:
                 return createExternalDriverPlaceholder ();
+            case InfrastructurePackage.APPLICATION_CONFIGURATION:
+                return createApplicationConfiguration ();
+            case InfrastructurePackage.CONFIGURATIONS:
+                return createConfigurations ();
+            case InfrastructurePackage.HTTP_SERVICE_MODULE:
+                return createHttpServiceModule ();
+            case InfrastructurePackage.REST_EXPORTER_MODULE:
+                return createRestExporterModule ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -105,11 +132,14 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
+    @Override
     public World createWorld ()
     {
-        WorldImpl world = new WorldImpl ();
+        final WorldImpl world = new WorldImpl ();
+        world.setConfigurations ( InfrastructureFactory.eINSTANCE.createConfigurations () );
         return world;
     }
 
@@ -118,6 +148,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public MasterServer createMasterServer ()
     {
         MasterServerImpl masterServer = new MasterServerImpl ();
@@ -129,6 +160,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public MasterImport createMasterImport ()
     {
         MasterImportImpl masterImport = new MasterImportImpl ();
@@ -140,6 +172,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Options createOptions ()
     {
         OptionsImpl options = new OptionsImpl ();
@@ -151,6 +184,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public CommonDriver createCommonDriver ()
     {
         CommonDriverImpl commonDriver = new CommonDriverImpl ();
@@ -162,6 +196,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ExternalNode createExternalNode ()
     {
         ExternalNodeImpl externalNode = new ExternalNodeImpl ();
@@ -173,6 +208,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public SystemNode createSystemNode ()
     {
         SystemNodeImpl systemNode = new SystemNodeImpl ();
@@ -184,6 +220,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public SystemPropertyUserService createSystemPropertyUserService ()
     {
         SystemPropertyUserServiceImpl systemPropertyUserService = new SystemPropertyUserServiceImpl ();
@@ -195,6 +232,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public UserEntry createUserEntry ()
     {
         UserEntryImpl userEntry = new UserEntryImpl ();
@@ -206,6 +244,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public JdbcUserService createJdbcUserService ()
     {
         JdbcUserServiceImpl jdbcUserService = new JdbcUserServiceImpl ();
@@ -217,6 +256,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ValueArchiveServer createValueArchiveServer ()
     {
         ValueArchiveServerImpl valueArchiveServer = new ValueArchiveServerImpl ();
@@ -228,6 +268,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EquinoxDriver createEquinoxDriver ()
     {
         EquinoxDriverImpl equinoxDriver = new EquinoxDriverImpl ();
@@ -239,6 +280,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ExternalDriver createExternalDriver ()
     {
         ExternalDriverImpl externalDriver = new ExternalDriverImpl ();
@@ -250,6 +292,7 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ExternalDriverPlaceholder createExternalDriverPlaceholder ()
     {
         ExternalDriverPlaceholderImpl externalDriverPlaceholder = new ExternalDriverPlaceholderImpl ();
@@ -261,6 +304,54 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
+    public ApplicationConfiguration createApplicationConfiguration ()
+    {
+        ApplicationConfigurationImpl applicationConfiguration = new ApplicationConfigurationImpl ();
+        return applicationConfiguration;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Configurations createConfigurations ()
+    {
+        ConfigurationsImpl configurations = new ConfigurationsImpl ();
+        return configurations;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public HttpServiceModule createHttpServiceModule ()
+    {
+        HttpServiceModuleImpl httpServiceModule = new HttpServiceModuleImpl ();
+        return httpServiceModule;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public RestExporterModule createRestExporterModule ()
+    {
+        RestExporterModuleImpl restExporterModule = new RestExporterModuleImpl ();
+        return restExporterModule;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
     public InfrastructurePackage getInfrastructurePackage ()
     {
         return (InfrastructurePackage)getEPackage ();

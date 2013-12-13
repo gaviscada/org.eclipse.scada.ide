@@ -11,7 +11,6 @@
 package org.eclipse.scada.configuration.infrastructure;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.scada.configuration.item.Selector;
 import org.eclipse.scada.configuration.world.Credentials;
 
 /**
@@ -25,7 +24,7 @@ import org.eclipse.scada.configuration.world.Credentials;
  *   <li>{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getImportedMaster <em>Imported Master</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getCredentials <em>Credentials</em>}</li>
- *   <li>{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getImportSelector <em>Import Selector</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getMaster <em>Master</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +42,9 @@ public interface MasterImport extends EObject
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
+     * <!-- begin-model-doc -->
+     * The master server that is imported
+     * <!-- end-model-doc -->
      * @return the value of the '<em>Imported Master</em>' reference.
      * @see #setImportedMaster(MasterServer)
      * @see org.eclipse.scada.configuration.infrastructure.InfrastructurePackage#getMasterImport_ImportedMaster()
@@ -114,29 +116,31 @@ public interface MasterImport extends EObject
     void setCredentials ( Credentials value );
 
     /**
-     * Returns the value of the '<em><b>Import Selector</b></em>' reference.
+     * Returns the value of the '<em><b>Master</b></em>' container reference.
+     * It is bidirectional and its opposite is '{@link org.eclipse.scada.configuration.infrastructure.MasterServer#getImportMaster <em>Import Master</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Import Selector</em>' reference isn't clear,
+     * If the meaning of the '<em>Master</em>' container reference isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Import Selector</em>' reference.
-     * @see #setImportSelector(Selector)
-     * @see org.eclipse.scada.configuration.infrastructure.InfrastructurePackage#getMasterImport_ImportSelector()
-     * @model
+     * @return the value of the '<em>Master</em>' container reference.
+     * @see #setMaster(MasterServer)
+     * @see org.eclipse.scada.configuration.infrastructure.InfrastructurePackage#getMasterImport_Master()
+     * @see org.eclipse.scada.configuration.infrastructure.MasterServer#getImportMaster
+     * @model opposite="importMaster" required="true" transient="false"
      * @generated
      */
-    Selector getImportSelector ();
+    MasterServer getMaster ();
 
     /**
-     * Sets the value of the '{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getImportSelector <em>Import Selector</em>}' reference.
+     * Sets the value of the '{@link org.eclipse.scada.configuration.infrastructure.MasterImport#getMaster <em>Master</em>}' container reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Import Selector</em>' reference.
-     * @see #getImportSelector()
+     * @param value the new value of the '<em>Master</em>' container reference.
+     * @see #getMaster()
      * @generated
      */
-    void setImportSelector ( Selector value );
+    void setMaster ( MasterServer value );
 
 } // MasterImport

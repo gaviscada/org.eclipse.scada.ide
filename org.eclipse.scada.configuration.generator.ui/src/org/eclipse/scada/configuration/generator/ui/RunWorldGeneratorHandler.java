@@ -19,8 +19,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.scada.configuration.world.World;
-import org.eclipse.scada.configuration.generator.world.WorldRunner;
+import org.eclipse.scada.configuration.world.lib.WorldRunner;
 
+/**
+ * Create artifacts from an existing world model
+ * 
+ * @author Jens Reimann
+ */
 public class RunWorldGeneratorHandler extends AbstractFileRunner
 {
 
@@ -46,7 +51,7 @@ public class RunWorldGeneratorHandler extends AbstractFileRunner
         outputContainer.create ( true, true, new SubProgressMonitor ( monitor, 1 ) );
 
         monitor.setTaskName ( "Creating output" );
-        new WorldRunner ().process ( URI.createURI ( file.getLocationURI ().toString () ), outputContainer, new SubProgressMonitor ( monitor, 8 ) );
+        new WorldRunner ().processUri ( URI.createURI ( file.getLocationURI ().toString () ), outputContainer, new SubProgressMonitor ( monitor, 8 ) );
 
         monitor.done ();
     }
@@ -73,7 +78,7 @@ public class RunWorldGeneratorHandler extends AbstractFileRunner
     public static void runWithOutput ( final World world, final IContainer outputContainer, final IProgressMonitor monitor ) throws CoreException, Exception
     {
         monitor.setTaskName ( "Creating output" );
-        new WorldRunner ().process ( world, outputContainer, monitor );
+        new WorldRunner ().process ( null, world, outputContainer, monitor );
     }
 
 }

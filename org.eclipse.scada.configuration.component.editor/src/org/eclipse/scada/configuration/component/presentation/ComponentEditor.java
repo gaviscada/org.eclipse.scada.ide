@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013 IBH SYSTEMS GmbH Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -34,6 +33,60 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IStatusLineManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.util.LocalSelectionTransfer;
+import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StructuredViewer;
+import org.eclipse.jface.viewers.TableLayout;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.FileTransfer;
+import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.events.ControlAdapter;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.dialogs.SaveAsDialog;
+import org.eclipse.ui.ide.IGotoMarker;
+import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
+import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.ui.views.properties.PropertySheet;
+import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
@@ -69,71 +122,17 @@ import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
 import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IStatusLineManager;
-import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.util.LocalSelectionTransfer;
-import org.eclipse.jface.viewers.ColumnWeightData;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.scada.configuration.component.provider.ComponentItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.globalization.provider.GlobalizeItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.infrastructure.provider.InfrastructureItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.item.provider.ItemItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.security.provider.SecurityItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.world.deployment.provider.DeploymentItemProviderAdapterFactory;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.dnd.DND;
-import org.eclipse.swt.dnd.FileTransfer;
-import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.events.ControlAdapter;
-import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IPartListener;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.ui.dialogs.SaveAsDialog;
-import org.eclipse.ui.ide.IGotoMarker;
-import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.ui.part.MultiPageEditorPart;
-import org.eclipse.ui.views.contentoutline.ContentOutline;
-import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.PropertySheet;
-import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.eclipse.scada.configuration.world.osgi.profile.provider.ProfileItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.world.osgi.provider.OsgiItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.world.provider.WorldItemProviderAdapterFactory;
 import org.eclipse.scada.da.exec.configuration.provider.ConfigurationItemProviderAdapterFactory;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 /**
  * This is an example of a Component model editor.
@@ -141,7 +140,9 @@ import org.eclipse.scada.da.exec.configuration.provider.ConfigurationItemProvide
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComponentEditor extends MultiPageEditorPart implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker
+public class ComponentEditor
+        extends MultiPageEditorPart
+        implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker
 {
     /**
      * This keeps track of the editing domain that is used to track all changes to the model.
@@ -297,53 +298,54 @@ public class ComponentEditor extends MultiPageEditorPart implements IEditingDoma
      * <!-- end-user-doc -->
      * @generated
      */
-    protected IPartListener partListener = new IPartListener ()
-    {
-        public void partActivated ( IWorkbenchPart p )
-        {
-            if ( p instanceof ContentOutline )
+    protected IPartListener partListener =
+            new IPartListener ()
             {
-                if ( ( (ContentOutline)p ).getCurrentPage () == contentOutlinePage )
+                public void partActivated ( IWorkbenchPart p )
                 {
-                    getActionBarContributor ().setActiveEditor ( ComponentEditor.this );
+                    if ( p instanceof ContentOutline )
+                    {
+                        if ( ( (ContentOutline)p ).getCurrentPage () == contentOutlinePage )
+                        {
+                            getActionBarContributor ().setActiveEditor ( ComponentEditor.this );
 
-                    setCurrentViewer ( contentOutlineViewer );
+                            setCurrentViewer ( contentOutlineViewer );
+                        }
+                    }
+                    else if ( p instanceof PropertySheet )
+                    {
+                        if ( propertySheetPages.contains ( ( (PropertySheet)p ).getCurrentPage () ) )
+                        {
+                            getActionBarContributor ().setActiveEditor ( ComponentEditor.this );
+                            handleActivate ();
+                        }
+                    }
+                    else if ( p == ComponentEditor.this )
+                    {
+                        handleActivate ();
+                    }
                 }
-            }
-            else if ( p instanceof PropertySheet )
-            {
-                if ( propertySheetPages.contains ( ( (PropertySheet)p ).getCurrentPage () ) )
+
+                public void partBroughtToTop ( IWorkbenchPart p )
                 {
-                    getActionBarContributor ().setActiveEditor ( ComponentEditor.this );
-                    handleActivate ();
+                    // Ignore.
                 }
-            }
-            else if ( p == ComponentEditor.this )
-            {
-                handleActivate ();
-            }
-        }
 
-        public void partBroughtToTop ( IWorkbenchPart p )
-        {
-            // Ignore.
-        }
+                public void partClosed ( IWorkbenchPart p )
+                {
+                    // Ignore.
+                }
 
-        public void partClosed ( IWorkbenchPart p )
-        {
-            // Ignore.
-        }
+                public void partDeactivated ( IWorkbenchPart p )
+                {
+                    // Ignore.
+                }
 
-        public void partDeactivated ( IWorkbenchPart p )
-        {
-            // Ignore.
-        }
-
-        public void partOpened ( IWorkbenchPart p )
-        {
-            // Ignore.
-        }
-    };
+                public void partOpened ( IWorkbenchPart p )
+                {
+                    // Ignore.
+                }
+            };
 
     /**
      * Resources that have been removed since last activation.
@@ -391,75 +393,76 @@ public class ComponentEditor extends MultiPageEditorPart implements IEditingDoma
      * <!-- end-user-doc -->
      * @generated
      */
-    protected EContentAdapter problemIndicationAdapter = new EContentAdapter ()
-    {
-        @Override
-        public void notifyChanged ( Notification notification )
-        {
-            if ( notification.getNotifier () instanceof Resource )
+    protected EContentAdapter problemIndicationAdapter =
+            new EContentAdapter ()
             {
-                switch ( notification.getFeatureID ( Resource.class ) )
+                @Override
+                public void notifyChanged ( Notification notification )
                 {
-                    case Resource.RESOURCE__IS_LOADED:
-                    case Resource.RESOURCE__ERRORS:
-                    case Resource.RESOURCE__WARNINGS:
+                    if ( notification.getNotifier () instanceof Resource )
                     {
-                        Resource resource = (Resource)notification.getNotifier ();
-                        Diagnostic diagnostic = analyzeResourceProblems ( resource, null );
-                        if ( diagnostic.getSeverity () != Diagnostic.OK )
+                        switch ( notification.getFeatureID ( Resource.class ) )
                         {
-                            resourceToDiagnosticMap.put ( resource, diagnostic );
-                        }
-                        else
-                        {
-                            resourceToDiagnosticMap.remove ( resource );
-                        }
+                            case Resource.RESOURCE__IS_LOADED:
+                            case Resource.RESOURCE__ERRORS:
+                            case Resource.RESOURCE__WARNINGS:
+                            {
+                                Resource resource = (Resource)notification.getNotifier ();
+                                Diagnostic diagnostic = analyzeResourceProblems ( resource, null );
+                                if ( diagnostic.getSeverity () != Diagnostic.OK )
+                                {
+                                    resourceToDiagnosticMap.put ( resource, diagnostic );
+                                }
+                                else
+                                {
+                                    resourceToDiagnosticMap.remove ( resource );
+                                }
 
-                        if ( updateProblemIndication )
-                        {
-                            getSite ().getShell ().getDisplay ().asyncExec
-                                    ( new Runnable ()
-                                    {
-                                        public void run ()
-                                        {
-                                            updateProblemIndication ();
-                                        }
-                                    } );
+                                if ( updateProblemIndication )
+                                {
+                                    getSite ().getShell ().getDisplay ().asyncExec
+                                            ( new Runnable ()
+                                            {
+                                                public void run ()
+                                                {
+                                                    updateProblemIndication ();
+                                                }
+                                            } );
+                                }
+                                break;
+                            }
                         }
-                        break;
+                    }
+                    else
+                    {
+                        super.notifyChanged ( notification );
                     }
                 }
-            }
-            else
-            {
-                super.notifyChanged ( notification );
-            }
-        }
 
-        @Override
-        protected void setTarget ( Resource target )
-        {
-            basicSetTarget ( target );
-        }
+                @Override
+                protected void setTarget ( Resource target )
+                {
+                    basicSetTarget ( target );
+                }
 
-        @Override
-        protected void unsetTarget ( Resource target )
-        {
-            basicUnsetTarget ( target );
-            resourceToDiagnosticMap.remove ( target );
-            if ( updateProblemIndication )
-            {
-                getSite ().getShell ().getDisplay ().asyncExec
-                        ( new Runnable ()
-                        {
-                            public void run ()
-                            {
-                                updateProblemIndication ();
-                            }
-                        } );
-            }
-        }
-    };
+                @Override
+                protected void unsetTarget ( Resource target )
+                {
+                    basicUnsetTarget ( target );
+                    resourceToDiagnosticMap.remove ( target );
+                    if ( updateProblemIndication )
+                    {
+                        getSite ().getShell ().getDisplay ().asyncExec
+                                ( new Runnable ()
+                                {
+                                    public void run ()
+                                    {
+                                        updateProblemIndication ();
+                                    }
+                                } );
+                    }
+                }
+            };
 
     /**
      * This listens for workspace changes.
@@ -467,99 +470,100 @@ public class ComponentEditor extends MultiPageEditorPart implements IEditingDoma
      * <!-- end-user-doc -->
      * @generated
      */
-    protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener ()
-    {
-        public void resourceChanged ( IResourceChangeEvent event )
-        {
-            IResourceDelta delta = event.getDelta ();
-            try
+    protected IResourceChangeListener resourceChangeListener =
+            new IResourceChangeListener ()
             {
-                class ResourceDeltaVisitor implements IResourceDeltaVisitor
+                public void resourceChanged ( IResourceChangeEvent event )
                 {
-                    protected ResourceSet resourceSet = editingDomain.getResourceSet ();
-
-                    protected Collection<Resource> changedResources = new ArrayList<Resource> ();
-
-                    protected Collection<Resource> removedResources = new ArrayList<Resource> ();
-
-                    public boolean visit ( IResourceDelta delta )
+                    IResourceDelta delta = event.getDelta ();
+                    try
                     {
-                        if ( delta.getResource ().getType () == IResource.FILE )
+                        class ResourceDeltaVisitor implements IResourceDeltaVisitor
                         {
-                            if ( delta.getKind () == IResourceDelta.REMOVED ||
-                                    delta.getKind () == IResourceDelta.CHANGED && delta.getFlags () != IResourceDelta.MARKERS )
+                            protected ResourceSet resourceSet = editingDomain.getResourceSet ();
+
+                            protected Collection<Resource> changedResources = new ArrayList<Resource> ();
+
+                            protected Collection<Resource> removedResources = new ArrayList<Resource> ();
+
+                            public boolean visit ( IResourceDelta delta )
                             {
-                                Resource resource = resourceSet.getResource ( URI.createPlatformResourceURI ( delta.getFullPath ().toString (), true ), false );
-                                if ( resource != null )
+                                if ( delta.getResource ().getType () == IResource.FILE )
                                 {
-                                    if ( delta.getKind () == IResourceDelta.REMOVED )
+                                    if ( delta.getKind () == IResourceDelta.REMOVED ||
+                                            delta.getKind () == IResourceDelta.CHANGED && delta.getFlags () != IResourceDelta.MARKERS )
                                     {
-                                        removedResources.add ( resource );
+                                        Resource resource = resourceSet.getResource ( URI.createPlatformResourceURI ( delta.getFullPath ().toString (), true ), false );
+                                        if ( resource != null )
+                                        {
+                                            if ( delta.getKind () == IResourceDelta.REMOVED )
+                                            {
+                                                removedResources.add ( resource );
+                                            }
+                                            else if ( !savedResources.remove ( resource ) )
+                                            {
+                                                changedResources.add ( resource );
+                                            }
+                                        }
                                     }
-                                    else if ( !savedResources.remove ( resource ) )
-                                    {
-                                        changedResources.add ( resource );
-                                    }
+                                    return false;
                                 }
+
+                                return true;
                             }
-                            return false;
+
+                            public Collection<Resource> getChangedResources ()
+                            {
+                                return changedResources;
+                            }
+
+                            public Collection<Resource> getRemovedResources ()
+                            {
+                                return removedResources;
+                            }
                         }
 
-                        return true;
-                    }
+                        final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor ();
+                        delta.accept ( visitor );
 
-                    public Collection<Resource> getChangedResources ()
-                    {
-                        return changedResources;
-                    }
-
-                    public Collection<Resource> getRemovedResources ()
-                    {
-                        return removedResources;
-                    }
-                }
-
-                final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor ();
-                delta.accept ( visitor );
-
-                if ( !visitor.getRemovedResources ().isEmpty () )
-                {
-                    getSite ().getShell ().getDisplay ().asyncExec
-                            ( new Runnable ()
-                            {
-                                public void run ()
-                                {
-                                    removedResources.addAll ( visitor.getRemovedResources () );
-                                    if ( !isDirty () )
+                        if ( !visitor.getRemovedResources ().isEmpty () )
+                        {
+                            getSite ().getShell ().getDisplay ().asyncExec
+                                    ( new Runnable ()
                                     {
-                                        getSite ().getPage ().closeEditor ( ComponentEditor.this, false );
-                                    }
-                                }
-                            } );
-                }
+                                        public void run ()
+                                        {
+                                            removedResources.addAll ( visitor.getRemovedResources () );
+                                            if ( !isDirty () )
+                                            {
+                                                getSite ().getPage ().closeEditor ( ComponentEditor.this, false );
+                                            }
+                                        }
+                                    } );
+                        }
 
-                if ( !visitor.getChangedResources ().isEmpty () )
-                {
-                    getSite ().getShell ().getDisplay ().asyncExec
-                            ( new Runnable ()
-                            {
-                                public void run ()
-                                {
-                                    changedResources.addAll ( visitor.getChangedResources () );
-                                    if ( getSite ().getPage ().getActiveEditor () == ComponentEditor.this )
+                        if ( !visitor.getChangedResources ().isEmpty () )
+                        {
+                            getSite ().getShell ().getDisplay ().asyncExec
+                                    ( new Runnable ()
                                     {
-                                        handleActivate ();
-                                    }
-                                }
-                            } );
+                                        public void run ()
+                                        {
+                                            changedResources.addAll ( visitor.getChangedResources () );
+                                            if ( getSite ().getPage ().getActiveEditor () == ComponentEditor.this )
+                                            {
+                                                handleActivate ();
+                                            }
+                                        }
+                                    } );
+                        }
+                    }
+                    catch ( CoreException exception )
+                    {
+                        ComponentEditorPlugin.INSTANCE.log ( exception );
+                    }
                 }
-            }
-            catch ( CoreException exception )
-            {
-                ComponentEditorPlugin.INSTANCE.log ( exception );
-            }
-        }
-    };
+            };
 
     /**
      * Handles activation of the editor or it's associated views.

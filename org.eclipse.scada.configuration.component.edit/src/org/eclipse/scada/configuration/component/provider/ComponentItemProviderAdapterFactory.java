@@ -102,28 +102,28 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
     }
 
     /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.System} instances.
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.ComponentWorld} instances.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected SystemItemProvider systemItemProvider;
+    protected ComponentWorldItemProvider componentWorldItemProvider;
 
     /**
-     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.System}.
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.ComponentWorld}.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     @Override
-    public Adapter createSystemAdapter ()
+    public Adapter createComponentWorldAdapter ()
     {
-        if ( systemItemProvider == null )
+        if ( componentWorldItemProvider == null )
         {
-            systemItemProvider = new SystemItemProvider ( this );
+            componentWorldItemProvider = new ComponentWorldItemProvider ( this );
         }
 
-        return systemItemProvider;
+        return componentWorldItemProvider;
     }
 
     /**
@@ -702,6 +702,106 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.RestInterceptor} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected RestInterceptorItemProvider restInterceptorItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.RestInterceptor}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createRestInterceptorAdapter ()
+    {
+        if ( restInterceptorItemProvider == null )
+        {
+            restInterceptorItemProvider = new RestInterceptorItemProvider ( this );
+        }
+
+        return restInterceptorItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.GlobalizeComponent} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected GlobalizeComponentItemProvider globalizeComponentItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.GlobalizeComponent}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createGlobalizeComponentAdapter ()
+    {
+        if ( globalizeComponentItemProvider == null )
+        {
+            globalizeComponentItemProvider = new GlobalizeComponentItemProvider ( this );
+        }
+
+        return globalizeComponentItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.TransientValue} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected TransientValueItemProvider transientValueItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.TransientValue}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createTransientValueAdapter ()
+    {
+        if ( transientValueItemProvider == null )
+        {
+            transientValueItemProvider = new TransientValueItemProvider ( this );
+        }
+
+        return transientValueItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.MasterComponent} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected MasterComponentItemProvider masterComponentItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.MasterComponent}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createMasterComponentAdapter ()
+    {
+        if ( masterComponentItemProvider == null )
+        {
+            masterComponentItemProvider = new MasterComponentItemProvider ( this );
+        }
+
+        return masterComponentItemProvider;
+    }
+
+    /**
      * This returns the root adapter factory that contains this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -842,8 +942,8 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      */
     public void dispose ()
     {
-        if ( systemItemProvider != null )
-            systemItemProvider.dispose ();
+        if ( componentWorldItemProvider != null )
+            componentWorldItemProvider.dispose ();
         if ( levelItemProvider != null )
             levelItemProvider.dispose ();
         if ( constantValueItemProvider != null )
@@ -890,6 +990,14 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
             externalValueItemProvider.dispose ();
         if ( summariesConfigurationItemProvider != null )
             summariesConfigurationItemProvider.dispose ();
+        if ( restInterceptorItemProvider != null )
+            restInterceptorItemProvider.dispose ();
+        if ( globalizeComponentItemProvider != null )
+            globalizeComponentItemProvider.dispose ();
+        if ( transientValueItemProvider != null )
+            transientValueItemProvider.dispose ();
+        if ( masterComponentItemProvider != null )
+            masterComponentItemProvider.dispose ();
     }
 
     /**

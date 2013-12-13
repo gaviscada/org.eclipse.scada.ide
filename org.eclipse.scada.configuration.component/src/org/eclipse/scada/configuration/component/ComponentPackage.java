@@ -78,14 +78,60 @@ public interface ComponentPackage extends EPackage
     ComponentPackage eINSTANCE = org.eclipse.scada.configuration.component.impl.ComponentPackageImpl.init ();
 
     /**
-     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.SystemImpl <em>System</em>}' class.
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.ContainerImpl <em>Container</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.scada.configuration.component.impl.SystemImpl
-     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getSystem()
+     * @see org.eclipse.scada.configuration.component.impl.ContainerImpl
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getContainer()
      * @generated
      */
-    int SYSTEM = 0;
+    int CONTAINER = 33;
+
+    /**
+     * The feature id for the '<em><b>Item Interceptors</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONTAINER__ITEM_INTERCEPTORS = 0;
+
+    /**
+     * The number of structural features of the '<em>Container</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONTAINER_FEATURE_COUNT = 1;
+
+    /**
+     * The number of operations of the '<em>Container</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONTAINER_OPERATION_COUNT = 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.ComponentWorldImpl <em>World</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.impl.ComponentWorldImpl
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getComponentWorld()
+     * @generated
+     */
+    int COMPONENT_WORLD = 0;
+
+    /**
+     * The feature id for the '<em><b>Item Interceptors</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int COMPONENT_WORLD__ITEM_INTERCEPTORS = CONTAINER__ITEM_INTERCEPTORS;
 
     /**
      * The feature id for the '<em><b>Levels</b></em>' containment reference list.
@@ -94,7 +140,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SYSTEM__LEVELS = 0;
+    int COMPONENT_WORLD__LEVELS = CONTAINER_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
@@ -103,7 +149,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SYSTEM__CONFIGURATIONS = 1;
+    int COMPONENT_WORLD__CONFIGURATIONS = CONTAINER_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Services</b></em>' containment reference list.
@@ -112,7 +158,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SYSTEM__SERVICES = 2;
+    int COMPONENT_WORLD__SERVICES = CONTAINER_FEATURE_COUNT + 2;
 
     /**
      * The feature id for the '<em><b>Infrastructure</b></em>' reference.
@@ -121,7 +167,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SYSTEM__INFRASTRUCTURE = 3;
+    int COMPONENT_WORLD__INFRASTRUCTURE = CONTAINER_FEATURE_COUNT + 3;
 
     /**
      * The feature id for the '<em><b>Default Customization Pipeline</b></em>' reference.
@@ -130,7 +176,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SYSTEM__DEFAULT_CUSTOMIZATION_PIPELINE = 4;
+    int COMPONENT_WORLD__DEFAULT_CUSTOMIZATION_PIPELINE = CONTAINER_FEATURE_COUNT + 4;
 
     /**
      * The feature id for the '<em><b>Default Archive Selector</b></em>' reference.
@@ -139,25 +185,25 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SYSTEM__DEFAULT_ARCHIVE_SELECTOR = 5;
+    int COMPONENT_WORLD__DEFAULT_ARCHIVE_SELECTOR = CONTAINER_FEATURE_COUNT + 5;
 
     /**
-     * The number of structural features of the '<em>System</em>' class.
+     * The number of structural features of the '<em>World</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int SYSTEM_FEATURE_COUNT = 6;
+    int COMPONENT_WORLD_FEATURE_COUNT = CONTAINER_FEATURE_COUNT + 6;
 
     /**
-     * The number of operations of the '<em>System</em>' class.
+     * The number of operations of the '<em>World</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int SYSTEM_OPERATION_COUNT = 0;
+    int COMPONENT_WORLD_OPERATION_COUNT = CONTAINER_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.LevelImpl <em>Level</em>}' class.
@@ -170,22 +216,22 @@ public interface ComponentPackage extends EPackage
     int LEVEL = 1;
 
     /**
+     * The feature id for the '<em><b>Item Interceptors</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LEVEL__ITEM_INTERCEPTORS = CONTAINER__ITEM_INTERCEPTORS;
+
+    /**
      * The feature id for the '<em><b>Components</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int LEVEL__COMPONENTS = 0;
-
-    /**
-     * The feature id for the '<em><b>Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int LEVEL__NAME = 1;
+    int LEVEL__COMPONENTS = CONTAINER_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Levels</b></em>' containment reference list.
@@ -194,7 +240,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int LEVEL__LEVELS = 2;
+    int LEVEL__LEVELS = CONTAINER_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -203,7 +249,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int LEVEL__PARENT = 3;
+    int LEVEL__PARENT = CONTAINER_FEATURE_COUNT + 2;
 
     /**
      * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
@@ -212,7 +258,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int LEVEL__CUSTOMIZATION_PIPELINE = 4;
+    int LEVEL__CUSTOMIZATION_PIPELINE = CONTAINER_FEATURE_COUNT + 3;
 
     /**
      * The feature id for the '<em><b>Archive Selector</b></em>' reference.
@@ -221,7 +267,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int LEVEL__ARCHIVE_SELECTOR = 5;
+    int LEVEL__ARCHIVE_SELECTOR = CONTAINER_FEATURE_COUNT + 4;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LEVEL__NAME = CONTAINER_FEATURE_COUNT + 5;
 
     /**
      * The number of structural features of the '<em>Level</em>' class.
@@ -230,7 +285,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int LEVEL_FEATURE_COUNT = 6;
+    int LEVEL_FEATURE_COUNT = CONTAINER_FEATURE_COUNT + 6;
 
     /**
      * The number of operations of the '<em>Level</em>' class.
@@ -239,7 +294,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int LEVEL_OPERATION_COUNT = 0;
+    int LEVEL_OPERATION_COUNT = CONTAINER_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.ComponentImpl <em>Component</em>}' class.
@@ -334,22 +389,22 @@ public interface ComponentPackage extends EPackage
     int DATA_COMPONENT__ARCHIVE_SELECTOR = COMPONENT__ARCHIVE_SELECTOR;
 
     /**
-     * The feature id for the '<em><b>Master On</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int DATA_COMPONENT__MASTER_ON = COMPONENT_FEATURE_COUNT + 0;
-
-    /**
      * The number of structural features of the '<em>Data Component</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int DATA_COMPONENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 1;
+    int DATA_COMPONENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 0;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int DATA_COMPONENT___GET_MASTER_ON = COMPONENT_OPERATION_COUNT + 0;
 
     /**
      * The number of operations of the '<em>Data Component</em>' class.
@@ -358,7 +413,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_COMPONENT_OPERATION_COUNT = COMPONENT_OPERATION_COUNT + 0;
+    int DATA_COMPONENT_OPERATION_COUNT = COMPONENT_OPERATION_COUNT + 1;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.ConfigurationImpl <em>Configuration</em>}' class.
@@ -389,6 +444,79 @@ public interface ComponentPackage extends EPackage
     int CONFIGURATION_OPERATION_COUNT = 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.MasterComponentImpl <em>Master Component</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.impl.MasterComponentImpl
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getMasterComponent()
+     * @generated
+     */
+    int MASTER_COMPONENT = 37;
+
+    /**
+     * The feature id for the '<em><b>Level</b></em>' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT__LEVEL = DATA_COMPONENT__LEVEL;
+
+    /**
+     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
+
+    /**
+     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT__MASTER_ON = DATA_COMPONENT_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Master Component</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 1;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT___GET_MASTER_ON = DATA_COMPONENT___GET_MASTER_ON;
+
+    /**
+     * The number of operations of the '<em>Master Component</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_COMPONENT_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+
+    /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.SingleValueImpl <em>Single Value</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -405,7 +533,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__LEVEL = DATA_COMPONENT__LEVEL;
+    int SINGLE_VALUE__LEVEL = MASTER_COMPONENT__LEVEL;
 
     /**
      * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
@@ -414,7 +542,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
+    int SINGLE_VALUE__CUSTOMIZATION_PIPELINE = MASTER_COMPONENT__CUSTOMIZATION_PIPELINE;
 
     /**
      * The feature id for the '<em><b>Archive Selector</b></em>' reference.
@@ -423,7 +551,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
+    int SINGLE_VALUE__ARCHIVE_SELECTOR = MASTER_COMPONENT__ARCHIVE_SELECTOR;
 
     /**
      * The feature id for the '<em><b>Master On</b></em>' reference list.
@@ -432,7 +560,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__MASTER_ON = DATA_COMPONENT__MASTER_ON;
+    int SINGLE_VALUE__MASTER_ON = MASTER_COMPONENT__MASTER_ON;
 
     /**
      * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -441,7 +569,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__NAME = DATA_COMPONENT_FEATURE_COUNT + 0;
+    int SINGLE_VALUE__NAME = MASTER_COMPONENT_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Data Type</b></em>' attribute.
@@ -450,7 +578,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__DATA_TYPE = DATA_COMPONENT_FEATURE_COUNT + 1;
+    int SINGLE_VALUE__DATA_TYPE = MASTER_COMPONENT_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Customization Tags</b></em>' attribute list.
@@ -459,7 +587,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE__CUSTOMIZATION_TAGS = DATA_COMPONENT_FEATURE_COUNT + 2;
+    int SINGLE_VALUE__CUSTOMIZATION_TAGS = MASTER_COMPONENT_FEATURE_COUNT + 2;
 
     /**
      * The number of structural features of the '<em>Single Value</em>' class.
@@ -468,7 +596,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 3;
+    int SINGLE_VALUE_FEATURE_COUNT = MASTER_COMPONENT_FEATURE_COUNT + 3;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SINGLE_VALUE___GET_MASTER_ON = MASTER_COMPONENT___GET_MASTER_ON;
 
     /**
      * The number of operations of the '<em>Single Value</em>' class.
@@ -477,7 +614,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int SINGLE_VALUE_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+    int SINGLE_VALUE_OPERATION_COUNT = MASTER_COMPONENT_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.ConstantValueImpl <em>Constant Value</em>}' class.
@@ -569,6 +706,15 @@ public interface ComponentPackage extends EPackage
      * @ordered
      */
     int CONSTANT_VALUE_FEATURE_COUNT = SINGLE_VALUE_FEATURE_COUNT + 1;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONSTANT_VALUE___GET_MASTER_ON = SINGLE_VALUE___GET_MASTER_ON;
 
     /**
      * The number of operations of the '<em>Constant Value</em>' class.
@@ -727,6 +873,15 @@ public interface ComponentPackage extends EPackage
     int PERSISTENT_VALUE_FEATURE_COUNT = SINGLE_VALUE_FEATURE_COUNT + 0;
 
     /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PERSISTENT_VALUE___GET_MASTER_ON = SINGLE_VALUE___GET_MASTER_ON;
+
+    /**
      * The number of operations of the '<em>Persistent Value</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -752,7 +907,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER__LEVEL = DATA_COMPONENT__LEVEL;
+    int DRIVER_CONNECTION_ANALYZER__LEVEL = MASTER_COMPONENT__LEVEL;
 
     /**
      * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
@@ -761,7 +916,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
+    int DRIVER_CONNECTION_ANALYZER__CUSTOMIZATION_PIPELINE = MASTER_COMPONENT__CUSTOMIZATION_PIPELINE;
 
     /**
      * The feature id for the '<em><b>Archive Selector</b></em>' reference.
@@ -770,7 +925,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
+    int DRIVER_CONNECTION_ANALYZER__ARCHIVE_SELECTOR = MASTER_COMPONENT__ARCHIVE_SELECTOR;
 
     /**
      * The feature id for the '<em><b>Master On</b></em>' reference list.
@@ -779,7 +934,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER__MASTER_ON = DATA_COMPONENT__MASTER_ON;
+    int DRIVER_CONNECTION_ANALYZER__MASTER_ON = MASTER_COMPONENT__MASTER_ON;
 
     /**
      * The feature id for the '<em><b>Connection</b></em>' reference.
@@ -788,7 +943,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER__CONNECTION = DATA_COMPONENT_FEATURE_COUNT + 0;
+    int DRIVER_CONNECTION_ANALYZER__CONNECTION = MASTER_COMPONENT_FEATURE_COUNT + 0;
 
     /**
      * The number of structural features of the '<em>Driver Connection Analyzer</em>' class.
@@ -797,7 +952,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 1;
+    int DRIVER_CONNECTION_ANALYZER_FEATURE_COUNT = MASTER_COMPONENT_FEATURE_COUNT + 1;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int DRIVER_CONNECTION_ANALYZER___GET_MASTER_ON = MASTER_COMPONENT___GET_MASTER_ON;
 
     /**
      * The number of operations of the '<em>Driver Connection Analyzer</em>' class.
@@ -806,7 +970,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DRIVER_CONNECTION_ANALYZER_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+    int DRIVER_CONNECTION_ANALYZER_OPERATION_COUNT = MASTER_COMPONENT_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.MasterImportConnectionAnalyzerImpl <em>Master Import Connection Analyzer</em>}' class.
@@ -825,7 +989,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER__LEVEL = DATA_COMPONENT__LEVEL;
+    int MASTER_IMPORT_CONNECTION_ANALYZER__LEVEL = MASTER_COMPONENT__LEVEL;
 
     /**
      * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
@@ -834,7 +998,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
+    int MASTER_IMPORT_CONNECTION_ANALYZER__CUSTOMIZATION_PIPELINE = MASTER_COMPONENT__CUSTOMIZATION_PIPELINE;
 
     /**
      * The feature id for the '<em><b>Archive Selector</b></em>' reference.
@@ -843,7 +1007,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
+    int MASTER_IMPORT_CONNECTION_ANALYZER__ARCHIVE_SELECTOR = MASTER_COMPONENT__ARCHIVE_SELECTOR;
 
     /**
      * The feature id for the '<em><b>Master On</b></em>' reference list.
@@ -852,7 +1016,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER__MASTER_ON = DATA_COMPONENT__MASTER_ON;
+    int MASTER_IMPORT_CONNECTION_ANALYZER__MASTER_ON = MASTER_COMPONENT__MASTER_ON;
 
     /**
      * The feature id for the '<em><b>Connection</b></em>' reference.
@@ -861,7 +1025,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER__CONNECTION = DATA_COMPONENT_FEATURE_COUNT + 0;
+    int MASTER_IMPORT_CONNECTION_ANALYZER__CONNECTION = MASTER_COMPONENT_FEATURE_COUNT + 0;
 
     /**
      * The number of structural features of the '<em>Master Import Connection Analyzer</em>' class.
@@ -870,7 +1034,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 1;
+    int MASTER_IMPORT_CONNECTION_ANALYZER_FEATURE_COUNT = MASTER_COMPONENT_FEATURE_COUNT + 1;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_IMPORT_CONNECTION_ANALYZER___GET_MASTER_ON = MASTER_COMPONENT___GET_MASTER_ON;
 
     /**
      * The number of operations of the '<em>Master Import Connection Analyzer</em>' class.
@@ -879,7 +1052,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MASTER_IMPORT_CONNECTION_ANALYZER_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+    int MASTER_IMPORT_CONNECTION_ANALYZER_OPERATION_COUNT = MASTER_COMPONENT_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.DataMapperAnalyzerImpl <em>Data Mapper Analyzer</em>}' class.
@@ -898,7 +1071,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER__LEVEL = DATA_COMPONENT__LEVEL;
+    int DATA_MAPPER_ANALYZER__LEVEL = MASTER_COMPONENT__LEVEL;
 
     /**
      * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
@@ -907,7 +1080,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
+    int DATA_MAPPER_ANALYZER__CUSTOMIZATION_PIPELINE = MASTER_COMPONENT__CUSTOMIZATION_PIPELINE;
 
     /**
      * The feature id for the '<em><b>Archive Selector</b></em>' reference.
@@ -916,7 +1089,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
+    int DATA_MAPPER_ANALYZER__ARCHIVE_SELECTOR = MASTER_COMPONENT__ARCHIVE_SELECTOR;
 
     /**
      * The feature id for the '<em><b>Master On</b></em>' reference list.
@@ -925,7 +1098,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER__MASTER_ON = DATA_COMPONENT__MASTER_ON;
+    int DATA_MAPPER_ANALYZER__MASTER_ON = MASTER_COMPONENT__MASTER_ON;
 
     /**
      * The feature id for the '<em><b>Data Mapper</b></em>' reference.
@@ -934,7 +1107,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER__DATA_MAPPER = DATA_COMPONENT_FEATURE_COUNT + 0;
+    int DATA_MAPPER_ANALYZER__DATA_MAPPER = MASTER_COMPONENT_FEATURE_COUNT + 0;
 
     /**
      * The number of structural features of the '<em>Data Mapper Analyzer</em>' class.
@@ -943,7 +1116,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 1;
+    int DATA_MAPPER_ANALYZER_FEATURE_COUNT = MASTER_COMPONENT_FEATURE_COUNT + 1;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int DATA_MAPPER_ANALYZER___GET_MASTER_ON = MASTER_COMPONENT___GET_MASTER_ON;
 
     /**
      * The number of operations of the '<em>Data Mapper Analyzer</em>' class.
@@ -952,7 +1134,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DATA_MAPPER_ANALYZER_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+    int DATA_MAPPER_ANALYZER_OPERATION_COUNT = MASTER_COMPONENT_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.DataMapperServiceImpl <em>Data Mapper Service</em>}' class.
@@ -1011,49 +1193,13 @@ public interface ComponentPackage extends EPackage
     int MAPPED_SOURCE_VALUE = 14;
 
     /**
-     * The feature id for the '<em><b>Level</b></em>' container reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAPPED_SOURCE_VALUE__LEVEL = DATA_COMPONENT__LEVEL;
-
-    /**
-     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAPPED_SOURCE_VALUE__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
-
-    /**
-     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAPPED_SOURCE_VALUE__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
-
-    /**
-     * The feature id for the '<em><b>Master On</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAPPED_SOURCE_VALUE__MASTER_ON = DATA_COMPONENT__MASTER_ON;
-
-    /**
      * The feature id for the '<em><b>Short Description</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int MAPPED_SOURCE_VALUE__SHORT_DESCRIPTION = DATA_COMPONENT_FEATURE_COUNT + 0;
+    int MAPPED_SOURCE_VALUE__SHORT_DESCRIPTION = WorldPackage.DOCUMENTABLE__SHORT_DESCRIPTION;
 
     /**
      * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1062,7 +1208,43 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MAPPED_SOURCE_VALUE__NAME = DATA_COMPONENT_FEATURE_COUNT + 1;
+    int MAPPED_SOURCE_VALUE__NAME = WorldPackage.DOCUMENTABLE__NAME;
+
+    /**
+     * The feature id for the '<em><b>Level</b></em>' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAPPED_SOURCE_VALUE__LEVEL = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAPPED_SOURCE_VALUE__CUSTOMIZATION_PIPELINE = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAPPED_SOURCE_VALUE__ARCHIVE_SELECTOR = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAPPED_SOURCE_VALUE__MASTER_ON = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 3;
 
     /**
      * The feature id for the '<em><b>Mapper</b></em>' reference.
@@ -1071,7 +1253,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MAPPED_SOURCE_VALUE__MAPPER = DATA_COMPONENT_FEATURE_COUNT + 2;
+    int MAPPED_SOURCE_VALUE__MAPPER = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 4;
 
     /**
      * The feature id for the '<em><b>Input</b></em>' containment reference.
@@ -1080,7 +1262,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MAPPED_SOURCE_VALUE__INPUT = DATA_COMPONENT_FEATURE_COUNT + 3;
+    int MAPPED_SOURCE_VALUE__INPUT = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 5;
 
     /**
      * The number of structural features of the '<em>Mapped Source Value</em>' class.
@@ -1089,7 +1271,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MAPPED_SOURCE_VALUE_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 4;
+    int MAPPED_SOURCE_VALUE_FEATURE_COUNT = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 6;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAPPED_SOURCE_VALUE___GET_MASTER_ON = WorldPackage.DOCUMENTABLE_OPERATION_COUNT + 0;
 
     /**
      * The number of operations of the '<em>Mapped Source Value</em>' class.
@@ -1098,7 +1289,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int MAPPED_SOURCE_VALUE_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+    int MAPPED_SOURCE_VALUE_OPERATION_COUNT = WorldPackage.DOCUMENTABLE_OPERATION_COUNT + 1;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.CalculationComponentImpl <em>Calculation Component</em>}' class.
@@ -1111,49 +1302,13 @@ public interface ComponentPackage extends EPackage
     int CALCULATION_COMPONENT = 15;
 
     /**
-     * The feature id for the '<em><b>Level</b></em>' container reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int CALCULATION_COMPONENT__LEVEL = DATA_COMPONENT__LEVEL;
-
-    /**
-     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int CALCULATION_COMPONENT__CUSTOMIZATION_PIPELINE = DATA_COMPONENT__CUSTOMIZATION_PIPELINE;
-
-    /**
-     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int CALCULATION_COMPONENT__ARCHIVE_SELECTOR = DATA_COMPONENT__ARCHIVE_SELECTOR;
-
-    /**
-     * The feature id for the '<em><b>Master On</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int CALCULATION_COMPONENT__MASTER_ON = DATA_COMPONENT__MASTER_ON;
-
-    /**
      * The feature id for the '<em><b>Short Description</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT__SHORT_DESCRIPTION = DATA_COMPONENT_FEATURE_COUNT + 0;
+    int CALCULATION_COMPONENT__SHORT_DESCRIPTION = WorldPackage.DOCUMENTABLE__SHORT_DESCRIPTION;
 
     /**
      * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1162,7 +1317,43 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT__NAME = DATA_COMPONENT_FEATURE_COUNT + 1;
+    int CALCULATION_COMPONENT__NAME = WorldPackage.DOCUMENTABLE__NAME;
+
+    /**
+     * The feature id for the '<em><b>Level</b></em>' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CALCULATION_COMPONENT__LEVEL = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CALCULATION_COMPONENT__CUSTOMIZATION_PIPELINE = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CALCULATION_COMPONENT__ARCHIVE_SELECTOR = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CALCULATION_COMPONENT__MASTER_ON = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 3;
 
     /**
      * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -1171,7 +1362,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT__IMPLEMENTATION = DATA_COMPONENT_FEATURE_COUNT + 2;
+    int CALCULATION_COMPONENT__IMPLEMENTATION = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 4;
 
     /**
      * The feature id for the '<em><b>Outputs</b></em>' containment reference list.
@@ -1180,7 +1371,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT__OUTPUTS = DATA_COMPONENT_FEATURE_COUNT + 3;
+    int CALCULATION_COMPONENT__OUTPUTS = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 5;
 
     /**
      * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -1189,7 +1380,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT__INPUTS = DATA_COMPONENT_FEATURE_COUNT + 4;
+    int CALCULATION_COMPONENT__INPUTS = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 6;
 
     /**
      * The number of structural features of the '<em>Calculation Component</em>' class.
@@ -1198,7 +1389,16 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT_FEATURE_COUNT = DATA_COMPONENT_FEATURE_COUNT + 5;
+    int CALCULATION_COMPONENT_FEATURE_COUNT = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 7;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CALCULATION_COMPONENT___GET_MASTER_ON = WorldPackage.DOCUMENTABLE_OPERATION_COUNT + 0;
 
     /**
      * The number of operations of the '<em>Calculation Component</em>' class.
@@ -1207,7 +1407,7 @@ public interface ComponentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int CALCULATION_COMPONENT_OPERATION_COUNT = DATA_COMPONENT_OPERATION_COUNT + 0;
+    int CALCULATION_COMPONENT_OPERATION_COUNT = WorldPackage.DOCUMENTABLE_OPERATION_COUNT + 1;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.CalculationModuleImpl <em>Calculation Module</em>}' class.
@@ -2161,6 +2361,15 @@ public interface ComponentPackage extends EPackage
     int EXTERNAL_VALUE_FEATURE_COUNT = SINGLE_VALUE_FEATURE_COUNT + 2;
 
     /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EXTERNAL_VALUE___GET_MASTER_ON = SINGLE_VALUE___GET_MASTER_ON;
+
+    /**
      * The number of operations of the '<em>External Value</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2207,6 +2416,298 @@ public interface ComponentPackage extends EPackage
     int SUMMARIES_CONFIGURATION_OPERATION_COUNT = CONFIGURATION_OPERATION_COUNT + 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.ItemInterceptor <em>Item Interceptor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.ItemInterceptor
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getItemInterceptor()
+     * @generated
+     */
+    int ITEM_INTERCEPTOR = 32;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ITEM_INTERCEPTOR__MASTER_ON = 0;
+
+    /**
+     * The number of structural features of the '<em>Item Interceptor</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ITEM_INTERCEPTOR_FEATURE_COUNT = 1;
+
+    /**
+     * The number of operations of the '<em>Item Interceptor</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ITEM_INTERCEPTOR_OPERATION_COUNT = 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.RestInterceptorImpl <em>Rest Interceptor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.impl.RestInterceptorImpl
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getRestInterceptor()
+     * @generated
+     */
+    int REST_INTERCEPTOR = 34;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REST_INTERCEPTOR__MASTER_ON = ITEM_INTERCEPTOR__MASTER_ON;
+
+    /**
+     * The feature id for the '<em><b>Selector</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REST_INTERCEPTOR__SELECTOR = ITEM_INTERCEPTOR_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Definition</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REST_INTERCEPTOR__DEFINITION = ITEM_INTERCEPTOR_FEATURE_COUNT + 1;
+
+    /**
+     * The number of structural features of the '<em>Rest Interceptor</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REST_INTERCEPTOR_FEATURE_COUNT = ITEM_INTERCEPTOR_FEATURE_COUNT + 2;
+
+    /**
+     * The number of operations of the '<em>Rest Interceptor</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REST_INTERCEPTOR_OPERATION_COUNT = ITEM_INTERCEPTOR_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.GlobalizeComponentImpl <em>Globalize Component</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.impl.GlobalizeComponentImpl
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getGlobalizeComponent()
+     * @generated
+     */
+    int GLOBALIZE_COMPONENT = 35;
+
+    /**
+     * The feature id for the '<em><b>Short Description</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__SHORT_DESCRIPTION = WorldPackage.DOCUMENTABLE__SHORT_DESCRIPTION;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__NAME = WorldPackage.DOCUMENTABLE__NAME;
+
+    /**
+     * The feature id for the '<em><b>Level</b></em>' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__LEVEL = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__CUSTOMIZATION_PIPELINE = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__ARCHIVE_SELECTOR = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Components</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__COMPONENTS = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 3;
+
+    /**
+     * The feature id for the '<em><b>Source Master</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT__SOURCE_MASTER = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 4;
+
+    /**
+     * The number of structural features of the '<em>Globalize Component</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT_FEATURE_COUNT = WorldPackage.DOCUMENTABLE_FEATURE_COUNT + 5;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT___GET_MASTER_ON = WorldPackage.DOCUMENTABLE_OPERATION_COUNT + 0;
+
+    /**
+     * The number of operations of the '<em>Globalize Component</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GLOBALIZE_COMPONENT_OPERATION_COUNT = WorldPackage.DOCUMENTABLE_OPERATION_COUNT + 1;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.impl.TransientValueImpl <em>Transient Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.impl.TransientValueImpl
+     * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getTransientValue()
+     * @generated
+     */
+    int TRANSIENT_VALUE = 36;
+
+    /**
+     * The feature id for the '<em><b>Level</b></em>' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__LEVEL = SINGLE_VALUE__LEVEL;
+
+    /**
+     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__CUSTOMIZATION_PIPELINE = SINGLE_VALUE__CUSTOMIZATION_PIPELINE;
+
+    /**
+     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__ARCHIVE_SELECTOR = SINGLE_VALUE__ARCHIVE_SELECTOR;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__MASTER_ON = SINGLE_VALUE__MASTER_ON;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__NAME = SINGLE_VALUE__NAME;
+
+    /**
+     * The feature id for the '<em><b>Data Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__DATA_TYPE = SINGLE_VALUE__DATA_TYPE;
+
+    /**
+     * The feature id for the '<em><b>Customization Tags</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE__CUSTOMIZATION_TAGS = SINGLE_VALUE__CUSTOMIZATION_TAGS;
+
+    /**
+     * The number of structural features of the '<em>Transient Value</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE_FEATURE_COUNT = SINGLE_VALUE_FEATURE_COUNT + 0;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE___GET_MASTER_ON = SINGLE_VALUE___GET_MASTER_ON;
+
+    /**
+     * The number of operations of the '<em>Transient Value</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TRANSIENT_VALUE_OPERATION_COUNT = SINGLE_VALUE_OPERATION_COUNT + 0;
+
+    /**
      * The meta object id for the '<em>Notification</em>' data type.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2214,83 +2715,83 @@ public interface ComponentPackage extends EPackage
      * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getNotification()
      * @generated
      */
-    int NOTIFICATION = 32;
+    int NOTIFICATION = 38;
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.System <em>System</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.ComponentWorld <em>World</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for class '<em>System</em>'.
-     * @see org.eclipse.scada.configuration.component.System
+     * @return the meta object for class '<em>World</em>'.
+     * @see org.eclipse.scada.configuration.component.ComponentWorld
      * @generated
      */
-    EClass getSystem ();
+    EClass getComponentWorld ();
 
     /**
-     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.System#getLevels <em>Levels</em>}'.
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.ComponentWorld#getLevels <em>Levels</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Levels</em>'.
-     * @see org.eclipse.scada.configuration.component.System#getLevels()
-     * @see #getSystem()
+     * @see org.eclipse.scada.configuration.component.ComponentWorld#getLevels()
+     * @see #getComponentWorld()
      * @generated
      */
-    EReference getSystem_Levels ();
+    EReference getComponentWorld_Levels ();
 
     /**
-     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.System#getConfigurations <em>Configurations</em>}'.
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.ComponentWorld#getConfigurations <em>Configurations</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Configurations</em>'.
-     * @see org.eclipse.scada.configuration.component.System#getConfigurations()
-     * @see #getSystem()
+     * @see org.eclipse.scada.configuration.component.ComponentWorld#getConfigurations()
+     * @see #getComponentWorld()
      * @generated
      */
-    EReference getSystem_Configurations ();
+    EReference getComponentWorld_Configurations ();
 
     /**
-     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.System#getServices <em>Services</em>}'.
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.ComponentWorld#getServices <em>Services</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Services</em>'.
-     * @see org.eclipse.scada.configuration.component.System#getServices()
-     * @see #getSystem()
+     * @see org.eclipse.scada.configuration.component.ComponentWorld#getServices()
+     * @see #getComponentWorld()
      * @generated
      */
-    EReference getSystem_Services ();
+    EReference getComponentWorld_Services ();
 
     /**
-     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.System#getInfrastructure <em>Infrastructure</em>}'.
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.ComponentWorld#getInfrastructure <em>Infrastructure</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Infrastructure</em>'.
-     * @see org.eclipse.scada.configuration.component.System#getInfrastructure()
-     * @see #getSystem()
+     * @see org.eclipse.scada.configuration.component.ComponentWorld#getInfrastructure()
+     * @see #getComponentWorld()
      * @generated
      */
-    EReference getSystem_Infrastructure ();
+    EReference getComponentWorld_Infrastructure ();
 
     /**
-     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.System#getDefaultCustomizationPipeline <em>Default Customization Pipeline</em>}'.
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.ComponentWorld#getDefaultCustomizationPipeline <em>Default Customization Pipeline</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Default Customization Pipeline</em>'.
-     * @see org.eclipse.scada.configuration.component.System#getDefaultCustomizationPipeline()
-     * @see #getSystem()
+     * @see org.eclipse.scada.configuration.component.ComponentWorld#getDefaultCustomizationPipeline()
+     * @see #getComponentWorld()
      * @generated
      */
-    EReference getSystem_DefaultCustomizationPipeline ();
+    EReference getComponentWorld_DefaultCustomizationPipeline ();
 
     /**
-     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.System#getDefaultArchiveSelector <em>Default Archive Selector</em>}'.
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.ComponentWorld#getDefaultArchiveSelector <em>Default Archive Selector</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Default Archive Selector</em>'.
-     * @see org.eclipse.scada.configuration.component.System#getDefaultArchiveSelector()
-     * @see #getSystem()
+     * @see org.eclipse.scada.configuration.component.ComponentWorld#getDefaultArchiveSelector()
+     * @see #getComponentWorld()
      * @generated
      */
-    EReference getSystem_DefaultArchiveSelector ();
+    EReference getComponentWorld_DefaultArchiveSelector ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.Level <em>Level</em>}'.
@@ -2422,15 +2923,14 @@ public interface ComponentPackage extends EPackage
     EClass getDataComponent ();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.scada.configuration.component.DataComponent#getMasterOn <em>Master On</em>}'.
+     * Returns the meta object for the '{@link org.eclipse.scada.configuration.component.DataComponent#getMasterOn() <em>Get Master On</em>}' operation.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the reference list '<em>Master On</em>'.
+     * @return the meta object for the '<em>Get Master On</em>' operation.
      * @see org.eclipse.scada.configuration.component.DataComponent#getMasterOn()
-     * @see #getDataComponent()
      * @generated
      */
-    EReference getDataComponent_MasterOn ();
+    EOperation getDataComponent__GetMasterOn ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.Configuration <em>Configuration</em>}'.
@@ -3233,6 +3733,143 @@ public interface ComponentPackage extends EPackage
     EAttribute getSummariesConfiguration_ItemThreshold ();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.ItemInterceptor <em>Item Interceptor</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Item Interceptor</em>'.
+     * @see org.eclipse.scada.configuration.component.ItemInterceptor
+     * @generated
+     */
+    EClass getItemInterceptor ();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.scada.configuration.component.ItemInterceptor#getMasterOn <em>Master On</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Master On</em>'.
+     * @see org.eclipse.scada.configuration.component.ItemInterceptor#getMasterOn()
+     * @see #getItemInterceptor()
+     * @generated
+     */
+    EReference getItemInterceptor_MasterOn ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.Container <em>Container</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Container</em>'.
+     * @see org.eclipse.scada.configuration.component.Container
+     * @generated
+     */
+    EClass getContainer ();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.component.Container#getItemInterceptors <em>Item Interceptors</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Item Interceptors</em>'.
+     * @see org.eclipse.scada.configuration.component.Container#getItemInterceptors()
+     * @see #getContainer()
+     * @generated
+     */
+    EReference getContainer_ItemInterceptors ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.RestInterceptor <em>Rest Interceptor</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Rest Interceptor</em>'.
+     * @see org.eclipse.scada.configuration.component.RestInterceptor
+     * @generated
+     */
+    EClass getRestInterceptor ();
+
+    /**
+     * Returns the meta object for the containment reference '{@link org.eclipse.scada.configuration.component.RestInterceptor#getSelector <em>Selector</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Selector</em>'.
+     * @see org.eclipse.scada.configuration.component.RestInterceptor#getSelector()
+     * @see #getRestInterceptor()
+     * @generated
+     */
+    EReference getRestInterceptor_Selector ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.RestInterceptor#getDefinition <em>Definition</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Definition</em>'.
+     * @see org.eclipse.scada.configuration.component.RestInterceptor#getDefinition()
+     * @see #getRestInterceptor()
+     * @generated
+     */
+    EReference getRestInterceptor_Definition ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.GlobalizeComponent <em>Globalize Component</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Globalize Component</em>'.
+     * @see org.eclipse.scada.configuration.component.GlobalizeComponent
+     * @generated
+     */
+    EClass getGlobalizeComponent ();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.scada.configuration.component.GlobalizeComponent#getComponents <em>Components</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Components</em>'.
+     * @see org.eclipse.scada.configuration.component.GlobalizeComponent#getComponents()
+     * @see #getGlobalizeComponent()
+     * @generated
+     */
+    EReference getGlobalizeComponent_Components ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.component.GlobalizeComponent#getSourceMaster <em>Source Master</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Source Master</em>'.
+     * @see org.eclipse.scada.configuration.component.GlobalizeComponent#getSourceMaster()
+     * @see #getGlobalizeComponent()
+     * @generated
+     */
+    EReference getGlobalizeComponent_SourceMaster ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.TransientValue <em>Transient Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Transient Value</em>'.
+     * @see org.eclipse.scada.configuration.component.TransientValue
+     * @generated
+     */
+    EClass getTransientValue ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.MasterComponent <em>Master Component</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Master Component</em>'.
+     * @see org.eclipse.scada.configuration.component.MasterComponent
+     * @generated
+     */
+    EClass getMasterComponent ();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.scada.configuration.component.MasterComponent#getMasterOn <em>Master On</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Master On</em>'.
+     * @see org.eclipse.scada.configuration.component.MasterComponent#getMasterOn()
+     * @see #getMasterComponent()
+     * @generated
+     */
+    EReference getMasterComponent_MasterOn ();
+
+    /**
      * Returns the meta object for data type '{@link org.eclipse.emf.common.notify.Notification <em>Notification</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3268,14 +3905,14 @@ public interface ComponentPackage extends EPackage
     interface Literals
     {
         /**
-         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.SystemImpl <em>System</em>}' class.
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.ComponentWorldImpl <em>World</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.scada.configuration.component.impl.SystemImpl
-         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getSystem()
+         * @see org.eclipse.scada.configuration.component.impl.ComponentWorldImpl
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getComponentWorld()
          * @generated
          */
-        EClass SYSTEM = eINSTANCE.getSystem ();
+        EClass COMPONENT_WORLD = eINSTANCE.getComponentWorld ();
 
         /**
          * The meta object literal for the '<em><b>Levels</b></em>' containment reference list feature.
@@ -3283,7 +3920,7 @@ public interface ComponentPackage extends EPackage
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference SYSTEM__LEVELS = eINSTANCE.getSystem_Levels ();
+        EReference COMPONENT_WORLD__LEVELS = eINSTANCE.getComponentWorld_Levels ();
 
         /**
          * The meta object literal for the '<em><b>Configurations</b></em>' containment reference list feature.
@@ -3291,7 +3928,7 @@ public interface ComponentPackage extends EPackage
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference SYSTEM__CONFIGURATIONS = eINSTANCE.getSystem_Configurations ();
+        EReference COMPONENT_WORLD__CONFIGURATIONS = eINSTANCE.getComponentWorld_Configurations ();
 
         /**
          * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
@@ -3299,7 +3936,7 @@ public interface ComponentPackage extends EPackage
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference SYSTEM__SERVICES = eINSTANCE.getSystem_Services ();
+        EReference COMPONENT_WORLD__SERVICES = eINSTANCE.getComponentWorld_Services ();
 
         /**
          * The meta object literal for the '<em><b>Infrastructure</b></em>' reference feature.
@@ -3307,7 +3944,7 @@ public interface ComponentPackage extends EPackage
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference SYSTEM__INFRASTRUCTURE = eINSTANCE.getSystem_Infrastructure ();
+        EReference COMPONENT_WORLD__INFRASTRUCTURE = eINSTANCE.getComponentWorld_Infrastructure ();
 
         /**
          * The meta object literal for the '<em><b>Default Customization Pipeline</b></em>' reference feature.
@@ -3315,7 +3952,7 @@ public interface ComponentPackage extends EPackage
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference SYSTEM__DEFAULT_CUSTOMIZATION_PIPELINE = eINSTANCE.getSystem_DefaultCustomizationPipeline ();
+        EReference COMPONENT_WORLD__DEFAULT_CUSTOMIZATION_PIPELINE = eINSTANCE.getComponentWorld_DefaultCustomizationPipeline ();
 
         /**
          * The meta object literal for the '<em><b>Default Archive Selector</b></em>' reference feature.
@@ -3323,7 +3960,7 @@ public interface ComponentPackage extends EPackage
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference SYSTEM__DEFAULT_ARCHIVE_SELECTOR = eINSTANCE.getSystem_DefaultArchiveSelector ();
+        EReference COMPONENT_WORLD__DEFAULT_ARCHIVE_SELECTOR = eINSTANCE.getComponentWorld_DefaultArchiveSelector ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.LevelImpl <em>Level</em>}' class.
@@ -3428,12 +4065,12 @@ public interface ComponentPackage extends EPackage
         EClass DATA_COMPONENT = eINSTANCE.getDataComponent ();
 
         /**
-         * The meta object literal for the '<em><b>Master On</b></em>' reference list feature.
+         * The meta object literal for the '<em><b>Get Master On</b></em>' operation.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference DATA_COMPONENT__MASTER_ON = eINSTANCE.getDataComponent_MasterOn ();
+        EOperation DATA_COMPONENT___GET_MASTER_ON = eINSTANCE.getDataComponent__GetMasterOn ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.ConfigurationImpl <em>Configuration</em>}' class.
@@ -4098,6 +4735,122 @@ public interface ComponentPackage extends EPackage
          * @generated
          */
         EAttribute SUMMARIES_CONFIGURATION__ITEM_THRESHOLD = eINSTANCE.getSummariesConfiguration_ItemThreshold ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.ItemInterceptor <em>Item Interceptor</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.ItemInterceptor
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getItemInterceptor()
+         * @generated
+         */
+        EClass ITEM_INTERCEPTOR = eINSTANCE.getItemInterceptor ();
+
+        /**
+         * The meta object literal for the '<em><b>Master On</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference ITEM_INTERCEPTOR__MASTER_ON = eINSTANCE.getItemInterceptor_MasterOn ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.ContainerImpl <em>Container</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.impl.ContainerImpl
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getContainer()
+         * @generated
+         */
+        EClass CONTAINER = eINSTANCE.getContainer ();
+
+        /**
+         * The meta object literal for the '<em><b>Item Interceptors</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CONTAINER__ITEM_INTERCEPTORS = eINSTANCE.getContainer_ItemInterceptors ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.RestInterceptorImpl <em>Rest Interceptor</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.impl.RestInterceptorImpl
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getRestInterceptor()
+         * @generated
+         */
+        EClass REST_INTERCEPTOR = eINSTANCE.getRestInterceptor ();
+
+        /**
+         * The meta object literal for the '<em><b>Selector</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference REST_INTERCEPTOR__SELECTOR = eINSTANCE.getRestInterceptor_Selector ();
+
+        /**
+         * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference REST_INTERCEPTOR__DEFINITION = eINSTANCE.getRestInterceptor_Definition ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.GlobalizeComponentImpl <em>Globalize Component</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.impl.GlobalizeComponentImpl
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getGlobalizeComponent()
+         * @generated
+         */
+        EClass GLOBALIZE_COMPONENT = eINSTANCE.getGlobalizeComponent ();
+
+        /**
+         * The meta object literal for the '<em><b>Components</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference GLOBALIZE_COMPONENT__COMPONENTS = eINSTANCE.getGlobalizeComponent_Components ();
+
+        /**
+         * The meta object literal for the '<em><b>Source Master</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference GLOBALIZE_COMPONENT__SOURCE_MASTER = eINSTANCE.getGlobalizeComponent_SourceMaster ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.TransientValueImpl <em>Transient Value</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.impl.TransientValueImpl
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getTransientValue()
+         * @generated
+         */
+        EClass TRANSIENT_VALUE = eINSTANCE.getTransientValue ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.impl.MasterComponentImpl <em>Master Component</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.impl.MasterComponentImpl
+         * @see org.eclipse.scada.configuration.component.impl.ComponentPackageImpl#getMasterComponent()
+         * @generated
+         */
+        EClass MASTER_COMPONENT = eINSTANCE.getMasterComponent ();
+
+        /**
+         * The meta object literal for the '<em><b>Master On</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference MASTER_COMPONENT__MASTER_ON = eINSTANCE.getMasterComponent_MasterOn ();
 
         /**
          * The meta object literal for the '<em>Notification</em>' data type.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="generator" name="generator" schema="schema/generator.exsd"/>
+   <extension
+         point="org.eclipse.scada.configuration.world.lib.generator">
+      <nodeElementProcessor
+            factoryClass="org.eclipse.scada.configuration.world.lib.DefaultNodeElementProcessorFactoryImpl">
+         <forClass
+               class="org.eclipse.scada.configuration.world.osgi.MasterServer">
+         </forClass>
+         <forClass
+               class="org.eclipse.scada.configuration.world.osgi.ValueArchiveServer">
+         </forClass>
+         <forClass
+               class="org.eclipse.scada.configuration.world.ExecDriver">
+         </forClass>
+         <forClass
+               class="org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism">
+         </forClass>
+         <forClass
+               class="org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism">
+         </forClass>
+      </nodeElementProcessor>
+   </extension>
+   <extension
+         point="org.eclipse.scada.configuration.world.lib.generator">
+      <oscarProcessor
+            class="org.eclipse.scada.configuration.world.lib.oscar.RestExporterProcessor">
+      </oscarProcessor>
+      <oscarProcessor
+            class="org.eclipse.scada.configuration.world.lib.oscar.HttpServiceProcessor">
+      </oscarProcessor>
+   </extension>
+
+</plugin>

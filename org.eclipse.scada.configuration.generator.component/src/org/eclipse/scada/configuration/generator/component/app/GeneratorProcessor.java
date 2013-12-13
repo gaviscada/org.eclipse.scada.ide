@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -25,8 +27,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.scada.configuration.generator.GenerationContext;
 import org.eclipse.scada.configuration.generator.Generator;
 import org.eclipse.scada.configuration.generator.GeneratorContext;
+import org.eclipse.scada.configuration.generator.GeneratorPlugin;
 import org.eclipse.scada.configuration.generator.PreparationContext;
-import org.eclipse.scada.configuration.generator.component.ComponentGeneratorPlugin;
 import org.eclipse.scada.configuration.infrastructure.lib.WorldGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,13 +58,29 @@ public class GeneratorProcessor
 
     private final static Logger logger = LoggerFactory.getLogger ( GeneratorProcessor.class );
 
-    private final EObject content;
+    @Inject
+    private EObject content;
 
-    private final WorldGenerator worldGenerator;
+    @Inject
+    private WorldGenerator worldGenerator;
+
+    public GeneratorProcessor ()
+    {
+    }
 
     public GeneratorProcessor ( final EObject content, final WorldGenerator worldGenerator )
     {
         this.content = content;
+        this.worldGenerator = worldGenerator;
+    }
+
+    public void setContent ( final EObject content )
+    {
+        this.content = content;
+    }
+
+    public void setWorldGenerator ( final WorldGenerator worldGenerator )
+    {
         this.worldGenerator = worldGenerator;
     }
 
@@ -75,7 +93,7 @@ public class GeneratorProcessor
         while ( ti.hasNext () )
         {
             final Object source = ti.next ();
-            final Set<Generator> gens = ComponentGeneratorPlugin.createGeneratorsFor ( source );
+            final Set<Generator> gens = GeneratorPlugin.createGeneratorsFor ( source );
             if ( !gens.isEmpty () )
             {
                 generatorMap.put ( source, gens );

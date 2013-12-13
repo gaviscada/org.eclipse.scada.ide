@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -57,23 +60,29 @@ import org.eclipse.scada.configuration.world.osgi.SummaryItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Singleton
 public class GlobalizationProcessor
 {
 
     private final static Logger logger = LoggerFactory.getLogger ( GlobalizationProcessor.class );
 
-    private final Globalization globalization;
+    @Inject
+    private Globalization globalizationModel;
+
+    public GlobalizationProcessor ()
+    {
+    }
 
     public GlobalizationProcessor ( final Globalization globalization )
     {
-        this.globalization = globalization;
+        this.globalizationModel = globalization;
     }
 
     protected int countJobs ()
     {
         int count = 0;
 
-        for ( final Global global : this.globalization.getGlobals () )
+        for ( final Global global : this.globalizationModel.getGlobals () )
         {
             count += global.getLocals ().size ();
         }
@@ -87,7 +96,7 @@ public class GlobalizationProcessor
 
         try
         {
-            for ( final Global global : this.globalization.getGlobals () )
+            for ( final Global global : this.globalizationModel.getGlobals () )
             {
                 for ( final Local local : global.getLocals () )
                 {
@@ -145,7 +154,7 @@ public class GlobalizationProcessor
 
     public void postProcess ( final IProgressMonitor monitor )
     {
-        monitor.beginTask ( "Globalizing world - Phase 2/2", this.entries.size () + this.globalization.getGlobals ().size () );
+        monitor.beginTask ( "Globalizing world - Phase 2/2", this.entries.size () + this.globalizationModel.getGlobals ().size () );
 
         try
         {
@@ -165,7 +174,7 @@ public class GlobalizationProcessor
 
     private void postProcessGlobal ( final IProgressMonitor monitor )
     {
-        for ( final Global global : this.globalization.getGlobals () )
+        for ( final Global global : this.globalizationModel.getGlobals () )
         {
             final AlarmsEventsModule module = addAEModule ( global );
 
@@ -469,11 +478,13 @@ public class GlobalizationProcessor
     {
         final T connection = clazz.cast ( OsgiFactory.eINSTANCE.create ( connectionClass ) );
 
-        final String cname = String.format ( "global.%s.to.%s", Names.makeName ( local.getLocal () ), Names.makeName ( global.getGlobal () ) );
+        final String tag = connection.getTypeTag ();
+
+        final String cname = String.format ( "global.%s.to.%s.%s", Names.makeName ( global.getGlobal () ), local.getId (), tag );
         connection.setName ( cname );
 
         // set credentials
-        connection.setCredentials ( findCredentials ( global, local ) );
+        connection.setCredentials ( EcoreUtil.copy ( findCredentials ( global, local ) ) );
 
         // add connection to "from"
         global.getGlobal ().getConnections ().add ( connection );
@@ -510,7 +521,7 @@ public class GlobalizationProcessor
         }
         else
         {
-            return this.globalization.getDefaultLogonCredentials ();
+            return this.globalizationModel.getDefaultLogonCredentials ();
         }
     }
 

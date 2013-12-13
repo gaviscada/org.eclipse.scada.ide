@@ -99,7 +99,6 @@
 		<module>../org.eclipse.scada.configuration.generator</module>
 		<module>../org.eclipse.scada.configuration.generator.component</module>
 		<module>../org.eclipse.scada.configuration.generator.ui</module>
-		<module>../org.eclipse.scada.configuration.generator.world</module>
 		<module>../org.eclipse.scada.configuration.globalization</module>
 		<module>../org.eclipse.scada.configuration.globalization.edit</module>
 		<module>../org.eclipse.scada.configuration.globalization.editor</module>
@@ -132,10 +131,20 @@
 		<module>../org.eclipse.scada.configuration.world</module>
 		<module>../org.eclipse.scada.configuration.world.edit</module>
 		<module>../org.eclipse.scada.configuration.world.editor</module>
+		<module>../org.eclipse.scada.configuration.world.lib</module>
 
 		<module>../org.eclipse.scada.protocol.ngp.model.additions</module>
 		<module>../org.eclipse.scada.da.server.ui</module>
 		<module>../org.eclipse.scada.da.server.ui.launcher</module>
 		<module>../org.eclipse.scada.configuration.memory.manager.lib</module>
+		<module>../org.eclipse.scada.configuration.recipe</module>
+		<module>../org.eclipse.scada.configuration.recipe.edit</module>
+		<module>../org.eclipse.scada.configuration.recipe.editor</module>
+		<module>../org.eclipse.scada.configuration.recipe.lib</module>
+		<module>../org.eclipse.scada.configuration.recipe.ui</module>
+		<module>../org.eclipse.scada.configuration.doc</module>
+		<module>../org.eclipse.scada.configuration.component.common</module>
+		<module>../org.eclipse.scada.configuration.component.common.edit</module>
+		<module>../org.eclipse.scada.configuration.component.common.lib</module>
 	</modules>
 </project>

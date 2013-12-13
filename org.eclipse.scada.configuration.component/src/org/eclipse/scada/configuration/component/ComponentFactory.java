@@ -31,13 +31,13 @@ public interface ComponentFactory extends EFactory
     ComponentFactory eINSTANCE = org.eclipse.scada.configuration.component.impl.ComponentFactoryImpl.init ();
 
     /**
-     * Returns a new object of class '<em>System</em>'.
+     * Returns a new object of class '<em>World</em>'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>System</em>'.
+     * @return a new object of class '<em>World</em>'.
      * @generated
      */
-    System createSystem ();
+    ComponentWorld createComponentWorld ();
 
     /**
      * Returns a new object of class '<em>Level</em>'.
@@ -245,6 +245,42 @@ public interface ComponentFactory extends EFactory
      * @generated
      */
     SummariesConfiguration createSummariesConfiguration ();
+
+    /**
+     * Returns a new object of class '<em>Rest Interceptor</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Rest Interceptor</em>'.
+     * @generated
+     */
+    RestInterceptor createRestInterceptor ();
+
+    /**
+     * Returns a new object of class '<em>Globalize Component</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Globalize Component</em>'.
+     * @generated
+     */
+    GlobalizeComponent createGlobalizeComponent ();
+
+    /**
+     * Returns a new object of class '<em>Transient Value</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Transient Value</em>'.
+     * @generated
+     */
+    TransientValue createTransientValue ();
+
+    /**
+     * Returns a new object of class '<em>Master Component</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Master Component</em>'.
+     * @generated
+     */
+    MasterComponent createMasterComponent ();
 
     /**
      * Returns the package supported by this factory.

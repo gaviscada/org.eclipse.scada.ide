@@ -17,7 +17,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.scada.configuration.globalization.GlobalizePackage;
 import org.eclipse.scada.configuration.infrastructure.AbstractFactoryDriver;
+import org.eclipse.scada.configuration.infrastructure.ApplicationConfiguration;
 import org.eclipse.scada.configuration.infrastructure.CommonDriver;
+import org.eclipse.scada.configuration.infrastructure.Configurations;
 import org.eclipse.scada.configuration.infrastructure.Device;
 import org.eclipse.scada.configuration.infrastructure.Driver;
 import org.eclipse.scada.configuration.infrastructure.EquinoxApplication;
@@ -25,13 +27,16 @@ import org.eclipse.scada.configuration.infrastructure.EquinoxDriver;
 import org.eclipse.scada.configuration.infrastructure.ExternalDriver;
 import org.eclipse.scada.configuration.infrastructure.ExternalDriverPlaceholder;
 import org.eclipse.scada.configuration.infrastructure.ExternalNode;
+import org.eclipse.scada.configuration.infrastructure.HttpServiceModule;
 import org.eclipse.scada.configuration.infrastructure.InfrastructureFactory;
 import org.eclipse.scada.configuration.infrastructure.InfrastructurePackage;
 import org.eclipse.scada.configuration.infrastructure.JdbcUserService;
 import org.eclipse.scada.configuration.infrastructure.MasterImport;
 import org.eclipse.scada.configuration.infrastructure.MasterServer;
+import org.eclipse.scada.configuration.infrastructure.Module;
 import org.eclipse.scada.configuration.infrastructure.Node;
 import org.eclipse.scada.configuration.infrastructure.Options;
+import org.eclipse.scada.configuration.infrastructure.RestExporterModule;
 import org.eclipse.scada.configuration.infrastructure.SystemNode;
 import org.eclipse.scada.configuration.infrastructure.SystemPropertyUserService;
 import org.eclipse.scada.configuration.infrastructure.UserEntry;
@@ -192,6 +197,41 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * @generated
      */
     private EClass externalDriverPlaceholderEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass applicationConfigurationEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass configurationsEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass moduleEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass httpServiceModuleEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass restExporterModuleEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -389,6 +429,16 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    public EReference getWorld_Configurations ()
+    {
+        return (EReference)worldEClass.getEStructuralFeatures ().get ( 10 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public EClass getNode ()
     {
@@ -532,8 +582,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    public EReference getMasterImport_ImportSelector ()
+    public EReference getMasterImport_Master ()
     {
         return (EReference)masterImportEClass.getEStructuralFeatures ().get ( 3 );
     }
@@ -675,6 +724,16 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    public EReference getEquinoxApplication_Configuration ()
+    {
+        return (EReference)equinoxApplicationEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public EClass getCommonDriver ()
     {
@@ -778,6 +837,16 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
     public EAttribute getSystemNode_Applications ()
     {
         return (EAttribute)systemNodeEClass.getEStructuralFeatures ().get ( 4 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getSystemNode_Services ()
+    {
+        return (EReference)systemNodeEClass.getEStructuralFeatures ().get ( 5 );
     }
 
     /**
@@ -1093,6 +1162,96 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getApplicationConfiguration ()
+    {
+        return applicationConfigurationEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getApplicationConfiguration_Modules ()
+    {
+        return (EReference)applicationConfigurationEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getConfigurations ()
+    {
+        return configurationsEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getConfigurations_Configurations ()
+    {
+        return (EReference)configurationsEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getModule ()
+    {
+        return moduleEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getHttpServiceModule ()
+    {
+        return httpServiceModuleEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getHttpServiceModule_Port ()
+    {
+        return (EAttribute)httpServiceModuleEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getRestExporterModule ()
+    {
+        return restExporterModuleEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getRestExporterModule_ContextId ()
+    {
+        return (EAttribute)restExporterModuleEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public InfrastructureFactory getInfrastructureFactory ()
     {
@@ -1131,6 +1290,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         createEReference ( worldEClass, WORLD__DEFAULT_DRIVER_PASSWORD );
         createEReference ( worldEClass, WORLD__APPLICATION_CONFIGURATIONS );
         createEReference ( worldEClass, WORLD__DEFAULT_DRIVER_ACCESS_CREDENTIALS );
+        createEReference ( worldEClass, WORLD__CONFIGURATIONS );
 
         nodeEClass = createEClass ( NODE );
         createEAttribute ( nodeEClass, NODE__HOST_NAME );
@@ -1147,7 +1307,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         createEReference ( masterImportEClass, MASTER_IMPORT__IMPORTED_MASTER );
         createEAttribute ( masterImportEClass, MASTER_IMPORT__ID );
         createEReference ( masterImportEClass, MASTER_IMPORT__CREDENTIALS );
-        createEReference ( masterImportEClass, MASTER_IMPORT__IMPORT_SELECTOR );
+        createEReference ( masterImportEClass, MASTER_IMPORT__MASTER );
 
         optionsEClass = createEClass ( OPTIONS );
         createEAttribute ( optionsEClass, OPTIONS__BASE_DA_NGP_PORT );
@@ -1162,6 +1322,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         createEAttribute ( equinoxApplicationEClass, EQUINOX_APPLICATION__NAME );
         createEAttribute ( equinoxApplicationEClass, EQUINOX_APPLICATION__INSTANCE_NUMBER );
         createEReference ( equinoxApplicationEClass, EQUINOX_APPLICATION__CONFIGURATIONS );
+        createEReference ( equinoxApplicationEClass, EQUINOX_APPLICATION__CONFIGURATION );
 
         commonDriverEClass = createEClass ( COMMON_DRIVER );
         createEReference ( commonDriverEClass, COMMON_DRIVER__PASSWORD );
@@ -1175,6 +1336,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         createEReference ( systemNodeEClass, SYSTEM_NODE__MASTERS );
         createEReference ( systemNodeEClass, SYSTEM_NODE__VALUE_ARCHIVES );
         createEAttribute ( systemNodeEClass, SYSTEM_NODE__APPLICATIONS );
+        createEReference ( systemNodeEClass, SYSTEM_NODE__SERVICES );
 
         systemPropertyUserServiceEClass = createEClass ( SYSTEM_PROPERTY_USER_SERVICE );
         createEReference ( systemPropertyUserServiceEClass, SYSTEM_PROPERTY_USER_SERVICE__USERS );
@@ -1214,6 +1376,20 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
 
         externalDriverPlaceholderEClass = createEClass ( EXTERNAL_DRIVER_PLACEHOLDER );
         createEReference ( externalDriverPlaceholderEClass, EXTERNAL_DRIVER_PLACEHOLDER__ENDPOINTS );
+
+        applicationConfigurationEClass = createEClass ( APPLICATION_CONFIGURATION );
+        createEReference ( applicationConfigurationEClass, APPLICATION_CONFIGURATION__MODULES );
+
+        configurationsEClass = createEClass ( CONFIGURATIONS );
+        createEReference ( configurationsEClass, CONFIGURATIONS__CONFIGURATIONS );
+
+        moduleEClass = createEClass ( MODULE );
+
+        httpServiceModuleEClass = createEClass ( HTTP_SERVICE_MODULE );
+        createEAttribute ( httpServiceModuleEClass, HTTP_SERVICE_MODULE__PORT );
+
+        restExporterModuleEClass = createEClass ( REST_EXPORTER_MODULE );
+        createEAttribute ( restExporterModuleEClass, REST_EXPORTER_MODULE__CONTEXT_ID );
     }
 
     /**
@@ -1247,7 +1423,6 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         ProfilePackage theProfilePackage = (ProfilePackage)EPackage.Registry.INSTANCE.getEPackage ( ProfilePackage.eNS_URI );
         OsgiPackage theOsgiPackage = (OsgiPackage)EPackage.Registry.INSTANCE.getEPackage ( OsgiPackage.eNS_URI );
         GlobalizePackage theGlobalizePackage = (GlobalizePackage)EPackage.Registry.INSTANCE.getEPackage ( GlobalizePackage.eNS_URI );
-        ItemPackage theItemPackage = (ItemPackage)EPackage.Registry.INSTANCE.getEPackage ( ItemPackage.eNS_URI );
         DeploymentPackage theDeploymentPackage = (DeploymentPackage)EPackage.Registry.INSTANCE.getEPackage ( DeploymentPackage.eNS_URI );
 
         // Create type parameters
@@ -1268,6 +1443,9 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         equinoxDriverEClass.getESuperTypes ().add ( this.getAbstractFactoryDriver () );
         externalDriverEClass.getESuperTypes ().add ( this.getDriver () );
         externalDriverPlaceholderEClass.getESuperTypes ().add ( theWorldPackage.getDriver () );
+        applicationConfigurationEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
+        httpServiceModuleEClass.getESuperTypes ().add ( this.getModule () );
+        restExporterModuleEClass.getESuperTypes ().add ( this.getModule () );
 
         // Initialize classes, features, and operations; add parameters
         initEClass ( worldEClass, World.class, "World", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
@@ -1279,8 +1457,9 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEReference ( getWorld_DefaultMasterCustomizationProfile (), theProfilePackage.getProfile (), null, "defaultMasterCustomizationProfile", null, 0, 1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getWorld_DefaultValueArchiveCustomizationProfile (), theProfilePackage.getProfile (), null, "defaultValueArchiveCustomizationProfile", null, 0, 1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getWorld_DefaultDriverPassword (), theWorldPackage.getPasswordCredentials (), null, "defaultDriverPassword", null, 0, 1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-        initEReference ( getWorld_ApplicationConfigurations (), theOsgiPackage.getApplicationConfiguration (), null, "applicationConfigurations", null, 0, -1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getWorld_ApplicationConfigurations (), theOsgiPackage.getIndependentConfiguration (), null, "applicationConfigurations", null, 0, -1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getWorld_DefaultDriverAccessCredentials (), theWorldPackage.getCredentials (), null, "defaultDriverAccessCredentials", null, 0, 1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getWorld_Configurations (), this.getConfigurations (), null, "configurations", null, 0, 1, World.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( nodeEClass, Node.class, "Node", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getNode_HostName (), ecorePackage.getEString (), "hostName", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1288,7 +1467,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
 
         initEClass ( masterServerEClass, MasterServer.class, "MasterServer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getMasterServer_Authoratives (), theGlobalizePackage.getAuthorative (), null, "authoratives", null, 0, -1, MasterServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-        initEReference ( getMasterServer_ImportMaster (), this.getMasterImport (), null, "importMaster", null, 0, -1, MasterServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getMasterServer_ImportMaster (), this.getMasterImport (), this.getMasterImport_Master (), "importMaster", null, 0, -1, MasterServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getMasterServer_Driver (), this.getDriver (), null, "driver", null, 0, -1, MasterServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getMasterServer_ArchiveTo (), this.getValueArchiveServer (), null, "archiveTo", null, 0, 1, MasterServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getMasterServer_LocalCredentials (), theWorldPackage.getCredentials (), null, "localCredentials", null, 0, 1, MasterServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1297,7 +1476,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEReference ( getMasterImport_ImportedMaster (), this.getMasterServer (), null, "importedMaster", null, 0, 1, MasterImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getMasterImport_Id (), ecorePackage.getEString (), "id", null, 1, 1, MasterImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getMasterImport_Credentials (), theWorldPackage.getCredentials (), null, "credentials", null, 0, 1, MasterImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-        initEReference ( getMasterImport_ImportSelector (), theItemPackage.getSelector (), null, "importSelector", null, 0, 1, MasterImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getMasterImport_Master (), this.getMasterServer (), this.getMasterServer_ImportMaster (), "master", null, 1, 1, MasterImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( optionsEClass, Options.class, "Options", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getOptions_BaseDaNgpPort (), ecorePackage.getEShort (), "baseDaNgpPort", "2100", 1, 1, Options.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
@@ -1311,7 +1490,8 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEClass ( equinoxApplicationEClass, EquinoxApplication.class, "EquinoxApplication", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getEquinoxApplication_Name (), ecorePackage.getEString (), "name", null, 1, 1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getEquinoxApplication_InstanceNumber (), ecorePackage.getEInt (), "instanceNumber", "1", 1, 1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
-        initEReference ( getEquinoxApplication_Configurations (), theOsgiPackage.getApplicationConfiguration (), null, "configurations", null, 0, -1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getEquinoxApplication_Configurations (), theOsgiPackage.getIndependentConfiguration (), null, "configurations", null, 0, -1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getEquinoxApplication_Configuration (), this.getApplicationConfiguration (), null, "configuration", null, 0, 1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( commonDriverEClass, CommonDriver.class, "CommonDriver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getCommonDriver_Password (), theWorldPackage.getPasswordCredentials (), null, "password", null, 0, 1, CommonDriver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1325,6 +1505,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEReference ( getSystemNode_Masters (), this.getMasterServer (), null, "masters", null, 0, -1, SystemNode.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getSystemNode_ValueArchives (), this.getValueArchiveServer (), null, "valueArchives", null, 0, -1, SystemNode.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getSystemNode_Applications (), ecorePackage.getEFeatureMapEntry (), "applications", null, 0, -1, SystemNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getSystemNode_Services (), theWorldPackage.getService (), null, "services", null, 0, -1, SystemNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( systemPropertyUserServiceEClass, SystemPropertyUserService.class, "SystemPropertyUserService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getSystemPropertyUserService_Users (), this.getUserEntry (), null, "users", null, 0, -1, SystemPropertyUserService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1365,6 +1546,20 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEClass ( externalDriverPlaceholderEClass, ExternalDriverPlaceholder.class, "ExternalDriverPlaceholder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getExternalDriverPlaceholder_Endpoints (), theWorldPackage.getEndpoint (), null, "endpoints", null, 0, -1, ExternalDriverPlaceholder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
+        initEClass ( applicationConfigurationEClass, ApplicationConfiguration.class, "ApplicationConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getApplicationConfiguration_Modules (), this.getModule (), null, "modules", null, 0, -1, ApplicationConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( configurationsEClass, Configurations.class, "Configurations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getConfigurations_Configurations (), this.getApplicationConfiguration (), null, "configurations", null, 0, -1, Configurations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( moduleEClass, Module.class, "Module", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+
+        initEClass ( httpServiceModuleEClass, HttpServiceModule.class, "HttpServiceModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getHttpServiceModule_Port (), ecorePackage.getEShort (), "port", "8080", 1, 1, HttpServiceModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
+
+        initEClass ( restExporterModuleEClass, RestExporterModule.class, "RestExporterModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getRestExporterModule_ContextId (), ecorePackage.getEString (), "contextId", null, 1, 1, RestExporterModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
         // Create resource
         createResource ( eNS_URI );
 
@@ -1381,7 +1576,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      */
     protected void createExtendedMetaDataAnnotations ()
     {
-        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$			
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$					
         addAnnotation ( getSystemNode_Masters (),
                 source,
                 new String[]

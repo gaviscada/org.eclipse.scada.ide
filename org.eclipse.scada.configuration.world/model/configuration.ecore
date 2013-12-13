@@ -19,6 +19,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EReference" name="applications" upperBound="-1"
         eType="#//Application" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
+        eType="#//Service" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Documentable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -75,6 +77,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Credentials" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" interface="true"
+      eSuperTypes="#//Documentable"/>
   <eSubpackages name="osgi" nsURI="http://eclipse.org/SCADA/Configuration/World/OSGi"
       nsPrefix="osgi">
     <eClassifiers xsi:type="ecore:EEnum" name="AverageReferenceType">
@@ -115,6 +119,9 @@
       </eOperations>
       <eOperations name="makeUri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eParameters name="localhost" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eOperations>
+      <eOperations name="getMatchingEndpoint" eType="#//Endpoint">
+        <eParameters name="exporter" eType="#//osgi/Exporter"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint" lowerBound="1"
           eType="#//Endpoint" eKeys="#//Endpoint/portNumber"/>
@@ -699,7 +706,7 @@
           eType="#//osgi/Item"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EventStorage" abstract="true" interface="true"
-        eSuperTypes="#//osgi/ApplicationConfiguration">
+        eSuperTypes="#//osgi/IndependentConfiguration">
       <eAnnotations source="http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup">
         <details key="groupId" value="ae.storage"/>
       </eAnnotations>
@@ -758,6 +765,28 @@
         <details key="documentation" value="This interface is intended as a marker interface for modules that bring on configuration parts for modules which should also be used in higher level modules when configuring the application instance."/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RestExporter" eSuperTypes="#//osgi/ApplicationModule">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+          eType="#//osgi/Item"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="hiveProperties" upperBound="-1"
+          eType="#//osgi/PropertyEntry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contextId" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HttpService" eSuperTypes="#//osgi/ApplicationConfiguration">
+      <eAnnotations source="http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup">
+        <details key="groupId" value="http.service"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint" lowerBound="1"
+          eType="#//Endpoint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IndependentConfiguration" abstract="true"
+        interface="true" eSuperTypes="#//osgi/ApplicationConfiguration">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This is a marker interface for standalone configuration element that can be used directly in the infrastructure model."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TransientItem" eSuperTypes="#//osgi/Item"/>
     <eSubpackages name="profile" nsURI="http://eclipse.org/SCADA/Configuration/World/OSGi/Profile"
         nsPrefix="profile">
       <eClassifiers xsi:type="ecore:EClass" name="Profile">
@@ -904,6 +933,40 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeMappings">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+          eType="#//deployment/NodeMappingEntry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fallbackMode" lowerBound="1"
+          eType="#//deployment/FallbackNodeMappingMode" defaultValueLiteral="FAIL"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionNodeMappingEntry" eSuperTypes="#//deployment/NodeMappingEntry">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Replace the hostname with an case insensitive regular expression. The replacement string may reference capture groups using the dollar ($) sign. See also java.util.regex.Matcher.replaceAll - http://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html#replaceAll%28java.lang.String%29"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="pattern" lowerBound="1"
+          eType="#//Pattern"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="replacement" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeMappingEntry" abstract="true"
+        interface="true">
+      <eOperations name="mapNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="node" eType="#//Node"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleNodeMappingEntry" eSuperTypes="#//deployment/NodeMappingEntry">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Replace a hostname by matching it against the fromHostName field and replacing it with the toHostName field if it matches. It is compared case insensitive."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromHostName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toHostName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FallbackNodeMappingMode">
+      <eLiterals name="FAIL"/>
+      <eLiterals name="IGNORE" value="1"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

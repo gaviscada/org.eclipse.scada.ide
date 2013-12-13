@@ -22,6 +22,7 @@ import org.eclipse.scada.configuration.component.Components;
 import org.eclipse.scada.configuration.generator.GeneratorContext.MasterContext;
 import org.eclipse.scada.configuration.infrastructure.Device;
 import org.eclipse.scada.configuration.infrastructure.Driver;
+import org.eclipse.scada.configuration.infrastructure.MasterImport;
 import org.eclipse.scada.configuration.item.CustomizationRequest;
 import org.eclipse.scada.configuration.lib.Locator;
 import org.eclipse.scada.configuration.lib.Names;
@@ -32,6 +33,7 @@ import org.eclipse.scada.configuration.world.osgi.OsgiFactory;
 import org.eclipse.scada.configuration.world.osgi.PersistentItem;
 import org.eclipse.scada.configuration.world.osgi.ReferenceItem;
 import org.eclipse.scada.configuration.world.osgi.SourceItem;
+import org.eclipse.scada.configuration.world.osgi.TransientItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,6 +60,13 @@ public abstract class AbstractComponentItemCreator extends AbstractItemCreator
     public CreationRequest<PersistentItem> createPersistentItem ()
     {
         final PersistentItem item = OsgiFactory.eINSTANCE.createPersistentItem ();
+        return addItem ( item );
+    }
+
+    @Override
+    public CreationRequest<TransientItem> createTransientItem ()
+    {
+        final TransientItem item = OsgiFactory.eINSTANCE.createTransientItem ();
         return addItem ( item );
     }
 
@@ -168,4 +177,11 @@ public abstract class AbstractComponentItemCreator extends AbstractItemCreator
         return addItem ( item );
     }
 
+    @Override
+    public CreationRequest<SourceItem> createImportItem ( final MasterImport masterImport, final String sourceName )
+    {
+        final SourceItem item = OsgiFactory.eINSTANCE.createSourceItem ();
+        item.setSourceName ( sourceName );
+        return addItem ( item );
+    }
 }

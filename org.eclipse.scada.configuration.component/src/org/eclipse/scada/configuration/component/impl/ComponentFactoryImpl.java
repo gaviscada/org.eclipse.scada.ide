@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.scada.configuration.component.*;
 import org.eclipse.scada.configuration.component.AbsoluteDanglingReference;
 import org.eclipse.scada.configuration.component.AverageModule;
 import org.eclipse.scada.configuration.component.CalculationComponent;
@@ -29,6 +30,7 @@ import org.eclipse.scada.configuration.component.DataMapperService;
 import org.eclipse.scada.configuration.component.DriverConnectionAnalyzer;
 import org.eclipse.scada.configuration.component.ExternalValue;
 import org.eclipse.scada.configuration.component.FormulaModule;
+import org.eclipse.scada.configuration.component.GlobalizeComponent;
 import org.eclipse.scada.configuration.component.InputSpecification;
 import org.eclipse.scada.configuration.component.ItemReferenceInputDefinition;
 import org.eclipse.scada.configuration.component.Level;
@@ -38,6 +40,7 @@ import org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer;
 import org.eclipse.scada.configuration.component.OutputDefinition;
 import org.eclipse.scada.configuration.component.OutputSpecification;
 import org.eclipse.scada.configuration.component.PersistentValue;
+import org.eclipse.scada.configuration.component.RestInterceptor;
 import org.eclipse.scada.configuration.component.Script;
 import org.eclipse.scada.configuration.component.ScriptModule;
 import org.eclipse.scada.configuration.component.SummariesConfiguration;
@@ -94,8 +97,8 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
     {
         switch ( eClass.getClassifierID () )
         {
-            case ComponentPackage.SYSTEM:
-                return createSystem ();
+            case ComponentPackage.COMPONENT_WORLD:
+                return createComponentWorld ();
             case ComponentPackage.LEVEL:
                 return createLevel ();
             case ComponentPackage.CONSTANT_VALUE:
@@ -142,6 +145,14 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
                 return createExternalValue ();
             case ComponentPackage.SUMMARIES_CONFIGURATION:
                 return createSummariesConfiguration ();
+            case ComponentPackage.REST_INTERCEPTOR:
+                return createRestInterceptor ();
+            case ComponentPackage.GLOBALIZE_COMPONENT:
+                return createGlobalizeComponent ();
+            case ComponentPackage.TRANSIENT_VALUE:
+                return createTransientValue ();
+            case ComponentPackage.MASTER_COMPONENT:
+                return createMasterComponent ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -182,10 +193,10 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
      * <!-- end-user-doc -->
      * @generated
      */
-    public org.eclipse.scada.configuration.component.System createSystem ()
+    public ComponentWorld createComponentWorld ()
     {
-        SystemImpl system = new SystemImpl ();
-        return system;
+        ComponentWorldImpl componentWorld = new ComponentWorldImpl ();
+        return componentWorld;
     }
 
     /**
@@ -439,6 +450,50 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
     {
         SummariesConfigurationImpl summariesConfiguration = new SummariesConfigurationImpl ();
         return summariesConfiguration;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public RestInterceptor createRestInterceptor ()
+    {
+        RestInterceptorImpl restInterceptor = new RestInterceptorImpl ();
+        return restInterceptor;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public GlobalizeComponent createGlobalizeComponent ()
+    {
+        GlobalizeComponentImpl globalizeComponent = new GlobalizeComponentImpl ();
+        return globalizeComponent;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public TransientValue createTransientValue ()
+    {
+        TransientValueImpl transientValue = new TransientValueImpl ();
+        return transientValue;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public MasterComponent createMasterComponent ()
+    {
+        MasterComponentImpl masterComponent = new MasterComponentImpl ();
+        return masterComponent;
     }
 
     /**

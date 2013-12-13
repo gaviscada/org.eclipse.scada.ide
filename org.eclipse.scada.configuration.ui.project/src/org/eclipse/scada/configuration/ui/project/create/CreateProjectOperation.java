@@ -38,10 +38,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.scada.configuration.component.ComponentFactory;
+import org.eclipse.scada.configuration.component.ComponentWorld;
 import org.eclipse.scada.configuration.component.DriverConnectionAnalyzer;
 import org.eclipse.scada.configuration.component.Level;
 import org.eclipse.scada.configuration.component.MarkerConfiguration;
-import org.eclipse.scada.configuration.component.System;
 import org.eclipse.scada.configuration.component.exec.ExecComponentsFactory;
 import org.eclipse.scada.configuration.component.exec.LoadAverage;
 import org.eclipse.scada.configuration.generator.Profiles;
@@ -60,6 +60,7 @@ import org.eclipse.scada.configuration.infrastructure.ValueArchiveServer;
 import org.eclipse.scada.configuration.infrastructure.World;
 import org.eclipse.scada.configuration.item.CustomizationPipeline;
 import org.eclipse.scada.configuration.item.Selector;
+import org.eclipse.scada.configuration.recipe.Definition;
 import org.eclipse.scada.configuration.security.Configuration;
 import org.eclipse.scada.configuration.security.GenericScript;
 import org.eclipse.scada.configuration.security.LogonRule;
@@ -73,6 +74,9 @@ import org.eclipse.scada.configuration.world.WorldFactory;
 import org.eclipse.scada.configuration.world.deployment.Author;
 import org.eclipse.scada.configuration.world.deployment.DeploymentFactory;
 import org.eclipse.scada.configuration.world.deployment.DeploymentInformation;
+import org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode;
+import org.eclipse.scada.configuration.world.deployment.NodeMappings;
 import org.eclipse.scada.configuration.world.osgi.EventPool;
 import org.eclipse.scada.configuration.world.osgi.MarkerEntry;
 import org.eclipse.scada.configuration.world.osgi.MonitorPool;
@@ -130,8 +134,11 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         final Selector globalizeSelector = createSelector ( new Path ( "templates/globalize.isel_js" ) ); //$NON-NLS-1$
 
         final World world = createInfrastructure ( rs, security, masterProfile, hdProfile );
-        final System system = createComponents ( world, pipeline, archiveSelector, globalizeSelector );
+        final ComponentWorld system = createComponents ( world, pipeline, archiveSelector, globalizeSelector );
         final DeploymentInformation di = createDeploymentInformation ();
+
+        final Definition defaultRecipe = RecipeBuilder.createDefaultRecipe ();
+        final Definition integrationRecipe = RecipeBuilder.createIntegrationRecipe ();
 
         save ( rs, base, "global/deployment.information.esdi", di ); //$NON-NLS-1$
 
@@ -146,6 +153,32 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         save ( rs, base, "world.esim", world ); //$NON-NLS-1$
         save ( rs, base, "world.escm", system ); //$NON-NLS-1$
 
+        if ( this.info.isEnableIntegrationSystem () )
+        {
+            final NodeMappings mappings = createNodeMappings ();
+            save ( rs, base, "nodeMappings.esdi", mappings ); //$NON-NLS-1$ 
+
+            save ( rs, base, "productive.recipe", defaultRecipe, "org.eclipse.scada.configuration.recipe" ); //$NON-NLS-1$ //$NON-NLS-2$
+            save ( rs, base, "integration.recipe", integrationRecipe, "org.eclipse.scada.configuration.recipe" ); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        else
+        {
+            save ( rs, base, "default.recipe", defaultRecipe, "org.eclipse.scada.configuration.recipe" ); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
+    }
+
+    private NodeMappings createNodeMappings ()
+    {
+        final NodeMappings mappings = DeploymentFactory.eINSTANCE.createNodeMappings ();
+        mappings.setFallbackMode ( FallbackNodeMappingMode.IGNORE );
+        final ExpressionNodeMappingEntry exp = DeploymentFactory.eINSTANCE.createExpressionNodeMappingEntry ();
+        mappings.getEntries ().add ( exp );
+
+        exp.setPattern ( Pattern.compile ( "node(\\d+)" ) ); //$NON-NLS-1$
+        exp.setReplacement ( "testnode$1" ); //$NON-NLS-1$
+
+        return mappings;
     }
 
     private DeploymentInformation createDeploymentInformation ()
@@ -154,7 +187,7 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
 
         final Author author = DeploymentFactory.eINSTANCE.createAuthor ();
 
-        final String username = java.lang.System.getProperty ( "user.name", "unknown" );
+        final String username = java.lang.System.getProperty ( "user.name", "unknown" ); //$NON-NLS-1$
         String hostname;
         try
         {
@@ -276,9 +309,9 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         world.getOptions ().setDefaultUserService ( service );
     }
 
-    private System createComponents ( final World world, final CustomizationPipeline pipeline, final Selector archiveSelector, final Selector globalizeSelector )
+    private org.eclipse.scada.configuration.component.ComponentWorld createComponents ( final World world, final CustomizationPipeline pipeline, final Selector archiveSelector, final Selector globalizeSelector )
     {
-        final System system = ComponentFactory.eINSTANCE.createSystem ();
+        final ComponentWorld system = ComponentFactory.eINSTANCE.createComponentWorld ();
 
         system.setInfrastructure ( world );
 
@@ -332,7 +365,7 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         return null;
     }
 
-    private Level makeLevel ( final System system, final List<String> hier, final String... subs )
+    private Level makeLevel ( final org.eclipse.scada.configuration.component.ComponentWorld system, final List<String> hier, final String... subs )
     {
         if ( hier.isEmpty () )
         {
@@ -396,7 +429,12 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
 
     protected static Resource save ( final ResourceSet rs, final URI base, final String localName, final EObject content ) throws IOException
     {
-        final Resource resource = rs.createResource ( base.appendSegments ( localName.split ( "\\/" ) ) );
+        return save ( rs, base, localName, content, null );
+    }
+
+    protected static Resource save ( final ResourceSet rs, final URI base, final String localName, final EObject content, final String contentType ) throws IOException
+    {
+        final Resource resource = rs.createResource ( base.appendSegments ( localName.split ( "\\/" ) ), contentType );
         resource.getContents ().add ( content );
         resource.save ( null );
         return resource;

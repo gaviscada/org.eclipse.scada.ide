@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+  remove|deconfigure)
+$$prerm.stop$$
+  ;;
+
+  upgrade|failed-upgrade)
+  ;;
+
+  *)
+    echo "prerm called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+$$prerm.scripts$$
+
+#DEBHELPER#
+
+exit 0

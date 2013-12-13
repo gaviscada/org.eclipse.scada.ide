@@ -23,6 +23,11 @@ import org.eclipse.scada.configuration.infrastructure.World;
 import org.eclipse.scada.configuration.infrastructure.lib.WorldGenerator;
 import org.eclipse.scada.configuration.utils.ModelLoader;
 
+/**
+ * Convert a Component/Infrastructure Model to a world model
+ * 
+ * @author Jens Reimann
+ */
 public class RunInfrastructureGeneratorHandler extends AbstractFileRunner
 {
 
@@ -40,7 +45,7 @@ public class RunInfrastructureGeneratorHandler extends AbstractFileRunner
         final World infra = new ModelLoader<> ( World.class ).load ( URI.createURI ( file.getLocationURI ().toString () ) );
         monitor.worked ( 1 );
 
-        monitor.setTaskName ( "Generating workd" );
+        monitor.setTaskName ( "Generating world" );
         final WorldGenerator gen = new WorldGenerator ( infra );
         gen.generate ( new SubProgressMonitor ( monitor, 7 ) );
 

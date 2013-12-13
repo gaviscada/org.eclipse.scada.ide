@@ -21,7 +21,7 @@ import org.eclipse.scada.configuration.component.DataMapperAnalyzer;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DataMapperAnalyzerTest extends DataComponentTest
+public class DataMapperAnalyzerTest extends MasterComponentTest
 {
 
     /**

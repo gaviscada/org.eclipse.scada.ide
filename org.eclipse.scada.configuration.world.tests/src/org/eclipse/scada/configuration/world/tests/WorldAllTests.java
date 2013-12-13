@@ -14,6 +14,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import org.eclipse.scada.configuration.world.deployment.tests.DeploymentTests;
 import org.eclipse.scada.configuration.world.osgi.tests.OsgiTests;
 
 /**
@@ -22,40 +23,37 @@ import org.eclipse.scada.configuration.world.osgi.tests.OsgiTests;
  * <!-- end-user-doc -->
  * @generated
  */
-public class WorldAllTests extends TestSuite
-{
+public class WorldAllTests extends TestSuite {
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static void main ( String[] args )
-    {
-        TestRunner.run ( suite () );
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(suite());
+	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static Test suite ()
-    {
-        TestSuite suite = new WorldAllTests ( "World Tests" ); //$NON-NLS-1$
-        suite.addTest ( WorldTests.suite () );
-        suite.addTest ( OsgiTests.suite () );
-        return suite;
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static Test suite() {
+		TestSuite suite = new WorldAllTests("World Tests"); //$NON-NLS-1$
+		suite.addTest(WorldTests.suite());
+		suite.addTest(OsgiTests.suite());
+		suite.addTest(DeploymentTests.suite());
+		return suite;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public WorldAllTests ( String name )
-    {
-        super ( name );
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WorldAllTests(String name) {
+		super(name);
+	}
 
 } //ConfigurationAllTests

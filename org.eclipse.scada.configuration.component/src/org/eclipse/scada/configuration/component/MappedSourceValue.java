@@ -29,7 +29,7 @@ import org.eclipse.scada.configuration.world.Documentable;
  * @model
  * @generated
  */
-public interface MappedSourceValue extends DataComponent, Documentable
+public interface MappedSourceValue extends Documentable, MasterComponent
 {
     /**
      * Returns the value of the '<em><b>Mapper</b></em>' reference.
@@ -68,7 +68,7 @@ public interface MappedSourceValue extends DataComponent, Documentable
      * @return the value of the '<em>Input</em>' containment reference.
      * @see #setInput(InputDefinition)
      * @see org.eclipse.scada.configuration.component.ComponentPackage#getMappedSourceValue_Input()
-     * @model containment="true" required="true"
+     * @model containment="true" resolveProxies="true" required="true"
      * @generated
      */
     InputDefinition getInput ();

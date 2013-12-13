@@ -12,6 +12,7 @@ package org.eclipse.scada.configuration.component.lib.create;
 
 import java.util.Collection;
 
+import org.eclipse.scada.configuration.item.CustomizationRequest;
 import org.eclipse.scada.configuration.world.osgi.DataType;
 import org.eclipse.scada.configuration.world.osgi.Item;
 
@@ -25,9 +26,19 @@ public interface CreationRequest<T extends Item>
 
     public CreationRequest<T> customizationTags ( Collection<String> tags );
 
+    public CreationRequest<T> addCustomizationTags ( String... tags );
+
+    public CreationRequest<T> addCustomizationTags ( Collection<String> tags );
+
     public CreationRequest<T> dataType ( DataType dataType );
 
     public CreationRequest<T> information ( String description, String unit, String system );
+
+    public CreationRequest<T> request ( CustomizationRequest request );
+
+    public CreationRequest<T> incrementGlobalizationLevel ();
+
+    public int getGlobalizationLevel ();
 
     public T create ();
 

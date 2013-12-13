@@ -13,6 +13,7 @@ package org.eclipse.scada.configuration.component.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.scada.configuration.component.*;
 import org.eclipse.scada.configuration.component.AbsoluteDanglingReference;
 import org.eclipse.scada.configuration.component.AverageModule;
 import org.eclipse.scada.configuration.component.CalculationComponent;
@@ -23,6 +24,7 @@ import org.eclipse.scada.configuration.component.ComponentPackage;
 import org.eclipse.scada.configuration.component.ComponentReferenceInputDefinition;
 import org.eclipse.scada.configuration.component.Configuration;
 import org.eclipse.scada.configuration.component.ConstantValue;
+import org.eclipse.scada.configuration.component.Container;
 import org.eclipse.scada.configuration.component.DanglingItemReference;
 import org.eclipse.scada.configuration.component.DataComponent;
 import org.eclipse.scada.configuration.component.DataMapperAnalyzer;
@@ -30,8 +32,10 @@ import org.eclipse.scada.configuration.component.DataMapperService;
 import org.eclipse.scada.configuration.component.DriverConnectionAnalyzer;
 import org.eclipse.scada.configuration.component.ExternalValue;
 import org.eclipse.scada.configuration.component.FormulaModule;
+import org.eclipse.scada.configuration.component.GlobalizeComponent;
 import org.eclipse.scada.configuration.component.InputDefinition;
 import org.eclipse.scada.configuration.component.InputSpecification;
+import org.eclipse.scada.configuration.component.ItemInterceptor;
 import org.eclipse.scada.configuration.component.ItemReferenceInputDefinition;
 import org.eclipse.scada.configuration.component.Level;
 import org.eclipse.scada.configuration.component.MappedSourceValue;
@@ -40,6 +44,7 @@ import org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer;
 import org.eclipse.scada.configuration.component.OutputDefinition;
 import org.eclipse.scada.configuration.component.OutputSpecification;
 import org.eclipse.scada.configuration.component.PersistentValue;
+import org.eclipse.scada.configuration.component.RestInterceptor;
 import org.eclipse.scada.configuration.component.Script;
 import org.eclipse.scada.configuration.component.ScriptModule;
 import org.eclipse.scada.configuration.component.Service;
@@ -111,10 +116,12 @@ public class ComponentSwitch<T> extends Switch<T>
     {
         switch ( classifierID )
         {
-            case ComponentPackage.SYSTEM:
+            case ComponentPackage.COMPONENT_WORLD:
             {
-                org.eclipse.scada.configuration.component.System system = (org.eclipse.scada.configuration.component.System)theEObject;
-                T result = caseSystem ( system );
+                ComponentWorld componentWorld = (ComponentWorld)theEObject;
+                T result = caseComponentWorld ( componentWorld );
+                if ( result == null )
+                    result = caseContainer ( componentWorld );
                 if ( result == null )
                     result = defaultCase ( theEObject );
                 return result;
@@ -123,6 +130,8 @@ public class ComponentSwitch<T> extends Switch<T>
             {
                 Level level = (Level)theEObject;
                 T result = caseLevel ( level );
+                if ( result == null )
+                    result = caseContainer ( level );
                 if ( result == null )
                     result = defaultCase ( theEObject );
                 return result;
@@ -160,6 +169,8 @@ public class ComponentSwitch<T> extends Switch<T>
                 if ( result == null )
                     result = caseSingleValue ( constantValue );
                 if ( result == null )
+                    result = caseMasterComponent ( constantValue );
+                if ( result == null )
                     result = caseDataComponent ( constantValue );
                 if ( result == null )
                     result = caseComponent ( constantValue );
@@ -192,6 +203,8 @@ public class ComponentSwitch<T> extends Switch<T>
                 if ( result == null )
                     result = caseSingleValue ( persistentValue );
                 if ( result == null )
+                    result = caseMasterComponent ( persistentValue );
+                if ( result == null )
                     result = caseDataComponent ( persistentValue );
                 if ( result == null )
                     result = caseComponent ( persistentValue );
@@ -203,6 +216,8 @@ public class ComponentSwitch<T> extends Switch<T>
             {
                 DriverConnectionAnalyzer driverConnectionAnalyzer = (DriverConnectionAnalyzer)theEObject;
                 T result = caseDriverConnectionAnalyzer ( driverConnectionAnalyzer );
+                if ( result == null )
+                    result = caseMasterComponent ( driverConnectionAnalyzer );
                 if ( result == null )
                     result = caseDataComponent ( driverConnectionAnalyzer );
                 if ( result == null )
@@ -216,6 +231,8 @@ public class ComponentSwitch<T> extends Switch<T>
                 MasterImportConnectionAnalyzer masterImportConnectionAnalyzer = (MasterImportConnectionAnalyzer)theEObject;
                 T result = caseMasterImportConnectionAnalyzer ( masterImportConnectionAnalyzer );
                 if ( result == null )
+                    result = caseMasterComponent ( masterImportConnectionAnalyzer );
+                if ( result == null )
                     result = caseDataComponent ( masterImportConnectionAnalyzer );
                 if ( result == null )
                     result = caseComponent ( masterImportConnectionAnalyzer );
@@ -228,6 +245,8 @@ public class ComponentSwitch<T> extends Switch<T>
                 SingleValue singleValue = (SingleValue)theEObject;
                 T result = caseSingleValue ( singleValue );
                 if ( result == null )
+                    result = caseMasterComponent ( singleValue );
+                if ( result == null )
                     result = caseDataComponent ( singleValue );
                 if ( result == null )
                     result = caseComponent ( singleValue );
@@ -239,6 +258,8 @@ public class ComponentSwitch<T> extends Switch<T>
             {
                 DataMapperAnalyzer dataMapperAnalyzer = (DataMapperAnalyzer)theEObject;
                 T result = caseDataMapperAnalyzer ( dataMapperAnalyzer );
+                if ( result == null )
+                    result = caseMasterComponent ( dataMapperAnalyzer );
                 if ( result == null )
                     result = caseDataComponent ( dataMapperAnalyzer );
                 if ( result == null )
@@ -262,9 +283,11 @@ public class ComponentSwitch<T> extends Switch<T>
                 MappedSourceValue mappedSourceValue = (MappedSourceValue)theEObject;
                 T result = caseMappedSourceValue ( mappedSourceValue );
                 if ( result == null )
-                    result = caseDataComponent ( mappedSourceValue );
-                if ( result == null )
                     result = caseDocumentable ( mappedSourceValue );
+                if ( result == null )
+                    result = caseMasterComponent ( mappedSourceValue );
+                if ( result == null )
+                    result = caseDataComponent ( mappedSourceValue );
                 if ( result == null )
                     result = caseComponent ( mappedSourceValue );
                 if ( result == null )
@@ -276,9 +299,11 @@ public class ComponentSwitch<T> extends Switch<T>
                 CalculationComponent calculationComponent = (CalculationComponent)theEObject;
                 T result = caseCalculationComponent ( calculationComponent );
                 if ( result == null )
-                    result = caseDataComponent ( calculationComponent );
-                if ( result == null )
                     result = caseDocumentable ( calculationComponent );
+                if ( result == null )
+                    result = caseMasterComponent ( calculationComponent );
+                if ( result == null )
+                    result = caseDataComponent ( calculationComponent );
                 if ( result == null )
                     result = caseComponent ( calculationComponent );
                 if ( result == null )
@@ -436,6 +461,8 @@ public class ComponentSwitch<T> extends Switch<T>
                 if ( result == null )
                     result = caseSingleValue ( externalValue );
                 if ( result == null )
+                    result = caseMasterComponent ( externalValue );
+                if ( result == null )
                     result = caseDataComponent ( externalValue );
                 if ( result == null )
                     result = caseComponent ( externalValue );
@@ -453,23 +480,91 @@ public class ComponentSwitch<T> extends Switch<T>
                     result = defaultCase ( theEObject );
                 return result;
             }
+            case ComponentPackage.ITEM_INTERCEPTOR:
+            {
+                ItemInterceptor itemInterceptor = (ItemInterceptor)theEObject;
+                T result = caseItemInterceptor ( itemInterceptor );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case ComponentPackage.CONTAINER:
+            {
+                Container container = (Container)theEObject;
+                T result = caseContainer ( container );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case ComponentPackage.REST_INTERCEPTOR:
+            {
+                RestInterceptor restInterceptor = (RestInterceptor)theEObject;
+                T result = caseRestInterceptor ( restInterceptor );
+                if ( result == null )
+                    result = caseItemInterceptor ( restInterceptor );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case ComponentPackage.GLOBALIZE_COMPONENT:
+            {
+                GlobalizeComponent globalizeComponent = (GlobalizeComponent)theEObject;
+                T result = caseGlobalizeComponent ( globalizeComponent );
+                if ( result == null )
+                    result = caseDocumentable ( globalizeComponent );
+                if ( result == null )
+                    result = caseDataComponent ( globalizeComponent );
+                if ( result == null )
+                    result = caseComponent ( globalizeComponent );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case ComponentPackage.TRANSIENT_VALUE:
+            {
+                TransientValue transientValue = (TransientValue)theEObject;
+                T result = caseTransientValue ( transientValue );
+                if ( result == null )
+                    result = caseSingleValue ( transientValue );
+                if ( result == null )
+                    result = caseMasterComponent ( transientValue );
+                if ( result == null )
+                    result = caseDataComponent ( transientValue );
+                if ( result == null )
+                    result = caseComponent ( transientValue );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case ComponentPackage.MASTER_COMPONENT:
+            {
+                MasterComponent masterComponent = (MasterComponent)theEObject;
+                T result = caseMasterComponent ( masterComponent );
+                if ( result == null )
+                    result = caseDataComponent ( masterComponent );
+                if ( result == null )
+                    result = caseComponent ( masterComponent );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
             default:
                 return defaultCase ( theEObject );
         }
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>System</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>World</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>System</em>'.
+     * @return the result of interpreting the object as an instance of '<em>World</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseSystem ( org.eclipse.scada.configuration.component.System object )
+    public T caseComponentWorld ( ComponentWorld object )
     {
         return null;
     }
@@ -966,6 +1061,102 @@ public class ComponentSwitch<T> extends Switch<T>
      * @generated
      */
     public T caseSummariesConfiguration ( SummariesConfiguration object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Item Interceptor</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Item Interceptor</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseItemInterceptor ( ItemInterceptor object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Container</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseContainer ( Container object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Rest Interceptor</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Rest Interceptor</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseRestInterceptor ( RestInterceptor object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Globalize Component</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Globalize Component</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseGlobalizeComponent ( GlobalizeComponent object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Transient Value</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Transient Value</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseTransientValue ( TransientValue object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Master Component</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Master Component</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseMasterComponent ( MasterComponent object )
     {
         return null;
     }
