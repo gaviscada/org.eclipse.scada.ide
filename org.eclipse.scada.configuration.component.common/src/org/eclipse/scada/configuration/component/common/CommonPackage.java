@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,11 +22,11 @@ import org.eclipse.scada.configuration.component.ComponentPackage;
  * The <b>Package</b> for the model.
  * It contains accessors for the meta objects to represent
  * <ul>
- *   <li>each class,</li>
- *   <li>each feature of each class,</li>
- *   <li>each operation of each class,</li>
- *   <li>each enum,</li>
- *   <li>and each data type</li>
+ * <li>each class,</li>
+ * <li>each feature of each class,</li>
+ * <li>each operation of each class,</li>
+ * <li>each enum,</li>
+ * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
  * @see org.eclipse.scada.configuration.component.common.CommonFactory
@@ -132,13 +132,22 @@ public interface CommonPackage extends EPackage
     int HEARTBEAT_GENERATOR__TARGET_ITEM = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 1;
 
     /**
+     * The feature id for the '<em><b>Active Input</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int HEARTBEAT_GENERATOR__ACTIVE_INPUT = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 2;
+
+    /**
      * The number of structural features of the '<em>Heartbeat Generator</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int HEARTBEAT_GENERATOR_FEATURE_COUNT = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 2;
+    int HEARTBEAT_GENERATOR_FEATURE_COUNT = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 3;
 
     /**
      * The operation id for the '<em>Get Master On</em>' operation.
@@ -221,6 +230,15 @@ public interface CommonPackage extends EPackage
      * @ordered
      */
     int TOGGLE_HEARTBEAT_GENERATOR__TARGET_ITEM = HEARTBEAT_GENERATOR__TARGET_ITEM;
+
+    /**
+     * The feature id for the '<em><b>Active Input</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TOGGLE_HEARTBEAT_GENERATOR__ACTIVE_INPUT = HEARTBEAT_GENERATOR__ACTIVE_INPUT;
 
     /**
      * The number of structural features of the '<em>Toggle Heartbeat Generator</em>' class.
@@ -423,6 +441,115 @@ public interface CommonPackage extends EPackage
     int CHANGE_HEARTBEAT_DETECTOR_OPERATION_COUNT = HEARTBEAT_DETECTOR_OPERATION_COUNT + 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.component.common.impl.TimerActionImpl <em>Timer Action</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.component.common.impl.TimerActionImpl
+     * @see org.eclipse.scada.configuration.component.common.impl.CommonPackageImpl#getTimerAction()
+     * @generated
+     */
+    int TIMER_ACTION = 4;
+
+    /**
+     * The feature id for the '<em><b>Level</b></em>' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__LEVEL = ComponentPackage.MASTER_COMPONENT__LEVEL;
+
+    /**
+     * The feature id for the '<em><b>Customization Pipeline</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__CUSTOMIZATION_PIPELINE = ComponentPackage.MASTER_COMPONENT__CUSTOMIZATION_PIPELINE;
+
+    /**
+     * The feature id for the '<em><b>Archive Selector</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__ARCHIVE_SELECTOR = ComponentPackage.MASTER_COMPONENT__ARCHIVE_SELECTOR;
+
+    /**
+     * The feature id for the '<em><b>Master On</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__MASTER_ON = ComponentPackage.MASTER_COMPONENT__MASTER_ON;
+
+    /**
+     * The feature id for the '<em><b>Period</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__PERIOD = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Target Item</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__TARGET_ITEM = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__VALUE = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION__NAME = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 3;
+
+    /**
+     * The number of structural features of the '<em>Timer Action</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION_FEATURE_COUNT = ComponentPackage.MASTER_COMPONENT_FEATURE_COUNT + 4;
+
+    /**
+     * The operation id for the '<em>Get Master On</em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION___GET_MASTER_ON = ComponentPackage.MASTER_COMPONENT___GET_MASTER_ON;
+
+    /**
+     * The number of operations of the '<em>Timer Action</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TIMER_ACTION_OPERATION_COUNT = ComponentPackage.MASTER_COMPONENT_OPERATION_COUNT + 0;
+
+    /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.common.HeartbeatGenerator <em>Heartbeat Generator</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -453,6 +580,17 @@ public interface CommonPackage extends EPackage
      * @generated
      */
     EReference getHeartbeatGenerator_TargetItem ();
+
+    /**
+     * Returns the meta object for the containment reference '{@link org.eclipse.scada.configuration.component.common.HeartbeatGenerator#getActiveInput <em>Active Input</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Active Input</em>'.
+     * @see org.eclipse.scada.configuration.component.common.HeartbeatGenerator#getActiveInput()
+     * @see #getHeartbeatGenerator()
+     * @generated
+     */
+    EReference getHeartbeatGenerator_ActiveInput ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.common.ToggleHeartbeatGenerator <em>Toggle Heartbeat Generator</em>}'.
@@ -518,6 +656,60 @@ public interface CommonPackage extends EPackage
     EReference getChangeHeartbeatDetector_SourceItem ();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.component.common.TimerAction <em>Timer Action</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Timer Action</em>'.
+     * @see org.eclipse.scada.configuration.component.common.TimerAction
+     * @generated
+     */
+    EClass getTimerAction ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.component.common.TimerAction#getPeriod <em>Period</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Period</em>'.
+     * @see org.eclipse.scada.configuration.component.common.TimerAction#getPeriod()
+     * @see #getTimerAction()
+     * @generated
+     */
+    EAttribute getTimerAction_Period ();
+
+    /**
+     * Returns the meta object for the containment reference '{@link org.eclipse.scada.configuration.component.common.TimerAction#getTargetItem <em>Target Item</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Target Item</em>'.
+     * @see org.eclipse.scada.configuration.component.common.TimerAction#getTargetItem()
+     * @see #getTimerAction()
+     * @generated
+     */
+    EReference getTimerAction_TargetItem ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.component.common.TimerAction#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see org.eclipse.scada.configuration.component.common.TimerAction#getValue()
+     * @see #getTimerAction()
+     * @generated
+     */
+    EAttribute getTimerAction_Value ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.component.common.TimerAction#getName <em>Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Name</em>'.
+     * @see org.eclipse.scada.configuration.component.common.TimerAction#getName()
+     * @see #getTimerAction()
+     * @generated
+     */
+    EAttribute getTimerAction_Name ();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -530,11 +722,11 @@ public interface CommonPackage extends EPackage
      * <!-- begin-user-doc -->
      * Defines literals for the meta objects that represent
      * <ul>
-     *   <li>each class,</li>
-     *   <li>each feature of each class,</li>
-     *   <li>each operation of each class,</li>
-     *   <li>each enum,</li>
-     *   <li>and each data type</li>
+     * <li>each class,</li>
+     * <li>each feature of each class,</li>
+     * <li>each operation of each class,</li>
+     * <li>each enum,</li>
+     * <li>and each data type</li>
      * </ul>
      * <!-- end-user-doc -->
      * @generated
@@ -566,6 +758,14 @@ public interface CommonPackage extends EPackage
          * @generated
          */
         EReference HEARTBEAT_GENERATOR__TARGET_ITEM = eINSTANCE.getHeartbeatGenerator_TargetItem ();
+
+        /**
+         * The meta object literal for the '<em><b>Active Input</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference HEARTBEAT_GENERATOR__ACTIVE_INPUT = eINSTANCE.getHeartbeatGenerator_ActiveInput ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.component.common.impl.ToggleHeartbeatGeneratorImpl <em>Toggle Heartbeat Generator</em>}' class.
@@ -620,6 +820,48 @@ public interface CommonPackage extends EPackage
          * @generated
          */
         EReference CHANGE_HEARTBEAT_DETECTOR__SOURCE_ITEM = eINSTANCE.getChangeHeartbeatDetector_SourceItem ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.component.common.impl.TimerActionImpl <em>Timer Action</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.component.common.impl.TimerActionImpl
+         * @see org.eclipse.scada.configuration.component.common.impl.CommonPackageImpl#getTimerAction()
+         * @generated
+         */
+        EClass TIMER_ACTION = eINSTANCE.getTimerAction ();
+
+        /**
+         * The meta object literal for the '<em><b>Period</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute TIMER_ACTION__PERIOD = eINSTANCE.getTimerAction_Period ();
+
+        /**
+         * The meta object literal for the '<em><b>Target Item</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference TIMER_ACTION__TARGET_ITEM = eINSTANCE.getTimerAction_TargetItem ();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute TIMER_ACTION__VALUE = eINSTANCE.getTimerAction_Value ();
+
+        /**
+         * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute TIMER_ACTION__NAME = eINSTANCE.getTimerAction_Name ();
 
     }
 

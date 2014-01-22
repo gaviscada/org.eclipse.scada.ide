@@ -8,10 +8,10 @@
                 primary="true">
           </toc>
           <toc
-                file="toc/tocgettingstarted.xml">
+                file="toc/tocreference.xml">
           </toc>
           <toc
-                file="toc/tocreference.xml">
+                file="toc/tocjavadoc.xml">
           </toc>
 		  <toc
           		file="content/basic/basic-toc.xml">

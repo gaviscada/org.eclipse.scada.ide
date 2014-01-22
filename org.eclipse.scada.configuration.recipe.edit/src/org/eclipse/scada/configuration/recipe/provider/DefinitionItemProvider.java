@@ -166,6 +166,7 @@ public class DefinitionItemProvider
         {
             super.getChildrenFeatures ( object );
             childrenFeatures.add ( RecipePackage.Literals.DEFINITION__TASK );
+            childrenFeatures.add ( RecipePackage.Literals.DEFINITION__PROPERTIES );
         }
         return childrenFeatures;
     }
@@ -230,6 +231,7 @@ public class DefinitionItemProvider
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
                 return;
             case RecipePackage.DEFINITION__TASK:
+            case RecipePackage.DEFINITION__PROPERTIES:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), true, false ) );
                 return;
         }
@@ -252,6 +254,11 @@ public class DefinitionItemProvider
                 ( createChildParameter
                 ( RecipePackage.Literals.DEFINITION__TASK,
                         RecipeFactory.eINSTANCE.createTask () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( RecipePackage.Literals.DEFINITION__PROPERTIES,
+                        RecipeFactory.eINSTANCE.createPropertyEntry () ) );
     }
 
     /**

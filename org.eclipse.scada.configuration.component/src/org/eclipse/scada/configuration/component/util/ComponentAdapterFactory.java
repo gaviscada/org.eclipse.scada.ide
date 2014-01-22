@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,15 +14,17 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.scada.configuration.component.*;
 import org.eclipse.scada.configuration.component.AbsoluteDanglingReference;
 import org.eclipse.scada.configuration.component.AverageModule;
+import org.eclipse.scada.configuration.component.BufferedValue;
 import org.eclipse.scada.configuration.component.CalculationComponent;
 import org.eclipse.scada.configuration.component.CalculationModule;
+import org.eclipse.scada.configuration.component.ChangeCounter;
 import org.eclipse.scada.configuration.component.Component;
 import org.eclipse.scada.configuration.component.ComponentDanglingReference;
 import org.eclipse.scada.configuration.component.ComponentPackage;
 import org.eclipse.scada.configuration.component.ComponentReferenceInputDefinition;
+import org.eclipse.scada.configuration.component.ComponentWorld;
 import org.eclipse.scada.configuration.component.Configuration;
 import org.eclipse.scada.configuration.component.ConstantValue;
 import org.eclipse.scada.configuration.component.Container;
@@ -41,6 +43,7 @@ import org.eclipse.scada.configuration.component.ItemReferenceInputDefinition;
 import org.eclipse.scada.configuration.component.Level;
 import org.eclipse.scada.configuration.component.MappedSourceValue;
 import org.eclipse.scada.configuration.component.MarkerConfiguration;
+import org.eclipse.scada.configuration.component.MasterComponent;
 import org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer;
 import org.eclipse.scada.configuration.component.OutputDefinition;
 import org.eclipse.scada.configuration.component.OutputSpecification;
@@ -51,13 +54,16 @@ import org.eclipse.scada.configuration.component.ScriptModule;
 import org.eclipse.scada.configuration.component.Service;
 import org.eclipse.scada.configuration.component.SingleValue;
 import org.eclipse.scada.configuration.component.SummariesConfiguration;
+import org.eclipse.scada.configuration.component.TransientValue;
 import org.eclipse.scada.configuration.world.Documentable;
+import org.eclipse.scada.configuration.world.NamedDocumentable;
 import org.eclipse.scada.configuration.world.osgi.Item;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * It provides an adapter <code>createXXX</code> method for each class of the
+ * model.
  * <!-- end-user-doc -->
  * @see org.eclipse.scada.configuration.component.ComponentPackage
  * @generated
@@ -89,7 +95,8 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Returns whether this factory is applicable for the type of the object.
      * <!-- begin-user-doc -->
-     * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+     * This implementation returns <code>true</code> if the object is either the
+     * model's package or is an instance object of the model.
      * <!-- end-user-doc -->
      * @return whether this factory is applicable for the type of the object.
      * @generated
@@ -345,9 +352,27 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
         }
 
         @Override
+        public Adapter caseBufferedValue ( BufferedValue object )
+        {
+            return createBufferedValueAdapter ();
+        }
+
+        @Override
+        public Adapter caseChangeCounter ( ChangeCounter object )
+        {
+            return createChangeCounterAdapter ();
+        }
+
+        @Override
         public Adapter caseDocumentable ( Documentable object )
         {
             return createDocumentableAdapter ();
+        }
+
+        @Override
+        public Adapter caseNamedDocumentable ( NamedDocumentable object )
+        {
+            return createNamedDocumentableAdapter ();
         }
 
         @Override
@@ -380,8 +405,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ComponentWorld <em>World</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ComponentWorld
@@ -395,8 +422,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.Level <em>Level</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.Level
@@ -410,8 +439,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.Component <em>Component</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.Component
@@ -425,8 +456,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.DataComponent <em>Data Component</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.DataComponent
@@ -440,8 +473,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.Configuration <em>Configuration</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.Configuration
@@ -455,8 +490,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ConstantValue <em>Constant Value</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ConstantValue
@@ -470,8 +507,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.MarkerConfiguration <em>Marker Configuration</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.MarkerConfiguration
@@ -485,8 +524,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.Service <em>Service</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.Service
@@ -500,8 +541,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.PersistentValue <em>Persistent Value</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.PersistentValue
@@ -515,8 +558,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.DriverConnectionAnalyzer <em>Driver Connection Analyzer</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.DriverConnectionAnalyzer
@@ -530,8 +575,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer <em>Master Import Connection Analyzer</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer
@@ -545,8 +592,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.SingleValue <em>Single Value</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.SingleValue
@@ -560,8 +609,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.DataMapperAnalyzer <em>Data Mapper Analyzer</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.DataMapperAnalyzer
@@ -575,8 +626,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.DataMapperService <em>Data Mapper Service</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.DataMapperService
@@ -590,8 +643,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.MappedSourceValue <em>Mapped Source Value</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.MappedSourceValue
@@ -605,8 +660,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.CalculationComponent <em>Calculation Component</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.CalculationComponent
@@ -620,8 +677,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.CalculationModule <em>Calculation Module</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.CalculationModule
@@ -635,8 +694,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.InputSpecification <em>Input Specification</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.InputSpecification
@@ -650,8 +711,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.OutputSpecification <em>Output Specification</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.OutputSpecification
@@ -665,8 +728,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.OutputDefinition <em>Output Definition</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.OutputDefinition
@@ -680,8 +745,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ItemReferenceInputDefinition <em>Item Reference Input Definition</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ItemReferenceInputDefinition
@@ -695,8 +762,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.InputDefinition <em>Input Definition</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.InputDefinition
@@ -710,8 +779,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ComponentReferenceInputDefinition <em>Reference Input Definition</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ComponentReferenceInputDefinition
@@ -725,8 +796,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.FormulaModule <em>Formula Module</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.FormulaModule
@@ -740,8 +813,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.AverageModule <em>Average Module</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.AverageModule
@@ -755,8 +830,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.DanglingItemReference <em>Dangling Item Reference</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.DanglingItemReference
@@ -770,8 +847,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ScriptModule <em>Script Module</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ScriptModule
@@ -785,8 +864,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.Script <em>Script</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.Script
@@ -800,8 +881,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.AbsoluteDanglingReference <em>Absolute Dangling Reference</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.AbsoluteDanglingReference
@@ -815,8 +898,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ComponentDanglingReference <em>Dangling Reference</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ComponentDanglingReference
@@ -830,8 +915,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ExternalValue <em>External Value</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ExternalValue
@@ -845,8 +932,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.SummariesConfiguration <em>Summaries Configuration</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.SummariesConfiguration
@@ -860,8 +949,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ItemInterceptor <em>Item Interceptor</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.ItemInterceptor
@@ -875,8 +966,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.Container <em>Container</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.Container
@@ -890,8 +983,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.RestInterceptor <em>Rest Interceptor</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.RestInterceptor
@@ -905,8 +1000,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.GlobalizeComponent <em>Globalize Component</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.GlobalizeComponent
@@ -920,8 +1017,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.TransientValue <em>Transient Value</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.TransientValue
@@ -935,8 +1034,10 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.MasterComponent <em>Master Component</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.component.MasterComponent
@@ -948,10 +1049,46 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     }
 
     /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.BufferedValue <em>Buffered Value</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.component.BufferedValue
+     * @generated
+     */
+    public Adapter createBufferedValueAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.component.ChangeCounter <em>Change Counter</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.component.ChangeCounter
+     * @generated
+     */
+    public Adapter createChangeCounterAdapter ()
+    {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.Documentable <em>Documentable</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.Documentable
@@ -963,10 +1100,29 @@ public class ComponentAdapterFactory extends AdapterFactoryImpl
     }
 
     /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.NamedDocumentable <em>Named Documentable</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.world.NamedDocumentable
+     * @generated
+     */
+    public Adapter createNamedDocumentableAdapter ()
+    {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.osgi.Item <em>Item</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.osgi.Item

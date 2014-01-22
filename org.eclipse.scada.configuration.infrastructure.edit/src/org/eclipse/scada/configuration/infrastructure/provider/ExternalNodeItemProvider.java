@@ -64,12 +64,13 @@ public class ExternalNodeItemProvider extends NodeItemProvider implements IEditi
      * This returns ExternalNode.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ExternalNode" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ExternalNode.png" ) ); //$NON-NLS-1$
     }
 
     /**

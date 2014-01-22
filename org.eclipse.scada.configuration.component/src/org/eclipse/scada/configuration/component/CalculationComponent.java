@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,7 +11,7 @@
 package org.eclipse.scada.configuration.component;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.scada.configuration.world.Documentable;
+import org.eclipse.scada.configuration.world.NamedDocumentable;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +31,7 @@ import org.eclipse.scada.configuration.world.Documentable;
  * @model
  * @generated
  */
-public interface CalculationComponent extends Documentable, MasterComponent
+public interface CalculationComponent extends NamedDocumentable, MasterComponent
 {
     /**
      * Returns the value of the '<em><b>Implementation</b></em>' reference.
@@ -64,8 +64,8 @@ public interface CalculationComponent extends Documentable, MasterComponent
      * The list contents are of type {@link org.eclipse.scada.configuration.component.OutputDefinition}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Outputs</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * If the meaning of the '<em>Outputs</em>' containment reference list isn't
+     * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Outputs</em>' containment reference list.
@@ -80,8 +80,8 @@ public interface CalculationComponent extends Documentable, MasterComponent
      * The list contents are of type {@link org.eclipse.scada.configuration.component.InputDefinition}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Inputs</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * If the meaning of the '<em>Inputs</em>' containment reference list isn't
+     * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Inputs</em>' containment reference list.

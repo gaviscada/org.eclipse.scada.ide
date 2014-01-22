@@ -29,7 +29,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" eType="#//Configurations"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Documentable">
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//NamedDocumentable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hostName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="devices" upperBound="-1"
@@ -127,6 +127,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Service"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueSlaves" upperBound="-1"
+        eType="#//ValueArchiveSlave" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SystemPropertyUserService" eSuperTypes="#//UserService">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -157,7 +159,7 @@
         eType="#//Device"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Device" abstract="true" interface="true"
-      eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Documentable">
+      eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//NamedDocumentable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//Node" eOpposite="#//Node/devices"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EquinoxDriver" eSuperTypes="#//AbstractFactoryDriver">
@@ -185,7 +187,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="endpoints" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Endpoint"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationConfiguration" eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Documentable">
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationConfiguration" eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//NamedDocumentable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
         eType="#//Module" containment="true"/>
   </eClassifiers>
@@ -201,5 +203,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="RestExporterModule" eSuperTypes="#//Module">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="contextId" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueArchiveSlave" eSuperTypes="#//EquinoxApplication">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="storagePath" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="/var/lib/eclipsescada/hds.slave"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="storageLayout" lowerBound="1"
+        eType="#//SlaveStorageLayout" defaultValueLiteral="MULTI"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SlaveStorageLayout">
+    <eLiterals name="SINGLE"/>
+    <eLiterals name="MULTI" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

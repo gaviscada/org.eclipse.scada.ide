@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,10 +19,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.scada.configuration.generator.GeneratorContext.GlobalContext;
 import org.eclipse.scada.configuration.generator.GeneratorContext.MasterContext;
+import org.eclipse.scada.configuration.generator.Profiles;
 import org.eclipse.scada.configuration.globalization.EventPoolImport;
 import org.eclipse.scada.configuration.globalization.Global;
 import org.eclipse.scada.configuration.globalization.Globalization;
@@ -42,8 +44,10 @@ import org.eclipse.scada.configuration.infrastructure.Options;
 import org.eclipse.scada.configuration.infrastructure.RestExporterModule;
 import org.eclipse.scada.configuration.infrastructure.SystemNode;
 import org.eclipse.scada.configuration.infrastructure.ValueArchiveServer;
+import org.eclipse.scada.configuration.infrastructure.ValueArchiveSlave;
 import org.eclipse.scada.configuration.lib.ExclusiveGroups;
 import org.eclipse.scada.configuration.recipe.lib.Output;
+import org.eclipse.scada.configuration.utils.ModelLoader;
 import org.eclipse.scada.configuration.utils.TypeWalker;
 import org.eclipse.scada.configuration.world.ApplicationNode;
 import org.eclipse.scada.configuration.world.Credentials;
@@ -55,6 +59,7 @@ import org.eclipse.scada.configuration.world.WorldFactory;
 import org.eclipse.scada.configuration.world.lib.Nodes;
 import org.eclipse.scada.configuration.world.osgi.ApplicationModule;
 import org.eclipse.scada.configuration.world.osgi.DataAccessConnection;
+import org.eclipse.scada.configuration.world.osgi.DefaultEquinoxApplication;
 import org.eclipse.scada.configuration.world.osgi.DefaultMasterServer;
 import org.eclipse.scada.configuration.world.osgi.DefaultValueArchiveServer;
 import org.eclipse.scada.configuration.world.osgi.EquinoxApplication;
@@ -128,7 +133,7 @@ public class WorldGenerator
         return this.driverMap;
     }
 
-    public void generate ( final IProgressMonitor monitor )
+    public void generate ( final IProgressMonitor monitor ) throws Exception
     {
         this.world = WorldFactory.eINSTANCE.createWorld ();
         this.world.setOptions ( WorldFactory.eINSTANCE.createOptions () );
@@ -152,7 +157,7 @@ public class WorldGenerator
         this.world.getNodes ().add ( cfgNode );
     }
 
-    protected void fillWorld ()
+    protected void fillWorld () throws Exception
     {
         final Map<org.eclipse.scada.configuration.infrastructure.Node, Node> nodes = new HashMap<> ();
 
@@ -264,6 +269,37 @@ public class WorldGenerator
                 }
             }
 
+            for ( final ValueArchiveSlave slave : infraNode.getValueSlaves () )
+            {
+                final int in = slave.getInstanceNumber ();
+
+                final DefaultEquinoxApplication app = OsgiFactory.eINSTANCE.createDefaultEquinoxApplication ();
+                app.setName ( slave.getName () );
+                app.setProfile ( new ModelLoader<> ( Profile.class ).load ( URI.createURI ( "platform:/plugin/org.eclipse.scada.configuration.lib/model/defaultValueArchiveSlaveProfile.xml" ), "org.eclipse.scada.configuration.world.osgi.profile" ) );
+                node.getApplications ().add ( app );
+
+                // add security configuration
+                app.setSecurityConfiguration ( this.infrastructure.getDefaultSecurityConfiguration () );
+
+                // add user service
+                Worlds.addUserService ( app, null, this.options );
+
+                createExporter ( OsgiPackage.Literals.HISTORICAL_DATA_EXPORTER, node, app, this.infrastructure.getOptions ().getBaseHdNgpPort () + in );
+                createExporter ( OsgiPackage.Literals.CONFIGURATION_ADMINISTRATOR_EXPORTER, node, app, this.infrastructure.getOptions ().getBaseCaNgpPort () + in );
+
+                final Profile profile = Profiles.createOfGetCustomizationProfile ( app );
+                switch ( slave.getStorageLayout () )
+                {
+                    case MULTI:
+                        Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.server.storage.slave.hds.basePath", "@" + slave.getStoragePath (), false );
+                        break;
+                    case SINGLE:
+                        Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.server.storage.slave.hds.basePath", slave.getStoragePath (), false );
+                        break;
+                }
+
+            }
+
         }
 
         // process drivers
@@ -322,7 +358,7 @@ public class WorldGenerator
                 if ( m instanceof HttpServiceModule )
                 {
                     final HttpService s = OsgiFactory.eINSTANCE.createHttpService ();
-                    final Endpoint ep = Worlds.createEndpoint ( ( (HttpServiceModule)m ).getPort () );
+                    final Endpoint ep = Worlds.createEndpoint ( ( (HttpServiceModule)m ).getPort (), "HTTP Endpoint" );
                     final Node node = Nodes.fromApp ( implMaster );
                     node.getEndpoints ().add ( ep );
                     s.setEndpoint ( ep );
@@ -378,7 +414,7 @@ public class WorldGenerator
     {
         final DataAccessConnection connection = OsgiFactory.eINSTANCE.createDataAccessConnection ();
         connection.setEndpoint ( ep );
-        connection.setName ( driver.getName () );
+        connection.setName ( Worlds.makeConnectionName ( driver ) );
         connection.setCredentials ( EcoreUtil.copy ( Worlds.findConnectionPassword ( driver ) ) );
 
         final org.eclipse.scada.configuration.world.osgi.MasterServer mappedMaster = this.ctxMap.get ( master ).getImplementation ();
@@ -492,9 +528,11 @@ public class WorldGenerator
 
     private Endpoint createExporter ( final EClass exporterClass, final Node node, final EquinoxApplication application, final int port )
     {
-        final Endpoint ep = Worlds.createEndpoint ( port );
-        node.getEndpoints ().add ( ep );
         final Exporter exporter = (Exporter)EcoreUtil.create ( exporterClass );
+
+        final Endpoint ep = Worlds.createEndpoint ( port, String.format ( "Exporter Endpoint: %s - %s", exporter.getTypeTag (), exporter.getName () ) );
+        node.getEndpoints ().add ( ep );
+
         exporter.setName ( application.getName () + "/exporter" );
         exporter.getEndpoints ().add ( ep );
         application.getExporter ().add ( exporter );

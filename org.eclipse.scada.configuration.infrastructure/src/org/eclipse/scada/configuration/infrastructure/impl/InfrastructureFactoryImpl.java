@@ -11,6 +11,7 @@
 package org.eclipse.scada.configuration.infrastructure.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
@@ -30,10 +31,12 @@ import org.eclipse.scada.configuration.infrastructure.JdbcUserService;
 import org.eclipse.scada.configuration.infrastructure.MasterImport;
 import org.eclipse.scada.configuration.infrastructure.MasterServer;
 import org.eclipse.scada.configuration.infrastructure.Options;
+import org.eclipse.scada.configuration.infrastructure.RestExporterModule;
 import org.eclipse.scada.configuration.infrastructure.SystemNode;
 import org.eclipse.scada.configuration.infrastructure.SystemPropertyUserService;
 import org.eclipse.scada.configuration.infrastructure.UserEntry;
 import org.eclipse.scada.configuration.infrastructure.ValueArchiveServer;
+import org.eclipse.scada.configuration.infrastructure.ValueArchiveSlave;
 import org.eclipse.scada.configuration.infrastructure.World;
 
 /**
@@ -124,8 +127,44 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
                 return createHttpServiceModule ();
             case InfrastructurePackage.REST_EXPORTER_MODULE:
                 return createRestExporterModule ();
+            case InfrastructurePackage.VALUE_ARCHIVE_SLAVE:
+                return createValueArchiveSlave ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object createFromString ( EDataType eDataType, String initialValue )
+    {
+        switch ( eDataType.getClassifierID () )
+        {
+            case InfrastructurePackage.SLAVE_STORAGE_LAYOUT:
+                return createSlaveStorageLayoutFromString ( eDataType, initialValue );
+            default:
+                throw new IllegalArgumentException ( "The datatype '" + eDataType.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String convertToString ( EDataType eDataType, Object instanceValue )
+    {
+        switch ( eDataType.getClassifierID () )
+        {
+            case InfrastructurePackage.SLAVE_STORAGE_LAYOUT:
+                return convertSlaveStorageLayoutToString ( eDataType, instanceValue );
+            default:
+                throw new IllegalArgumentException ( "The datatype '" + eDataType.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -146,12 +185,15 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
     public MasterServer createMasterServer ()
     {
-        MasterServerImpl masterServer = new MasterServerImpl ();
+        final MasterServerImpl masterServer = new MasterServerImpl ();
+        masterServer.setName ( "master" );
+        masterServer.setInstanceNumber ( 1 );
         return masterServer;
     }
 
@@ -254,12 +296,15 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
     public ValueArchiveServer createValueArchiveServer ()
     {
-        ValueArchiveServerImpl valueArchiveServer = new ValueArchiveServerImpl ();
+        final ValueArchiveServerImpl valueArchiveServer = new ValueArchiveServerImpl ();
+        valueArchiveServer.setName ( "hdserver" );
+        valueArchiveServer.setInstanceNumber ( 2 );
         return valueArchiveServer;
     }
 
@@ -340,10 +385,49 @@ public class InfrastructureFactoryImpl extends EFactoryImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public RestExporterModule createRestExporterModule ()
     {
         RestExporterModuleImpl restExporterModule = new RestExporterModuleImpl ();
         return restExporterModule;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @generated NOT
+     */
+    @Override
+    public ValueArchiveSlave createValueArchiveSlave ()
+    {
+        final ValueArchiveSlaveImpl valueArchiveSlave = new ValueArchiveSlaveImpl ();
+        valueArchiveSlave.setName ( "hdslave" );
+        valueArchiveSlave.setInstanceNumber ( 3 );
+        return valueArchiveSlave;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public SlaveStorageLayout createSlaveStorageLayoutFromString ( EDataType eDataType, String initialValue )
+    {
+        SlaveStorageLayout result = SlaveStorageLayout.get ( initialValue );
+        if ( result == null )
+            throw new IllegalArgumentException ( "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName () + "'" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        return result;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String convertSlaveStorageLayoutToString ( EDataType eDataType, Object instanceValue )
+    {
+        return instanceValue == null ? null : instanceValue.toString ();
     }
 
     /**

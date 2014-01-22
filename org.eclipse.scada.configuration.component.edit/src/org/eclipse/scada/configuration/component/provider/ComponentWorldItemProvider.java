@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,9 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -27,7 +25,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.scada.configuration.component.ComponentFactory;
 import org.eclipse.scada.configuration.component.ComponentPackage;
 import org.eclipse.scada.configuration.component.ComponentWorld;
@@ -186,12 +183,13 @@ public class ComponentWorldItemProvider
      * This returns ComponentWorld.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ComponentWorld" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ComponentWorld.png" ) ); //$NON-NLS-1$
     }
 
     /**

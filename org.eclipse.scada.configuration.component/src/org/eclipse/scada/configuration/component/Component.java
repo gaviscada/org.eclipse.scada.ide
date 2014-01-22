@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.component;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.scada.configuration.item.CustomizationPipeline;
 import org.eclipse.scada.configuration.item.Selector;
+import org.eclipse.scada.configuration.world.Documentable;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +32,7 @@ import org.eclipse.scada.configuration.item.Selector;
  * @model abstract="true"
  * @generated
  */
-public interface Component extends EObject
+public interface Component extends Documentable
 {
     /**
      * Returns the value of the '<em><b>Level</b></em>' container reference.
@@ -66,8 +66,8 @@ public interface Component extends EObject
      * Returns the value of the '<em><b>Customization Pipeline</b></em>' reference.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Customization Pipeline</em>' reference isn't clear,
-     * there really should be more of a description here...
+     * If the meaning of the '<em>Customization Pipeline</em>' reference isn't
+     * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Customization Pipeline</em>' reference.

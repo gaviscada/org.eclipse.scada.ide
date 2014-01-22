@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.scada.configuration.component.ComponentPackage;
+import org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.component.MasterImportConnectionAnalyzer} object.
@@ -105,7 +106,10 @@ public class MasterImportConnectionAnalyzerItemProvider extends MasterComponentI
     @Override
     public String getText ( Object object )
     {
-        return getString ( "_UI_MasterImportConnectionAnalyzer_type" ); //$NON-NLS-1$
+        String label = ( (MasterImportConnectionAnalyzer)object ).getShortDescription ();
+        return label == null || label.length () == 0 ?
+                getString ( "_UI_MasterImportConnectionAnalyzer_type" ) : //$NON-NLS-1$
+                getString ( "_UI_MasterImportConnectionAnalyzer_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

@@ -208,12 +208,13 @@ public class WorldItemProvider extends ItemProviderAdapter implements IEditingDo
      * This returns World.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/World" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/World.png" ) ); //$NON-NLS-1$
     }
 
     /**

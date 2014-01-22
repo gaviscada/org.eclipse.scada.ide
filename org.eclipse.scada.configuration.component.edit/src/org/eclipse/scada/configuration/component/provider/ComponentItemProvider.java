@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,8 +24,12 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.scada.configuration.component.Component;
 import org.eclipse.scada.configuration.component.ComponentPackage;
+import org.eclipse.scada.configuration.world.WorldPackage;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.component.Component} object.
@@ -59,10 +63,34 @@ public class ComponentItemProvider extends ItemProviderAdapter implements IEditi
         {
             super.getPropertyDescriptors ( object );
 
+            addShortDescriptionPropertyDescriptor ( object );
             addCustomizationPipelinePropertyDescriptor ( object );
             addArchiveSelectorPropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
+    }
+
+    /**
+     * This adds a property descriptor for the Short Description feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addShortDescriptionPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_Documentable_shortDescription_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_Documentable_shortDescription_feature", "_UI_Documentable_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        WorldPackage.Literals.DOCUMENTABLE__SHORT_DESCRIPTION,
+                        true,
+                        false,
+                        false,
+                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                        null,
+                        null ) );
     }
 
     /**
@@ -120,7 +148,10 @@ public class ComponentItemProvider extends ItemProviderAdapter implements IEditi
     @Override
     public String getText ( Object object )
     {
-        return getString ( "_UI_Component_type" ); //$NON-NLS-1$
+        String label = ( (Component)object ).getShortDescription ();
+        return label == null || label.length () == 0 ?
+                getString ( "_UI_Component_type" ) : //$NON-NLS-1$
+                getString ( "_UI_Component_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -134,6 +165,13 @@ public class ComponentItemProvider extends ItemProviderAdapter implements IEditi
     public void notifyChanged ( Notification notification )
     {
         updateChildren ( notification );
+
+        switch ( notification.getFeatureID ( Component.class ) )
+        {
+            case ComponentPackage.COMPONENT__SHORT_DESCRIPTION:
+                fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
+                return;
+        }
         super.notifyChanged ( notification );
     }
 

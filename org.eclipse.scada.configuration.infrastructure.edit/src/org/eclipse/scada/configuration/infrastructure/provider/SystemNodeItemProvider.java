@@ -84,6 +84,7 @@ public class SystemNodeItemProvider extends NodeItemProvider implements IEditing
             childrenFeatures.add ( InfrastructurePackage.Literals.SYSTEM_NODE__MASTERS );
             childrenFeatures.add ( InfrastructurePackage.Literals.SYSTEM_NODE__VALUE_ARCHIVES );
             childrenFeatures.add ( InfrastructurePackage.Literals.SYSTEM_NODE__SERVICES );
+            childrenFeatures.add ( InfrastructurePackage.Literals.SYSTEM_NODE__VALUE_SLAVES );
         }
         return childrenFeatures;
     }
@@ -106,12 +107,13 @@ public class SystemNodeItemProvider extends NodeItemProvider implements IEditing
      * This returns SystemNode.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/SystemNode" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/SystemNode.png" ) ); //$NON-NLS-1$
     }
 
     /**
@@ -155,6 +157,7 @@ public class SystemNodeItemProvider extends NodeItemProvider implements IEditing
             case InfrastructurePackage.SYSTEM_NODE__MASTERS:
             case InfrastructurePackage.SYSTEM_NODE__VALUE_ARCHIVES:
             case InfrastructurePackage.SYSTEM_NODE__SERVICES:
+            case InfrastructurePackage.SYSTEM_NODE__VALUE_SLAVES:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), true, false ) );
                 return;
         }
@@ -207,6 +210,11 @@ public class SystemNodeItemProvider extends NodeItemProvider implements IEditing
                 ( createChildParameter
                 ( InfrastructurePackage.Literals.SYSTEM_NODE__VALUE_ARCHIVES,
                         InfrastructureFactory.eINSTANCE.createValueArchiveServer () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.SYSTEM_NODE__VALUE_SLAVES,
+                        InfrastructureFactory.eINSTANCE.createValueArchiveSlave () ) );
     }
 
 }

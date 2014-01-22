@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,19 +10,21 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.world.lib;
 
+import java.util.Map;
+
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.scada.configuration.world.Documentable;
+import org.eclipse.scada.configuration.world.NamedDocumentable;
 
 public abstract class AbstractFolderProcessor extends BasicProcessor implements NodeElementProcessor
 {
-    public AbstractFolderProcessor ( final Documentable documentable )
+    public AbstractFolderProcessor ( final NamedDocumentable documentable )
     {
         super ( documentable );
     }
 
     @Override
-    public void process ( final String phase, final IFolder nodeDir, final IProgressMonitor monitor ) throws Exception
+    public void process ( final String phase, final IFolder nodeDir, final IProgressMonitor monitor, final Map<String, String> properties ) throws Exception
     {
         if ( phase != null && !"package".equals ( phase ) )
         {

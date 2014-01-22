@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@ package org.eclipse.scada.configuration.component;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.scada.configuration.world.Documentable;
+import org.eclipse.scada.configuration.world.NamedDocumentable;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,15 +32,15 @@ import org.eclipse.scada.configuration.world.Documentable;
  * @model
  * @generated
  */
-public interface ScriptModule extends Documentable, CalculationModule
+public interface ScriptModule extends NamedDocumentable, CalculationModule
 {
     /**
      * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
      * The list contents are of type {@link org.eclipse.scada.configuration.component.InputSpecification}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Inputs</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * If the meaning of the '<em>Inputs</em>' containment reference list isn't
+     * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Inputs</em>' containment reference list.
@@ -55,8 +55,8 @@ public interface ScriptModule extends Documentable, CalculationModule
      * The list contents are of type {@link org.eclipse.scada.configuration.component.OutputSpecification}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Outputs</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * If the meaning of the '<em>Outputs</em>' containment reference list isn't
+     * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Outputs</em>' containment reference list.
@@ -100,6 +100,7 @@ public interface ScriptModule extends Documentable, CalculationModule
      *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getInputs ();'"
      * @generated
      */
+    @Override
     EList<InputSpecification> getKnownInputs ();
 
     /**
@@ -118,6 +119,7 @@ public interface ScriptModule extends Documentable, CalculationModule
      *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getOutputs();'"
      * @generated
      */
+    @Override
     EList<OutputSpecification> getKnownOutputs ();
 
 } // ScriptModule

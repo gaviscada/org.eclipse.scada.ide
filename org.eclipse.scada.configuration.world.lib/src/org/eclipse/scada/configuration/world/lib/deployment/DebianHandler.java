@@ -13,7 +13,9 @@ package org.eclipse.scada.configuration.world.lib.deployment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -55,13 +57,8 @@ public class DebianHandler extends CommonHandler
     }
 
     @Override
-    public void process ( final String phase, final IFolder nodeDir, final IProgressMonitor monitor ) throws Exception
+    protected void handleProcess ( final IFolder nodeDir, final IProgressMonitor monitor, final Map<String, String> properties ) throws Exception
     {
-        if ( phase != null && !"package".equals ( phase ) )
-        {
-            return;
-        }
-
         final File packageFolder = getPackageFolder ( nodeDir );
 
         final String packageName = getPackageName ();
@@ -95,20 +92,24 @@ public class DebianHandler extends CommonHandler
 
         // run debuild
 
-        monitor.setTaskName ( "Running \"debuild -us -uc\"" );
-
-        final ProcessBuilder processBuilder = new ProcessBuilder ( Arrays.asList ( "debuild", "-us", "-uc" ) );
-        processBuilder.directory ( packageFolder );
-        try
+        if ( !Boolean.parseBoolean ( properties.get ( "skipRunDeployment" ) ) )
         {
-            new ProcessRunner ( processBuilder ).run ();
-        }
-        catch ( final Exception e )
-        {
-            logger.warn ( "Failed to generate debian package", e );
-        }
 
-        nodeDir.refreshLocal ( IResource.DEPTH_INFINITE, monitor );
+            monitor.setTaskName ( "Running \"debuild -us -uc\"" );
+
+            final ProcessBuilder processBuilder = new ProcessBuilder ( Arrays.asList ( "debuild", "-us", "-uc" ) );
+            processBuilder.directory ( packageFolder );
+            try
+            {
+                new ProcessRunner ( processBuilder ).run ();
+            }
+            catch ( final Exception e )
+            {
+                logger.warn ( "Failed to generate debian package", e );
+            }
+
+            nodeDir.refreshLocal ( IResource.DEPTH_INFINITE, monitor );
+        }
     }
 
     private String createScriptFile ( final File packageFolder, final String type )
@@ -193,7 +194,10 @@ public class DebianHandler extends CommonHandler
     {
         final StringBuilder sb = new StringBuilder ();
 
-        for ( final ChangeEntry entry : changes )
+        final ArrayList<ChangeEntry> sortedChanges = new ArrayList<> ( changes );
+        Collections.sort ( sortedChanges, new ChangeEntryComparator ( true ) );
+
+        for ( final ChangeEntry entry : sortedChanges )
         {
             sb.append ( String.format ( "%s (%s) stable; urgency=low\n", packageName, entry.getVersion () ) );
             sb.append ( '\n' );
@@ -204,10 +208,9 @@ public class DebianHandler extends CommonHandler
             f.format ( " -- %1$s <%2$s>  %3$ta, %3$te %3$tb %3$tY %3$tT %3$tz", entry.getAuthor ().getName (), entry.getAuthor ().getEmail (), entry.getDate () );
             f.close ();
 
-            sb.append ( '\n' );
+            sb.append ( "\n\n" );
         }
 
         return sb.toString ();
     }
-
 }

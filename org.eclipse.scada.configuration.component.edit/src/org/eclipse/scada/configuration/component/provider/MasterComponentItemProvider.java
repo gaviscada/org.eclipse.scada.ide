@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,8 +23,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.scada.configuration.component.ComponentPackage;
+import org.eclipse.scada.configuration.component.MasterComponent;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.component.MasterComponent} object.
@@ -115,7 +114,10 @@ public class MasterComponentItemProvider
     @Override
     public String getText ( Object object )
     {
-        return getString ( "_UI_MasterComponent_type" ); //$NON-NLS-1$
+        String label = ( (MasterComponent)object ).getShortDescription ();
+        return label == null || label.length () == 0 ?
+                getString ( "_UI_MasterComponent_type" ) : //$NON-NLS-1$
+                getString ( "_UI_MasterComponent_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

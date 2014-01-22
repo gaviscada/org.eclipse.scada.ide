@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scada.configuration.component.Component;
-import org.eclipse.scada.configuration.component.generator.util.Components;
+import org.eclipse.scada.configuration.component.lib.Components;
 import org.eclipse.scada.configuration.component.lib.create.CreationRequest;
 import org.eclipse.scada.configuration.component.lib.create.Helper;
 import org.eclipse.scada.configuration.component.lib.create.MasterItemCreatorImpl;
@@ -178,7 +178,7 @@ public class ItemCreatorImpl extends MasterItemCreatorImpl
             final ValueArchiveServer archive = this.ctx.getArchiveServer ( this.master.getImplementation () );
             if ( archive == null )
             {
-                throw new IllegalStateException ( String.format ( "Item %s should be archive but no archive server is configured on %s", item, this.master ) );
+                throw new IllegalStateException ( String.format ( "Item %s should be archived but no archive server is configured on %s", item, this.master ) );
             }
             Items.addArchive ( archive, item );
         }

@@ -153,6 +153,10 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
                 return createTransientValue ();
             case ComponentPackage.MASTER_COMPONENT:
                 return createMasterComponent ();
+            case ComponentPackage.BUFFERED_VALUE:
+                return createBufferedValue ();
+            case ComponentPackage.CHANGE_COUNTER:
+                return createChangeCounter ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -494,6 +498,28 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
     {
         MasterComponentImpl masterComponent = new MasterComponentImpl ();
         return masterComponent;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public BufferedValue createBufferedValue ()
+    {
+        BufferedValueImpl bufferedValue = new BufferedValueImpl ();
+        return bufferedValue;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ChangeCounter createChangeCounter ()
+    {
+        ChangeCounterImpl changeCounter = new ChangeCounterImpl ();
+        return changeCounter;
     }
 
     /**

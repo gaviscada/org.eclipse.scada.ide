@@ -142,12 +142,13 @@ public class UserEntryItemProvider extends ItemProviderAdapter implements IEditi
      * This returns UserEntry.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/UserEntry" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/UserEntry.png" ) ); //$NON-NLS-1$
     }
 
     /**

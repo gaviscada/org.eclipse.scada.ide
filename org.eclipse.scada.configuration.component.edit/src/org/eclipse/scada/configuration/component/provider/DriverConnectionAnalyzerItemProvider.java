@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.scada.configuration.component.ComponentPackage;
+import org.eclipse.scada.configuration.component.DriverConnectionAnalyzer;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.component.DriverConnectionAnalyzer} object.
@@ -56,26 +57,26 @@ public class DriverConnectionAnalyzerItemProvider extends MasterComponentItemPro
         {
             super.getPropertyDescriptors ( object );
 
-            addConnectionPropertyDescriptor ( object );
+            addDriverPropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
     }
 
     /**
-     * This adds a property descriptor for the Connection feature.
+     * This adds a property descriptor for the Driver feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected void addConnectionPropertyDescriptor ( Object object )
+    protected void addDriverPropertyDescriptor ( Object object )
     {
         itemPropertyDescriptors.add
                 ( createItemPropertyDescriptor
                 ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
                         getResourceLocator (),
-                        getString ( "_UI_DriverConnectionAnalyzer_connection_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_DriverConnectionAnalyzer_connection_feature", "_UI_DriverConnectionAnalyzer_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        ComponentPackage.Literals.DRIVER_CONNECTION_ANALYZER__CONNECTION,
+                        getString ( "_UI_DriverConnectionAnalyzer_driver_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_DriverConnectionAnalyzer_driver_feature", "_UI_DriverConnectionAnalyzer_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        ComponentPackage.Literals.DRIVER_CONNECTION_ANALYZER__DRIVER,
                         true,
                         false,
                         true,
@@ -105,7 +106,10 @@ public class DriverConnectionAnalyzerItemProvider extends MasterComponentItemPro
     @Override
     public String getText ( Object object )
     {
-        return getString ( "_UI_DriverConnectionAnalyzer_type" ); //$NON-NLS-1$
+        String label = ( (DriverConnectionAnalyzer)object ).getShortDescription ();
+        return label == null || label.length () == 0 ?
+                getString ( "_UI_DriverConnectionAnalyzer_type" ) : //$NON-NLS-1$
+                getString ( "_UI_DriverConnectionAnalyzer_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

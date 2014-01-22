@@ -47,14 +47,16 @@ public interface Factories
 
     public static final String FACTORY_DA_SOURCE = "da.datasource.dataitem"; //$NON-NLS-1$
 
+    public static final String FACTORY_DA_BUFFER = "org.eclipse.scada.da.buffer"; //$NON-NLS-1$
+
     public static final String FACTORY_DA_SUM_SOURCE = "org.eclipse.scada.da.datasource.sum"; //$NON-NLS-1$
 
     public static final String FACTORY_DA_CONST_SOURCE = "org.eclipse.scada.da.datasource.constant"; //$NON-NLS-1$
 
     public static final String FACTORY_DA_DS_SOURCE = "org.eclipse.scada.da.datasource.ds"; //$NON-NLS-1$
 
-	public static final String FACTORY_DA_MEMORY_SOURCE = "org.eclipse.scada.da.datasource.memory"; //$NON-NLS-1$
-    
+    public static final String FACTORY_DA_MEMORY_SOURCE = "org.eclipse.scada.da.datasource.memory"; //$NON-NLS-1$
+
     public static final String FACTORY_DA_PROXY_SOURCE = "da.datasource.proxy"; //$NON-NLS-1$
 
     public static final String FACTORY_DA_MASTER_HANDLER_SUM = "da.master.handler.sum"; //$NON-NLS-1$
@@ -72,6 +74,8 @@ public interface Factories
     public static final String FACTORY_DA_MOVING_AVERAGE = "org.eclipse.scada.da.datasource.movingaverage"; //$NON-NLS-1$
 
     public static final String FACTORY_DA_AVERAGE = "org.eclipse.scada.da.datasource.average"; //$NON-NLS-1$
+
+    public static final String FACTORY_DA_CHANGE_COUNTER = "org.eclipse.scada.da.datasource.changecounter"; //$NON-NLS-1$
 
     public static final String FACTORY_DA_GLOBAL_SUMMARY_SOURCE = "org.eclipse.scada.da.server.osgi.summary.attribute"; //$NON-NLS-1$
 
@@ -94,6 +98,5 @@ public interface Factories
     public static final String FACTORY_AE_EXTERNAL = "ae.monitor.ae.event.external";
 
     public static final String FACTORY_DA_REST_EXPORTER = "org.eclipse.scada.da.server.exporter.rest.context";
-
 
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,8 +20,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.scada.configuration.component.AbsoluteDanglingReference;
 import org.eclipse.scada.configuration.component.AverageModule;
+import org.eclipse.scada.configuration.component.BufferedValue;
 import org.eclipse.scada.configuration.component.CalculationComponent;
 import org.eclipse.scada.configuration.component.CalculationModule;
+import org.eclipse.scada.configuration.component.ChangeCounter;
 import org.eclipse.scada.configuration.component.Component;
 import org.eclipse.scada.configuration.component.ComponentDanglingReference;
 import org.eclipse.scada.configuration.component.ComponentFactory;
@@ -341,6 +343,20 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass bufferedValueEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass changeCounterEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EDataType notificationEDataType = null;
 
     /**
@@ -394,6 +410,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
 
         // Initialize simple dependencies
         InfrastructurePackage.eINSTANCE.eClass ();
+        ItemPackage.eINSTANCE.eClass ();
 
         // Create package meta-data objects
         theComponentPackage.createPackageContents ();
@@ -694,7 +711,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getDriverConnectionAnalyzer_Connection ()
+    public EReference getDriverConnectionAnalyzer_Driver ()
     {
         return (EReference)driverConnectionAnalyzerEClass.getEStructuralFeatures ().get ( 0 );
     }
@@ -837,6 +854,16 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
     public EReference getMappedSourceValue_Input ()
     {
         return (EReference)mappedSourceValueEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMappedSourceValue_CustomizationTags ()
+    {
+        return (EAttribute)mappedSourceValueEClass.getEStructuralFeatures ().get ( 2 );
     }
 
     /**
@@ -987,6 +1014,16 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
     public EAttribute getOutputDefinition_LocalTag ()
     {
         return (EAttribute)outputDefinitionEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getOutputDefinition_CustomizationTags ()
+    {
+        return (EAttribute)outputDefinitionEClass.getEStructuralFeatures ().get ( 2 );
     }
 
     /**
@@ -1504,6 +1541,136 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getBufferedValue ()
+    {
+        return bufferedValueEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBufferedValue_Name ()
+    {
+        return (EAttribute)bufferedValueEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getBufferedValue_Input ()
+    {
+        return (EReference)bufferedValueEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBufferedValue_Range ()
+    {
+        return (EAttribute)bufferedValueEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBufferedValue_InitialValue ()
+    {
+        return (EAttribute)bufferedValueEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBufferedValue_Persistence ()
+    {
+        return (EAttribute)bufferedValueEClass.getEStructuralFeatures ().get ( 4 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBufferedValue_Trigger ()
+    {
+        return (EAttribute)bufferedValueEClass.getEStructuralFeatures ().get ( 5 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBufferedValue_TriggerOnly ()
+    {
+        return (EAttribute)bufferedValueEClass.getEStructuralFeatures ().get ( 6 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getChangeCounter ()
+    {
+        return changeCounterEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getChangeCounter_Buffer ()
+    {
+        return (EReference)changeCounterEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getChangeCounter_Type ()
+    {
+        return (EAttribute)changeCounterEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getChangeCounter_Values ()
+    {
+        return (EAttribute)changeCounterEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getChangeCounter_OnError ()
+    {
+        return (EAttribute)changeCounterEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EDataType getNotification ()
     {
         return notificationEDataType;
@@ -1577,7 +1744,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         persistentValueEClass = createEClass ( PERSISTENT_VALUE );
 
         driverConnectionAnalyzerEClass = createEClass ( DRIVER_CONNECTION_ANALYZER );
-        createEReference ( driverConnectionAnalyzerEClass, DRIVER_CONNECTION_ANALYZER__CONNECTION );
+        createEReference ( driverConnectionAnalyzerEClass, DRIVER_CONNECTION_ANALYZER__DRIVER );
 
         masterImportConnectionAnalyzerEClass = createEClass ( MASTER_IMPORT_CONNECTION_ANALYZER );
         createEReference ( masterImportConnectionAnalyzerEClass, MASTER_IMPORT_CONNECTION_ANALYZER__CONNECTION );
@@ -1597,6 +1764,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         mappedSourceValueEClass = createEClass ( MAPPED_SOURCE_VALUE );
         createEReference ( mappedSourceValueEClass, MAPPED_SOURCE_VALUE__MAPPER );
         createEReference ( mappedSourceValueEClass, MAPPED_SOURCE_VALUE__INPUT );
+        createEAttribute ( mappedSourceValueEClass, MAPPED_SOURCE_VALUE__CUSTOMIZATION_TAGS );
 
         calculationComponentEClass = createEClass ( CALCULATION_COMPONENT );
         createEReference ( calculationComponentEClass, CALCULATION_COMPONENT__IMPLEMENTATION );
@@ -1617,6 +1785,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         outputDefinitionEClass = createEClass ( OUTPUT_DEFINITION );
         createEAttribute ( outputDefinitionEClass, OUTPUT_DEFINITION__NAME );
         createEAttribute ( outputDefinitionEClass, OUTPUT_DEFINITION__LOCAL_TAG );
+        createEAttribute ( outputDefinitionEClass, OUTPUT_DEFINITION__CUSTOMIZATION_TAGS );
 
         itemReferenceInputDefinitionEClass = createEClass ( ITEM_REFERENCE_INPUT_DEFINITION );
         createEAttribute ( itemReferenceInputDefinitionEClass, ITEM_REFERENCE_INPUT_DEFINITION__ITEM_ID );
@@ -1687,6 +1856,21 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         masterComponentEClass = createEClass ( MASTER_COMPONENT );
         createEReference ( masterComponentEClass, MASTER_COMPONENT__MASTER_ON );
 
+        bufferedValueEClass = createEClass ( BUFFERED_VALUE );
+        createEAttribute ( bufferedValueEClass, BUFFERED_VALUE__NAME );
+        createEReference ( bufferedValueEClass, BUFFERED_VALUE__INPUT );
+        createEAttribute ( bufferedValueEClass, BUFFERED_VALUE__RANGE );
+        createEAttribute ( bufferedValueEClass, BUFFERED_VALUE__INITIAL_VALUE );
+        createEAttribute ( bufferedValueEClass, BUFFERED_VALUE__PERSISTENCE );
+        createEAttribute ( bufferedValueEClass, BUFFERED_VALUE__TRIGGER );
+        createEAttribute ( bufferedValueEClass, BUFFERED_VALUE__TRIGGER_ONLY );
+
+        changeCounterEClass = createEClass ( CHANGE_COUNTER );
+        createEReference ( changeCounterEClass, CHANGE_COUNTER__BUFFER );
+        createEAttribute ( changeCounterEClass, CHANGE_COUNTER__TYPE );
+        createEAttribute ( changeCounterEClass, CHANGE_COUNTER__VALUES );
+        createEAttribute ( changeCounterEClass, CHANGE_COUNTER__ON_ERROR );
+
         // Create data types
         notificationEDataType = createEDataType ( NOTIFICATION );
     }
@@ -1719,8 +1903,8 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         // Obtain other dependent packages
         InfrastructurePackage theInfrastructurePackage = (InfrastructurePackage)EPackage.Registry.INSTANCE.getEPackage ( InfrastructurePackage.eNS_URI );
         ItemPackage theItemPackage = (ItemPackage)EPackage.Registry.INSTANCE.getEPackage ( ItemPackage.eNS_URI );
-        OsgiPackage theOsgiPackage = (OsgiPackage)EPackage.Registry.INSTANCE.getEPackage ( OsgiPackage.eNS_URI );
         WorldPackage theWorldPackage = (WorldPackage)EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI );
+        OsgiPackage theOsgiPackage = (OsgiPackage)EPackage.Registry.INSTANCE.getEPackage ( OsgiPackage.eNS_URI );
 
         // Create type parameters
 
@@ -1729,6 +1913,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         // Add supertypes to classes
         componentWorldEClass.getESuperTypes ().add ( this.getContainer () );
         levelEClass.getESuperTypes ().add ( this.getContainer () );
+        componentEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
         dataComponentEClass.getESuperTypes ().add ( this.getComponent () );
         constantValueEClass.getESuperTypes ().add ( this.getSingleValue () );
         markerConfigurationEClass.getESuperTypes ().add ( this.getConfiguration () );
@@ -1738,28 +1923,30 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         singleValueEClass.getESuperTypes ().add ( this.getMasterComponent () );
         dataMapperAnalyzerEClass.getESuperTypes ().add ( this.getMasterComponent () );
         dataMapperServiceEClass.getESuperTypes ().add ( this.getService () );
-        mappedSourceValueEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
+        mappedSourceValueEClass.getESuperTypes ().add ( theWorldPackage.getNamedDocumentable () );
         mappedSourceValueEClass.getESuperTypes ().add ( this.getMasterComponent () );
-        calculationComponentEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
+        calculationComponentEClass.getESuperTypes ().add ( theWorldPackage.getNamedDocumentable () );
         calculationComponentEClass.getESuperTypes ().add ( this.getMasterComponent () );
         calculationModuleEClass.getESuperTypes ().add ( this.getService () );
         itemReferenceInputDefinitionEClass.getESuperTypes ().add ( this.getInputDefinition () );
         componentReferenceInputDefinitionEClass.getESuperTypes ().add ( this.getInputDefinition () );
-        formulaModuleEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
+        formulaModuleEClass.getESuperTypes ().add ( theWorldPackage.getNamedDocumentable () );
         formulaModuleEClass.getESuperTypes ().add ( this.getCalculationModule () );
         averageModuleEClass.getESuperTypes ().add ( this.getCalculationModule () );
         danglingItemReferenceEClass.getESuperTypes ().add ( theOsgiPackage.getItem () );
-        scriptModuleEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
+        scriptModuleEClass.getESuperTypes ().add ( theWorldPackage.getNamedDocumentable () );
         scriptModuleEClass.getESuperTypes ().add ( this.getCalculationModule () );
         absoluteDanglingReferenceEClass.getESuperTypes ().add ( this.getDanglingItemReference () );
         componentDanglingReferenceEClass.getESuperTypes ().add ( this.getDanglingItemReference () );
         externalValueEClass.getESuperTypes ().add ( this.getSingleValue () );
         summariesConfigurationEClass.getESuperTypes ().add ( this.getConfiguration () );
         restInterceptorEClass.getESuperTypes ().add ( this.getItemInterceptor () );
-        globalizeComponentEClass.getESuperTypes ().add ( theWorldPackage.getDocumentable () );
         globalizeComponentEClass.getESuperTypes ().add ( this.getDataComponent () );
+        globalizeComponentEClass.getESuperTypes ().add ( theWorldPackage.getNamedDocumentable () );
         transientValueEClass.getESuperTypes ().add ( this.getSingleValue () );
         masterComponentEClass.getESuperTypes ().add ( this.getDataComponent () );
+        bufferedValueEClass.getESuperTypes ().add ( this.getMasterComponent () );
+        changeCounterEClass.getESuperTypes ().add ( this.getSingleValue () );
 
         // Initialize classes, features, and operations; add parameters
         initEClass ( componentWorldEClass, ComponentWorld.class, "ComponentWorld", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
@@ -1800,7 +1987,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         initEClass ( persistentValueEClass, PersistentValue.class, "PersistentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
 
         initEClass ( driverConnectionAnalyzerEClass, DriverConnectionAnalyzer.class, "DriverConnectionAnalyzer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
-        initEReference ( getDriverConnectionAnalyzer_Connection (), theInfrastructurePackage.getDriver (), null, "connection", null, 1, 1, DriverConnectionAnalyzer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getDriverConnectionAnalyzer_Driver (), theInfrastructurePackage.getDriver (), null, "driver", null, 1, 1, DriverConnectionAnalyzer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( masterImportConnectionAnalyzerEClass, MasterImportConnectionAnalyzer.class, "MasterImportConnectionAnalyzer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getMasterImportConnectionAnalyzer_Connection (), theInfrastructurePackage.getMasterImport (), null, "connection", null, 1, 1, MasterImportConnectionAnalyzer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1820,6 +2007,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         initEClass ( mappedSourceValueEClass, MappedSourceValue.class, "MappedSourceValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getMappedSourceValue_Mapper (), this.getDataMapperService (), null, "mapper", null, 1, 1, MappedSourceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getMappedSourceValue_Input (), this.getInputDefinition (), null, "input", null, 1, 1, MappedSourceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getMappedSourceValue_CustomizationTags (), ecorePackage.getEString (), "customizationTags", null, 0, -1, MappedSourceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( calculationComponentEClass, CalculationComponent.class, "CalculationComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getCalculationComponent_Implementation (), this.getCalculationModule (), null, "implementation", null, 1, 1, CalculationComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1840,6 +2028,7 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         initEClass ( outputDefinitionEClass, OutputDefinition.class, "OutputDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getOutputDefinition_Name (), ecorePackage.getEString (), "name", null, 1, 1, OutputDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getOutputDefinition_LocalTag (), ecorePackage.getEString (), "localTag", null, 1, -1, OutputDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getOutputDefinition_CustomizationTags (), ecorePackage.getEString (), "customizationTags", null, 0, -1, OutputDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( itemReferenceInputDefinitionEClass, ItemReferenceInputDefinition.class, "ItemReferenceInputDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getItemReferenceInputDefinition_ItemId (), ecorePackage.getEString (), "itemId", null, 1, 1, ItemReferenceInputDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1920,11 +2109,46 @@ public class ComponentPackageImpl extends EPackageImpl implements ComponentPacka
         initEClass ( masterComponentEClass, MasterComponent.class, "MasterComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getMasterComponent_MasterOn (), theInfrastructurePackage.getMasterServer (), null, "masterOn", null, 0, -1, MasterComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
+        initEClass ( bufferedValueEClass, BufferedValue.class, "BufferedValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getBufferedValue_Name (), ecorePackage.getEString (), "name", null, 1, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getBufferedValue_Input (), this.getInputDefinition (), null, "input", null, 0, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBufferedValue_Range (), ecorePackage.getELong (), "range", null, 1, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBufferedValue_InitialValue (), theOsgiPackage.getVariant (), "initialValue", null, 0, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBufferedValue_Persistence (), theOsgiPackage.getPersistence (), "persistence", "NONE", 1, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute ( getBufferedValue_Trigger (), ecorePackage.getELong (), "trigger", null, 1, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBufferedValue_TriggerOnly (), ecorePackage.getEBoolean (), "triggerOnly", "false", 0, 1, BufferedValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
+
+        initEClass ( changeCounterEClass, ChangeCounter.class, "ChangeCounter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getChangeCounter_Buffer (), this.getBufferedValue (), null, "buffer", null, 0, 1, ChangeCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getChangeCounter_Type (), theOsgiPackage.getChangeType (), "type", null, 0, 1, ChangeCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getChangeCounter_Values (), theOsgiPackage.getVariant (), "values", null, 1, -1, ChangeCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getChangeCounter_OnError (), theOsgiPackage.getErrorHandling (), "onError", null, 0, 1, ChangeCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
         // Initialize data types
         initEDataType ( notificationEDataType, Notification.class, "Notification", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
 
         // Create resource
         createResource ( eNS_URI );
+
+        // Create annotations
+        // http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+        createExtendedMetaDataAnnotations ();
+    }
+
+    /**
+     * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void createExtendedMetaDataAnnotations ()
+    {
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$									
+        addAnnotation ( getGlobalizeComponent_Components (),
+                source,
+                new String[]
+                {       "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
+                } );
     }
 
 } //ComponentPackageImpl
