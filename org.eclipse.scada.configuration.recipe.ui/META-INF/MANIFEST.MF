@@ -1,21 +1,20 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Recipe UI (Incubation)
-Bundle-SymbolicName: org.eclipse.scada.configuration.recipe.ui;singleton:=true
-Bundle-Version: 0.1.0.qualifier
-Bundle-Activator: org.eclipse.scada.configuration.recipe.ui.Activator
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
+ ada.configuration.recipe;bundle-version="0.1.0",org.eclipse.scada.con
+ figuration;bundle-version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.scada.configuration.recipe;bundle-version="0.1.0",
- org.eclipse.scada.configuration;bundle-version="0.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.core.resources,
- org.eclipse.emf.common.util,
- org.eclipse.scada.configuration.recipe;version="0.1.0",
- org.eclipse.scada.configuration.recipe.lib;version="0.1.0",
- org.eclipse.scada.configuration.utils;version="0.1.0",
- org.eclipse.scada.ui.databinding;version="0.1.0",
- org.eclipse.scada.ui.utils.status;version="0.1.0",
- org.eclipse.scada.utils;version="0.1.0"
+Bundle-Version: 0.1.0.v20140312-1603
+Bundle-Name: Recipe UI (Incubation)
+Bundle-Activator: org.eclipse.scada.configuration.recipe.ui.Activator
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.core.resources,org.eclipse.emf.common.util
+ ,org.eclipse.scada.configuration.recipe;version="0.1.0",org.eclipse.s
+ cada.configuration.recipe.lib;version="0.1.0",org.eclipse.scada.confi
+ guration.utils;version="0.1.0",org.eclipse.scada.ui.databinding;versi
+ on="0.1.0",org.eclipse.scada.ui.utils.status;version="0.1.0",org.ecli
+ pse.scada.utils;version="0.1.0"
+Bundle-SymbolicName: org.eclipse.scada.configuration.recipe.ui;singlet
+ on:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+

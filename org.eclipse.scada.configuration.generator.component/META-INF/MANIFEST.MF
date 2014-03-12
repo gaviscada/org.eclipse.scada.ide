@@ -1,31 +1,28 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Runner (Incubation)
-Bundle-SymbolicName: org.eclipse.scada.configuration.generator.component;singleton:=true
-Bundle-Version: 0.1.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore,org.ecl
+ ipse.scada.configuration.world;bundle-version="0.1.0",org.eclipse.sca
+ da.configuration.globalization.lib;bundle-version="0.1.0",org.eclipse
+ .scada.configuration.component;bundle-version="0.1.0",org.eclipse.sca
+ da.configuration.globalization;bundle-version="0.1.0",org.eclipse.sca
+ da.configuration.utils;bundle-version="0.1.0"
+Export-Package: org.eclipse.scada.configuration.generator.component;ve
+ rsion="0.1.0"; uses:="org.eclipse.core.runtime,  org.eclipse.emf.comm
+ on.util,  org.eclipse.scada.configuration.world,  org.osgi.framework"
 Bundle-Vendor: Eclipse SCADA Project
-Export-Package: org.eclipse.scada.configuration.generator.component;version="0.1.0";
-  uses:="org.eclipse.core.runtime,
-   org.eclipse.emf.common.util,
-   org.eclipse.scada.configuration.world,
-   org.osgi.framework"
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore,
- org.eclipse.scada.configuration.world;bundle-version="0.1.0",
- org.eclipse.scada.configuration.globalization.lib;bundle-version="0.1.0",
- org.eclipse.scada.configuration.component;bundle-version="0.1.0",
- org.eclipse.scada.configuration.globalization;bundle-version="0.1.0",
- org.eclipse.scada.configuration.utils;bundle-version="0.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: javax.inject;version="1.0.0",
- org.eclipse.scada.configuration.component.lib;version="0.1.0",
- org.eclipse.scada.configuration.component.lib.create;version="0.1.0",
- org.eclipse.scada.configuration.generator;version="0.1.0",
- org.eclipse.scada.configuration.generator.text;version="0.1.0",
- org.eclipse.scada.configuration.infrastructure.lib;version="0.1.0",
- org.eclipse.scada.configuration.lib;version="0.1.0",
- org.eclipse.scada.core;version="0.1.0",
- org.eclipse.scada.ui.databinding;version="0.1.0",
- org.eclipse.scada.utils.str;version="0.1.0",
- org.slf4j;version="1.7.2"
 Bundle-ActivationPolicy: lazy
+Bundle-Version: 0.1.0.v20140312-1603
+Bundle-Name: Runner (Incubation)
+Bundle-ManifestVersion: 2
+Import-Package: javax.inject;version="1.0.0",org.eclipse.scada.configu
+ ration.component.lib;version="0.1.0",org.eclipse.scada.configuration.
+ component.lib.create;version="0.1.0",org.eclipse.scada.configuration.
+ generator;version="0.1.0",org.eclipse.scada.configuration.generator.t
+ ext;version="0.1.0",org.eclipse.scada.configuration.infrastructure.li
+ b;version="0.1.0",org.eclipse.scada.configuration.lib;version="0.1.0"
+ ,org.eclipse.scada.core;version="0.1.0",org.eclipse.scada.ui.databind
+ ing;version="0.1.0",org.eclipse.scada.utils.str;version="0.1.0",org.s
+ lf4j;version="1.7.2"
+Bundle-SymbolicName: org.eclipse.scada.configuration.generator.compone
+ nt;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+
