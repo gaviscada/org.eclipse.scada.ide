@@ -1,17 +1,15 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.scada.configuration.globalization;bundle-v
- ersion="0.1.0",org.eclipse.scada.configuration.utils;bundle-version="
- 0.1.0"
-Export-Package: org.eclipse.scada.configuration.globalization.lib;vers
- ion="0.1.0";uses:="org.eclipse.scada.configuration.world.osgi,org.ecl
- ipse.core.runtime,org.eclipse.scada.configuration.globalization"
-Bundle-Vendor: Eclipse SCADA Project
-Bundle-Version: 0.1.0.v20131219-0915
-Bundle-Name: Globalization Library (Incubation)
 Bundle-ManifestVersion: 2
-Import-Package: javax.inject;version="1.0.0",org.eclipse.core.runtime,
- org.eclipse.scada.configuration.lib;version="0.1.0",org.eclipse.scada
- .utils.str;version="0.1.0",org.slf4j;version="1.7.2"
+Bundle-Name: Globalization Library (Incubation)
 Bundle-SymbolicName: org.eclipse.scada.configuration.globalization.lib
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Eclipse SCADA Project
+Export-Package: org.eclipse.scada.configuration.globalization.lib;version="0.1.0";uses:="org.eclipse.scada.configuration.world.osgi,org.eclipse.core.runtime,org.eclipse.scada.configuration.globalization"
+Require-Bundle: org.eclipse.scada.configuration.globalization;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.utils;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-
+Import-Package: javax.inject;version="1.0.0",
+ org.eclipse.core.runtime,
+ org.eclipse.scada.configuration.lib;version="0.1.0",
+ org.eclipse.scada.utils.str;version="0.1.0",
+ org.slf4j;version="1.7.2"

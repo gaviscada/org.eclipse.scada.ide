@@ -1,40 +1,39 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0",org.ec
- lipse.scada.configuration.arduino;visibility:=reexport;bundle-version
- ="0.1.0",org.eclipse.emf.edit;visibility:=reexport;bundle-version="2.
- 9.0",org.eclipse.scada.configuration.world;visibility:=reexport;bundl
- e-version="0.1.0",org.eclipse.scada.configuration.world.edit;visibili
- ty:=reexport;bundle-version="0.1.0",org.eclipse.scada.da.server.exec;
- visibility:=reexport;bundle-version="0.1.0",org.eclipse.scada.da.serv
- er.exec.edit;visibility:=reexport;bundle-version="0.1.0",org.eclipse.
- scada.configuration.globalization;visibility:=reexport;bundle-version
- ="0.1.0",org.eclipse.scada.configuration.globalization.edit;visibilit
- y:=reexport;bundle-version="0.1.0",org.eclipse.scada.configuration.se
- curity;visibility:=reexport;bundle-version="0.1.0",org.eclipse.scada.
- configuration.security.edit;visibility:=reexport;bundle-version="0.1.
- 0",org.eclipse.scada.configuration.infrastructure;bundle-version="0.1
- .0",org.eclipse.scada.configuration.infrastructure.edit;bundle-versio
- n="0.1.0",org.eclipse.scada.configuration.item;visibility:=reexport;b
- undle-version="0.1.0",org.eclipse.scada.configuration.item.edit;visib
- ility:=reexport;bundle-version="0.1.0"
-Export-Package: org.eclipse.scada.configuration.arduino.provider;versi
- on="0.1.0"; uses:="org.eclipse.emf.edit.command,  org.eclipse.emf.com
- mon.util,  org.eclipse.scada.configuration.world,  org.eclipse.emf.co
- mmon.notify,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration
- .arduino.util,  org.eclipse.scada.configuration.world.util,  org.ecli
- pse.scada.configuration.infrastructure,  org.eclipse.scada.configurat
- ion.infrastructure.util,  org.eclipse.emf.common,  org.eclipse.emf.ed
- it.provider,  org.eclipse.emf.edit.domain"
-Bundle-Vendor: %providerName
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140121-0953
-Bundle-Localization: plugin
-Bundle-Name: %pluginName
-Bundle-Activator: org.eclipse.scada.configuration.arduino.provider.Ard
- uinoEditPlugin$Implementation
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.eclipse.scada.configuration.arduino.edit;sing
- leton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.scada.configuration.arduino.edit;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.scada.configuration.arduino.provider.ArduinoEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.scada.configuration.arduino.provider;version="0.1.0";
+  uses:="org.eclipse.emf.edit.command,
+   org.eclipse.emf.common.util,
+   org.eclipse.scada.configuration.world,
+   org.eclipse.emf.common.notify,
+   org.eclipse.emf.ecore,
+   org.eclipse.scada.configuration.arduino.util,
+   org.eclipse.scada.configuration.world.util,
+   org.eclipse.scada.configuration.infrastructure,
+   org.eclipse.scada.configuration.infrastructure.util,
+   org.eclipse.emf.common,
+   org.eclipse.emf.edit.provider,
+   org.eclipse.emf.edit.domain"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0",
+ org.eclipse.scada.configuration.arduino;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.emf.edit;visibility:=reexport;bundle-version="2.9.0",
+ org.eclipse.scada.configuration.world;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.world.edit;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.da.server.exec;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.da.server.exec.edit;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.globalization;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.globalization.edit;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.security;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.security.edit;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.infrastructure;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.infrastructure.edit;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.item;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.item.edit;visibility:=reexport;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-
+Bundle-ActivationPolicy: lazy
