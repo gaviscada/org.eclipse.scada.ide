@@ -24,6 +24,9 @@
          <forClass
                class="org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism">
          </forClass>
+         <forClass
+               class="org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism">
+         </forClass>
       </nodeElementProcessor>
    </extension>
    <extension
@@ -33,6 +36,9 @@
       </oscarProcessor>
       <oscarProcessor
             class="org.eclipse.scada.configuration.world.lib.oscar.HttpServiceProcessor">
+      </oscarProcessor>
+      <oscarProcessor
+            class="org.eclipse.scada.configuration.world.lib.oscar.TelnetConsoleProcessor">
       </oscarProcessor>
    </extension>
 

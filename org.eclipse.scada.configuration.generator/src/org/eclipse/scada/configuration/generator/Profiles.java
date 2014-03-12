@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,14 +10,17 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.generator;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.scada.configuration.world.osgi.EquinoxApplication;
 import org.eclipse.scada.configuration.world.osgi.PropertyEntry;
+import org.eclipse.scada.configuration.world.osgi.profile.BundleStartLevel;
 import org.eclipse.scada.configuration.world.osgi.profile.Profile;
 import org.eclipse.scada.configuration.world.osgi.profile.ProfileFactory;
 import org.eclipse.scada.configuration.world.osgi.profile.StartBundle;
@@ -29,7 +32,23 @@ public final class Profiles
     {
     }
 
-    public static Profile createOfGetCustomizationProfile ( final EquinoxApplication app )
+    public static Map<String, Integer> makeStartLevelMap ( final Profile profile )
+    {
+        final Map<String, Integer> result = new HashMap<> ();
+
+        for ( final StartBundle start : profile.getStart () )
+        {
+            result.put ( start.getName (), -1 );
+        }
+        for ( final BundleStartLevel bsl : profile.getSetbsl () )
+        {
+            result.put ( bsl.getName (), bsl.getLevel () );
+        }
+
+        return result;
+    }
+
+    public static Profile createOrGetCustomizationProfile ( final EquinoxApplication app )
     {
         Profile profile = app.getCustomizationProfile ();
         if ( profile == null )
@@ -88,6 +107,11 @@ public final class Profiles
             prop.setValue ( null );
         }
         profile.getProperty ().add ( prop );
+    }
+
+    public static void addProgramArugment ( final Profile profile, final String argument )
+    {
+        profile.getArguments ().add ( argument );
     }
 
     public static void addInclude ( final Profile profile, final ResourceSet resourceSet, final URI uri )

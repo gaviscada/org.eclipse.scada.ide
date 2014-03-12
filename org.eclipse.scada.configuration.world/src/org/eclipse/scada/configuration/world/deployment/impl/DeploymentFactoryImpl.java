@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,20 +10,27 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.world.deployment.impl;
 
+import java.util.UUID;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.scada.configuration.world.deployment.*;
+import org.eclipse.scada.configuration.world.deployment.Architecture;
 import org.eclipse.scada.configuration.world.deployment.Author;
 import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
 import org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism;
 import org.eclipse.scada.configuration.world.deployment.DeploymentFactory;
 import org.eclipse.scada.configuration.world.deployment.DeploymentInformation;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
+import org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode;
+import org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.NodeMappings;
+import org.eclipse.scada.configuration.world.deployment.P2Platform;
 import org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,6 +101,10 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
                 return createExpressionNodeMappingEntry ();
             case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY:
                 return createSimpleNodeMappingEntry ();
+            case DeploymentPackage.MSI_DEPLOYMENT_MECHANISM:
+                return createMsiDeploymentMechanism ();
+            case DeploymentPackage.P2_PLATFORM:
+                return createP2Platform ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -111,6 +122,8 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
         {
             case DeploymentPackage.FALLBACK_NODE_MAPPING_MODE:
                 return createFallbackNodeMappingModeFromString ( eDataType, initialValue );
+            case DeploymentPackage.ARCHITECTURE:
+                return createArchitectureFromString ( eDataType, initialValue );
             default:
                 throw new IllegalArgumentException ( "The datatype '" + eDataType.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -128,6 +141,8 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
         {
             case DeploymentPackage.FALLBACK_NODE_MAPPING_MODE:
                 return convertFallbackNodeMappingModeToString ( eDataType, instanceValue );
+            case DeploymentPackage.ARCHITECTURE:
+                return convertArchitectureToString ( eDataType, instanceValue );
             default:
                 throw new IllegalArgumentException ( "The datatype '" + eDataType.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -200,6 +215,7 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public NodeMappings createNodeMappings ()
     {
         NodeMappingsImpl nodeMappings = new NodeMappingsImpl ();
@@ -211,6 +227,7 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ExpressionNodeMappingEntry createExpressionNodeMappingEntry ()
     {
         ExpressionNodeMappingEntryImpl expressionNodeMappingEntry = new ExpressionNodeMappingEntryImpl ();
@@ -222,10 +239,40 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public SimpleNodeMappingEntry createSimpleNodeMappingEntry ()
     {
         SimpleNodeMappingEntryImpl simpleNodeMappingEntry = new SimpleNodeMappingEntryImpl ();
         return simpleNodeMappingEntry;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @generated NOT
+     */
+    @Override
+    public MsiDeploymentMechanism createMsiDeploymentMechanism ()
+    {
+        final MsiDeploymentMechanismImpl msiDeploymentMechanism = new MsiDeploymentMechanismImpl ();
+
+        // we initialize this with a random UUID
+        msiDeploymentMechanism.setUpgradeCode ( UUID.randomUUID ().toString () );
+
+        return msiDeploymentMechanism;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public P2Platform createP2Platform ()
+    {
+        P2PlatformImpl p2Platform = new P2PlatformImpl ();
+        return p2Platform;
     }
 
     /**
@@ -247,8 +294,30 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
-    public String convertFallbackNodeMappingModeToString ( EDataType eDataType,
-            Object instanceValue )
+    public String convertFallbackNodeMappingModeToString ( EDataType eDataType, Object instanceValue )
+    {
+        return instanceValue == null ? null : instanceValue.toString ();
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Architecture createArchitectureFromString ( EDataType eDataType, String initialValue )
+    {
+        Architecture result = Architecture.get ( initialValue );
+        if ( result == null )
+            throw new IllegalArgumentException ( "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName () + "'" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        return result;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String convertArchitectureToString ( EDataType eDataType, Object instanceValue )
     {
         return instanceValue == null ? null : instanceValue.toString ();
     }

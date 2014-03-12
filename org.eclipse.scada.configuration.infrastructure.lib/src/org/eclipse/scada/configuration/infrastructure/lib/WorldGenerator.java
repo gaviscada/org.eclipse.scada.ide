@@ -54,6 +54,8 @@ import org.eclipse.scada.configuration.world.Credentials;
 import org.eclipse.scada.configuration.world.Driver;
 import org.eclipse.scada.configuration.world.Endpoint;
 import org.eclipse.scada.configuration.world.Node;
+import org.eclipse.scada.configuration.world.PasswordCredentials;
+import org.eclipse.scada.configuration.world.UsernamePasswordCredentials;
 import org.eclipse.scada.configuration.world.World;
 import org.eclipse.scada.configuration.world.WorldFactory;
 import org.eclipse.scada.configuration.world.lib.Nodes;
@@ -253,11 +255,26 @@ public class WorldGenerator
                 createExporter ( OsgiPackage.Literals.HISTORICAL_DATA_EXPORTER, node, archive, this.infrastructure.getOptions ().getBaseHdNgpPort () + in );
                 createExporter ( OsgiPackage.Literals.CONFIGURATION_ADMINISTRATOR_EXPORTER, node, archive, this.infrastructure.getOptions ().getBaseCaNgpPort () + in );
 
+                archive.getModules ().addAll ( makeModules ( infraArchive, archive ) );
+
+                final Profile profile = Profiles.createOrGetCustomizationProfile ( archive );
                 for ( final Map.Entry<org.eclipse.scada.configuration.infrastructure.MasterServer, DataAccessConnection> entry : conMap.entrySet () )
                 {
                     if ( entry.getKey ().getArchiveTo () != infraArchive )
                     {
                         continue;
+                    }
+
+                    final Credentials credentials = findLocalCredentials ( infraArchive );
+                    if ( credentials instanceof PasswordCredentials )
+                    {
+                        Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.user", "", false );
+                        Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.password", PasswordCredentials.class.cast ( credentials ).getPassword (), false );
+                    }
+                    else if ( credentials instanceof UsernamePasswordCredentials )
+                    {
+                        Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.user", UsernamePasswordCredentials.class.cast ( credentials ).getUsername (), false );
+                        Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.password", UsernamePasswordCredentials.class.cast ( credentials ).getPassword (), false );
                     }
 
                     final DataAccessConnection con = EcoreUtil.copy ( entry.getValue () );
@@ -287,7 +304,7 @@ public class WorldGenerator
                 createExporter ( OsgiPackage.Literals.HISTORICAL_DATA_EXPORTER, node, app, this.infrastructure.getOptions ().getBaseHdNgpPort () + in );
                 createExporter ( OsgiPackage.Literals.CONFIGURATION_ADMINISTRATOR_EXPORTER, node, app, this.infrastructure.getOptions ().getBaseCaNgpPort () + in );
 
-                final Profile profile = Profiles.createOfGetCustomizationProfile ( app );
+                final Profile profile = Profiles.createOrGetCustomizationProfile ( app );
                 switch ( slave.getStorageLayout () )
                 {
                     case MULTI:
@@ -298,6 +315,19 @@ public class WorldGenerator
                         break;
                 }
 
+                final Credentials credentials = findLocalCredentials ( slave );
+                if ( credentials instanceof PasswordCredentials )
+                {
+                    Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.user", "", false );
+                    Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.password", PasswordCredentials.class.cast ( credentials ).getPassword (), false );
+                }
+                else if ( credentials instanceof UsernamePasswordCredentials )
+                {
+                    Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.user", UsernamePasswordCredentials.class.cast ( credentials ).getUsername (), false );
+                    Profiles.addSystemProperty ( profile, "org.eclipse.scada.hd.exporter.http.server.password", UsernamePasswordCredentials.class.cast ( credentials ).getPassword (), false );
+                }
+
+                app.getModules ().addAll ( makeModules ( slave, app ) );
             }
 
         }
@@ -336,22 +366,26 @@ public class WorldGenerator
         }
     }
 
-    private Collection<ApplicationModule> makeModules ( final MasterServer master, final DefaultMasterServer implMaster )
+    private Collection<ApplicationModule> makeModules ( final org.eclipse.scada.configuration.infrastructure.EquinoxApplication app, final EquinoxApplication implApp )
     {
         final Collection<ApplicationModule> result = new LinkedList<> ();
 
         // process application configurations
 
         result.addAll ( this.infrastructure.getApplicationConfigurations () );
-        ExclusiveGroups.removeGroups ( result, master.getConfigurations () );
-        result.addAll ( master.getConfigurations () );
+
+        ExclusiveGroups.removeGroups ( result, app.getConfigurations () );
+        result.addAll ( app.getConfigurations () );
 
         // process infrastructure configuration
 
-        final org.eclipse.scada.configuration.infrastructure.ApplicationConfiguration cfg = master.getConfiguration ();
+        final org.eclipse.scada.configuration.infrastructure.ApplicationConfiguration cfg = app.getConfiguration ();
         // TODO: add a default configuration
         if ( cfg != null )
         {
+            ExclusiveGroups.removeGroups ( result, cfg.getConfigurations () );
+            result.addAll ( cfg.getConfigurations () );
+
             for ( final Module m : cfg.getModules () )
             {
                 // FIXME: add extension scheme
@@ -359,7 +393,7 @@ public class WorldGenerator
                 {
                     final HttpService s = OsgiFactory.eINSTANCE.createHttpService ();
                     final Endpoint ep = Worlds.createEndpoint ( ( (HttpServiceModule)m ).getPort (), "HTTP Endpoint" );
-                    final Node node = Nodes.fromApp ( implMaster );
+                    final Node node = Nodes.fromApp ( implApp );
                     node.getEndpoints ().add ( ep );
                     s.setEndpoint ( ep );
                     result.add ( s );
@@ -368,7 +402,7 @@ public class WorldGenerator
                 {
                     final RestExporter s = OsgiFactory.eINSTANCE.createRestExporter ();
                     s.setContextId ( ( (RestExporterModule)m ).getContextId () );
-                    s.getHiveProperties ().addAll ( Worlds.convertToProperties ( Worlds.findInterconnectCredentials ( master ) ) );
+                    s.getHiveProperties ().addAll ( Worlds.convertToProperties ( Worlds.findInterconnectCredentials ( app ) ) );
                     result.add ( s );
                 }
             }
@@ -379,14 +413,14 @@ public class WorldGenerator
         return EcoreUtil.copyAll ( result );
     }
 
-    public Credentials findLocalCredentials ( final MasterServer master )
+    public Credentials findLocalCredentials ( final org.eclipse.scada.configuration.infrastructure.EquinoxApplication app )
     {
-        logger.debug ( "Looking for credentials: {}", master );
+        logger.debug ( "Looking for credentials: {}", app );
 
-        if ( master.getLocalCredentials () != null )
+        if ( app.getLocalCredentials () != null )
         {
-            logger.debug ( "Using local: {}", master.getLocalCredentials () );
-            return master.getLocalCredentials ();
+            logger.debug ( "Using local: {}", app.getLocalCredentials () );
+            return app.getLocalCredentials ();
         }
         else
         {

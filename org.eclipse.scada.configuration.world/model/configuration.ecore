@@ -846,6 +846,15 @@
       <eLiterals name="SET" value="1" literal="SET"/>
       <eLiterals name="DIRECTION" value="2" literal="DIRECTION"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TelnetConsole" eSuperTypes="#//osgi/IndependentConfiguration">
+      <eAnnotations source="http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup">
+        <details key="groupId" value="telnet.console"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="host" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="localhost"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    </eClassifiers>
     <eSubpackages name="profile" nsURI="http://eclipse.org/SCADA/Configuration/World/OSGi/Profile"
         nsPrefix="profile">
       <eClassifiers xsi:type="ecore:EClass" name="Profile">
@@ -859,7 +868,7 @@
             <details key="name" value="feature"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="jvmArgument" upperBound="-1"
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="jvmArguments" upperBound="-1"
             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
           <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
             <details key="name" value="argument"/>
@@ -893,6 +902,16 @@
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="arguments" upperBound="-1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+            <details key="name" value="arg"/>
+            <details key="kind" value="element"/>
+          </eAnnotations>
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Program arguments"/>
+          </eAnnotations>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StartBundle">
         <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -961,10 +980,7 @@
       nsPrefix="deployment">
     <eClassifiers xsi:type="ecore:EClass" name="DeploymentMechanism" abstract="true"
         interface="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="DebianDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalDependencies"
-          ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DebianDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism"/>
     <eClassifiers xsi:type="ecore:EClass" name="Author">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -972,7 +988,15 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           iD="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RedhatDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RedhatDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="license" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="other">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The value of the license field that will be inserted into the template &quot;spec&quot; file."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DeploymentInformation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="authors" upperBound="-1"
           eType="#//deployment/Author" containment="true"/>
@@ -983,6 +1007,8 @@
           upperBound="-1" eType="#//deployment/ChangeEntry" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="maintainer" lowerBound="1"
           eType="#//deployment/Author" eKeys="#//deployment/Author/email"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalDependencies"
+          ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ChangeEntry">
       <eStructuralFeatures xsi:type="ecore:EReference" name="author" lowerBound="1"
@@ -1027,6 +1053,36 @@
     <eClassifiers xsi:type="ecore:EEnum" name="FallbackNodeMappingMode">
       <eLiterals name="FAIL"/>
       <eLiterals name="IGNORE" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MsiDeploymentMechanism" eSuperTypes="#//deployment/DeploymentMechanism">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="upgradeCode" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="manufacturer" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="Eclipse SCADA"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sharedPlatform" eType="#//deployment/P2Platform"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="localPlatform" eType="#//deployment/P2Platform"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="architecture" lowerBound="1"
+          eType="#//deployment/Architecture" defaultValueLiteral="i386"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableFirewall" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableUserInterface"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="P2Platform">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="repositories" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Architecture">
+      <eLiterals name="i386"/>
+      <eLiterals name="amd64" value="1"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

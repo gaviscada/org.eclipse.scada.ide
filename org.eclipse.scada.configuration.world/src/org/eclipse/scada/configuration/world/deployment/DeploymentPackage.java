@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,11 +22,11 @@ import org.eclipse.emf.ecore.EReference;
  * The <b>Package</b> for the model.
  * It contains accessors for the meta objects to represent
  * <ul>
- *   <li>each class,</li>
- *   <li>each feature of each class,</li>
- *   <li>each operation of each class,</li>
- *   <li>each enum,</li>
- *   <li>and each data type</li>
+ * <li>each class,</li>
+ * <li>each feature of each class,</li>
+ * <li>each operation of each class,</li>
+ * <li>each enum,</li>
+ * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
  * @see org.eclipse.scada.configuration.world.deployment.DeploymentFactory
@@ -132,13 +132,22 @@ public interface DeploymentPackage extends EPackage
     int COMMON_DEPLOYMENT_MECHANISM__MAINTAINER = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 1;
 
     /**
+     * The feature id for the '<em><b>Additional Dependencies</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 2;
+
+    /**
      * The number of structural features of the '<em>Common Deployment Mechanism</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 2;
+    int COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 3;
 
     /**
      * The number of operations of the '<em>Common Deployment Mechanism</em>' class.
@@ -184,7 +193,7 @@ public interface DeploymentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DEBIAN_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES = COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT + 0;
+    int DEBIAN_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES = COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES;
 
     /**
      * The number of structural features of the '<em>Debian Deployment Mechanism</em>' class.
@@ -193,7 +202,7 @@ public interface DeploymentPackage extends EPackage
      * @generated
      * @ordered
      */
-    int DEBIAN_DEPLOYMENT_MECHANISM_FEATURE_COUNT = COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT + 1;
+    int DEBIAN_DEPLOYMENT_MECHANISM_FEATURE_COUNT = COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT + 0;
 
     /**
      * The number of operations of the '<em>Debian Deployment Mechanism</em>' class.
@@ -279,13 +288,31 @@ public interface DeploymentPackage extends EPackage
     int REDHAT_DEPLOYMENT_MECHANISM__MAINTAINER = COMMON_DEPLOYMENT_MECHANISM__MAINTAINER;
 
     /**
+     * The feature id for the '<em><b>Additional Dependencies</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REDHAT_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES = COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES;
+
+    /**
+     * The feature id for the '<em><b>License</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int REDHAT_DEPLOYMENT_MECHANISM__LICENSE = COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT + 0;
+
+    /**
      * The number of structural features of the '<em>Redhat Deployment Mechanism</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int REDHAT_DEPLOYMENT_MECHANISM_FEATURE_COUNT = COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT + 0;
+    int REDHAT_DEPLOYMENT_MECHANISM_FEATURE_COUNT = COMMON_DEPLOYMENT_MECHANISM_FEATURE_COUNT + 1;
 
     /**
      * The number of operations of the '<em>Redhat Deployment Mechanism</em>' class.
@@ -591,6 +618,161 @@ public interface DeploymentPackage extends EPackage
     int SIMPLE_NODE_MAPPING_ENTRY_OPERATION_COUNT = NODE_MAPPING_ENTRY_OPERATION_COUNT + 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.deployment.impl.MsiDeploymentMechanismImpl <em>Msi Deployment Mechanism</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.deployment.impl.MsiDeploymentMechanismImpl
+     * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getMsiDeploymentMechanism()
+     * @generated
+     */
+    int MSI_DEPLOYMENT_MECHANISM = 11;
+
+    /**
+     * The feature id for the '<em><b>Version</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__VERSION = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Upgrade Code</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__UPGRADE_CODE = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Manufacturer</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__MANUFACTURER = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Shared Platform</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__SHARED_PLATFORM = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 3;
+
+    /**
+     * The feature id for the '<em><b>Local Platform</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__LOCAL_PLATFORM = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 4;
+
+    /**
+     * The feature id for the '<em><b>Architecture</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__ARCHITECTURE = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 5;
+
+    /**
+     * The feature id for the '<em><b>Enable Firewall</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__ENABLE_FIREWALL = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 6;
+
+    /**
+     * The feature id for the '<em><b>Enable User Interface</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__ENABLE_USER_INTERFACE = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 7;
+
+    /**
+     * The feature id for the '<em><b>License File</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM__LICENSE_FILE = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 8;
+
+    /**
+     * The number of structural features of the '<em>Msi Deployment Mechanism</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM_FEATURE_COUNT = DEPLOYMENT_MECHANISM_FEATURE_COUNT + 9;
+
+    /**
+     * The number of operations of the '<em>Msi Deployment Mechanism</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MSI_DEPLOYMENT_MECHANISM_OPERATION_COUNT = DEPLOYMENT_MECHANISM_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.deployment.impl.P2PlatformImpl <em>P2 Platform</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.deployment.impl.P2PlatformImpl
+     * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getP2Platform()
+     * @generated
+     */
+    int P2_PLATFORM = 12;
+
+    /**
+     * The feature id for the '<em><b>Repositories</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int P2_PLATFORM__REPOSITORIES = 0;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int P2_PLATFORM__NAME = 1;
+
+    /**
+     * The number of structural features of the '<em>P2 Platform</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int P2_PLATFORM_FEATURE_COUNT = 2;
+
+    /**
+     * The number of operations of the '<em>P2 Platform</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int P2_PLATFORM_OPERATION_COUNT = 0;
+
+    /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode <em>Fallback Node Mapping Mode</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -598,7 +780,17 @@ public interface DeploymentPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getFallbackNodeMappingMode()
      * @generated
      */
-    int FALLBACK_NODE_MAPPING_MODE = 11;
+    int FALLBACK_NODE_MAPPING_MODE = 13;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.deployment.Architecture <em>Architecture</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.deployment.Architecture
+     * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getArchitecture()
+     * @generated
+     */
+    int ARCHITECTURE = 14;
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.deployment.DeploymentMechanism <em>Mechanism</em>}'.
@@ -619,17 +811,6 @@ public interface DeploymentPackage extends EPackage
      * @generated
      */
     EClass getDebianDeploymentMechanism ();
-
-    /**
-     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism#getAdditionalDependencies <em>Additional Dependencies</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute list '<em>Additional Dependencies</em>'.
-     * @see org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism#getAdditionalDependencies()
-     * @see #getDebianDeploymentMechanism()
-     * @generated
-     */
-    EAttribute getDebianDeploymentMechanism_AdditionalDependencies ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.deployment.Author <em>Author</em>}'.
@@ -672,6 +853,17 @@ public interface DeploymentPackage extends EPackage
      * @generated
      */
     EClass getRedhatDeploymentMechanism ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism#getLicense <em>License</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>License</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism#getLicense()
+     * @see #getRedhatDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getRedhatDeploymentMechanism_License ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.deployment.DeploymentInformation <em>Information</em>}'.
@@ -725,6 +917,17 @@ public interface DeploymentPackage extends EPackage
      * @generated
      */
     EReference getCommonDeploymentMechanism_Maintainer ();
+
+    /**
+     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism#getAdditionalDependencies <em>Additional Dependencies</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Additional Dependencies</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism#getAdditionalDependencies()
+     * @see #getCommonDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getCommonDeploymentMechanism_AdditionalDependencies ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.deployment.ChangeEntry <em>Change Entry</em>}'.
@@ -897,6 +1100,147 @@ public interface DeploymentPackage extends EPackage
     EAttribute getSimpleNodeMappingEntry_ToHostName ();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism <em>Msi Deployment Mechanism</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Msi Deployment Mechanism</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism
+     * @generated
+     */
+    EClass getMsiDeploymentMechanism ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getVersion <em>Version</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Version</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getVersion()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_Version ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getUpgradeCode <em>Upgrade Code</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Upgrade Code</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getUpgradeCode()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_UpgradeCode ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getManufacturer <em>Manufacturer</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Manufacturer</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getManufacturer()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_Manufacturer ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getSharedPlatform <em>Shared Platform</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Shared Platform</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getSharedPlatform()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EReference getMsiDeploymentMechanism_SharedPlatform ();
+
+    /**
+     * Returns the meta object for the containment reference '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getLocalPlatform <em>Local Platform</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Local Platform</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getLocalPlatform()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EReference getMsiDeploymentMechanism_LocalPlatform ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getArchitecture <em>Architecture</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Architecture</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getArchitecture()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_Architecture ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#isEnableFirewall <em>Enable Firewall</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Enable Firewall</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#isEnableFirewall()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_EnableFirewall ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#isEnableUserInterface <em>Enable User Interface</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Enable User Interface</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#isEnableUserInterface()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_EnableUserInterface ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getLicenseFile <em>License File</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>License File</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism#getLicenseFile()
+     * @see #getMsiDeploymentMechanism()
+     * @generated
+     */
+    EAttribute getMsiDeploymentMechanism_LicenseFile ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.deployment.P2Platform <em>P2 Platform</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>P2 Platform</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.P2Platform
+     * @generated
+     */
+    EClass getP2Platform ();
+
+    /**
+     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.deployment.P2Platform#getRepositories <em>Repositories</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Repositories</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.P2Platform#getRepositories()
+     * @see #getP2Platform()
+     * @generated
+     */
+    EAttribute getP2Platform_Repositories ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.deployment.P2Platform#getName <em>Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Name</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.P2Platform#getName()
+     * @see #getP2Platform()
+     * @generated
+     */
+    EAttribute getP2Platform_Name ();
+
+    /**
      * Returns the meta object for enum '{@link org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode <em>Fallback Node Mapping Mode</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -905,6 +1249,16 @@ public interface DeploymentPackage extends EPackage
      * @generated
      */
     EEnum getFallbackNodeMappingMode ();
+
+    /**
+     * Returns the meta object for enum '{@link org.eclipse.scada.configuration.world.deployment.Architecture <em>Architecture</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for enum '<em>Architecture</em>'.
+     * @see org.eclipse.scada.configuration.world.deployment.Architecture
+     * @generated
+     */
+    EEnum getArchitecture ();
 
     /**
      * Returns the factory that creates the instances of the model.
@@ -919,11 +1273,11 @@ public interface DeploymentPackage extends EPackage
      * <!-- begin-user-doc -->
      * Defines literals for the meta objects that represent
      * <ul>
-     *   <li>each class,</li>
-     *   <li>each feature of each class,</li>
-     *   <li>each operation of each class,</li>
-     *   <li>each enum,</li>
-     *   <li>and each data type</li>
+     * <li>each class,</li>
+     * <li>each feature of each class,</li>
+     * <li>each operation of each class,</li>
+     * <li>each enum,</li>
+     * <li>and each data type</li>
      * </ul>
      * <!-- end-user-doc -->
      * @generated
@@ -949,14 +1303,6 @@ public interface DeploymentPackage extends EPackage
          * @generated
          */
         EClass DEBIAN_DEPLOYMENT_MECHANISM = eINSTANCE.getDebianDeploymentMechanism ();
-
-        /**
-         * The meta object literal for the '<em><b>Additional Dependencies</b></em>' attribute list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute DEBIAN_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES = eINSTANCE.getDebianDeploymentMechanism_AdditionalDependencies ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.impl.AuthorImpl <em>Author</em>}' class.
@@ -993,6 +1339,14 @@ public interface DeploymentPackage extends EPackage
          * @generated
          */
         EClass REDHAT_DEPLOYMENT_MECHANISM = eINSTANCE.getRedhatDeploymentMechanism ();
+
+        /**
+         * The meta object literal for the '<em><b>License</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute REDHAT_DEPLOYMENT_MECHANISM__LICENSE = eINSTANCE.getRedhatDeploymentMechanism_License ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.impl.DeploymentInformationImpl <em>Information</em>}' class.
@@ -1037,6 +1391,14 @@ public interface DeploymentPackage extends EPackage
          * @generated
          */
         EReference COMMON_DEPLOYMENT_MECHANISM__MAINTAINER = eINSTANCE.getCommonDeploymentMechanism_Maintainer ();
+
+        /**
+         * The meta object literal for the '<em><b>Additional Dependencies</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES = eINSTANCE.getCommonDeploymentMechanism_AdditionalDependencies ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.impl.ChangeEntryImpl <em>Change Entry</em>}' class.
@@ -1177,6 +1539,114 @@ public interface DeploymentPackage extends EPackage
         EAttribute SIMPLE_NODE_MAPPING_ENTRY__TO_HOST_NAME = eINSTANCE.getSimpleNodeMappingEntry_ToHostName ();
 
         /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.impl.MsiDeploymentMechanismImpl <em>Msi Deployment Mechanism</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.deployment.impl.MsiDeploymentMechanismImpl
+         * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getMsiDeploymentMechanism()
+         * @generated
+         */
+        EClass MSI_DEPLOYMENT_MECHANISM = eINSTANCE.getMsiDeploymentMechanism ();
+
+        /**
+         * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__VERSION = eINSTANCE.getMsiDeploymentMechanism_Version ();
+
+        /**
+         * The meta object literal for the '<em><b>Upgrade Code</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__UPGRADE_CODE = eINSTANCE.getMsiDeploymentMechanism_UpgradeCode ();
+
+        /**
+         * The meta object literal for the '<em><b>Manufacturer</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__MANUFACTURER = eINSTANCE.getMsiDeploymentMechanism_Manufacturer ();
+
+        /**
+         * The meta object literal for the '<em><b>Shared Platform</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference MSI_DEPLOYMENT_MECHANISM__SHARED_PLATFORM = eINSTANCE.getMsiDeploymentMechanism_SharedPlatform ();
+
+        /**
+         * The meta object literal for the '<em><b>Local Platform</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference MSI_DEPLOYMENT_MECHANISM__LOCAL_PLATFORM = eINSTANCE.getMsiDeploymentMechanism_LocalPlatform ();
+
+        /**
+         * The meta object literal for the '<em><b>Architecture</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__ARCHITECTURE = eINSTANCE.getMsiDeploymentMechanism_Architecture ();
+
+        /**
+         * The meta object literal for the '<em><b>Enable Firewall</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__ENABLE_FIREWALL = eINSTANCE.getMsiDeploymentMechanism_EnableFirewall ();
+
+        /**
+         * The meta object literal for the '<em><b>Enable User Interface</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__ENABLE_USER_INTERFACE = eINSTANCE.getMsiDeploymentMechanism_EnableUserInterface ();
+
+        /**
+         * The meta object literal for the '<em><b>License File</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MSI_DEPLOYMENT_MECHANISM__LICENSE_FILE = eINSTANCE.getMsiDeploymentMechanism_LicenseFile ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.impl.P2PlatformImpl <em>P2 Platform</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.deployment.impl.P2PlatformImpl
+         * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getP2Platform()
+         * @generated
+         */
+        EClass P2_PLATFORM = eINSTANCE.getP2Platform ();
+
+        /**
+         * The meta object literal for the '<em><b>Repositories</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute P2_PLATFORM__REPOSITORIES = eINSTANCE.getP2Platform_Repositories ();
+
+        /**
+         * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute P2_PLATFORM__NAME = eINSTANCE.getP2Platform_Name ();
+
+        /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode <em>Fallback Node Mapping Mode</em>}' enum.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -1185,6 +1655,16 @@ public interface DeploymentPackage extends EPackage
          * @generated
          */
         EEnum FALLBACK_NODE_MAPPING_MODE = eINSTANCE.getFallbackNodeMappingMode ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.deployment.Architecture <em>Architecture</em>}' enum.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.deployment.Architecture
+         * @see org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl#getArchitecture()
+         * @generated
+         */
+        EEnum ARCHITECTURE = eINSTANCE.getArchitecture ();
 
     }
 

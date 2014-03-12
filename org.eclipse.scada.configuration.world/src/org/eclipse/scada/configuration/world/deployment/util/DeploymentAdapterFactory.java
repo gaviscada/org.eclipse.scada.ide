@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,12 +14,26 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.scada.configuration.world.deployment.*;
+import org.eclipse.scada.configuration.world.deployment.Author;
+import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
+import org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DeploymentInformation;
+import org.eclipse.scada.configuration.world.deployment.DeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
+import org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.NodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.NodeMappings;
+import org.eclipse.scada.configuration.world.deployment.P2Platform;
+import org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
- * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * It provides an adapter <code>createXXX</code> method for each class of the
+ * model.
  * <!-- end-user-doc -->
  * @see org.eclipse.scada.configuration.world.deployment.DeploymentPackage
  * @generated
@@ -51,7 +65,8 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Returns whether this factory is applicable for the type of the object.
      * <!-- begin-user-doc -->
-     * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+     * This implementation returns <code>true</code> if the object is either the
+     * model's package or is an instance object of the model.
      * <!-- end-user-doc -->
      * @return whether this factory is applicable for the type of the object.
      * @generated
@@ -145,6 +160,18 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
         }
 
         @Override
+        public Adapter caseMsiDeploymentMechanism ( MsiDeploymentMechanism object )
+        {
+            return createMsiDeploymentMechanismAdapter ();
+        }
+
+        @Override
+        public Adapter caseP2Platform ( P2Platform object )
+        {
+            return createP2PlatformAdapter ();
+        }
+
+        @Override
         public Adapter defaultCase ( EObject object )
         {
             return createEObjectAdapter ();
@@ -168,8 +195,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.DeploymentMechanism <em>Mechanism</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.DeploymentMechanism
@@ -183,8 +212,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism <em>Debian Deployment Mechanism</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism
@@ -198,8 +229,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.Author <em>Author</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.Author
@@ -213,8 +246,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism <em>Redhat Deployment Mechanism</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism
@@ -228,8 +263,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.DeploymentInformation <em>Information</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.DeploymentInformation
@@ -243,8 +280,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism <em>Common Deployment Mechanism</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism
@@ -258,8 +297,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.ChangeEntry <em>Change Entry</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.ChangeEntry
@@ -273,8 +314,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.NodeMappings <em>Node Mappings</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.NodeMappings
@@ -288,8 +331,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry <em>Expression Node Mapping Entry</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry
@@ -303,8 +348,10 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.NodeMappingEntry <em>Node Mapping Entry</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.NodeMappingEntry
@@ -318,14 +365,50 @@ public class DeploymentAdapterFactory extends AdapterFactoryImpl
     /**
      * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry <em>Simple Node Mapping Entry</em>}'.
      * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
      * @see org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry
      * @generated
      */
     public Adapter createSimpleNodeMappingEntryAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism <em>Msi Deployment Mechanism</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism
+     * @generated
+     */
+    public Adapter createMsiDeploymentMechanismAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.world.deployment.P2Platform <em>P2 Platform</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.world.deployment.P2Platform
+     * @generated
+     */
+    public Adapter createP2PlatformAdapter ()
     {
         return null;
     }

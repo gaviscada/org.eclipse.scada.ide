@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -37,7 +37,7 @@ import org.eclipse.scada.utils.str.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DebianHandler extends CommonHandler
+public class DebianHandler extends CommonPackageHandler
 {
 
     private final static Logger logger = LoggerFactory.getLogger ( DebianHandler.class );
@@ -53,7 +53,7 @@ public class DebianHandler extends CommonHandler
     @Override
     protected String getBaseFolderName ()
     {
-        return "debian-packages";
+        return "debian-packages"; //$NON-NLS-1$
     }
 
     @Override
@@ -64,13 +64,13 @@ public class DebianHandler extends CommonHandler
         final String packageName = getPackageName ();
 
         final Map<String, String> replacements = new HashMap<> ();
-        replacements.put ( "packageName", packageName );
-        replacements.put ( "authorName", this.deploy.getMaintainer ().getName () );
-        replacements.put ( "authorEmail", this.deploy.getMaintainer ().getEmail () );
-        replacements.put ( "nodeName", this.applicationNode.getName () == null ? this.applicationNode.getHostName () : this.applicationNode.getName () );
-        replacements.put ( "postinst.restart", createPostInst ( makeDriverList () ) );
-        replacements.put ( "prerm.stop", createPreRm ( makeDriverList () ) );
-        replacements.put ( "depends", makeDependencies () );
+        replacements.put ( "packageName", packageName ); //$NON-NLS-1$
+        replacements.put ( "authorName", this.deploy.getMaintainer ().getName () ); //$NON-NLS-1$
+        replacements.put ( "authorEmail", this.deploy.getMaintainer ().getEmail () ); //$NON-NLS-1$
+        replacements.put ( "nodeName", this.applicationNode.getName () == null ? this.applicationNode.getHostName () : this.applicationNode.getName () ); //$NON-NLS-1$
+        replacements.put ( "postinst.restart", createPostInst ( makeDriverList () ) ); //$NON-NLS-1$
+        replacements.put ( "prerm.stop", createPreRm ( makeDriverList () ) ); //$NON-NLS-1$
+        replacements.put ( "depends", makeDependencies () ); //$NON-NLS-1$
 
         replacements.put ( "postinst.scripts", createScriptFile ( packageFolder, "postinst" ) );
         replacements.put ( "prerm.scripts", createScriptFile ( packageFolder, "prerm" ) );
@@ -92,10 +92,10 @@ public class DebianHandler extends CommonHandler
 
         // run debuild
 
-        if ( !Boolean.parseBoolean ( properties.get ( "skipRunDeployment" ) ) )
+        if ( !Boolean.parseBoolean ( properties.get ( "skipRunDeployment" ) ) ) //$NON-NLS-1$
         {
 
-            monitor.setTaskName ( "Running \"debuild -us -uc\"" );
+            monitor.setTaskName ( "Running \"debuild -us -uc\"" ); //$NON-NLS-1$
 
             final ProcessBuilder processBuilder = new ProcessBuilder ( Arrays.asList ( "debuild", "-us", "-uc" ) );
             processBuilder.directory ( packageFolder );
@@ -105,7 +105,7 @@ public class DebianHandler extends CommonHandler
             }
             catch ( final Exception e )
             {
-                logger.warn ( "Failed to generate debian package", e );
+                logger.warn ( "Failed to generate debian package", e ); //$NON-NLS-1$
             }
 
             nodeDir.refreshLocal ( IResource.DEPTH_INFINITE, monitor );
@@ -152,16 +152,17 @@ public class DebianHandler extends CommonHandler
     {
         final Set<String> result = new HashSet<> ();
 
-        result.add ( "org.eclipse.scada" );
+        result.add ( "org.eclipse.scada" ); //$NON-NLS-1$
 
         if ( needP2 () )
         {
-            result.add ( "org.eclipse.scada.p2" );
+            result.add ( "org.eclipse.scada.p2" ); //$NON-NLS-1$
         }
 
+        result.add ( "org.eclipse.scada.deploy.p2-incubation" ); //$NON-NLS-1$
         result.addAll ( this.deploy.getAdditionalDependencies () );
 
-        return StringHelper.join ( result, ", " );
+        return StringHelper.join ( result, ", " ); //$NON-NLS-1$
     }
 
     private String createPostInst ( final Set<String> driverName )
@@ -201,12 +202,14 @@ public class DebianHandler extends CommonHandler
         {
             sb.append ( String.format ( "%s (%s) stable; urgency=low\n", packageName, entry.getVersion () ) );
             sb.append ( '\n' );
-            sb.append ( "  * Initial release.\n" );
+            sb.append ( entry.getDescription () );
             sb.append ( '\n' );
+            sb.append ( '\n' ); // additional empty line
 
-            final Formatter f = new Formatter ( sb, Locale.ENGLISH );
-            f.format ( " -- %1$s <%2$s>  %3$ta, %3$te %3$tb %3$tY %3$tT %3$tz", entry.getAuthor ().getName (), entry.getAuthor ().getEmail (), entry.getDate () );
-            f.close ();
+            try ( Formatter f = new Formatter ( sb, Locale.ENGLISH ) )
+            {
+                f.format ( " -- %1$s <%2$s>  %3$ta, %3$te %3$tb %3$tY %3$tT %3$tz", entry.getAuthor ().getName (), entry.getAuthor ().getEmail (), entry.getDate () );
+            }
 
             sb.append ( "\n\n" );
         }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -101,6 +101,24 @@ public interface DeploymentFactory extends EFactory
      * @generated
      */
     SimpleNodeMappingEntry createSimpleNodeMappingEntry ();
+
+    /**
+     * Returns a new object of class '<em>Msi Deployment Mechanism</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Msi Deployment Mechanism</em>'.
+     * @generated
+     */
+    MsiDeploymentMechanism createMsiDeploymentMechanism ();
+
+    /**
+     * Returns a new object of class '<em>P2 Platform</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>P2 Platform</em>'.
+     * @generated
+     */
+    P2Platform createP2Platform ();
 
     /**
      * Returns the package supported by this factory.

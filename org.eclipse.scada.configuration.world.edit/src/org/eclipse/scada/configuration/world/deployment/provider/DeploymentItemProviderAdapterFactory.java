@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -284,11 +284,62 @@ public class DeploymentItemProviderAdapterFactory extends
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected MsiDeploymentMechanismItemProvider msiDeploymentMechanismItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createMsiDeploymentMechanismAdapter ()
+    {
+        if ( msiDeploymentMechanismItemProvider == null )
+        {
+            msiDeploymentMechanismItemProvider = new MsiDeploymentMechanismItemProvider ( this );
+        }
+
+        return msiDeploymentMechanismItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.world.deployment.P2Platform} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected P2PlatformItemProvider p2PlatformItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.world.deployment.P2Platform}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createP2PlatformAdapter ()
+    {
+        if ( p2PlatformItemProvider == null )
+        {
+            p2PlatformItemProvider = new P2PlatformItemProvider ( this );
+        }
+
+        return p2PlatformItemProvider;
+    }
+
+    /**
      * This returns the root adapter factory that contains this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ComposeableAdapterFactory getRootAdapterFactory ()
     {
         return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory ();
@@ -300,6 +351,7 @@ public class DeploymentItemProviderAdapterFactory extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setParentAdapterFactory (
             ComposedAdapterFactory parentAdapterFactory )
     {
@@ -355,6 +407,7 @@ public class DeploymentItemProviderAdapterFactory extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void addListener ( INotifyChangedListener notifyChangedListener )
     {
         changeNotifier.addListener ( notifyChangedListener );
@@ -366,6 +419,7 @@ public class DeploymentItemProviderAdapterFactory extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void removeListener ( INotifyChangedListener notifyChangedListener )
     {
         changeNotifier.removeListener ( notifyChangedListener );
@@ -377,6 +431,7 @@ public class DeploymentItemProviderAdapterFactory extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void fireNotifyChanged ( Notification notification )
     {
         changeNotifier.fireNotifyChanged ( notification );
@@ -393,6 +448,7 @@ public class DeploymentItemProviderAdapterFactory extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void dispose ()
     {
         if ( debianDeploymentMechanismItemProvider != null )
@@ -411,6 +467,10 @@ public class DeploymentItemProviderAdapterFactory extends
             expressionNodeMappingEntryItemProvider.dispose ();
         if ( simpleNodeMappingEntryItemProvider != null )
             simpleNodeMappingEntryItemProvider.dispose ();
+        if ( msiDeploymentMechanismItemProvider != null )
+            msiDeploymentMechanismItemProvider.dispose ();
+        if ( p2PlatformItemProvider != null )
+            p2PlatformItemProvider.dispose ();
     }
 
 }

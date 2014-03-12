@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,13 +13,26 @@ package org.eclipse.scada.configuration.world.deployment.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.scada.configuration.world.deployment.*;
+import org.eclipse.scada.configuration.world.deployment.Author;
+import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
+import org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DeploymentInformation;
+import org.eclipse.scada.configuration.world.deployment.DeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
+import org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.NodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.NodeMappings;
+import org.eclipse.scada.configuration.world.deployment.P2Platform;
+import org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
- * It supports the call {@link #doSwitch(EObject) doSwitch(object)}
- * to invoke the <code>caseXXX</code> method for each class of the model,
+ * It supports the call {@link #doSwitch(EObject) doSwitch(object)} to invoke
+ * the <code>caseXXX</code> method for each class of the model,
  * starting with the actual class of the object
  * and proceeding up the inheritance hierarchy
  * until a non-null result is returned,
@@ -176,6 +189,24 @@ public class DeploymentSwitch<T> extends Switch<T>
                 T result = caseSimpleNodeMappingEntry ( simpleNodeMappingEntry );
                 if ( result == null )
                     result = caseNodeMappingEntry ( simpleNodeMappingEntry );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case DeploymentPackage.MSI_DEPLOYMENT_MECHANISM:
+            {
+                MsiDeploymentMechanism msiDeploymentMechanism = (MsiDeploymentMechanism)theEObject;
+                T result = caseMsiDeploymentMechanism ( msiDeploymentMechanism );
+                if ( result == null )
+                    result = caseDeploymentMechanism ( msiDeploymentMechanism );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case DeploymentPackage.P2_PLATFORM:
+            {
+                P2Platform p2Platform = (P2Platform)theEObject;
+                T result = caseP2Platform ( p2Platform );
                 if ( result == null )
                     result = defaultCase ( theEObject );
                 return result;
@@ -362,10 +393,43 @@ public class DeploymentSwitch<T> extends Switch<T>
     }
 
     /**
+     * Returns the result of interpreting the object as an instance of '<em>Msi Deployment Mechanism</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Msi Deployment Mechanism</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseMsiDeploymentMechanism ( MsiDeploymentMechanism object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>P2 Platform</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>P2 Platform</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseP2Platform ( P2Platform object )
+    {
+        return null;
+    }
+
+    /**
      * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
-     * returning a non-null result will terminate the switch, but this is the last case anyway.
+     * returning a non-null result will terminate the switch, but this is the
+     * last case anyway.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
      * @return the result of interpreting the object as an instance of '<em>EObject</em>'.

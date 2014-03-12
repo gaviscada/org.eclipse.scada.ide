@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,14 +11,24 @@
 package org.eclipse.scada.configuration.world.impl;
 
 import java.util.regex.Pattern;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.scada.configuration.world.*;
+import org.eclipse.scada.configuration.world.ApplicationNode;
+import org.eclipse.scada.configuration.world.Endpoint;
+import org.eclipse.scada.configuration.world.ExecDriver;
+import org.eclipse.scada.configuration.world.ExternalNode;
+import org.eclipse.scada.configuration.world.HandlerPriorityRule;
+import org.eclipse.scada.configuration.world.MasterHandlerPriorities;
+import org.eclipse.scada.configuration.world.Options;
+import org.eclipse.scada.configuration.world.PasswordCredentials;
+import org.eclipse.scada.configuration.world.UsernamePasswordCredentials;
+import org.eclipse.scada.configuration.world.World;
+import org.eclipse.scada.configuration.world.WorldFactory;
+import org.eclipse.scada.configuration.world.WorldPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -220,6 +230,7 @@ public class WorldFactoryImpl extends EFactoryImpl implements WorldFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public UsernamePasswordCredentials createUsernamePasswordCredentials ()
     {
         UsernamePasswordCredentialsImpl usernamePasswordCredentials = new UsernamePasswordCredentialsImpl ();
@@ -231,6 +242,7 @@ public class WorldFactoryImpl extends EFactoryImpl implements WorldFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public PasswordCredentials createPasswordCredentials ()
     {
         PasswordCredentialsImpl passwordCredentials = new PasswordCredentialsImpl ();
@@ -242,6 +254,7 @@ public class WorldFactoryImpl extends EFactoryImpl implements WorldFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ExternalNode createExternalNode ()
     {
         ExternalNodeImpl externalNode = new ExternalNodeImpl ();
@@ -265,8 +278,7 @@ public class WorldFactoryImpl extends EFactoryImpl implements WorldFactory
      * <!-- end-user-doc -->
      * @generated
      */
-    public String convertPatternToString ( EDataType eDataType,
-            Object instanceValue )
+    public String convertPatternToString ( EDataType eDataType, Object instanceValue )
     {
         return super.convertToString ( eDataType, instanceValue );
     }
@@ -276,6 +288,7 @@ public class WorldFactoryImpl extends EFactoryImpl implements WorldFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public WorldPackage getWorldPackage ()
     {
         return (WorldPackage)getEPackage ();
