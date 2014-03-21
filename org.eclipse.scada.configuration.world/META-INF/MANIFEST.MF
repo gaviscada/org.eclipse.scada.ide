@@ -1,70 +1,30 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.configuration.world;uses:="org.eclip
- se.emf.ecore,org.eclipse.emf.common.util,org.eclipse.scada.da.exec.co
- nfiguration";version="0.1.0",org.eclipse.scada.configuration.world.de
- ployment;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util";ve
- rsion="0.1.0",org.eclipse.scada.configuration.world.deployment.impl;u
- ses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclip
- se.scada.configuration.world.deployment,  org.eclipse.emf.ecore.impl,
-   org.eclipse.emf.common.notify";version="0.1.0",org.eclipse.scada.co
- nfiguration.world.deployment.util;uses:="org.eclipse.emf.ecore.resour
- ce,  org.eclipse.emf.ecore.xmi.impl,  org.eclipse.emf.ecore.util,  or
- g.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  org.eclips
- e.scada.configuration.world.deployment,  org.eclipse.emf.common.util,
-   org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.resource.impl
- ";version="0.1.0",org.eclipse.scada.configuration.world.impl;uses:="o
- rg.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.scad
- a.da.exec.configuration,  org.eclipse.scada.configuration.world,  org
- .eclipse.emf.common.notify,  org.eclipse.emf.ecore.impl";version="0.1
- .0",org.eclipse.scada.configuration.world.osgi;uses:="org.eclipse.sca
- da.configuration.world.osgi.profile,  org.eclipse.emf.ecore,  org.ecl
- ipse.emf.common.util,  org.eclipse.scada.core,  org.eclipse.scada.ae.
- data,  org.eclipse.scada.configuration.world,  org.eclipse.scada.conf
- iguration.security";version="0.1.0",org.eclipse.scada.configuration.w
- orld.osgi.impl;uses:="org.eclipse.scada.configuration.world.osgi.prof
- ile,  org.eclipse.scada.configuration.world.osgi,  org.eclipse.emf.ec
- ore,  org.eclipse.emf.common.util,  org.eclipse.scada.core,  org.ecli
- pse.scada.ae.data,  org.eclipse.scada.configuration.world,  org.eclip
- se.emf.common.notify,  org.eclipse.emf.ecore.impl,  org.eclipse.scada
- .configuration.security";version="0.1.0",org.eclipse.scada.configurat
- ion.world.osgi.profile;uses:="org.eclipse.emf.ecore,org.eclipse.emf.c
- ommon.util";version="0.1.0",org.eclipse.scada.configuration.world.osg
- i.profile.impl;uses:="org.eclipse.scada.configuration.world.osgi.prof
- ile,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclip
- se.emf.ecore.impl,  org.eclipse.emf.common.notify";version="0.1.0",or
- g.eclipse.scada.configuration.world.osgi.profile.util;uses:="org.ecli
- pse.emf.ecore.resource,  org.eclipse.emf.ecore.xmi.impl,  org.eclipse
- .emf.common.util,  org.eclipse.emf.ecore.xmi.util,  org.eclipse.emf.e
- core.resource.impl,  org.eclipse.emf.common.notify,  org.eclipse.scad
- a.configuration.world.osgi.profile,  org.eclipse.emf.ecore.util,  org
- .eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl";version="0.1
- .0",org.eclipse.scada.configuration.world.osgi.util;uses:="org.eclips
- e.emf.ecore.xmi.impl,  org.eclipse.emf.ecore.resource,  org.eclipse.e
- mf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.scada.configurati
- on.world.osgi,  org.eclipse.emf.common.notify.impl,  org.eclipse.emf.
- common.util,  org.eclipse.scada.configuration.world,  org.eclipse.emf
- .common.notify,  org.eclipse.emf.ecore.resource.impl";version="0.1.0"
- ,org.eclipse.scada.configuration.world.util;uses:="org.eclipse.emf.ec
- ore.xmi.impl,  org.eclipse.emf.ecore.resource,  org.eclipse.emf.ecore
- .util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  
- org.eclipse.emf.common.util,  org.eclipse.scada.configuration.world, 
-  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.resource.impl"
- ;version="0.1.0"
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Bundle-Name: %pluginName
-Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
- ity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecli
- pse.scada.da.server.exec;bundle-version="0.1.0",org.eclipse.scada.con
- figuration.security;visibility:=reexport;bundle-version="0.1.0",org.e
- clipse.scada.configuration.utils;bundle-version="0.1.0"
-Bundle-Vendor: %providerName
-Bundle-Version: 0.1.0.v20140306-1222
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.scada.ae.data;version="0.1.0",org.eclipse.
- scada.core;version="0.1.0"
-Bundle-SymbolicName: org.eclipse.scada.configuration.world;singleton:=
- true
-
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.scada.configuration.world;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.scada.configuration.world;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util,org.eclipse.scada.da.exec.configuration";version="0.1.0",
+ org.eclipse.scada.configuration.world.deployment;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util";version="0.1.0",
+ org.eclipse.scada.configuration.world.deployment.impl;uses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.scada.configuration.world.deployment,  org.eclipse.emf.ecore.impl,  org.eclipse.emf.common.notify";version="0.1.0",
+ org.eclipse.scada.configuration.world.deployment.util;uses:="org.eclipse.emf.ecore.resource,  org.eclipse.emf.ecore.xmi.impl,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  org.eclipse.scada.configuration.world.deployment,  org.eclipse.emf.common.util,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.resource.impl";version="0.1.0",
+ org.eclipse.scada.configuration.world.impl;uses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.scada.da.exec.configuration,  org.eclipse.scada.configuration.world,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.impl";version="0.1.0",
+ org.eclipse.scada.configuration.world.osgi;uses:="org.eclipse.scada.configuration.world.osgi.profile,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.scada.core,  org.eclipse.scada.ae.data,  org.eclipse.scada.configuration.world,  org.eclipse.scada.configuration.security";version="0.1.0",
+ org.eclipse.scada.configuration.world.osgi.impl;uses:="org.eclipse.scada.configuration.world.osgi.profile,  org.eclipse.scada.configuration.world.osgi,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.scada.core,  org.eclipse.scada.ae.data,  org.eclipse.scada.configuration.world,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.impl,  org.eclipse.scada.configuration.security";version="0.1.0",
+ org.eclipse.scada.configuration.world.osgi.profile;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util";version="0.1.0",
+ org.eclipse.scada.configuration.world.osgi.profile.impl;uses:="org.eclipse.scada.configuration.world.osgi.profile,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.emf.ecore.impl,  org.eclipse.emf.common.notify";version="0.1.0",
+ org.eclipse.scada.configuration.world.osgi.profile.util;uses:="org.eclipse.emf.ecore.resource,  org.eclipse.emf.ecore.xmi.impl,  org.eclipse.emf.common.util,  org.eclipse.emf.ecore.xmi.util,  org.eclipse.emf.ecore.resource.impl,  org.eclipse.emf.common.notify,  org.eclipse.scada.configuration.world.osgi.profile,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl";version="0.1.0",
+ org.eclipse.scada.configuration.world.osgi.util;uses:="org.eclipse.emf.ecore.xmi.impl,  org.eclipse.emf.ecore.resource,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration.world.osgi,  org.eclipse.emf.common.notify.impl,  org.eclipse.emf.common.util,  org.eclipse.scada.configuration.world,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.resource.impl";version="0.1.0",
+ org.eclipse.scada.configuration.world.util;uses:="org.eclipse.emf.ecore.xmi.impl,  org.eclipse.emf.ecore.resource,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  org.eclipse.emf.common.util,  org.eclipse.scada.configuration.world,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.resource.impl";version="0.1.0"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.scada.da.server.exec;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.security;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.utils;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.scada.ae.data;version="0.1.0",
+ org.eclipse.scada.core;version="0.1.0"

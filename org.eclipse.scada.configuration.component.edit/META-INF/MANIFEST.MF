@@ -1,36 +1,27 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
- on.component;visibility:=reexport,org.eclipse.emf.edit;visibility:=re
- export,org.eclipse.scada.configuration.world;visibility:=reexport,org
- .eclipse.scada.configuration.world.edit;visibility:=reexport,org.ecli
- pse.scada.da.server.exec;visibility:=reexport,org.eclipse.scada.da.se
- rver.exec.edit;visibility:=reexport,org.eclipse.scada.configuration.g
- lobalization;visibility:=reexport,org.eclipse.scada.configuration.glo
- balization.edit;visibility:=reexport,org.eclipse.scada.configuration.
- infrastructure;visibility:=reexport,org.eclipse.scada.configuration.i
- nfrastructure.edit;visibility:=reexport,org.eclipse.scada.configurati
- on.item;visibility:=reexport,org.eclipse.scada.configuration.item.edi
- t;visibility:=reexport,org.eclipse.scada.configuration.security;visib
- ility:=reexport,org.eclipse.scada.configuration.security.edit;visibil
- ity:=reexport
-Export-Package: org.eclipse.scada.configuration.component.provider;use
- s:="org.eclipse.emf.edit.command,  org.eclipse.scada.configuration.wo
- rld.osgi,  org.eclipse.emf.common.util,  org.eclipse.emf.common.notif
- y,  org.eclipse.scada.configuration.world.osgi.provider,  org.eclipse
- .scada.configuration.world.osgi.util,  org.eclipse.emf.ecore,  org.ec
- lipse.scada.configuration.component.util,  org.eclipse.emf.common,  o
- rg.eclipse.emf.edit.provider,  org.eclipse.emf.edit.domain";version="
- 0.1.0"
-Bundle-Vendor: %providerName
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140220-1122
-Bundle-Localization: plugin
-Bundle-Name: %pluginName
-Bundle-Activator: org.eclipse.scada.configuration.component.provider.C
- omponentEditPlugin$Implementation
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.eclipse.scada.configuration.component.edit;si
- ngleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.scada.configuration.component.edit;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.scada.configuration.component.provider.ComponentEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.scada.configuration.component.provider;uses:="org.eclipse.emf.edit.command,  org.eclipse.scada.configuration.world.osgi,  org.eclipse.emf.common.util,  org.eclipse.emf.common.notify,  org.eclipse.scada.configuration.world.osgi.provider,  org.eclipse.scada.configuration.world.osgi.util,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration.component.util,  org.eclipse.emf.common,  org.eclipse.emf.edit.provider,  org.eclipse.emf.edit.domain";version="0.1.0"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scada.configuration.component;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.eclipse.scada.configuration.world;visibility:=reexport,
+ org.eclipse.scada.configuration.world.edit;visibility:=reexport,
+ org.eclipse.scada.da.server.exec;visibility:=reexport,
+ org.eclipse.scada.da.server.exec.edit;visibility:=reexport,
+ org.eclipse.scada.configuration.globalization;visibility:=reexport,
+ org.eclipse.scada.configuration.globalization.edit;visibility:=reexport,
+ org.eclipse.scada.configuration.infrastructure;visibility:=reexport,
+ org.eclipse.scada.configuration.infrastructure.edit;visibility:=reexport,
+ org.eclipse.scada.configuration.item;visibility:=reexport,
+ org.eclipse.scada.configuration.item.edit;visibility:=reexport,
+ org.eclipse.scada.configuration.security;visibility:=reexport,
+ org.eclipse.scada.configuration.security.edit;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-
+Bundle-ActivationPolicy: lazy
