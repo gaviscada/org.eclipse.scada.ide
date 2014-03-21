@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -27,7 +26,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.scada.configuration.component.ComponentFactory;
 import org.eclipse.scada.configuration.component.common.ChangeHeartbeatDetector;
 import org.eclipse.scada.configuration.component.common.CommonPackage;
@@ -96,7 +94,7 @@ public class ChangeHeartbeatDetectorItemProvider
                         false,
                         false,
                         ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_configurationPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -119,7 +117,7 @@ public class ChangeHeartbeatDetectorItemProvider
                         false,
                         false,
                         ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_configurationPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -177,8 +175,10 @@ public class ChangeHeartbeatDetectorItemProvider
     @Override
     public String getText ( Object object )
     {
-        ChangeHeartbeatDetector changeHeartbeatDetector = (ChangeHeartbeatDetector)object;
-        return getString ( "_UI_ChangeHeartbeatDetector_type" ) + " " + changeHeartbeatDetector.getTimeout (); //$NON-NLS-1$ //$NON-NLS-2$
+        String label = ( (ChangeHeartbeatDetector)object ).getShortDescription ();
+        return label == null || label.length () == 0 ?
+                getString ( "_UI_ChangeHeartbeatDetector_type" ) : //$NON-NLS-1$
+                getString ( "_UI_ChangeHeartbeatDetector_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
