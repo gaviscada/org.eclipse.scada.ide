@@ -1,33 +1,45 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.configuration.recipe.presentation;ve
- rsion="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclipse.scada.co
- nfiguration.recipe,  org.eclipse.core.runtime,  org.eclipse.emf.edit.
- ui.provider,  org.eclipse.emf.common.notify,  org.eclipse.ui.ide,  or
- g.eclipse.jface.action,  org.eclipse.emf.ecore.util,  org.eclipse.emf
- .ecore,  org.eclipse.ui.views.contentoutline,  org.eclipse.core.resou
- rces,  org.eclipse.jface.viewers,  org.eclipse.ui.dialogs,  org.eclip
- se.emf.ecore.resource,  org.eclipse.emf.common.ui.viewer,  org.eclips
- e.emf.edit.ui.action,  org.eclipse.emf.common.util,  org.eclipse.swt.
- events,  org.eclipse.ui,  org.eclipse.ui.views.properties,  org.eclip
- se.ui.part,  org.eclipse.emf.common,  org.eclipse.emf.edit.provider, 
-  org.eclipse.swt.widgets,  org.eclipse.emf.common.ui,  org.eclipse.em
- f.edit.domain"
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.scada.configuration.recipe.editor;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.scada.configuration.recipe.presentation.RecipeEditorPlugin$Implementation
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
- sibility:=reexport,org.eclipse.scada.configuration.recipe.edit;visibi
- lity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecl
- ipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui.ide;visibility:=
- reexport
-Bundle-Vendor: %providerName
-Bundle-Version: 0.1.0.v20140319-0930
-Bundle-ManifestVersion: 2
-Bundle-Activator: org.eclipse.scada.configuration.recipe.presentation.
- RecipeEditorPlugin$Implementation
+Export-Package: org.eclipse.scada.configuration.recipe.presentation;version="0.1.0";
+  uses:="org.eclipse.jface.wizard,
+   org.eclipse.scada.configuration.recipe,
+   org.eclipse.core.runtime,
+   org.eclipse.emf.edit.ui.provider,
+   org.eclipse.emf.common.notify,
+   org.eclipse.ui.ide,
+   org.eclipse.jface.action,
+   org.eclipse.emf.ecore.util,
+   org.eclipse.emf.ecore,
+   org.eclipse.ui.views.contentoutline,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.dialogs,
+   org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.common.ui.viewer,
+   org.eclipse.emf.edit.ui.action,
+   org.eclipse.emf.common.util,
+   org.eclipse.swt.events,
+   org.eclipse.ui,
+   org.eclipse.ui.views.properties,
+   org.eclipse.ui.part,
+   org.eclipse.emf.common,
+   org.eclipse.emf.edit.provider,
+   org.eclipse.swt.widgets,
+   org.eclipse.emf.common.ui,
+   org.eclipse.emf.edit.domain"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.scada.configuration.recipe.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport
+Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.scada.ui.databinding
-Bundle-SymbolicName: org.eclipse.scada.configuration.recipe.editor;sin
- gleton:=true
-

@@ -1,20 +1,29 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.configuration.utils;version="0.1.0";
-  uses:="org.eclipse.core.runtime,  org.eclipse.emf.ecore,  org.eclips
- e.emf.common.notify.impl,  org.eclipse.emf.common.util,  org.osgi.fra
- mework,  org.eclipse.emf.common.notify"
-Bundle-Vendor: Eclipse SCADA Project
-Bundle-Version: 0.1.0.v20140321-1022
-Bundle-Name: Configuration Utils (Incubation) (Incubation)
 Bundle-ManifestVersion: 2
-Import-Package: javax.inject;version="1.0.0",org.eclipse.core.resource
- s,org.eclipse.core.runtime;version="3.4.0",org.eclipse.emf.common.not
- ify,org.eclipse.emf.common.notify.impl,org.eclipse.emf.common.util,or
- g.eclipse.emf.ecore,org.eclipse.emf.ecore.impl,org.eclipse.emf.ecore.
- resource,org.eclipse.emf.ecore.resource.impl,org.eclipse.emf.ecore.ut
- il,org.eclipse.scada.configuration.recipe.lib;version="0.1.0",org.ecl
- ipse.scada.utils.inject;version="0.1.0",org.osgi.framework;version="1
- .7.0",org.slf4j;version="1.7.2"
+Bundle-Name: Configuration Utils (Incubation) (Incubation)
 Bundle-SymbolicName: org.eclipse.scada.configuration.utils
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Eclipse SCADA Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-
+Export-Package: org.eclipse.scada.configuration.utils;version="0.1.0";
+  uses:="org.eclipse.core.runtime,
+   org.eclipse.emf.ecore,
+   org.eclipse.emf.common.notify.impl,
+   org.eclipse.emf.common.util,
+   org.osgi.framework,
+   org.eclipse.emf.common.notify"
+Import-Package: javax.inject;version="1.0.0",
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.impl,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.scada.configuration.recipe.lib;version="0.1.0",
+ org.eclipse.scada.utils.inject;version="0.1.0",
+ org.osgi.framework;version="1.7.0",
+ org.slf4j;version="1.7.2"

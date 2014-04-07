@@ -1,67 +1,118 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
- sibility:=reexport,org.eclipse.scada.configuration.world.edit;visibil
- ity:=reexport;bundle-version="0.1.0",org.eclipse.emf.ecore.xmi;visibi
- lity:=reexport,org.eclipse.emf.edit.ui;visibility:=reexport,org.eclip
- se.ui.ide;visibility:=reexport,org.eclipse.scada.da.server.exec.edit;
- visibility:=reexport;bundle-version="0.1.0",org.eclipse.scada.configu
- ration.security.edit;visibility:=reexport;bundle-version="0.1.0"
-Export-Package: org.eclipse.scada.configuration.world.deployment.prese
- ntation;version="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclips
- e.core.runtime,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.c
- ommon.notify,  org.eclipse.ui.ide,  org.eclipse.jface.action,  org.ec
- lipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.ui.views.c
- ontentoutline,  org.eclipse.core.resources,  org.eclipse.jface.viewer
- s,  org.eclipse.ui.dialogs,  org.eclipse.emf.ecore.resource,  org.ecl
- ipse.emf.common.ui.viewer,  org.eclipse.emf.edit.ui.action,  org.ecli
- pse.scada.configuration.world.deployment,  org.eclipse.emf.common.uti
- l,  org.eclipse.ui,  org.eclipse.swt.events,  org.eclipse.ui.views.pr
- operties,  org.eclipse.ui.part,  org.eclipse.emf.edit.provider,  org.
- eclipse.swt.widgets,  org.eclipse.emf.edit.domain,  org.eclipse.emf.c
- ommon.ui",org.eclipse.scada.configuration.world.osgi.presentation;ver
- sion="0.1.0"; uses:="org.eclipse.emf.ecore.resource,  org.eclipse.emf
- .common.ui.viewer,  org.eclipse.core.runtime,  org.eclipse.emf.edit.u
- i.action,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.common.
- util,  org.eclipse.ui,  org.eclipse.ui.views.properties,  org.eclipse
- .ui.part,  org.eclipse.emf.common.notify,  org.eclipse.ui.ide,  org.e
- clipse.jface.action,  org.eclipse.emf.ecore.util,  org.eclipse.ui.vie
- ws.contentoutline,  org.eclipse.core.resources,  org.eclipse.jface.vi
- ewers,  org.eclipse.emf.edit.provider,  org.eclipse.emf.edit.domain, 
-  org.eclipse.emf.common.ui",org.eclipse.scada.configuration.world.osg
- i.profile.presentation;version="0.1.0"; uses:="org.eclipse.jface.wiza
- rd,  org.eclipse.core.runtime,  org.eclipse.emf.edit.ui.provider,  or
- g.eclipse.emf.common.notify,  org.eclipse.jface.action,  org.eclipse.
- ui.ide,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.ecl
- ipse.ui.views.contentoutline,  org.eclipse.core.resources,  org.eclip
- se.jface.viewers,  org.eclipse.ui.dialogs,  org.eclipse.emf.ecore.res
- ource,  org.eclipse.emf.common.ui.viewer,  org.eclipse.emf.edit.ui.ac
- tion,  org.eclipse.emf.common.util,  org.eclipse.swt.events,  org.ecl
- ipse.ui,  org.eclipse.ui.views.properties,  org.eclipse.ui.part,  org
- .eclipse.scada.configuration.world.osgi.profile,  org.eclipse.emf.edi
- t.provider,  org.eclipse.swt.widgets,  org.eclipse.emf.common.ui,  or
- g.eclipse.emf.edit.domain",org.eclipse.scada.configuration.world.pres
- entation;version="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclip
- se.core.runtime,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.
- common.notify,  org.eclipse.jface.action,  org.eclipse.ui.ide,  org.e
- clipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.ui.views.
- contentoutline,  org.eclipse.core.resources,  org.eclipse.jface.viewe
- rs,  org.eclipse.ui.dialogs,  org.eclipse.emf.ecore.resource,  org.ec
- lipse.emf.common.ui.viewer,  org.eclipse.emf.edit.ui.action,  org.ecl
- ipse.emf.common.util,  org.eclipse.swt.events,  org.eclipse.ui,  org.
- eclipse.ui.views.properties,  org.eclipse.scada.configuration.world, 
-  org.eclipse.ui.part,  org.eclipse.emf.common,  org.eclipse.emf.edit.
- provider,  org.eclipse.swt.widgets,  org.eclipse.emf.common.ui,  org.
- eclipse.emf.edit.domain"
-Bundle-Vendor: %providerName
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140321-1022
-Bundle-Localization: plugin
-Bundle-Name: %pluginName
-Bundle-Activator: org.eclipse.scada.configuration.world.presentation.W
- orldEditorPlugin$Implementation
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.eclipse.scada.configuration.world.editor;sing
- leton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.scada.configuration.world.editor;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.eclipse.scada.configuration.world.presentation.WorldEditorPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.scada.configuration.world.deployment.presentation;version="0.1.0";
+  uses:="org.eclipse.jface.wizard,
+   org.eclipse.core.runtime,
+   org.eclipse.emf.edit.ui.provider,
+   org.eclipse.emf.common.notify,
+   org.eclipse.ui.ide,
+   org.eclipse.jface.action,
+   org.eclipse.emf.ecore.util,
+   org.eclipse.emf.ecore,
+   org.eclipse.ui.views.contentoutline,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.dialogs,
+   org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.common.ui.viewer,
+   org.eclipse.emf.edit.ui.action,
+   org.eclipse.scada.configuration.world.deployment,
+   org.eclipse.emf.common.util,
+   org.eclipse.ui,
+   org.eclipse.swt.events,
+   org.eclipse.ui.views.properties,
+   org.eclipse.ui.part,
+   org.eclipse.emf.edit.provider,
+   org.eclipse.swt.widgets,
+   org.eclipse.emf.edit.domain,
+   org.eclipse.emf.common.ui",
+ org.eclipse.scada.configuration.world.osgi.presentation;version="0.1.0";
+  uses:="org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.common.ui.viewer,
+   org.eclipse.core.runtime,
+   org.eclipse.emf.edit.ui.action,
+   org.eclipse.emf.edit.ui.provider,
+   org.eclipse.emf.common.util,
+   org.eclipse.ui,
+   org.eclipse.ui.views.properties,
+   org.eclipse.ui.part,
+   org.eclipse.emf.common.notify,
+   org.eclipse.ui.ide,
+   org.eclipse.jface.action,
+   org.eclipse.emf.ecore.util,
+   org.eclipse.ui.views.contentoutline,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers,
+   org.eclipse.emf.edit.provider,
+   org.eclipse.emf.edit.domain,
+   org.eclipse.emf.common.ui",
+ org.eclipse.scada.configuration.world.osgi.profile.presentation;version="0.1.0";
+  uses:="org.eclipse.jface.wizard,
+   org.eclipse.core.runtime,
+   org.eclipse.emf.edit.ui.provider,
+   org.eclipse.emf.common.notify,
+   org.eclipse.jface.action,
+   org.eclipse.ui.ide,
+   org.eclipse.emf.ecore.util,
+   org.eclipse.emf.ecore,
+   org.eclipse.ui.views.contentoutline,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.dialogs,
+   org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.common.ui.viewer,
+   org.eclipse.emf.edit.ui.action,
+   org.eclipse.emf.common.util,
+   org.eclipse.swt.events,
+   org.eclipse.ui,
+   org.eclipse.ui.views.properties,
+   org.eclipse.ui.part,
+   org.eclipse.scada.configuration.world.osgi.profile,
+   org.eclipse.emf.edit.provider,
+   org.eclipse.swt.widgets,
+   org.eclipse.emf.common.ui,
+   org.eclipse.emf.edit.domain",
+ org.eclipse.scada.configuration.world.presentation;version="0.1.0";
+  uses:="org.eclipse.jface.wizard,
+   org.eclipse.core.runtime,
+   org.eclipse.emf.edit.ui.provider,
+   org.eclipse.emf.common.notify,
+   org.eclipse.jface.action,
+   org.eclipse.ui.ide,
+   org.eclipse.emf.ecore.util,
+   org.eclipse.emf.ecore,
+   org.eclipse.ui.views.contentoutline,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.dialogs,
+   org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.common.ui.viewer,
+   org.eclipse.emf.edit.ui.action,
+   org.eclipse.emf.common.util,
+   org.eclipse.swt.events,
+   org.eclipse.ui,
+   org.eclipse.ui.views.properties,
+   org.eclipse.scada.configuration.world,
+   org.eclipse.ui.part,
+   org.eclipse.emf.common,
+   org.eclipse.emf.edit.provider,
+   org.eclipse.swt.widgets,
+   org.eclipse.emf.common.ui,
+   org.eclipse.emf.edit.domain"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.scada.configuration.world.edit;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport,
+ org.eclipse.scada.da.server.exec.edit;visibility:=reexport;bundle-version="0.1.0",
+ org.eclipse.scada.configuration.security.edit;visibility:=reexport;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-
+Bundle-ActivationPolicy: lazy
