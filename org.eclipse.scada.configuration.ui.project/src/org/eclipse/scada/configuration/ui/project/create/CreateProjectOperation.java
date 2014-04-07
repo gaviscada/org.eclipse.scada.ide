@@ -134,10 +134,9 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
 
         final CustomizationPipeline pipeline = createPipeline ( new Path ( "templates/default.icm_js" ) ); //$NON-NLS-1$
         final Selector archiveSelector = createSelector ( new Path ( "templates/archiveSelector.isel_js" ) ); //$NON-NLS-1$
-        final Selector globalizeSelector = createSelector ( new Path ( "templates/globalize.isel_js" ) ); //$NON-NLS-1$
 
         final World world = createInfrastructure ( rs, security, masterProfile, hdProfile );
-        final ComponentWorld system = createComponents ( world, pipeline, archiveSelector, globalizeSelector );
+        final ComponentWorld system = createComponents ( world, pipeline, archiveSelector );
         final DeploymentInformation di = createDeploymentInformation ();
         final P2Platform targetPlatform = createTargetPlatformInformation ( TargetPlatforms.KEPLER );
 
@@ -153,7 +152,6 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
 
         save ( rs, base, "customization/default.icm_js", pipeline ); //$NON-NLS-1$
         save ( rs, base, "customization/archiveSelector.isel_js", archiveSelector ); //$NON-NLS-1$
-        save ( rs, base, "customization/globalize.isel_js", globalizeSelector ); //$NON-NLS-1$
 
         save ( rs, base, "world.esim", world ); //$NON-NLS-1$
         save ( rs, base, "world.escm", system ); //$NON-NLS-1$
@@ -314,17 +312,19 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         final UserEntry user = InfrastructureFactory.eINSTANCE.createUserEntry ();
         user.setName ( "admin" ); //$NON-NLS-1$
         user.setPassword ( "admin12" ); //$NON-NLS-1$
+        user.getRoles ().add ( "ADMIN" );
         service.getUsers ().add ( user );
 
         final UserEntry user2 = InfrastructureFactory.eINSTANCE.createUserEntry ();
         user2.setName ( this.info.getDefaultInterconnectCredentials ().getUsername () );
         user2.setPassword ( this.info.getDefaultInterconnectCredentials ().getPassword () );
+        user2.getRoles ().add ( "INTERCONNECT" );
         service.getUsers ().add ( user2 );
 
         world.getOptions ().setDefaultUserService ( service );
     }
 
-    private org.eclipse.scada.configuration.component.ComponentWorld createComponents ( final World world, final CustomizationPipeline pipeline, final Selector archiveSelector, final Selector globalizeSelector )
+    private org.eclipse.scada.configuration.component.ComponentWorld createComponents ( final World world, final CustomizationPipeline pipeline, final Selector archiveSelector )
     {
         final ComponentWorld system = ComponentFactory.eINSTANCE.createComponentWorld ();
 
@@ -372,7 +372,7 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
     {
         for ( final Driver driver : master.getDriver () )
         {
-            if ( driver.getName ().equals ( driverName ) && ( driver instanceof AbstractFactoryDriver ) )
+            if ( driver.getName ().equals ( driverName ) && driver instanceof AbstractFactoryDriver )
             {
                 return (AbstractFactoryDriver)driver;
             }
@@ -486,6 +486,7 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         final GenericScript trueScript = addSecurityScript ( cfg, "true;" ); //$NON-NLS-1$
         final GenericScript falseScript = addSecurityScript ( cfg, "false;" ); //$NON-NLS-1$
         final GenericScript hasUserScript = addSecurityScript ( cfg, "user != null;" ); //$NON-NLS-1$
+        final GenericScript hasAdminRoleScript = addSecurityScript ( cfg, "user != null && user.hasRole ( \"ADMIN\" );" ); //$NON-NLS-1$
 
         // logon rule
         final LogonRule logonRule = SecurityFactory.eINSTANCE.createLogonRule ();
@@ -494,11 +495,11 @@ public class CreateProjectOperation extends WorkspaceModifyOperation
         logonRule.setTypeFilter ( Pattern.compile ( "SESSION" ) ); //$NON-NLS-1$
         cfg.getRules ().add ( logonRule );
 
-        addScriptRule ( cfg, "allow.logon", null, "CONNECT", "SESSION", trueScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$
-        addScriptRule ( cfg, "allow.operator.session", "operator", "PRIV", "SESSION", hasUserScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$
-        addScriptRule ( cfg, "reject.operator.session", "operator", "PRIV", "SESSION", falseScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$
-        addScriptRule ( cfg, "reject.all.session", null, "PRIV", "SESSION", falseScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$
-        addScriptRule ( cfg, "allow.all", null, null, null, hasUserScript ); //$NON-NLS-1$  
+        addScriptRule ( cfg, "allow.logon", null, "CONNECT", "SESSION", trueScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$ 
+        addScriptRule ( cfg, "allow.operator.session", "operator", "PRIV", "SESSION", hasUserScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$ //$NON-NLS-4$
+        addScriptRule ( cfg, "allow.admin.session", "admin", "PRIV", "SESSION", hasAdminRoleScript ); //$NON-NLS-1$  //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+        addScriptRule ( cfg, "reject.all.session", null, "PRIV", "SESSION", falseScript ); //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$ 
+        addScriptRule ( cfg, "allow.all", null, null, null, hasUserScript ); //$NON-NLS-1$
 
         return cfg;
     }
