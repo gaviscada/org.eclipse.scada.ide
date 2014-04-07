@@ -1,31 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/org.eclipse.scada.configuration_0.1.0.qualifier.jar" id="org.eclipse.scada.configuration" version="0.1.0.qualifier">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><site>
+   <feature id="org.eclipse.scada.configuration" url="features/org.eclipse.scada.configuration_0.1.0.v20140407-1215.jar" version="0.1.0.v20140407-1215">
       <category name="org.eclipse.scada.configuration.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.configuration.sdk_0.1.0.qualifier.jar" id="org.eclipse.scada.configuration.sdk" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.configuration.sdk" url="features/org.eclipse.scada.configuration.sdk_0.1.0.v20140407-1215.jar" version="0.1.0.v20140407-1215">
       <category name="org.eclipse.scada.configuration.sdk.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.ide.protocol.ngp_0.1.0.qualifier.jar" id="org.eclipse.scada.ide.protocol.ngp" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.ide.protocol.ngp" url="features/org.eclipse.scada.ide.protocol.ngp_0.1.0.v20140407-1215.jar" version="0.1.0.v20140407-1215">
       <category name="org.eclipse.scada.configuration.sdk.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.ide.da.server.ui_0.1.0.qualifier.jar" id="org.eclipse.scada.ide.da.server.ui" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.ide.da.server.ui" url="features/org.eclipse.scada.ide.da.server.ui_0.1.0.v20140407-1215.jar" version="0.1.0.v20140407-1215">
       <category name="org.eclipse.scada.configuration.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.configuration.doc_0.1.0.qualifier.jar" id="org.eclipse.scada.configuration.doc" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.configuration.doc" url="features/org.eclipse.scada.configuration.doc_0.1.0.v20140407-1215.jar" version="0.1.0.v20140407-1215">
       <category name="org.eclipse.scada.configuration.category"/>
    </feature>
-   <feature url="features/org.eclipse.scada.ide_0.1.0.qualifier.jar" id="org.eclipse.scada.ide" version="0.1.0.qualifier">
+   <feature id="org.eclipse.scada.ide" url="features/org.eclipse.scada.ide_0.1.0.v20140407-1215.jar" version="0.1.0.v20140407-1215">
       <category name="org.eclipse.scada.configuration.category"/>
    </feature>
-   <category-def name="org.eclipse.scada.configuration.category" label="Eclipse SCADA Configuration (Incubation)">
+   <category-def label="Eclipse SCADA Configuration (Incubation)" name="org.eclipse.scada.configuration.category">
       <description>
          The Eclipse SCADA IDE Configuration System Components.
 
 Install this if you want to creation configuration projects for using Eclipse SCADA setups.
       </description>
    </category-def>
-   <category-def name="org.eclipse.scada.configuration.sdk.category" label="Eclipse SCADA IDE Development">
+   <category-def label="Eclipse SCADA IDE Development" name="org.eclipse.scada.configuration.sdk.category">
       <description>
          The SDK and additional development features for the IDE based configuration system.
       </description>
