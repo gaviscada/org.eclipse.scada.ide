@@ -1,22 +1,22 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Exec Component Generator (Incubation)
-Bundle-SymbolicName: org.eclipse.scada.configuration.component.exec.generator;singleton:=true
-Bundle-Version: 0.1.0.qualifier
+Require-Bundle: org.eclipse.equinox.registry,org.eclipse.emf.common,or
+ g.eclipse.emf.ecore;bundle-version="2.9.0"
 Bundle-Vendor: Eclipse SCADA Project
-Require-Bundle: org.eclipse.equinox.registry,
- org.eclipse.emf.common,
- org.eclipse.emf.ecore;bundle-version="2.9.0"
+Bundle-Version: 0.1.0.v20140430-1526
+Bundle-Name: Exec Component Generator (Incubation)
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.emf.validation,org.eclipse.scada.configura
+ tion.component;version="0.1.0",org.eclipse.scada.configuration.compon
+ ent.exec;version="0.1.0",org.eclipse.scada.configuration.component.ge
+ nerator;version="0.1.0",org.eclipse.scada.configuration.component.lib
+ .create;version="0.1.0",org.eclipse.scada.configuration.generator;ver
+ sion="0.1.0",org.eclipse.scada.configuration.generator.text;version="
+ 0.1.0",org.eclipse.scada.configuration.infrastructure;version="0.1.0"
+ ,org.eclipse.scada.configuration.infrastructure.lib;version="0.1.0",o
+ rg.eclipse.scada.configuration.world;version="0.1.0",org.eclipse.scad
+ a.configuration.world.osgi;version="0.1.0",org.eclipse.scada.da.exec.
+ configuration;version="0.1.0"
+Bundle-SymbolicName: org.eclipse.scada.configuration.component.exec.ge
+ nerator;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: org.eclipse.emf.validation,
- org.eclipse.scada.configuration.component;version="0.1.0",
- org.eclipse.scada.configuration.component.exec;version="0.1.0",
- org.eclipse.scada.configuration.component.generator;version="0.1.0",
- org.eclipse.scada.configuration.component.lib.create;version="0.1.0",
- org.eclipse.scada.configuration.generator;version="0.1.0",
- org.eclipse.scada.configuration.generator.text;version="0.1.0",
- org.eclipse.scada.configuration.infrastructure;version="0.1.0",
- org.eclipse.scada.configuration.infrastructure.lib;version="0.1.0",
- org.eclipse.scada.configuration.world;version="0.1.0",
- org.eclipse.scada.configuration.world.osgi;version="0.1.0",
- org.eclipse.scada.da.exec.configuration;version="0.1.0"
+
