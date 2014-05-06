@@ -1,4 +1,11 @@
 Manifest-Version: 1.0
+Export-Package: org.eclipse.scada.configuration.infrastructure.provide
+ r;uses:="org.eclipse.emf.edit.command,  org.eclipse.emf.common.util, 
+  org.eclipse.scada.configuration.world,  org.eclipse.emf.common.notif
+ y,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration.world.uti
+ l,  org.eclipse.emf.common,  org.eclipse.scada.configuration.infrastr
+ ucture.util,  org.eclipse.emf.edit.provider,  org.eclipse.emf.edit.do
+ main";version="0.1.0"
 Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
  on.infrastructure;visibility:=reexport;bundle-version="0.1.0",org.ecl
  ipse.emf.edit;visibility:=reexport,org.eclipse.scada.configuration.wo
@@ -14,22 +21,15 @@ Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
  figuration.security;visibility:=reexport;bundle-version="0.1.0",org.e
  clipse.scada.configuration.security.edit;visibility:=reexport;bundle-
  version="0.1.0"
-Export-Package: org.eclipse.scada.configuration.infrastructure.provide
- r;uses:="org.eclipse.emf.edit.command,  org.eclipse.emf.common.util, 
-  org.eclipse.scada.configuration.world,  org.eclipse.emf.common.notif
- y,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration.world.uti
- l,  org.eclipse.emf.common,  org.eclipse.scada.configuration.infrastr
- ucture.util,  org.eclipse.emf.edit.provider,  org.eclipse.emf.edit.do
- main";version="0.1.0"
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140506-1029
-Bundle-Localization: plugin
+Bundle-Version: 0.1.0.v20140506-1653
 Bundle-Name: %pluginName
+Bundle-Localization: plugin
+Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.configuration.infrastructure.provi
  der.InfrastructureEditPlugin$Implementation
-Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.infrastructure.ed
  it;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

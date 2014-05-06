@@ -16,11 +16,11 @@ Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
  bility:=reexport,org.eclipse.scada.configuration.globalization;visibi
  lity:=reexport
 Bundle-Vendor: %providerName
-Bundle-Version: 0.1.0.v20140506-1029
+Bundle-Version: 0.1.0.v20140506-1653
 Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.scada.configuration.component;singlet
+ on:=true
 Import-Package: org.eclipse.scada.configuration.lib;version="0.1.0",or
  g.eclipse.scada.core;version="0.1.0",org.eclipse.scada.utils.str;vers
  ion="0.1.0"
-Bundle-SymbolicName: org.eclipse.scada.configuration.component;singlet
- on:=true
 

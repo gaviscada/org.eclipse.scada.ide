@@ -61,10 +61,10 @@ Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
  figuration.security;visibility:=reexport;bundle-version="0.1.0",org.e
  clipse.scada.configuration.utils;bundle-version="0.1.0"
 Bundle-Vendor: %providerName
-Bundle-Version: 0.1.0.v20140506-1029
+Bundle-Version: 0.1.0.v20140506-1653
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.scada.ae.data;version="0.1.0",org.eclipse.
- scada.core;version="0.1.0"
 Bundle-SymbolicName: org.eclipse.scada.configuration.world;singleton:=
  true
+Import-Package: org.eclipse.scada.ae.data;version="0.1.0",org.eclipse.
+ scada.core;version="0.1.0"
 
