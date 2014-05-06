@@ -1,10 +1,4 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
- ity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecli
- pse.scada.configuration.world;visibility:=reexport;bundle-version="0.
- 1.0",org.eclipse.scada.da.server.exec;visibility:=reexport,org.eclips
- e.scada.configuration.memory;visibility:=reexport,org.eclipse.scada.c
- onfiguration.security;visibility:=reexport
 Export-Package: org.eclipse.scada.configuration.memory.manager;version
  ="0.1.0";uses:="org.eclipse.scada.configuration.world.osgi,org.eclips
  e.emf.ecore,org.eclipse.scada.configuration.memory",org.eclipse.scada
@@ -18,12 +12,18 @@ Export-Package: org.eclipse.scada.configuration.memory.manager;version
  ecore.xmi.util,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecor
  e.resource.impl,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,
    org.eclipse.emf.common.notify.impl"
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
+ ity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecli
+ pse.scada.configuration.world;visibility:=reexport;bundle-version="0.
+ 1.0",org.eclipse.scada.da.server.exec;visibility:=reexport,org.eclips
+ e.scada.configuration.memory;visibility:=reexport,org.eclipse.scada.c
+ onfiguration.security;visibility:=reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1526
-Bundle-Localization: plugin
+Bundle-Version: 0.1.0.v20140430-1536
 Bundle-Name: %pluginName
+Bundle-Localization: plugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.memory.manager;si
  ngleton:=true

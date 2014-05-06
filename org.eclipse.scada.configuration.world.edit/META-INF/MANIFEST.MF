@@ -1,11 +1,4 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
- on.world;visibility:=reexport;bundle-version="0.1.0",org.eclipse.emf.
- edit;visibility:=reexport,org.eclipse.scada.da.server.exec;visibility
- :=reexport,org.eclipse.scada.da.server.exec.edit;visibility:=reexport
- ,org.eclipse.scada.configuration.security;visibility:=reexport;bundle
- -version="0.1.0",org.eclipse.scada.configuration.security.edit;visibi
- lity:=reexport;bundle-version="0.1.0"
 Export-Package: org.eclipse.scada.configuration.world.deployment.provi
  der;uses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.
  eclipse.scada.configuration.world.deployment.util,  org.eclipse.emf.e
@@ -23,18 +16,25 @@ Export-Package: org.eclipse.scada.configuration.world.deployment.provi
  e.scada.configuration.world.util,  org.eclipse.emf.common.util,  org.
  eclipse.emf.common,  org.eclipse.emf.edit.provider,  org.eclipse.emf.
  common.notify,  org.eclipse.emf.edit.domain";version="0.1.0"
-Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1526
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
+ on.world;visibility:=reexport;bundle-version="0.1.0",org.eclipse.emf.
+ edit;visibility:=reexport,org.eclipse.scada.da.server.exec;visibility
+ :=reexport,org.eclipse.scada.da.server.exec.edit;visibility:=reexport
+ ,org.eclipse.scada.configuration.security;visibility:=reexport;bundle
+ -version="0.1.0",org.eclipse.scada.configuration.security.edit;visibi
+ lity:=reexport;bundle-version="0.1.0"
+Bundle-Vendor: %providerName
+Bundle-Version: 0.1.0.v20140430-1536
 Bundle-Activator: org.eclipse.scada.configuration.world.provider.World
  EditPlugin$Implementation
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.scada.configuration.lib;version="0.1.0",or
- g.eclipse.scada.core;version="0.1.0"
 Bundle-SymbolicName: org.eclipse.scada.configuration.world.edit;single
  ton:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.eclipse.scada.configuration.lib;version="0.1.0",or
+ g.eclipse.scada.core;version="0.1.0"
 
