@@ -10,7 +10,7 @@
   </parent>
   <groupId>org.eclipse.scada.ide</groupId>
   <artifactId>org.eclipse.scada.ide.p2-incubation</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <packaging>eclipse-repository</packaging>
   <profiles>
     <profile>
