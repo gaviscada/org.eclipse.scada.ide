@@ -1,4 +1,13 @@
 Manifest-Version: 1.0
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
+ sibility:=reexport,org.eclipse.scada.configuration.infrastructure.edi
+ t;visibility:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport
+ ,org.eclipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui.ide;visi
+ bility:=reexport,org.eclipse.scada.configuration.world.edit;visibilit
+ y:=reexport,org.eclipse.scada.da.server.exec.edit;visibility:=reexpor
+ t,org.eclipse.scada.configuration.globalization.edit;visibility:=reex
+ port,org.eclipse.scada.configuration.item.edit;visibility:=reexport,o
+ rg.eclipse.scada.configuration.security.edit;visibility:=reexport
 Export-Package: org.eclipse.scada.configuration.infrastructure.present
  ation;version="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclipse.
  core.runtime,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.com
@@ -12,24 +21,15 @@ Export-Package: org.eclipse.scada.configuration.infrastructure.present
  ties,  org.eclipse.ui.part,  org.eclipse.emf.common,  org.eclipse.emf
  .edit.provider,  org.eclipse.swt.widgets,  org.eclipse.emf.common.ui,
    org.eclipse.emf.edit.domain"
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
- sibility:=reexport,org.eclipse.scada.configuration.infrastructure.edi
- t;visibility:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport
- ,org.eclipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui.ide;visi
- bility:=reexport,org.eclipse.scada.configuration.world.edit;visibilit
- y:=reexport,org.eclipse.scada.da.server.exec.edit;visibility:=reexpor
- t,org.eclipse.scada.configuration.globalization.edit;visibility:=reex
- port,org.eclipse.scada.configuration.item.edit;visibility:=reexport,o
- rg.eclipse.scada.configuration.security.edit;visibility:=reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1536
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Localization: plugin
-Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
 Bundle-Activator: org.eclipse.scada.configuration.infrastructure.prese
  ntation.InfrastructureEditorPlugin$Implementation
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.infrastructure.ed
  itor;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

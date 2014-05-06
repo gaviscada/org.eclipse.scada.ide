@@ -1,12 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.configuration.arduino.provider;versi
- on="0.1.0"; uses:="org.eclipse.emf.edit.command,  org.eclipse.emf.com
- mon.util,  org.eclipse.scada.configuration.world,  org.eclipse.emf.co
- mmon.notify,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration
- .arduino.util,  org.eclipse.scada.configuration.world.util,  org.ecli
- pse.scada.configuration.infrastructure,  org.eclipse.scada.configurat
- ion.infrastructure.util,  org.eclipse.emf.common,  org.eclipse.emf.ed
- it.provider,  org.eclipse.emf.edit.domain"
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0",org.ec
  lipse.scada.configuration.arduino;visibility:=reexport;bundle-version
  ="0.1.0",org.eclipse.emf.edit;visibility:=reexport;bundle-version="2.
@@ -25,15 +17,23 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0",org.ec
  n="0.1.0",org.eclipse.scada.configuration.item;visibility:=reexport;b
  undle-version="0.1.0",org.eclipse.scada.configuration.item.edit;visib
  ility:=reexport;bundle-version="0.1.0"
+Export-Package: org.eclipse.scada.configuration.arduino.provider;versi
+ on="0.1.0"; uses:="org.eclipse.emf.edit.command,  org.eclipse.emf.com
+ mon.util,  org.eclipse.scada.configuration.world,  org.eclipse.emf.co
+ mmon.notify,  org.eclipse.emf.ecore,  org.eclipse.scada.configuration
+ .arduino.util,  org.eclipse.scada.configuration.world.util,  org.ecli
+ pse.scada.configuration.infrastructure,  org.eclipse.scada.configurat
+ ion.infrastructure.util,  org.eclipse.emf.common,  org.eclipse.emf.ed
+ it.provider,  org.eclipse.emf.edit.domain"
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1536
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Localization: plugin
-Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
 Bundle-Activator: org.eclipse.scada.configuration.arduino.provider.Ard
  uinoEditPlugin$Implementation
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.arduino.edit;sing
  leton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

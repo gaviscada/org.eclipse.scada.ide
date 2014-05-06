@@ -13,16 +13,16 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime;bundle-version
  e,org.eclipse.scada.configuration.recipe;bundle-version="0.1.0"
 Bundle-Vendor: %Bundle-Vendor
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: %Bundle-Name (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.configuration.ui.project.Activator
-Bundle-SymbolicName: org.eclipse.scada.configuration.ui.project;single
- ton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.core.resources,org.eclipse.scada.configura
  tion.utils;version="0.1.0",org.eclipse.scada.configuration.world.lib.
  deployment,org.eclipse.scada.ui.utils.status;version="0.1.0",org.ecli
  pse.scada.utils;version="0.1.0",org.eclipse.scada.utils.collection;ve
  rsion="0.1.0",org.slf4j;version="1.7.2"
+Bundle-SymbolicName: org.eclipse.scada.configuration.ui.project;single
+ ton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 

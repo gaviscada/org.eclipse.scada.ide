@@ -23,11 +23,11 @@ Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
  ipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui.ide;visibility:=
  reexport
 Bundle-Vendor: %providerName
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.configuration.recipe.presentation.
  RecipeEditorPlugin$Implementation
+Import-Package: org.eclipse.scada.ui.databinding
 Bundle-SymbolicName: org.eclipse.scada.configuration.recipe.editor;sin
  gleton:=true
-Import-Package: org.eclipse.scada.ui.databinding
 

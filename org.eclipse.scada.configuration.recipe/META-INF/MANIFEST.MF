@@ -1,6 +1,4 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore,org.ecl
- ipse.emf.ecore.xmi;visibility:=reexport,org.eclipse.wst.xml.core
 Export-Package: org.eclipse.scada.configuration.recipe;uses:="org.ecli
  pse.emf.ecore,org.eclipse.emf.common.util";version="0.1.0",org.eclips
  e.scada.configuration.recipe.impl;uses:="org.eclipse.scada.configurat
@@ -12,12 +10,14 @@ Export-Package: org.eclipse.scada.configuration.recipe;uses:="org.ecli
  f.common.notify,  org.eclipse.emf.ecore.xmi.util,  org.eclipse.emf.ec
  ore.resource.impl,  org.eclipse.emf.ecore.util,  org.eclipse.emf.ecor
  e,  org.eclipse.emf.common.notify.impl";version="0.1.0"
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore,org.ecl
+ ipse.emf.ecore.xmi;visibility:=reexport,org.eclipse.wst.xml.core
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1536
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Localization: plugin
+Bundle-Name: %pluginName
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.recipe;singleton:
  =true

@@ -10,6 +10,6 @@
   </parent>
   <groupId>org.eclipse.scada.ide</groupId>
   <artifactId>org.eclipse.scada.configuration.world.lib</artifactId>
-  <version>0.1.1.qualifier</version>
+  <version>0.1.1.v20140506-1553</version>
   <packaging>eclipse-plugin</packaging>
 </project>
