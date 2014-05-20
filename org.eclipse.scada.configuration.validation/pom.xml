@@ -10,6 +10,6 @@
   </parent>
   <groupId>org.eclipse.scada.ide</groupId>
   <artifactId>org.eclipse.scada.configuration.validation</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.2.v20140520-1146</version>
   <packaging>eclipse-plugin</packaging>
 </project>

@@ -1,4 +1,13 @@
 Manifest-Version: 1.0
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
+ sibility:=reexport,org.eclipse.scada.configuration.globalization.edit
+ ;visibility:=reexport;bundle-version="0.1.0",org.eclipse.emf.ecore.xm
+ i;visibility:=reexport,org.eclipse.emf.edit.ui;visibility:=reexport,o
+ rg.eclipse.ui.ide;visibility:=reexport,org.eclipse.scada.configuratio
+ n.world.edit;visibility:=reexport;bundle-version="0.1.0",org.eclipse.
+ scada.da.server.exec.edit;visibility:=reexport,org.eclipse.scada.conf
+ iguration.security.edit;visibility:=reexport;bundle-version="0.1.0",o
+ rg.eclipse.scada.configuration;bundle-version="0.1.0"
 Export-Package: org.eclipse.scada.configuration.globalization.presenta
  tion;version="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclipse.c
  ore.runtime,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.comm
@@ -12,24 +21,15 @@ Export-Package: org.eclipse.scada.configuration.globalization.presenta
  es,  org.eclipse.ui.part,  org.eclipse.emf.common,  org.eclipse.emf.e
  dit.provider,  org.eclipse.swt.widgets,  org.eclipse.emf.common.ui,  
  org.eclipse.emf.edit.domain"
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
- sibility:=reexport,org.eclipse.scada.configuration.globalization.edit
- ;visibility:=reexport;bundle-version="0.1.0",org.eclipse.emf.ecore.xm
- i;visibility:=reexport,org.eclipse.emf.edit.ui;visibility:=reexport,o
- rg.eclipse.ui.ide;visibility:=reexport,org.eclipse.scada.configuratio
- n.world.edit;visibility:=reexport;bundle-version="0.1.0",org.eclipse.
- scada.da.server.exec.edit;visibility:=reexport,org.eclipse.scada.conf
- iguration.security.edit;visibility:=reexport;bundle-version="0.1.0",o
- rg.eclipse.scada.configuration;bundle-version="0.1.0"
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140506-1653
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1700
 Bundle-Localization: plugin
-Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
 Bundle-Activator: org.eclipse.scada.configuration.globalization.presen
  tation.GlobalizeEditorPlugin$Implementation
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.globalization.edi
  tor;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -1,6 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.configuration.component.common.provi
- der;version="0.1.0"
 Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
  on.component.common;visibility:=reexport,org.eclipse.emf.edit;visibil
  ity:=reexport,org.eclipse.scada.configuration.component;visibility:=r
@@ -17,15 +15,17 @@ Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.configurati
  ty.edit;visibility:=reexport,org.eclipse.scada.configuration.world;vi
  sibility:=reexport,org.eclipse.scada.configuration.world.edit;visibil
  ity:=reexport
+Export-Package: org.eclipse.scada.configuration.component.common.provi
+ der;version="0.1.0"
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 1.0.0.v20140506-1653
-Bundle-Name: %pluginName
+Bundle-Version: 1.0.0.v20140506-1700
 Bundle-Localization: plugin
-Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
 Bundle-Activator: org.eclipse.scada.configuration.component.common.pro
  vider.CommonComponentsEditPlugin$Implementation
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.component.common.
  edit;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

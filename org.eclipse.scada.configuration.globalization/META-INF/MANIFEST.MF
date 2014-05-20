@@ -1,4 +1,9 @@
 Manifest-Version: 1.0
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
+ ity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecli
+ pse.scada.configuration.world;visibility:=reexport,org.eclipse.scada.
+ da.server.exec;visibility:=reexport,org.eclipse.scada.configuration.s
+ ecurity;visibility:=reexport
 Export-Package: org.eclipse.scada.configuration.globalization;uses:="o
  rg.eclipse.scada.configuration.world.osgi,  org.eclipse.emf.ecore,  o
  rg.eclipse.emf.common.util,  org.eclipse.scada.configuration.world";v
@@ -13,17 +18,12 @@ Export-Package: org.eclipse.scada.configuration.globalization;uses:="o
  g.eclipse.emf.common.util,  org.eclipse.scada.configuration.world,  o
  rg.eclipse.emf.common.notify,  org.eclipse.emf.ecore.resource.impl,  
  org.eclipse.scada.configuration.globalization";version="0.1.0"
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibil
- ity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecli
- pse.scada.configuration.world;visibility:=reexport,org.eclipse.scada.
- da.server.exec;visibility:=reexport,org.eclipse.scada.configuration.s
- ecurity;visibility:=reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140506-1653
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1700
 Bundle-Localization: plugin
+Bundle-Name: %pluginName
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.globalization;sin
  gleton:=true
