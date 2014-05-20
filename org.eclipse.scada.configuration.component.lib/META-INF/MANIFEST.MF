@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0"
 Export-Package: org.eclipse.scada.configuration.component.lib;version=
  "0.1.0"; uses:="org.eclipse.core.runtime,  org.eclipse.scada.configur
  ation.world.osgi,  org.eclipse.scada.configuration.generator,  org.ec
@@ -9,13 +8,16 @@ Export-Package: org.eclipse.scada.configuration.component.lib;version=
  da.configuration.world.osgi,  org.eclipse.scada.configuration.infrast
  ructure,  org.eclipse.scada.configuration.component,  org.eclipse.sca
  da.configuration.item,  org.slf4j"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140506-1700
+Bundle-Version: 0.1.0.v20140520-1210
 Bundle-Name: Component Configuration Library (Incubation)
+Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.configuration.component.lib.Activa
  tor
-Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.scada.configuration.component.lib;sin
+ gleton:=true
 Import-Package: org.apache.xml.resolver.apps;version="1.2.0",org.eclip
  se.emf.common.util,org.eclipse.emf.ecore,org.eclipse.scada.configurat
  ion.component;version="0.1.0",org.eclipse.scada.configuration.generat
@@ -28,7 +30,5 @@ Import-Package: org.apache.xml.resolver.apps;version="1.2.0",org.eclip
  e.scada.core;version="0.1.0",org.eclipse.scada.ui.databinding;version
  ="0.1.0",org.eclipse.scada.utils.str;version="0.1.0",org.osgi.framewo
  rk;version="1.7.0",org.slf4j;version="1.7.2"
-Bundle-SymbolicName: org.eclipse.scada.configuration.component.lib;sin
- gleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 

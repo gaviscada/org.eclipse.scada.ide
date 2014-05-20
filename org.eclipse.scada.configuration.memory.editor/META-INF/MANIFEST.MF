@@ -1,9 +1,4 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
- sibility:=reexport,org.eclipse.scada.configuration.memory.edit;visibi
- lity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecl
- ipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui.ide;visibility:=
- reexport
 Export-Package: org.eclipse.scada.configuration.memory.presentation;ve
  rsion="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclipse.core.run
  time,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.common.noti
@@ -17,15 +12,20 @@ Export-Package: org.eclipse.scada.configuration.memory.presentation;ve
  se.ui.part,  org.eclipse.emf.common,  org.eclipse.emf.edit.provider, 
   org.eclipse.swt.widgets,  org.eclipse.emf.common.ui,  org.eclipse.em
  f.edit.domain"
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
+ sibility:=reexport,org.eclipse.scada.configuration.memory.edit;visibi
+ lity:=reexport,org.eclipse.emf.ecore.xmi;visibility:=reexport,org.ecl
+ ipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui.ide;visibility:=
+ reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140506-1700
-Bundle-Localization: plugin
+Bundle-Version: 0.1.0.v20140520-1210
 Bundle-Name: %pluginName
+Bundle-Localization: plugin
+Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.configuration.memory.presentation.
  MemoryEditorPlugin$Implementation
-Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.memory.editor;sin
  gleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
