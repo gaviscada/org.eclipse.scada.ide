@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.1.v20140506-1653
+Bundle-Version: 0.1.2.qualifier
 Bundle-Name: Configuration Help Bundle (Incubation)
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.configuration.doc.Activator

@@ -10,6 +10,6 @@
   </parent>
   <groupId>org.eclipse.scada.ide.features</groupId>
   <artifactId>org.eclipse.scada.configuration.doc</artifactId>
-  <version>0.1.1.v20140506-1653</version>
+  <version>0.1.2-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
 </project>
