@@ -10,13 +10,13 @@
   </parent>
   <groupId>org.eclipse.scada.ide</groupId>
   <artifactId>org.eclipse.scada.configuration.doc</artifactId>
-  <version>0.1.2.v20140520-1210</version>
+  <version>0.1.2.v20140520-1338</version>
   <packaging>eclipse-plugin</packaging>
   <dependencies>
     <dependency>
       <groupId>org.eclipse.scada.ide.features</groupId>
       <artifactId>org.eclipse.scada.configuration</artifactId>
-      <version>0.1.2.v20140520-1210</version>
+      <version>0.1.2.v20140520-1338</version>
       <type>pom</type>
     </dependency>
   </dependencies>

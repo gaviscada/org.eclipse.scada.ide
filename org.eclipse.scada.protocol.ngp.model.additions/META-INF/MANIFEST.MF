@@ -5,11 +5,11 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  "2.8.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140520-1210
+Bundle-Version: 0.1.0.v20140520-1338
 Bundle-Name: Eclipse SCADA NGP Editor Additions (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.protocol.ngp.model.additions.Activ
  ator
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.protocol.ngp.model.additions;si
  ngleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

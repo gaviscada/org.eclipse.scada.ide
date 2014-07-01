@@ -1,4 +1,9 @@
 Manifest-Version: 1.0
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
+ sibility:=reexport,org.eclipse.scada.configuration.security.edit;visi
+ bility:=reexport;bundle-version="0.1.0",org.eclipse.emf.ecore.xmi;vis
+ ibility:=reexport,org.eclipse.emf.edit.ui;visibility:=reexport,org.ec
+ lipse.ui.ide;visibility:=reexport
 Export-Package: org.eclipse.scada.configuration.security.presentation;
  version="0.1.0"; uses:="org.eclipse.jface.wizard,  org.eclipse.core.r
  untime,  org.eclipse.emf.edit.ui.provider,  org.eclipse.emf.common.no
@@ -12,20 +17,15 @@ Export-Package: org.eclipse.scada.configuration.security.presentation;
  rg.eclipse.emf.edit.provider,  org.eclipse.swt.widgets,  org.eclipse.
  emf.edit.domain,  org.eclipse.emf.common.ui,  org.eclipse.scada.confi
  guration.security"
-Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
- sibility:=reexport,org.eclipse.scada.configuration.security.edit;visi
- bility:=reexport;bundle-version="0.1.0",org.eclipse.emf.ecore.xmi;vis
- ibility:=reexport,org.eclipse.emf.edit.ui;visibility:=reexport,org.ec
- lipse.ui.ide;visibility:=reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140520-1210
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140520-1338
 Bundle-Localization: plugin
-Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
 Bundle-Activator: org.eclipse.scada.configuration.security.presentatio
  n.SecurityEditorPlugin$Implementation
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.configuration.security.editor;s
  ingleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
