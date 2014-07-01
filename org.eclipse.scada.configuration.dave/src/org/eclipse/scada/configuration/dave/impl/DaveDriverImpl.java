@@ -498,10 +498,19 @@ public class DaveDriverImpl extends MinimalEObjectImpl.Container implements Dave
         return this.devices;
     }
 
+    /**
+     * @generated NOT
+     */
     private static final String DEFAULT_URI = "platform:/plugin/org.eclipse.scada.configuration.dave/model/default.dave.xml#/";
 
+    /**
+     * @generated NOT
+     */
     private Profile profile;
 
+    /**
+     * @generated NOT
+     */
     @Override
     public Profile getProfile ()
     {

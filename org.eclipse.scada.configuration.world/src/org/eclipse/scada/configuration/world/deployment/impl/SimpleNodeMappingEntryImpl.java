@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.scada.configuration.world.Node;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
 import org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry;
 
@@ -32,6 +31,7 @@ import org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry;
  * <ul>
  *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.SimpleNodeMappingEntryImpl#getFromHostName <em>From Host Name</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.SimpleNodeMappingEntryImpl#getToHostName <em>To Host Name</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.SimpleNodeMappingEntryImpl#isIgnoreCase <em>Ignore Case</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +79,26 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
      * @ordered
      */
     protected String toHostName = TO_HOST_NAME_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #isIgnoreCase() <em>Ignore Case</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isIgnoreCase()
+     * @generated
+     * @ordered
+     */
+    protected static final boolean IGNORE_CASE_EDEFAULT = true;
+
+    /**
+     * The cached value of the '{@link #isIgnoreCase() <em>Ignore Case</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isIgnoreCase()
+     * @generated
+     * @ordered
+     */
+    protected boolean ignoreCase = IGNORE_CASE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -154,26 +174,51 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean isIgnoreCase ()
+    {
+        return ignoreCase;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setIgnoreCase ( boolean newIgnoreCase )
+    {
+        boolean oldIgnoreCase = ignoreCase;
+        ignoreCase = newIgnoreCase;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__IGNORE_CASE, oldIgnoreCase, ignoreCase ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * 
      * @generated NOT
      */
     @Override
-    public boolean mapNode ( final Node node )
+    public String map ( final String from )
     {
-        if ( node == null )
+        if ( from == null )
         {
-            return false;
+            return null;
         }
-        if ( node.getHostName () == null )
+
+        if ( isIgnoreCase () && from.equalsIgnoreCase ( getFromHostName () ) )
         {
-            return false;
+            return getToHostName ();
         }
-        if ( node.getHostName ().equalsIgnoreCase ( getFromHostName () ) )
+        else if ( from.equals ( getFromHostName () ) )
         {
-            node.setHostName ( getToHostName () );
-            return true;
+            return getToHostName ();
         }
-        return false;
+        return null;
     }
 
     /**
@@ -190,6 +235,8 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
                 return getFromHostName ();
             case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__TO_HOST_NAME:
                 return getToHostName ();
+            case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__IGNORE_CASE:
+                return isIgnoreCase ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -209,6 +256,9 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
                 return;
             case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__TO_HOST_NAME:
                 setToHostName ( (String)newValue );
+                return;
+            case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__IGNORE_CASE:
+                setIgnoreCase ( (Boolean)newValue );
                 return;
         }
         super.eSet ( featureID, newValue );
@@ -230,6 +280,9 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
             case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__TO_HOST_NAME:
                 setToHostName ( TO_HOST_NAME_EDEFAULT );
                 return;
+            case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__IGNORE_CASE:
+                setIgnoreCase ( IGNORE_CASE_EDEFAULT );
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -248,6 +301,8 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
                 return FROM_HOST_NAME_EDEFAULT == null ? fromHostName != null : !FROM_HOST_NAME_EDEFAULT.equals ( fromHostName );
             case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__TO_HOST_NAME:
                 return TO_HOST_NAME_EDEFAULT == null ? toHostName != null : !TO_HOST_NAME_EDEFAULT.equals ( toHostName );
+            case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY__IGNORE_CASE:
+                return ignoreCase != IGNORE_CASE_EDEFAULT;
         }
         return super.eIsSet ( featureID );
     }
@@ -263,8 +318,8 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
     {
         switch ( operationID )
         {
-            case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY___MAP_NODE__NODE:
-                return mapNode ( (Node)arguments.get ( 0 ) );
+            case DeploymentPackage.SIMPLE_NODE_MAPPING_ENTRY___MAP__STRING:
+                return map ( (String)arguments.get ( 0 ) );
         }
         return super.eInvoke ( operationID, arguments );
     }
@@ -285,6 +340,8 @@ public class SimpleNodeMappingEntryImpl extends MinimalEObjectImpl.Container
         result.append ( fromHostName );
         result.append ( ", toHostName: " ); //$NON-NLS-1$
         result.append ( toHostName );
+        result.append ( ", ignoreCase: " ); //$NON-NLS-1$
+        result.append ( ignoreCase );
         result.append ( ')' );
         return result.toString ();
     }

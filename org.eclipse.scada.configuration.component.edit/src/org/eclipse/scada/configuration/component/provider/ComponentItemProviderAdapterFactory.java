@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -477,6 +477,31 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.ItemReferenceOutputDefinition} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ItemReferenceOutputDefinitionItemProvider itemReferenceOutputDefinitionItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.component.ItemReferenceOutputDefinition}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createItemReferenceOutputDefinitionAdapter ()
+    {
+        if ( itemReferenceOutputDefinitionItemProvider == null )
+        {
+            itemReferenceOutputDefinitionItemProvider = new ItemReferenceOutputDefinitionItemProvider ( this );
+        }
+
+        return itemReferenceOutputDefinitionItemProvider;
+    }
+
+    /**
      * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.component.ComponentReferenceInputDefinition} instances.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -882,6 +907,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ComposeableAdapterFactory getRootAdapterFactory ()
     {
         return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory ();
@@ -893,6 +919,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setParentAdapterFactory ( ComposedAdapterFactory parentAdapterFactory )
     {
         this.parentAdapterFactory = parentAdapterFactory;
@@ -956,6 +983,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Collection<?> getNewChildDescriptors ( Object object, EditingDomain editingDomain )
     {
         return childCreationExtenderManager.getNewChildDescriptors ( object, editingDomain );
@@ -966,6 +994,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ResourceLocator getResourceLocator ()
     {
         return childCreationExtenderManager;
@@ -977,6 +1006,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void addListener ( INotifyChangedListener notifyChangedListener )
     {
         changeNotifier.addListener ( notifyChangedListener );
@@ -988,6 +1018,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void removeListener ( INotifyChangedListener notifyChangedListener )
     {
         changeNotifier.removeListener ( notifyChangedListener );
@@ -999,6 +1030,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void fireNotifyChanged ( Notification notification )
     {
         changeNotifier.fireNotifyChanged ( notification );
@@ -1015,6 +1047,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void dispose ()
     {
         if ( componentWorldItemProvider != null )
@@ -1047,6 +1080,8 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
             outputDefinitionItemProvider.dispose ();
         if ( itemReferenceInputDefinitionItemProvider != null )
             itemReferenceInputDefinitionItemProvider.dispose ();
+        if ( itemReferenceOutputDefinitionItemProvider != null )
+            itemReferenceOutputDefinitionItemProvider.dispose ();
         if ( componentReferenceInputDefinitionItemProvider != null )
             componentReferenceInputDefinitionItemProvider.dispose ();
         if ( formulaModuleItemProvider != null )
@@ -1205,6 +1240,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
          * <!-- end-user-doc -->
          * @generated
          */
+        @Override
         public Collection<Object> getNewChildDescriptors ( Object object, EditingDomain editingDomain )
         {
             ArrayList<Object> result = new ArrayList<Object> ();
@@ -1217,6 +1253,7 @@ public class ComponentItemProviderAdapterFactory extends ComponentAdapterFactory
          * <!-- end-user-doc -->
          * @generated
          */
+        @Override
         public ResourceLocator getResourceLocator ()
         {
             return ComponentEditPlugin.INSTANCE;

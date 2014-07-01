@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -127,6 +127,8 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
                 return createOutputDefinition ();
             case ComponentPackage.ITEM_REFERENCE_INPUT_DEFINITION:
                 return createItemReferenceInputDefinition ();
+            case ComponentPackage.ITEM_REFERENCE_OUTPUT_DEFINITION:
+                return createItemReferenceOutputDefinition ();
             case ComponentPackage.COMPONENT_REFERENCE_INPUT_DEFINITION:
                 return createComponentReferenceInputDefinition ();
             case ComponentPackage.FORMULA_MODULE:
@@ -357,6 +359,17 @@ public class ComponentFactoryImpl extends EFactoryImpl implements ComponentFacto
     {
         ItemReferenceInputDefinitionImpl itemReferenceInputDefinition = new ItemReferenceInputDefinitionImpl ();
         return itemReferenceInputDefinition;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ItemReferenceOutputDefinition createItemReferenceOutputDefinition ()
+    {
+        ItemReferenceOutputDefinitionImpl itemReferenceOutputDefinition = new ItemReferenceOutputDefinitionImpl ();
+        return itemReferenceOutputDefinition;
     }
 
     /**

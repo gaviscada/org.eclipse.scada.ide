@@ -196,15 +196,9 @@
       eSuperTypes="../../org.eclipse.scada.configuration.world/model/configuration.ecore#//NamedDocumentable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//Node" eOpposite="#//Node/devices"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EquinoxDriver" eSuperTypes="#//AbstractFactoryDriver">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="userService" eType="#//UserService"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EquinoxDriver" eSuperTypes="#//AbstractFactoryDriver #//EquinoxBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="accessCredentials" eType="ecore:EClass ../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Credentials"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="securityConfiguration"
-        eType="ecore:EClass ../../org.eclipse.scada.configuration.security/model/sec.ecore#//Configuration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalDriver" eSuperTypes="#//Driver">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNumber" lowerBound="1"
@@ -263,5 +257,51 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A base interface for settings.&#xA;&#xA;Settings are, compared to ApplicationConfiguration, not assigned to an application they are running in."/>
     </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebAdminConsole" eSuperTypes="#//Module">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="httpService" lowerBound="1"
+        eType="#//HttpServiceModule"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OracleVMSettings" eSuperTypes="#//Module">
+    <eAnnotations source="http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup">
+      <details key="groupId" value="oracle.vm.settings"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialHeapSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximumHeapSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericVMSettings" eSuperTypes="#//Module">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arguments" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractEquinoxDriver" abstract="true"
+      eSuperTypes="#//Driver #//EquinoxBase">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessCredentials" eType="ecore:EClass ../../org.eclipse.scada.configuration.world/model/configuration.ecore#//Credentials"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EquinoxBase" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userService" eType="#//UserService"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityConfiguration"
+        eType="ecore:EClass ../../org.eclipse.scada.configuration.security/model/sec.ecore#//Configuration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseSettings" eSuperTypes="#//Settings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.scada.configuration.world/model/configuration.ecore#//PropertyEntry"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="user" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractCommonDriver" abstract="true"
+      eSuperTypes="#//Driver">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="password" eType="ecore:EClass ../../org.eclipse.scada.configuration.world/model/configuration.ecore#//PasswordCredentials"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

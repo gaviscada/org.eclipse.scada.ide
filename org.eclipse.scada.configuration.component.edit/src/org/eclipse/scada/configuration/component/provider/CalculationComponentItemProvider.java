@@ -95,7 +95,7 @@ public class CalculationComponentItemProvider extends ItemProviderAdapter implem
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_namingPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -118,7 +118,7 @@ public class CalculationComponentItemProvider extends ItemProviderAdapter implem
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_namingPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -324,6 +324,11 @@ public class CalculationComponentItemProvider extends ItemProviderAdapter implem
                 ( createChildParameter
                 ( ComponentPackage.Literals.CALCULATION_COMPONENT__OUTPUTS,
                         ComponentFactory.eINSTANCE.createOutputDefinition () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( ComponentPackage.Literals.CALCULATION_COMPONENT__OUTPUTS,
+                        ComponentFactory.eINSTANCE.createItemReferenceOutputDefinition () ) );
 
         newChildDescriptors.add
                 ( createChildParameter

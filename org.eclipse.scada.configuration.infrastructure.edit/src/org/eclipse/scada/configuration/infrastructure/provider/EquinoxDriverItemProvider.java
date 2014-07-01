@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -80,9 +80,9 @@ public class EquinoxDriverItemProvider extends AbstractFactoryDriverItemProvider
                 ( createItemPropertyDescriptor
                 ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
                         getResourceLocator (),
-                        getString ( "_UI_EquinoxDriver_instanceNumber_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_EquinoxDriver_instanceNumber_feature", "_UI_EquinoxDriver_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        InfrastructurePackage.Literals.EQUINOX_DRIVER__INSTANCE_NUMBER,
+                        getString ( "_UI_EquinoxBase_instanceNumber_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_EquinoxBase_instanceNumber_feature", "_UI_EquinoxBase_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        InfrastructurePackage.Literals.EQUINOX_BASE__INSTANCE_NUMBER,
                         true,
                         false,
                         false,
@@ -103,9 +103,9 @@ public class EquinoxDriverItemProvider extends AbstractFactoryDriverItemProvider
                 ( createItemPropertyDescriptor
                 ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
                         getResourceLocator (),
-                        getString ( "_UI_EquinoxDriver_securityConfiguration_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_EquinoxDriver_securityConfiguration_feature", "_UI_EquinoxDriver_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        InfrastructurePackage.Literals.EQUINOX_DRIVER__SECURITY_CONFIGURATION,
+                        getString ( "_UI_EquinoxBase_securityConfiguration_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_EquinoxBase_securityConfiguration_feature", "_UI_EquinoxBase_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        InfrastructurePackage.Literals.EQUINOX_BASE__SECURITY_CONFIGURATION,
                         true,
                         false,
                         true,
@@ -128,7 +128,7 @@ public class EquinoxDriverItemProvider extends AbstractFactoryDriverItemProvider
         if ( childrenFeatures == null )
         {
             super.getChildrenFeatures ( object );
-            childrenFeatures.add ( InfrastructurePackage.Literals.EQUINOX_DRIVER__USER_SERVICE );
+            childrenFeatures.add ( InfrastructurePackage.Literals.EQUINOX_BASE__USER_SERVICE );
             childrenFeatures.add ( InfrastructurePackage.Literals.EQUINOX_DRIVER__ACCESS_CREDENTIALS );
         }
         return childrenFeatures;
@@ -170,9 +170,7 @@ public class EquinoxDriverItemProvider extends AbstractFactoryDriverItemProvider
     @Override
     public String getText ( final Object object )
     {
-        final String label = String.format ( "%s @ %s", ( (EquinoxDriver)object ).getName (), ( (EquinoxDriver)object ).getNode ().getHostName () );
-        return label == null || label.length () == 0 ? getString ( "_UI_EquinoxDriver_type" ) : //$NON-NLS-1$
-        getString ( "_UI_EquinoxDriver_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return getDriverLabel ( (EquinoxDriver)object, getString ( "_UI_EquinoxDriver_type" ) );
     }
 
     /**
@@ -214,12 +212,12 @@ public class EquinoxDriverItemProvider extends AbstractFactoryDriverItemProvider
 
         newChildDescriptors.add
                 ( createChildParameter
-                ( InfrastructurePackage.Literals.EQUINOX_DRIVER__USER_SERVICE,
+                ( InfrastructurePackage.Literals.EQUINOX_BASE__USER_SERVICE,
                         InfrastructureFactory.eINSTANCE.createSystemPropertyUserService () ) );
 
         newChildDescriptors.add
                 ( createChildParameter
-                ( InfrastructurePackage.Literals.EQUINOX_DRIVER__USER_SERVICE,
+                ( InfrastructurePackage.Literals.EQUINOX_BASE__USER_SERVICE,
                         InfrastructureFactory.eINSTANCE.createJdbcUserService () ) );
 
         newChildDescriptors.add

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH Corporation and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -33,6 +33,43 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.command.BasicCommandStack;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CommandStackListener;
+import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.ui.MarkerHelper;
+import org.eclipse.emf.common.ui.ViewerPane;
+import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
+import org.eclipse.emf.common.ui.viewer.ColumnViewerInformationControlToolTipSupport;
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
+import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
+import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
+import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.DecoratingColumLabelProvider;
+import org.eclipse.emf.edit.ui.provider.DiagnosticDecorator;
+import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
+import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
+import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
@@ -55,6 +92,18 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.scada.configuration.component.provider.ComponentItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.ecore.ui.ExtendedAdapterFactoryContentProvider;
+import org.eclipse.scada.configuration.globalization.provider.GlobalizeItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.infrastructure.provider.InfrastructureItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.item.provider.ItemItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.security.provider.SecurityItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.world.deployment.provider.DeploymentItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.world.osgi.profile.provider.ProfileItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.world.osgi.provider.OsgiItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.world.provider.WorldItemProviderAdapterFactory;
+import org.eclipse.scada.da.exec.configuration.provider.ConfigurationItemProviderAdapterFactory;
+import org.eclipse.scada.da.ui.connection.dnd.ItemTransfer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
@@ -77,6 +126,7 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
@@ -87,52 +137,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CommandStackListener;
-import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.ui.MarkerHelper;
-import org.eclipse.emf.common.ui.ViewerPane;
-import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
-import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
-import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
-import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
-import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
-import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
-import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
-import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
-import org.eclipse.emf.edit.ui.util.EditUIUtil;
-import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-import org.eclipse.scada.configuration.component.provider.ComponentItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.globalization.provider.GlobalizeItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.infrastructure.provider.InfrastructureItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.item.provider.ItemItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.security.provider.SecurityItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.world.deployment.provider.DeploymentItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.world.osgi.profile.provider.ProfileItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.world.osgi.provider.OsgiItemProviderAdapterFactory;
-import org.eclipse.scada.configuration.world.provider.WorldItemProviderAdapterFactory;
-import org.eclipse.scada.da.exec.configuration.provider.ConfigurationItemProviderAdapterFactory;
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 /**
  * This is an example of a Component model editor.
@@ -486,23 +490,33 @@ public class ComponentEditor
 
                             protected Collection<Resource> removedResources = new ArrayList<Resource> ();
 
-                            public boolean visit ( IResourceDelta delta )
+                            public boolean visit ( final IResourceDelta delta )
                             {
                                 if ( delta.getResource ().getType () == IResource.FILE )
                                 {
                                     if ( delta.getKind () == IResourceDelta.REMOVED ||
-                                            delta.getKind () == IResourceDelta.CHANGED && delta.getFlags () != IResourceDelta.MARKERS )
+                                            delta.getKind () == IResourceDelta.CHANGED )
                                     {
-                                        Resource resource = resourceSet.getResource ( URI.createPlatformResourceURI ( delta.getFullPath ().toString (), true ), false );
+                                        final Resource resource = resourceSet.getResource ( URI.createPlatformResourceURI ( delta.getFullPath ().toString (), true ), false );
                                         if ( resource != null )
                                         {
                                             if ( delta.getKind () == IResourceDelta.REMOVED )
                                             {
                                                 removedResources.add ( resource );
                                             }
-                                            else if ( !savedResources.remove ( resource ) )
+                                            else
                                             {
-                                                changedResources.add ( resource );
+                                                if ( ( delta.getFlags () & IResourceDelta.MARKERS ) != 0 )
+                                                {
+                                                    DiagnosticDecorator.DiagnosticAdapter.update ( resource, markerHelper.getMarkerDiagnostics ( resource, (IFile)delta.getResource () ) );
+                                                }
+                                                if ( ( delta.getFlags () & IResourceDelta.CONTENT ) != 0 )
+                                                {
+                                                    if ( !savedResources.remove ( resource ) )
+                                                    {
+                                                        changedResources.add ( resource );
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -869,6 +883,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EditingDomain getEditingDomain ()
     {
         return editingDomain;
@@ -1016,31 +1031,39 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Viewer getViewer ()
     {
         return currentViewer;
     }
 
     /**
-     * This creates a context menu for the viewer and adds a listener as well registering the menu for extension.
+     * This creates a context menu for the viewer and adds a listener as well
+     * registering the menu for extension.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     *
+     * @generated NOT
      */
-    protected void createContextMenuFor ( StructuredViewer viewer )
+    protected void createContextMenuFor ( final StructuredViewer viewer )
     {
-        MenuManager contextMenu = new MenuManager ( "#PopUp" ); //$NON-NLS-1$
+        final MenuManager contextMenu = new MenuManager ( "#PopUp" ); //$NON-NLS-1$
         contextMenu.add ( new Separator ( "additions" ) ); //$NON-NLS-1$
         contextMenu.setRemoveAllWhenShown ( true );
         contextMenu.addMenuListener ( this );
-        Menu menu = contextMenu.createContextMenu ( viewer.getControl () );
+        final Menu menu = contextMenu.createContextMenu ( viewer.getControl () );
         viewer.getControl ().setMenu ( menu );
         getSite ().registerContextMenu ( contextMenu, new UnwrappingSelectionProvider ( viewer ) );
 
-        int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
-        Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance (), LocalSelectionTransfer.getTransfer (), FileTransfer.getInstance () };
+        final int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
+        final Transfer[] transfers = new Transfer[] {
+                LocalTransfer.getInstance (),
+                LocalSelectionTransfer.getTransfer (),
+                FileTransfer.getInstance (),
+                ItemTransfer.getInstance ()
+        };
         viewer.addDragSupport ( dndOperations, transfers, new ViewerDragAdapter ( viewer ) );
-        viewer.addDropSupport ( dndOperations, transfers, new EditingDomainViewerDropAdapter ( editingDomain, viewer ) );
+        viewer.addDropSupport ( dndOperations, transfers, new DropAdapterExtension ( this.editingDomain, viewer ) );
     }
 
     /**
@@ -1150,12 +1173,13 @@ public class ComponentEditor
                 selectionViewer = (TreeViewer)viewerPane.getViewer ();
                 selectionViewer.setContentProvider ( new AdapterFactoryContentProvider ( adapterFactory ) );
 
-                selectionViewer.setLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ) );
+                selectionViewer.setLabelProvider ( new DecoratingColumLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ), new DiagnosticDecorator ( editingDomain, selectionViewer, ComponentEditorPlugin.getPlugin ().getDialogSettings () ) ) );
                 selectionViewer.setInput ( editingDomain.getResourceSet () );
                 selectionViewer.setSelection ( new StructuredSelection ( editingDomain.getResourceSet ().getResources ().get ( 0 ) ), true );
                 viewerPane.setTitle ( editingDomain.getResourceSet () );
 
                 new AdapterFactoryTreeEditor ( selectionViewer.getTree (), adapterFactory );
+                new ColumnViewerInformationControlToolTipSupport ( selectionViewer, new DiagnosticDecorator.EditingDomainLocationListener ( editingDomain, selectionViewer ) );
 
                 createContextMenuFor ( selectionViewer );
                 int pageIndex = addPage ( viewerPane.getControl () );
@@ -1246,9 +1270,10 @@ public class ComponentEditor
                 viewerPane.createControl ( getContainer () );
                 treeViewer = (TreeViewer)viewerPane.getViewer ();
                 treeViewer.setContentProvider ( new AdapterFactoryContentProvider ( adapterFactory ) );
-                treeViewer.setLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ) );
+                treeViewer.setLabelProvider ( new DecoratingColumLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ), new DiagnosticDecorator ( editingDomain, treeViewer ) ) );
 
                 new AdapterFactoryTreeEditor ( treeViewer.getTree (), adapterFactory );
+                new ColumnViewerInformationControlToolTipSupport ( treeViewer, new DiagnosticDecorator.EditingDomainLocationListener ( editingDomain, treeViewer ) );
 
                 createContextMenuFor ( treeViewer );
                 int pageIndex = addPage ( viewerPane.getControl () );
@@ -1295,7 +1320,9 @@ public class ComponentEditor
 
                 tableViewer.setColumnProperties ( new String[] { "a", "b" } ); //$NON-NLS-1$ //$NON-NLS-2$
                 tableViewer.setContentProvider ( new AdapterFactoryContentProvider ( adapterFactory ) );
-                tableViewer.setLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ) );
+                tableViewer.setLabelProvider ( new DecoratingColumLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ), new DiagnosticDecorator ( editingDomain, tableViewer, ComponentEditorPlugin.getPlugin ().getDialogSettings () ) ) );
+
+                new ColumnViewerInformationControlToolTipSupport ( tableViewer, new DiagnosticDecorator.EditingDomainLocationListener ( editingDomain, tableViewer ) );
 
                 createContextMenuFor ( tableViewer );
                 int pageIndex = addPage ( viewerPane.getControl () );
@@ -1342,7 +1369,9 @@ public class ComponentEditor
 
                 treeViewerWithColumns.setColumnProperties ( new String[] { "a", "b" } ); //$NON-NLS-1$ //$NON-NLS-2$
                 treeViewerWithColumns.setContentProvider ( new AdapterFactoryContentProvider ( adapterFactory ) );
-                treeViewerWithColumns.setLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ) );
+                treeViewerWithColumns.setLabelProvider ( new DecoratingColumLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ), new DiagnosticDecorator ( editingDomain, treeViewerWithColumns, ComponentEditorPlugin.getPlugin ().getDialogSettings () ) ) );
+
+                new ColumnViewerInformationControlToolTipSupport ( treeViewerWithColumns, new DiagnosticDecorator.EditingDomainLocationListener ( editingDomain, treeViewerWithColumns ) );
 
                 createContextMenuFor ( treeViewerWithColumns );
                 int pageIndex = addPage ( viewerPane.getControl () );
@@ -1500,8 +1529,10 @@ public class ComponentEditor
                     // Set up the tree viewer.
                     //
                     contentOutlineViewer.setContentProvider ( new AdapterFactoryContentProvider ( adapterFactory ) );
-                    contentOutlineViewer.setLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ) );
+                    contentOutlineViewer.setLabelProvider ( new DecoratingColumLabelProvider ( new AdapterFactoryLabelProvider ( adapterFactory ), new DiagnosticDecorator ( editingDomain, contentOutlineViewer, ComponentEditorPlugin.getPlugin ().getDialogSettings () ) ) );
                     contentOutlineViewer.setInput ( editingDomain.getResourceSet () );
+
+                    new ColumnViewerInformationControlToolTipSupport ( contentOutlineViewer, new DiagnosticDecorator.EditingDomainLocationListener ( editingDomain, contentOutlineViewer ) );
 
                     // Make sure our popups work.
                     //
@@ -1553,29 +1584,30 @@ public class ComponentEditor
      * This accesses a cached version of the property sheet.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     *
+     * @generated NOT
      */
     public IPropertySheetPage getPropertySheetPage ()
     {
-        PropertySheetPage propertySheetPage =
-                new ExtendedPropertySheetPage ( editingDomain )
+        final PropertySheetPage propertySheetPage =
+                new ExtendedPropertySheetPage ( this.editingDomain, ExtendedPropertySheetPage.Decoration.LIVE, ComponentEditorPlugin.getPlugin ().getDialogSettings () )
                 {
                     @Override
-                    public void setSelectionToViewer ( List<?> selection )
+                    public void setSelectionToViewer ( final List<?> selection )
                     {
                         ComponentEditor.this.setSelectionToViewer ( selection );
                         ComponentEditor.this.setFocus ();
                     }
 
                     @Override
-                    public void setActionBars ( IActionBars actionBars )
+                    public void setActionBars ( final IActionBars actionBars )
                     {
                         super.setActionBars ( actionBars );
                         getActionBarContributor ().shareGlobalActions ( this, actionBars );
                     }
                 };
-        propertySheetPage.setPropertySourceProvider ( new AdapterFactoryContentProvider ( adapterFactory ) );
-        propertySheetPages.add ( propertySheetPage );
+        propertySheetPage.setPropertySourceProvider ( new ExtendedAdapterFactoryContentProvider ( this.adapterFactory ) );
+        this.propertySheetPages.add ( propertySheetPage );
 
         return propertySheetPage;
     }
@@ -1793,6 +1825,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void gotoMarker ( IMarker marker )
     {
         List<?> targetObjects = markerHelper.getTargetObjects ( editingDomain, marker );
@@ -1843,6 +1876,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void addSelectionChangedListener ( ISelectionChangedListener listener )
     {
         selectionChangedListeners.add ( listener );
@@ -1854,6 +1888,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void removeSelectionChangedListener ( ISelectionChangedListener listener )
     {
         selectionChangedListeners.remove ( listener );
@@ -1865,6 +1900,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public ISelection getSelection ()
     {
         return editorSelection;
@@ -1877,6 +1913,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setSelection ( ISelection selection )
     {
         editorSelection = selection;
@@ -1958,6 +1995,7 @@ public class ComponentEditor
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void menuAboutToShow ( IMenuManager menuManager )
     {
         ( (IMenuListener)getEditorSite ().getActionBarContributor () ).menuAboutToShow ( menuManager );

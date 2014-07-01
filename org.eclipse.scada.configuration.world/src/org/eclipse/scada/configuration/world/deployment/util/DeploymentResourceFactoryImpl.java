@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,8 @@ package org.eclipse.scada.configuration.world.deployment.util;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +40,16 @@ public class DeploymentResourceFactoryImpl extends ResourceFactoryImpl
      * Creates an instance of the resource.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Resource createResource ( URI uri )
+    public Resource createResource ( final URI uri )
     {
-        Resource result = new DeploymentResourceImpl ( uri );
+        final XMLResource result = new DeploymentResourceImpl ( uri );
+
+        result.getDefaultSaveOptions ().put ( XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware () );
+
         return result;
     }
 

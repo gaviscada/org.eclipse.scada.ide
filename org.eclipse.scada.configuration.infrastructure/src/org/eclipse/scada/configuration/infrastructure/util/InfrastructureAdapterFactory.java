@@ -273,6 +273,48 @@ public class InfrastructureAdapterFactory extends AdapterFactoryImpl
         }
 
         @Override
+        public Adapter caseWebAdminConsole ( WebAdminConsole object )
+        {
+            return createWebAdminConsoleAdapter ();
+        }
+
+        @Override
+        public Adapter caseOracleVMSettings ( OracleVMSettings object )
+        {
+            return createOracleVMSettingsAdapter ();
+        }
+
+        @Override
+        public Adapter caseGenericVMSettings ( GenericVMSettings object )
+        {
+            return createGenericVMSettingsAdapter ();
+        }
+
+        @Override
+        public Adapter caseAbstractEquinoxDriver ( AbstractEquinoxDriver object )
+        {
+            return createAbstractEquinoxDriverAdapter ();
+        }
+
+        @Override
+        public Adapter caseEquinoxBase ( EquinoxBase object )
+        {
+            return createEquinoxBaseAdapter ();
+        }
+
+        @Override
+        public Adapter caseDatabaseSettings ( DatabaseSettings object )
+        {
+            return createDatabaseSettingsAdapter ();
+        }
+
+        @Override
+        public Adapter caseAbstractCommonDriver ( AbstractCommonDriver object )
+        {
+            return createAbstractCommonDriverAdapter ();
+        }
+
+        @Override
         public Adapter caseDocumentable ( Documentable object )
         {
             return createDocumentableAdapter ();
@@ -770,6 +812,111 @@ public class InfrastructureAdapterFactory extends AdapterFactoryImpl
      * @generated
      */
     public Adapter createSettingsAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.WebAdminConsole <em>Web Admin Console</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.WebAdminConsole
+     * @generated
+     */
+    public Adapter createWebAdminConsoleAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.OracleVMSettings <em>Oracle VM Settings</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.OracleVMSettings
+     * @generated
+     */
+    public Adapter createOracleVMSettingsAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.GenericVMSettings <em>Generic VM Settings</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.GenericVMSettings
+     * @generated
+     */
+    public Adapter createGenericVMSettingsAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.AbstractEquinoxDriver <em>Abstract Equinox Driver</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.AbstractEquinoxDriver
+     * @generated
+     */
+    public Adapter createAbstractEquinoxDriverAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.EquinoxBase <em>Equinox Base</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.EquinoxBase
+     * @generated
+     */
+    public Adapter createEquinoxBaseAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.DatabaseSettings <em>Database Settings</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.DatabaseSettings
+     * @generated
+     */
+    public Adapter createDatabaseSettingsAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.configuration.infrastructure.AbstractCommonDriver <em>Abstract Common Driver</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.configuration.infrastructure.AbstractCommonDriver
+     * @generated
+     */
+    public Adapter createAbstractCommonDriverAdapter ()
     {
         return null;
     }

@@ -99,7 +99,7 @@ public class ApplicationConfigurationItemProvider
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_namingPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -122,7 +122,7 @@ public class ApplicationConfigurationItemProvider
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_namingPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -234,6 +234,21 @@ public class ApplicationConfigurationItemProvider
                 ( createChildParameter
                 ( InfrastructurePackage.Literals.APPLICATION_CONFIGURATION__MODULES,
                         InfrastructureFactory.eINSTANCE.createRestExporterModule () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.APPLICATION_CONFIGURATION__MODULES,
+                        InfrastructureFactory.eINSTANCE.createWebAdminConsole () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.APPLICATION_CONFIGURATION__MODULES,
+                        InfrastructureFactory.eINSTANCE.createOracleVMSettings () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.APPLICATION_CONFIGURATION__MODULES,
+                        InfrastructureFactory.eINSTANCE.createGenericVMSettings () ) );
 
         newChildDescriptors.add
                 ( createChildParameter

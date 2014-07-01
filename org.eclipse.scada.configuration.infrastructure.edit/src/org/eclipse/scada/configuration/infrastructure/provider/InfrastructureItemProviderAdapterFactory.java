@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -568,6 +568,106 @@ public class InfrastructureItemProviderAdapterFactory extends InfrastructureAdap
         }
 
         return valueArchiveSlaveItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.infrastructure.WebAdminConsole} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected WebAdminConsoleItemProvider webAdminConsoleItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.infrastructure.WebAdminConsole}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createWebAdminConsoleAdapter ()
+    {
+        if ( webAdminConsoleItemProvider == null )
+        {
+            webAdminConsoleItemProvider = new WebAdminConsoleItemProvider ( this );
+        }
+
+        return webAdminConsoleItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.infrastructure.OracleVMSettings} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected OracleVMSettingsItemProvider oracleVMSettingsItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.infrastructure.OracleVMSettings}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createOracleVMSettingsAdapter ()
+    {
+        if ( oracleVMSettingsItemProvider == null )
+        {
+            oracleVMSettingsItemProvider = new OracleVMSettingsItemProvider ( this );
+        }
+
+        return oracleVMSettingsItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.infrastructure.GenericVMSettings} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected GenericVMSettingsItemProvider genericVMSettingsItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.infrastructure.GenericVMSettings}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createGenericVMSettingsAdapter ()
+    {
+        if ( genericVMSettingsItemProvider == null )
+        {
+            genericVMSettingsItemProvider = new GenericVMSettingsItemProvider ( this );
+        }
+
+        return genericVMSettingsItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.infrastructure.DatabaseSettings} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected DatabaseSettingsItemProvider databaseSettingsItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.infrastructure.DatabaseSettings}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createDatabaseSettingsAdapter ()
+    {
+        if ( databaseSettingsItemProvider == null )
+        {
+            databaseSettingsItemProvider = new DatabaseSettingsItemProvider ( this );
+        }
+
+        return databaseSettingsItemProvider;
     }
 
     /**

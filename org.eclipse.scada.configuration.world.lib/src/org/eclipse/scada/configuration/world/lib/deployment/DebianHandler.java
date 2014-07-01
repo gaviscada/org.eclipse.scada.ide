@@ -11,8 +11,6 @@
 package org.eclipse.scada.configuration.world.lib.deployment;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,6 +29,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.scada.configuration.world.ApplicationNode;
 import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
 import org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.StartupMechanism;
+import org.eclipse.scada.configuration.world.lib.deployment.startup.StartupHandler;
 import org.eclipse.scada.configuration.world.lib.utils.Helper;
 import org.eclipse.scada.configuration.world.lib.utils.ProcessRunner;
 import org.eclipse.scada.utils.str.StringHelper;
@@ -46,7 +46,7 @@ public class DebianHandler extends CommonPackageHandler
 
     public DebianHandler ( final ApplicationNode applicationNode, final DebianDeploymentMechanism deploy )
     {
-        super ( applicationNode );
+        super ( applicationNode, deploy );
         this.deploy = deploy;
     }
 
@@ -68,8 +68,8 @@ public class DebianHandler extends CommonPackageHandler
         replacements.put ( "authorName", this.deploy.getMaintainer ().getName () ); //$NON-NLS-1$
         replacements.put ( "authorEmail", this.deploy.getMaintainer ().getEmail () ); //$NON-NLS-1$
         replacements.put ( "nodeName", this.applicationNode.getName () == null ? this.applicationNode.getHostName () : this.applicationNode.getName () ); //$NON-NLS-1$
-        replacements.put ( "postinst.restart", createPostInst ( makeDriverList () ) ); //$NON-NLS-1$
-        replacements.put ( "prerm.stop", createPreRm ( makeDriverList () ) ); //$NON-NLS-1$
+        replacements.put ( "postinst.restart", createPostInst () ); //$NON-NLS-1$
+        replacements.put ( "prerm.stop", createPreRm () ); //$NON-NLS-1$
         replacements.put ( "depends", makeDependencies () ); //$NON-NLS-1$
 
         replacements.put ( "postinst.scripts", createScriptFile ( packageFolder, "postinst" ) );
@@ -87,8 +87,10 @@ public class DebianHandler extends CommonPackageHandler
         Helper.createFile ( new File ( packageFolder, "debian/control" ), DebianHandler.class.getResourceAsStream ( "templates/deb/control" ), replacements, monitor );
         Helper.createFile ( new File ( packageFolder, "debian/changelog" ), createChangeLog ( packageName, this.deploy.getChanges () ), monitor );
 
-        createDrivers ( nodeDir, monitor, packageFolder, replacements );
-        createEquinox ( nodeDir.getLocation ().toFile (), packageFolder, replacements, monitor );
+        final BinaryPackageBuilderWrapper builder = new BinaryPackageBuilderWrapper ( new File ( packageFolder, "src" ) );
+
+        createDrivers ( builder, nodeDir, monitor, packageFolder, replacements );
+        createEquinox ( builder, nodeDir.getLocation ().toFile (), packageFolder, replacements, monitor );
 
         // run debuild
 
@@ -135,17 +137,9 @@ public class DebianHandler extends CommonPackageHandler
     }
 
     @Override
-    protected void processDriver ( final IProgressMonitor monitor, final File packageFolder, final Map<String, String> replacements, final String driverName, final File sourceDir, final File driverDir ) throws IOException, Exception
+    protected StartupMechanism getDefaultStartupMechanism ()
     {
-        super.processDriver ( monitor, packageFolder, replacements, driverName, sourceDir, driverDir );
-        Helper.createFile ( new File ( packageFolder, "src/etc/init/scada.driver." + driverName + ".conf" ), DebianHandler.class.getResourceAsStream ( "templates/deb/driver.upstart.conf" ), replacements, monitor );
-    }
-
-    @Override
-    protected void processEquinox ( final File sourceBase, final File packageFolder, final Map<String, String> replacements, final IProgressMonitor monitor, final String name ) throws IOException, Exception, FileNotFoundException
-    {
-        super.processEquinox ( sourceBase, packageFolder, replacements, monitor, name );
-        Helper.createFile ( new File ( packageFolder, "src/etc/init/scada.app." + name + ".conf" ), DebianHandler.class.getResourceAsStream ( "templates/deb/p2.upstart.conf" ), replacements, monitor );
+        return StartupMechanism.UPSTART;
     }
 
     private String makeDependencies ()
@@ -162,30 +156,82 @@ public class DebianHandler extends CommonPackageHandler
         result.add ( "org.eclipse.scada.deploy.p2-incubation" ); //$NON-NLS-1$
         result.addAll ( this.deploy.getAdditionalDependencies () );
 
+        final StartupHandler sh = getStartupHandler ();
+        if ( sh != null )
+        {
+            result.addAll ( sh.getAdditionalPackageDependencies () );
+        }
+
         return StringHelper.join ( result, ", " ); //$NON-NLS-1$
     }
 
-    private String createPostInst ( final Set<String> driverName )
+    private String createPostInst ()
     {
+        final StartupHandler sh = getStartupHandler ();
+        if ( sh == null )
+        {
+            return "";
+        }
+
         final StringBuilder sb = new StringBuilder ();
 
-        for ( final String driver : driverName )
+        for ( final String driver : makeDriverList () )
         {
-            sb.append ( String.format ( "    restart scada.driver.%1$s || echo failed to restart %1$s", driver ) );
-            sb.append ( "\n" );
+            final String cmd = sh.restartDriverCommand ( driver );
+            if ( cmd == null )
+            {
+                continue;
+            }
+
+            sb.append ( String.format ( "    %s || echo failed to restart %s", cmd, driver ) );
+            sb.append ( '\n' );
+        }
+
+        for ( final String app : makeEquinoxList () )
+        {
+            final String cmd = sh.restartEquinoxCommand ( app );
+            if ( cmd == null )
+            {
+                continue;
+            }
+
+            sb.append ( String.format ( "    %s || echo failed to restart %s", cmd, app ) );
+            sb.append ( '\n' );
         }
 
         return sb.toString ();
     }
 
-    private String createPreRm ( final Set<String> driverName )
+    private String createPreRm ()
     {
         final StringBuilder sb = new StringBuilder ();
 
-        for ( final String driver : driverName )
+        final StartupHandler sh = getStartupHandler ();
+        if ( sh == null )
         {
-            sb.append ( String.format ( "    stop scada.driver.%1$s || echo failed to restart %1$s", driver ) );
-            sb.append ( "\n" );
+            return "";
+        }
+
+        for ( final String driver : makeDriverList () )
+        {
+            final String cmd = sh.stopDriverCommand ( driver );
+            if ( cmd == null )
+            {
+                continue;
+            }
+            sb.append ( String.format ( "    %s || echo failed to stop %s", cmd, driver ) );
+            sb.append ( '\n' );
+        }
+
+        for ( final String app : makeEquinoxList () )
+        {
+            final String cmd = sh.stopEquinoxCommand ( app );
+            if ( cmd == null )
+            {
+                continue;
+            }
+            sb.append ( String.format ( "    %s || echo failed to stop %s", cmd, app ) );
+            sb.append ( '\n' );
         }
 
         return sb.toString ();
@@ -202,7 +248,7 @@ public class DebianHandler extends CommonPackageHandler
         {
             sb.append ( String.format ( "%s (%s) stable; urgency=low\n", packageName, entry.getVersion () ) );
             sb.append ( '\n' );
-            sb.append ( entry.getDescription () );
+            sb.append ( "  * " + entry.getDescription () );
             sb.append ( '\n' );
             sb.append ( '\n' ); // additional empty line
 

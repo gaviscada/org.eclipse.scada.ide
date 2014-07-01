@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -144,19 +144,7 @@ public class CommonDriverItemProvider extends AbstractFactoryDriverItemProvider 
     @Override
     public String getText ( final Object object )
     {
-        final CommonDriver driver = (CommonDriver)object;
-
-        final String label;
-        if ( driver.getNode () != null )
-        {
-            label = String.format ( "%s @ %s", driver.getName (), driver.getNode ().getHostName () );
-        }
-        else
-        {
-            label = String.format ( "%s @ <none>", driver.getName () );
-        }
-
-        return getString ( "_UI_CommonDriver_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return getDriverLabel ( (CommonDriver)object, getString ( "_UI_CommonDriver_type" ) );
     }
 
     /**

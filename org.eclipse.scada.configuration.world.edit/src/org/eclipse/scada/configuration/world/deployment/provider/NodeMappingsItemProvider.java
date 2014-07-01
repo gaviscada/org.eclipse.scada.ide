@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,12 +13,8 @@ package org.eclipse.scada.configuration.world.deployment.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -26,14 +22,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.scada.configuration.world.deployment.DeploymentFactory;
-import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
-import org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode;
+import org.eclipse.scada.configuration.world.deployment.FallbackMappingMode;
 import org.eclipse.scada.configuration.world.deployment.NodeMappings;
-import org.eclipse.scada.configuration.world.provider.WorldEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.world.deployment.NodeMappings} object.
@@ -41,7 +31,7 @@ import org.eclipse.scada.configuration.world.provider.WorldEditPlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class NodeMappingsItemProvider extends ItemProviderAdapter implements
+public class NodeMappingsItemProvider extends MappingsItemProvider implements
         IEditingDomainItemProvider, IStructuredItemContentProvider,
         ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource,
         ITableItemLabelProvider
@@ -70,66 +60,8 @@ public class NodeMappingsItemProvider extends ItemProviderAdapter implements
         {
             super.getPropertyDescriptors ( object );
 
-            addFallbackModePropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
-    }
-
-    /**
-     * This adds a property descriptor for the Fallback Mode feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addFallbackModePropertyDescriptor ( Object object )
-    {
-        itemPropertyDescriptors.add
-                ( createItemPropertyDescriptor
-                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_NodeMappings_fallbackMode_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_NodeMappings_fallbackMode_feature", "_UI_NodeMappings_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        DeploymentPackage.Literals.NODE_MAPPINGS__FALLBACK_MODE,
-                        true,
-                        false,
-                        false,
-                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
-                        null ) );
-    }
-
-    /**
-     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Collection<? extends EStructuralFeature> getChildrenFeatures (
-            Object object )
-    {
-        if ( childrenFeatures == null )
-        {
-            super.getChildrenFeatures ( object );
-            childrenFeatures.add ( DeploymentPackage.Literals.NODE_MAPPINGS__ENTRIES );
-        }
-        return childrenFeatures;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    protected EStructuralFeature getChildFeature ( Object object, Object child )
-    {
-        // Check the type of the specified child object and return the proper feature to use for
-        // adding (see {@link AddCommand}) it as a child.
-
-        return super.getChildFeature ( object, child );
     }
 
     /**
@@ -153,7 +85,7 @@ public class NodeMappingsItemProvider extends ItemProviderAdapter implements
     @Override
     public String getText ( Object object )
     {
-        FallbackNodeMappingMode labelValue = ( (NodeMappings)object ).getFallbackMode ();
+        FallbackMappingMode labelValue = ( (NodeMappings)object ).getFallbackMode ();
         String label = labelValue == null ? null : labelValue.toString ();
         return label == null || label.length () == 0 ?
                 getString ( "_UI_NodeMappings_type" ) : //$NON-NLS-1$
@@ -171,16 +103,6 @@ public class NodeMappingsItemProvider extends ItemProviderAdapter implements
     public void notifyChanged ( Notification notification )
     {
         updateChildren ( notification );
-
-        switch ( notification.getFeatureID ( NodeMappings.class ) )
-        {
-            case DeploymentPackage.NODE_MAPPINGS__FALLBACK_MODE:
-                fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
-                return;
-            case DeploymentPackage.NODE_MAPPINGS__ENTRIES:
-                fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), true, false ) );
-                return;
-        }
         super.notifyChanged ( notification );
     }
 
@@ -196,28 +118,6 @@ public class NodeMappingsItemProvider extends ItemProviderAdapter implements
             Collection<Object> newChildDescriptors, Object object )
     {
         super.collectNewChildDescriptors ( newChildDescriptors, object );
-
-        newChildDescriptors.add
-                ( createChildParameter
-                ( DeploymentPackage.Literals.NODE_MAPPINGS__ENTRIES,
-                        DeploymentFactory.eINSTANCE.createExpressionNodeMappingEntry () ) );
-
-        newChildDescriptors.add
-                ( createChildParameter
-                ( DeploymentPackage.Literals.NODE_MAPPINGS__ENTRIES,
-                        DeploymentFactory.eINSTANCE.createSimpleNodeMappingEntry () ) );
-    }
-
-    /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public ResourceLocator getResourceLocator ()
-    {
-        return WorldEditPlugin.INSTANCE;
     }
 
 }

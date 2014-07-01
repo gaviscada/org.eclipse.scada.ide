@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.scada.configuration.world.Node;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
 import org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry;
 
@@ -160,25 +159,21 @@ public class ExpressionNodeMappingEntryImpl extends
      * @generated NOT
      */
     @Override
-    public boolean mapNode ( final Node node )
+    public String map ( final String from )
     {
-        if ( node == null || node.getHostName () == null )
+        if ( from == null )
         {
-            return false;
+            return null;
         }
 
-        // recompile as case insensitve
-        final Pattern pattern = Pattern.compile ( getPattern ().pattern (),
-                Pattern.CASE_INSENSITIVE );
-        final Matcher m = pattern.matcher ( node.getHostName () );
+        final Matcher m = getPattern ().matcher ( from );
         if ( m.matches () )
         {
-            node.setHostName ( m.replaceAll ( this.replacement ) );
-            return true;
+            return m.replaceAll ( this.replacement );
         }
         else
         {
-            return false;
+            return null;
         }
     }
 
@@ -269,8 +264,8 @@ public class ExpressionNodeMappingEntryImpl extends
     {
         switch ( operationID )
         {
-            case DeploymentPackage.EXPRESSION_NODE_MAPPING_ENTRY___MAP_NODE__NODE:
-                return mapNode ( (Node)arguments.get ( 0 ) );
+            case DeploymentPackage.EXPRESSION_NODE_MAPPING_ENTRY___MAP__STRING:
+                return map ( (String)arguments.get ( 0 ) );
         }
         return super.eInvoke ( operationID, arguments );
     }

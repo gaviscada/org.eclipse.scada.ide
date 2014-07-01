@@ -234,7 +234,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_6kqAwfOEEeK6AdOYc1mm4A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="component.ecore#//DataMapperAnalyzer"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6kqAwvOEEeK6AdOYc1mm4A" x="792" y="516"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6kqAwvOEEeK6AdOYc1mm4A" x="816" y="576"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_yMJLwPOGEeK6AdOYc1mm4A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_yMQggPOGEeK6AdOYc1mm4A" type="4001"/>
@@ -269,7 +269,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_o59ZQfOHEeK6AdOYc1mm4A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="component.ecore#//DataMapperService"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_o59ZQvOHEeK6AdOYc1mm4A" x="1164" y="516"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_o59ZQvOHEeK6AdOYc1mm4A" x="1176" y="564"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="__462EPOMEeK6AdOYc1mm4A" type="1001">
     <children xmi:type="notation:Node" xmi:id="__5AVoPOMEeK6AdOYc1mm4A" type="4001"/>
@@ -602,7 +602,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_f0g5ceDhEeOpg4BGGiolrw" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.eclipse.scada.configuration.world/model/configuration.ecore#//PropertyEntry"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_f0g5cuDhEeOpg4BGGiolrw" x="1020" y="300"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_f0g5cuDhEeOpg4BGGiolrw" x="1080" y="336"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_oACEwe0-EeKGXeBKLQA3cw"/>
   <element xmi:type="ecore:EPackage" href="component.ecore#/"/>
@@ -763,7 +763,7 @@
     <element xmi:type="ecore:EReference" href="component.ecore#//DataMapperAnalyzer/dataMapper"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_pSPWY_OHEeK6AdOYc1mm4A" points="[78, 5, -271, -11]$[276, 22, -73, 6]"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_CP_bIPONEeK6AdOYc1mm4A" type="3003" source="__462EPOMEeK6AdOYc1mm4A" target="_aiwFkGNFEeO9EKVyUKzxnQ">
+  <edges xmi:type="notation:Edge" xmi:id="_CP_bIPONEeK6AdOYc1mm4A" type="3003" source="__462EPOMEeK6AdOYc1mm4A" target="_r4z68O7wEeKfz8wEznvEdQ">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_CP_bIfONEeK6AdOYc1mm4A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_CP_bIvONEeK6AdOYc1mm4A" fontName="Sans"/>
     <element xsi:nil="true"/>
@@ -987,17 +987,11 @@
     <element xmi:type="ecore:EReference" href="platform:/resource/org.eclipse.scada.configuration.infrastructure/model/infrastructure.ecore#//MasterServer/driver"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__VkQs3h7EeOnu99lvUIkKg" points="[-34, -29, 863, 745]$[-896, -773, 1, 1]"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_oyIr8IJ_EeOQC-jE1OzfjA" type="3003" source="__462EPOMEeK6AdOYc1mm4A" target="_oxJNcIJ_EeOQC-jE1OzfjA">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_oyIr8YJ_EeOQC-jE1OzfjA" routing="Rectilinear" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_oyIr8oJ_EeOQC-jE1OzfjA" fontName="Sans"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oyIr84J_EeOQC-jE1OzfjA" points="[-21, -24, 336, 397]$[-356, -420, 1, 1]"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_oyKhIIJ_EeOQC-jE1OzfjA" type="3003" source="_jhEfoPOgEeK6AdOYc1mm4A" target="_oxJNcIJ_EeOQC-jE1OzfjA">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_oyKhIYJ_EeOQC-jE1OzfjA" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_oyKhIoJ_EeOQC-jE1OzfjA" fontName="Sans"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oyKhI4J_EeOQC-jE1OzfjA" points="[-20, -20, 304, 313]$[-323, -332, 1, 1]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oyKhI4J_EeOQC-jE1OzfjA" points="[84, -8, -515, 147]$[600, -8, 1, 147]$[600, -122, 1, 33]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_qqFFAIJ_EeOQC-jE1OzfjA" type="3003" source="_oxJNcIJ_EeOQC-jE1OzfjA" target="_qp--YIJ_EeOQC-jE1OzfjA">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_qqFFAYJ_EeOQC-jE1OzfjA" routing="Rectilinear" lineColor="4210752"/>

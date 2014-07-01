@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -164,6 +164,15 @@ public interface ComponentFactory extends EFactory
      * @generated
      */
     ItemReferenceInputDefinition createItemReferenceInputDefinition ();
+
+    /**
+     * Returns a new object of class '<em>Item Reference Output Definition</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Item Reference Output Definition</em>'.
+     * @generated
+     */
+    ItemReferenceOutputDefinition createItemReferenceOutputDefinition ();
 
     /**
      * Returns a new object of class '<em>Reference Input Definition</em>'.

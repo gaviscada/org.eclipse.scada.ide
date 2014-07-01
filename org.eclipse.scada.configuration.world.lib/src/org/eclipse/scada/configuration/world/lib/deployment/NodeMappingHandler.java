@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,41 +17,34 @@ import org.eclipse.scada.configuration.utils.TypeVisitor;
 import org.eclipse.scada.configuration.utils.TypeWalker;
 import org.eclipse.scada.configuration.world.Node;
 import org.eclipse.scada.configuration.world.World;
-import org.eclipse.scada.configuration.world.deployment.NodeMappingEntry;
-import org.eclipse.scada.configuration.world.deployment.NodeMappings;
+import org.eclipse.scada.configuration.world.WorldPackage;
+import org.eclipse.scada.configuration.world.deployment.Mappings;
 
-public class NodeMappingHandler implements TypeVisitor<Node>
+public class NodeMappingHandler extends AbstractMapper
 {
     @Inject
     private World worldModel;
 
     @Inject
-    private NodeMappings nodeMappings;
+    private Mappings nodeMappings;
+
+    @Override
+    protected Mappings getMappings ()
+    {
+        return this.nodeMappings;
+    }
 
     public void execute ( final IProgressMonitor monitor ) throws Exception
     {
         monitor.setTaskName ( "Mapping nodes" );
 
-        new TypeWalker<Node> ( Node.class ).walk ( this.worldModel, this );
-    }
+        new TypeWalker<Node> ( Node.class ).walk ( this.worldModel, new TypeVisitor<Node> () {
 
-    @Override
-    public void visit ( final Node node ) throws Exception
-    {
-        for ( final NodeMappingEntry entry : this.nodeMappings.getEntries () )
-        {
-            if ( entry.mapNode ( node ) )
+            @Override
+            public void visit ( final Node node ) throws Exception
             {
-                return;
+                replaceName ( node, WorldPackage.Literals.NODE__HOST_NAME );
             }
-        }
-
-        switch ( this.nodeMappings.getFallbackMode () )
-        {
-            case IGNORE:
-                return;
-            case FAIL:
-                throw new IllegalStateException ( String.format ( "No node mapping for: %s", node ) );
-        }
+        } );
     }
 }

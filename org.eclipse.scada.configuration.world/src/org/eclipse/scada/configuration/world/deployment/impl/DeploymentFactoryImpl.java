@@ -17,20 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.scada.configuration.world.deployment.Architecture;
-import org.eclipse.scada.configuration.world.deployment.Author;
-import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
-import org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism;
-import org.eclipse.scada.configuration.world.deployment.DeploymentFactory;
-import org.eclipse.scada.configuration.world.deployment.DeploymentInformation;
-import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
-import org.eclipse.scada.configuration.world.deployment.ExpressionNodeMappingEntry;
-import org.eclipse.scada.configuration.world.deployment.FallbackNodeMappingMode;
-import org.eclipse.scada.configuration.world.deployment.MsiDeploymentMechanism;
-import org.eclipse.scada.configuration.world.deployment.NodeMappings;
-import org.eclipse.scada.configuration.world.deployment.P2Platform;
-import org.eclipse.scada.configuration.world.deployment.RedhatDeploymentMechanism;
-import org.eclipse.scada.configuration.world.deployment.SimpleNodeMappingEntry;
+import org.eclipse.scada.configuration.world.deployment.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -105,6 +92,8 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
                 return createMsiDeploymentMechanism ();
             case DeploymentPackage.P2_PLATFORM:
                 return createP2Platform ();
+            case DeploymentPackage.MAPPINGS:
+                return createMappings ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -120,10 +109,12 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
     {
         switch ( eDataType.getClassifierID () )
         {
-            case DeploymentPackage.FALLBACK_NODE_MAPPING_MODE:
-                return createFallbackNodeMappingModeFromString ( eDataType, initialValue );
+            case DeploymentPackage.FALLBACK_MAPPING_MODE:
+                return createFallbackMappingModeFromString ( eDataType, initialValue );
             case DeploymentPackage.ARCHITECTURE:
                 return createArchitectureFromString ( eDataType, initialValue );
+            case DeploymentPackage.STARTUP_MECHANISM:
+                return createStartupMechanismFromString ( eDataType, initialValue );
             default:
                 throw new IllegalArgumentException ( "The datatype '" + eDataType.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -139,10 +130,12 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
     {
         switch ( eDataType.getClassifierID () )
         {
-            case DeploymentPackage.FALLBACK_NODE_MAPPING_MODE:
-                return convertFallbackNodeMappingModeToString ( eDataType, instanceValue );
+            case DeploymentPackage.FALLBACK_MAPPING_MODE:
+                return convertFallbackMappingModeToString ( eDataType, instanceValue );
             case DeploymentPackage.ARCHITECTURE:
                 return convertArchitectureToString ( eDataType, instanceValue );
+            case DeploymentPackage.STARTUP_MECHANISM:
+                return convertStartupMechanismToString ( eDataType, instanceValue );
             default:
                 throw new IllegalArgumentException ( "The datatype '" + eDataType.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -280,10 +273,20 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
-    public FallbackNodeMappingMode createFallbackNodeMappingModeFromString (
-            EDataType eDataType, String initialValue )
+    public Mappings createMappings ()
     {
-        FallbackNodeMappingMode result = FallbackNodeMappingMode.get ( initialValue );
+        MappingsImpl mappings = new MappingsImpl ();
+        return mappings;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public FallbackMappingMode createFallbackMappingModeFromString ( EDataType eDataType, String initialValue )
+    {
+        FallbackMappingMode result = FallbackMappingMode.get ( initialValue );
         if ( result == null )
             throw new IllegalArgumentException ( "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName () + "'" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         return result;
@@ -294,7 +297,7 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
-    public String convertFallbackNodeMappingModeToString ( EDataType eDataType, Object instanceValue )
+    public String convertFallbackMappingModeToString ( EDataType eDataType, Object instanceValue )
     {
         return instanceValue == null ? null : instanceValue.toString ();
     }
@@ -318,6 +321,29 @@ public class DeploymentFactoryImpl extends EFactoryImpl implements
      * @generated
      */
     public String convertArchitectureToString ( EDataType eDataType, Object instanceValue )
+    {
+        return instanceValue == null ? null : instanceValue.toString ();
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public StartupMechanism createStartupMechanismFromString ( EDataType eDataType, String initialValue )
+    {
+        StartupMechanism result = StartupMechanism.get ( initialValue );
+        if ( result == null )
+            throw new IllegalArgumentException ( "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName () + "'" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        return result;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String convertStartupMechanismToString ( EDataType eDataType, Object instanceValue )
     {
         return instanceValue == null ? null : instanceValue.toString ();
     }
