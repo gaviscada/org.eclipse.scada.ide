@@ -55,6 +55,7 @@ import org.eclipse.scada.configuration.world.Driver;
 import org.eclipse.scada.configuration.world.Endpoint;
 import org.eclipse.scada.configuration.world.Node;
 import org.eclipse.scada.configuration.world.PasswordCredentials;
+import org.eclipse.scada.configuration.world.ServiceBinding;
 import org.eclipse.scada.configuration.world.UsernamePasswordCredentials;
 import org.eclipse.scada.configuration.world.World;
 import org.eclipse.scada.configuration.world.WorldFactory;
@@ -382,10 +383,10 @@ public class WorldGenerator
 
         // process application configurations
 
-        result.addAll ( this.infrastructure.getApplicationConfigurations () );
+        result.addAll ( EcoreUtil.copyAll ( this.infrastructure.getApplicationConfigurations () ) );
 
         ExclusiveGroups.removeGroups ( result, app.getConfigurations () );
-        result.addAll ( app.getConfigurations () );
+        result.addAll ( EcoreUtil.copyAll ( app.getConfigurations () ) );
 
         // process infrastructure configuration
 
@@ -394,11 +395,10 @@ public class WorldGenerator
         if ( cfg != null )
         {
             ExclusiveGroups.removeGroups ( result, cfg.getConfigurations () );
-            result.addAll ( cfg.getConfigurations () );
+            result.addAll ( EcoreUtil.copyAll ( cfg.getConfigurations () ) );
 
             for ( final Module m : cfg.getModules () )
             {
-
                 final ModuleHandler mh = AdapterHelper.adapt ( m, ModuleHandler.class );
                 if ( mh == null )
                 {
@@ -411,7 +411,7 @@ public class WorldGenerator
 
         // final check is done in the target model
 
-        return EcoreUtil.copyAll ( result );
+        return result; // we don't copy here, since the module handlers might have created actual objects
     }
 
     public Credentials findLocalCredentials ( final org.eclipse.scada.configuration.infrastructure.EquinoxApplication app )
@@ -461,7 +461,7 @@ public class WorldGenerator
         final DriverHandler driverHandler = AdapterHelper.adapt ( driver, DriverHandler.class, true );
         if ( driverHandler != null )
         {
-            final Driver result = driverHandler.process ( driver );
+            final Driver result = driverHandler.process ( driver, nodes );
 
             finishDriver ( result, driver, node, true );
 
@@ -484,7 +484,9 @@ public class WorldGenerator
         else if ( driver instanceof ExternalDriver )
         {
             final ExternalDriverPlaceholder result = InfrastructureFactory.eINSTANCE.createExternalDriverPlaceholder ();
-            result.getEndpoints ().add ( Worlds.createDaEndpoint ( this.options, driver ) );
+            result.setName ( driver.getName () );
+            final ServiceBinding bindingService = ( (ExternalDriver)driver ).isBinding () ? Endpoints.contain ( result ) : null;
+            result.getEndpoints ().add ( Endpoints.registerEndpoint ( node, ( (ExternalDriver)driver ).getPortNumber (), bindingService, "ExternalDriver Endpoint: " + driver.getName () ) );
 
             finishDriver ( result, driver, node, false );
 
@@ -561,7 +563,7 @@ public class WorldGenerator
                     local.setId ( masterImport.getId () );
                     local.setLocal ( this.ctxMap.get ( masterImport.getImportedMaster () ).getImplementation () );
                     local.getAuthoratives ().addAll ( EcoreUtil.copyAll ( masterImport.getImportedMaster ().getAuthoratives () ) );
-                    local.setLogonCredentials ( Worlds.findConnectionCredentials ( masterImport ) );
+                    local.setLogonCredentials ( EcoreUtil.copy ( Worlds.findConnectionCredentials ( masterImport ) ) );
 
                     final MasterContext importedMaster = this.ctxMap.get ( masterImport.getImportedMaster () );
                     importedMaster.getGlobalContext ().add ( new GlobalContext ( local, masterImport ) );
@@ -574,7 +576,7 @@ public class WorldGenerator
     {
         final Exporter exporter = (Exporter)EcoreUtil.create ( exporterClass );
 
-        final Endpoint ep = Endpoints.registerEndpoint ( node, (short)port, String.format ( "Exporter Endpoint: %s - %s", exporter.getTypeTag (), exporter.getName () ) );
+        final Endpoint ep = Endpoints.registerEndpoint ( node, port, Endpoints.reference ( exporter ), String.format ( "Exporter Endpoint: %s - %s", exporter.getTypeTag (), exporter.getName () ) );
         node.getEndpoints ().add ( ep );
 
         exporter.setName ( application.getName () + "/exporter" );

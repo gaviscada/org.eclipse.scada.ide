@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.scada.configuration.world.Endpoint;
 import org.eclipse.scada.configuration.world.Node;
+import org.eclipse.scada.configuration.world.ServiceBinding;
 import org.eclipse.scada.configuration.world.WorldPackage;
 
 /**
@@ -32,6 +33,7 @@ import org.eclipse.scada.configuration.world.WorldPackage;
  *   <li>{@link org.eclipse.scada.configuration.world.impl.EndpointImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.impl.EndpointImpl#getNode <em>Node</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.impl.EndpointImpl#getPortNumber <em>Port Number</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.impl.EndpointImpl#getBoundService <em>Bound Service</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,7 +90,7 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
      * @generated
      * @ordered
      */
-    protected static final short PORT_NUMBER_EDEFAULT = 0;
+    protected static final int PORT_NUMBER_EDEFAULT = 0;
 
     /**
      * The cached value of the '{@link #getPortNumber() <em>Port Number</em>}' attribute.
@@ -98,7 +100,17 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
      * @generated
      * @ordered
      */
-    protected short portNumber = PORT_NUMBER_EDEFAULT;
+    protected int portNumber = PORT_NUMBER_EDEFAULT;
+
+    /**
+     * The cached value of the '{@link #getBoundService() <em>Bound Service</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getBoundService()
+     * @generated
+     * @ordered
+     */
+    protected ServiceBinding boundService;
 
     /**
      * <!-- begin-user-doc -->
@@ -231,7 +243,7 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
      * <!-- end-user-doc -->
      * @generated
      */
-    public short getPortNumber ()
+    public int getPortNumber ()
     {
         return portNumber;
     }
@@ -241,12 +253,92 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setPortNumber ( short newPortNumber )
+    public void setPortNumber ( int newPortNumber )
     {
-        short oldPortNumber = portNumber;
+        int oldPortNumber = portNumber;
         portNumber = newPortNumber;
         if ( eNotificationRequired () )
             eNotify ( new ENotificationImpl ( this, Notification.SET, WorldPackage.ENDPOINT__PORT_NUMBER, oldPortNumber, portNumber ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ServiceBinding getBoundService ()
+    {
+        if ( boundService != null && boundService.eIsProxy () )
+        {
+            InternalEObject oldBoundService = (InternalEObject)boundService;
+            boundService = (ServiceBinding)eResolveProxy ( oldBoundService );
+            if ( boundService != oldBoundService )
+            {
+                InternalEObject newBoundService = (InternalEObject)boundService;
+                NotificationChain msgs = oldBoundService.eInverseRemove ( this, EOPPOSITE_FEATURE_BASE - WorldPackage.ENDPOINT__BOUND_SERVICE, null, null );
+                if ( newBoundService.eInternalContainer () == null )
+                {
+                    msgs = newBoundService.eInverseAdd ( this, EOPPOSITE_FEATURE_BASE - WorldPackage.ENDPOINT__BOUND_SERVICE, null, msgs );
+                }
+                if ( msgs != null )
+                    msgs.dispatch ();
+                if ( eNotificationRequired () )
+                    eNotify ( new ENotificationImpl ( this, Notification.RESOLVE, WorldPackage.ENDPOINT__BOUND_SERVICE, oldBoundService, boundService ) );
+            }
+        }
+        return boundService;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ServiceBinding basicGetBoundService ()
+    {
+        return boundService;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain basicSetBoundService ( ServiceBinding newBoundService, NotificationChain msgs )
+    {
+        ServiceBinding oldBoundService = boundService;
+        boundService = newBoundService;
+        if ( eNotificationRequired () )
+        {
+            ENotificationImpl notification = new ENotificationImpl ( this, Notification.SET, WorldPackage.ENDPOINT__BOUND_SERVICE, oldBoundService, newBoundService );
+            if ( msgs == null )
+                msgs = notification;
+            else
+                msgs.add ( notification );
+        }
+        return msgs;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setBoundService ( ServiceBinding newBoundService )
+    {
+        if ( newBoundService != boundService )
+        {
+            NotificationChain msgs = null;
+            if ( boundService != null )
+                msgs = ( (InternalEObject)boundService ).eInverseRemove ( this, EOPPOSITE_FEATURE_BASE - WorldPackage.ENDPOINT__BOUND_SERVICE, null, msgs );
+            if ( newBoundService != null )
+                msgs = ( (InternalEObject)newBoundService ).eInverseAdd ( this, EOPPOSITE_FEATURE_BASE - WorldPackage.ENDPOINT__BOUND_SERVICE, null, msgs );
+            msgs = basicSetBoundService ( newBoundService, msgs );
+            if ( msgs != null )
+                msgs.dispatch ();
+        }
+        else if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, WorldPackage.ENDPOINT__BOUND_SERVICE, newBoundService, newBoundService ) );
     }
 
     /**
@@ -281,6 +373,8 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
         {
             case WorldPackage.ENDPOINT__NODE:
                 return basicSetNode ( null, msgs );
+            case WorldPackage.ENDPOINT__BOUND_SERVICE:
+                return basicSetBoundService ( null, msgs );
         }
         return super.eInverseRemove ( otherEnd, featureID, msgs );
     }
@@ -322,6 +416,10 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
                 return basicGetNode ();
             case WorldPackage.ENDPOINT__PORT_NUMBER:
                 return getPortNumber ();
+            case WorldPackage.ENDPOINT__BOUND_SERVICE:
+                if ( resolve )
+                    return getBoundService ();
+                return basicGetBoundService ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -346,7 +444,10 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
                 setNode ( (Node)newValue );
                 return;
             case WorldPackage.ENDPOINT__PORT_NUMBER:
-                setPortNumber ( (Short)newValue );
+                setPortNumber ( (Integer)newValue );
+                return;
+            case WorldPackage.ENDPOINT__BOUND_SERVICE:
+                setBoundService ( (ServiceBinding)newValue );
                 return;
         }
         super.eSet ( featureID, newValue );
@@ -374,6 +475,9 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
             case WorldPackage.ENDPOINT__PORT_NUMBER:
                 setPortNumber ( PORT_NUMBER_EDEFAULT );
                 return;
+            case WorldPackage.ENDPOINT__BOUND_SERVICE:
+                setBoundService ( (ServiceBinding)null );
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -396,6 +500,8 @@ public class EndpointImpl extends MinimalEObjectImpl.Container implements
                 return basicGetNode () != null;
             case WorldPackage.ENDPOINT__PORT_NUMBER:
                 return portNumber != PORT_NUMBER_EDEFAULT;
+            case WorldPackage.ENDPOINT__BOUND_SERVICE:
+                return boundService != null;
         }
         return super.eIsSet ( featureID );
     }

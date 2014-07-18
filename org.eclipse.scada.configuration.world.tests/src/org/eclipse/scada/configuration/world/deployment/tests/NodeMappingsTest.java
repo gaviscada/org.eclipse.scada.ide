@@ -11,10 +11,7 @@
  */
 package org.eclipse.scada.configuration.world.deployment.tests;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
-
 import org.eclipse.scada.configuration.world.deployment.DeploymentFactory;
 import org.eclipse.scada.configuration.world.deployment.NodeMappings;
 
@@ -24,16 +21,8 @@ import org.eclipse.scada.configuration.world.deployment.NodeMappings;
  * <!-- end-user-doc -->
  * @generated
  */
-public class NodeMappingsTest extends TestCase
+public class NodeMappingsTest extends MappingsTest
 {
-
-    /**
-     * The fixture for this Node Mappings test case.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected NodeMappings fixture = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -57,25 +46,15 @@ public class NodeMappingsTest extends TestCase
     }
 
     /**
-     * Sets the fixture for this Node Mappings test case.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void setFixture ( NodeMappings fixture )
-    {
-        this.fixture = fixture;
-    }
-
-    /**
      * Returns the fixture for this Node Mappings test case.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     protected NodeMappings getFixture ()
     {
-        return fixture;
+        return (NodeMappings)fixture;
     }
 
     /**

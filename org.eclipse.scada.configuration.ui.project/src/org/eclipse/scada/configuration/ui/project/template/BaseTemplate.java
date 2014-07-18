@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -40,6 +40,10 @@ public abstract class BaseTemplate extends OptionTemplateSection
         final IPluginElement element = factory.createElement ( parent );
         parent.add ( element );
         element.setName ( name );
+        if ( id != null )
+        {
+            element.setAttribute ( "id", id ); //$NON-NLS-1$
+        }
         return element;
     }
 
@@ -64,7 +68,18 @@ public abstract class BaseTemplate extends OptionTemplateSection
         ele.add ( param );
     }
 
+    protected static void addProperty ( final IPluginModelFactory factory, final IPluginElement ele, final String key, final String value ) throws CoreException
+    {
+        final IPluginElement param = factory.createElement ( ele );
+        param.setName ( "property" ); //$NON-NLS-1$
+        param.setAttribute ( "name", key ); //$NON-NLS-1$
+        param.setAttribute ( "value", value ); //$NON-NLS-1$
+        ele.add ( param );
+    }
+
     protected String pluginId;
+
+    protected String version;
 
     protected String getFormattedPackageName ( final String id )
     {
@@ -137,12 +152,14 @@ public abstract class BaseTemplate extends OptionTemplateSection
     protected void initializeFields ( final IFieldData data )
     {
         this.pluginId = data.getId ();
+        this.version = data.getVersion ();
     }
 
     @Override
     public void initializeFields ( final IPluginModelBase model )
     {
         this.pluginId = model.getPluginBase ().getId ();
+        this.version = model.getPluginBase ().getVersion ();
     }
 
     protected String makeId ( final String localId )
@@ -155,7 +172,7 @@ public abstract class BaseTemplate extends OptionTemplateSection
      * option is required and is currently not set. The flagging is done by
      * setting the page incomplete and setting the error message that uses
      * option's message label.
-     * 
+     *
      * @param option
      *            the option that is required and currently not set
      */
