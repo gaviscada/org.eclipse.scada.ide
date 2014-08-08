@@ -234,6 +234,17 @@ public class EquinoxApplicationItemProvider extends ItemProviderAdapter implemen
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -299,6 +310,21 @@ public class EquinoxApplicationItemProvider extends ItemProviderAdapter implemen
                 ( createChildParameter
                 ( InfrastructurePackage.Literals.EQUINOX_APPLICATION__CONFIGURATIONS,
                         OsgiFactory.eINSTANCE.createTelnetConsole () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.EQUINOX_APPLICATION__CONFIGURATIONS,
+                        OsgiFactory.eINSTANCE.createEventInjectorPostgres () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.EQUINOX_APPLICATION__CONFIGURATIONS,
+                        OsgiFactory.eINSTANCE.createEventInjectorJdbc () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.EQUINOX_APPLICATION__CONFIGURATIONS,
+                        OsgiFactory.eINSTANCE.createProfileConfiguration () ) );
     }
 
     /**

@@ -225,6 +225,12 @@ public class OsgiFactoryImpl extends EFactoryImpl implements OsgiFactory
                 return createBufferedValue ();
             case OsgiPackage.TELNET_CONSOLE:
                 return createTelnetConsole ();
+            case OsgiPackage.EVENT_INJECTOR_POSTGRES:
+                return createEventInjectorPostgres ();
+            case OsgiPackage.EVENT_INJECTOR_JDBC:
+                return createEventInjectorJdbc ();
+            case OsgiPackage.PROFILE_CONFIGURATION:
+                return createProfileConfiguration ();
             default:
                 throw new IllegalArgumentException ( "The class '" + eClass.getName () + "' is not a valid classifier" ); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -250,6 +256,8 @@ public class OsgiFactoryImpl extends EFactoryImpl implements OsgiFactory
                 return createDataTypeFromString ( eDataType, initialValue );
             case OsgiPackage.PASSWORD_TYPE:
                 return createPasswordTypeFromString ( eDataType, initialValue );
+            case OsgiPackage.REPLICATION_DATA_FORMAT:
+                return createReplicationDataFormatFromString ( eDataType, initialValue );
             case OsgiPackage.PERSISTENCE:
                 return createPersistenceFromString ( eDataType, initialValue );
             case OsgiPackage.ERROR_HANDLING:
@@ -285,6 +293,8 @@ public class OsgiFactoryImpl extends EFactoryImpl implements OsgiFactory
                 return convertDataTypeToString ( eDataType, instanceValue );
             case OsgiPackage.PASSWORD_TYPE:
                 return convertPasswordTypeToString ( eDataType, instanceValue );
+            case OsgiPackage.REPLICATION_DATA_FORMAT:
+                return convertReplicationDataFormatToString ( eDataType, instanceValue );
             case OsgiPackage.PERSISTENCE:
                 return convertPersistenceToString ( eDataType, instanceValue );
             case OsgiPackage.ERROR_HANDLING:
@@ -1141,6 +1151,39 @@ public class OsgiFactoryImpl extends EFactoryImpl implements OsgiFactory
      * <!-- end-user-doc -->
      * @generated
      */
+    public EventInjectorPostgres createEventInjectorPostgres ()
+    {
+        EventInjectorPostgresImpl eventInjectorPostgres = new EventInjectorPostgresImpl ();
+        return eventInjectorPostgres;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EventInjectorJdbc createEventInjectorJdbc ()
+    {
+        EventInjectorJdbcImpl eventInjectorJdbc = new EventInjectorJdbcImpl ();
+        return eventInjectorJdbc;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ProfileConfiguration createProfileConfiguration ()
+    {
+        ProfileConfigurationImpl profileConfiguration = new ProfileConfigurationImpl ();
+        return profileConfiguration;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public AverageReferenceType createAverageReferenceTypeFromString (
             EDataType eDataType, String initialValue )
     {
@@ -1257,6 +1300,29 @@ public class OsgiFactoryImpl extends EFactoryImpl implements OsgiFactory
      */
     public String convertPasswordTypeToString ( EDataType eDataType,
             Object instanceValue )
+    {
+        return instanceValue == null ? null : instanceValue.toString ();
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ReplicationDataFormat createReplicationDataFormatFromString ( EDataType eDataType, String initialValue )
+    {
+        ReplicationDataFormat result = ReplicationDataFormat.get ( initialValue );
+        if ( result == null )
+            throw new IllegalArgumentException ( "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName () + "'" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        return result;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String convertReplicationDataFormatToString ( EDataType eDataType, Object instanceValue )
     {
         return instanceValue == null ? null : instanceValue.toString ();
     }

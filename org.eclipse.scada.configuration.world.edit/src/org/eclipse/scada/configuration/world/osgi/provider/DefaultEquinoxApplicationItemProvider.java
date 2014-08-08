@@ -388,6 +388,21 @@ public class DefaultEquinoxApplicationItemProvider
                 ( createChildParameter
                 ( OsgiPackage.Literals.EQUINOX_APPLICATION__MODULES,
                         OsgiFactory.eINSTANCE.createTelnetConsole () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( OsgiPackage.Literals.EQUINOX_APPLICATION__MODULES,
+                        OsgiFactory.eINSTANCE.createEventInjectorPostgres () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( OsgiPackage.Literals.EQUINOX_APPLICATION__MODULES,
+                        OsgiFactory.eINSTANCE.createEventInjectorJdbc () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( OsgiPackage.Literals.EQUINOX_APPLICATION__MODULES,
+                        OsgiFactory.eINSTANCE.createProfileConfiguration () ) );
     }
 
     /**

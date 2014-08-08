@@ -218,6 +218,17 @@ public class WorldItemProvider extends ItemProviderAdapter implements IEditingDo
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -312,6 +323,21 @@ public class WorldItemProvider extends ItemProviderAdapter implements IEditingDo
                 ( createChildParameter
                 ( InfrastructurePackage.Literals.WORLD__APPLICATION_CONFIGURATIONS,
                         OsgiFactory.eINSTANCE.createTelnetConsole () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.WORLD__APPLICATION_CONFIGURATIONS,
+                        OsgiFactory.eINSTANCE.createEventInjectorPostgres () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.WORLD__APPLICATION_CONFIGURATIONS,
+                        OsgiFactory.eINSTANCE.createEventInjectorJdbc () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( InfrastructurePackage.Literals.WORLD__APPLICATION_CONFIGURATIONS,
+                        OsgiFactory.eINSTANCE.createProfileConfiguration () ) );
 
         newChildDescriptors.add
                 ( createChildParameter

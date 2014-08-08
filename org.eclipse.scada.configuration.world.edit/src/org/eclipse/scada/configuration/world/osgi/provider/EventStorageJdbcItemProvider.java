@@ -12,17 +12,10 @@ package org.eclipse.scada.configuration.world.osgi.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.scada.configuration.world.osgi.EventStorageJdbc;
@@ -35,10 +28,7 @@ import org.eclipse.scada.configuration.world.osgi.OsgiPackage;
  * @generated
  */
 public class EventStorageJdbcItemProvider extends
-        AbstractEventStorageJdbcItemProvider implements
-        IEditingDomainItemProvider, IStructuredItemContentProvider,
-        ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource,
-        ITableItemLabelProvider
+        AbstractEventStorageJdbcItemProvider
 {
     /**
      * This constructs an instance from a factory and a notifier.
@@ -64,58 +54,10 @@ public class EventStorageJdbcItemProvider extends
         {
             super.getPropertyDescriptors ( object );
 
-            addJdbcDriverNamePropertyDescriptor ( object );
-            addDriverBundlesPropertyDescriptor ( object );
             addMaxFieldLengthPropertyDescriptor ( object );
             addQueryFetchSizePropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
-    }
-
-    /**
-     * This adds a property descriptor for the Jdbc Driver Name feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addJdbcDriverNamePropertyDescriptor ( Object object )
-    {
-        itemPropertyDescriptors.add
-                ( createItemPropertyDescriptor
-                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_EventStorageJdbc_jdbcDriverName_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_EventStorageJdbc_jdbcDriverName_feature", "_UI_EventStorageJdbc_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        OsgiPackage.Literals.EVENT_STORAGE_JDBC__JDBC_DRIVER_NAME,
-                        true,
-                        false,
-                        false,
-                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
-                        null ) );
-    }
-
-    /**
-     * This adds a property descriptor for the Driver Bundles feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addDriverBundlesPropertyDescriptor ( Object object )
-    {
-        itemPropertyDescriptors.add
-                ( createItemPropertyDescriptor
-                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_EventStorageJdbc_driverBundles_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_EventStorageJdbc_driverBundles_feature", "_UI_EventStorageJdbc_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        OsgiPackage.Literals.EVENT_STORAGE_JDBC__DRIVER_BUNDLES,
-                        true,
-                        false,
-                        false,
-                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
-                        null ) );
     }
 
     /**
@@ -216,8 +158,6 @@ public class EventStorageJdbcItemProvider extends
 
         switch ( notification.getFeatureID ( EventStorageJdbc.class ) )
         {
-            case OsgiPackage.EVENT_STORAGE_JDBC__JDBC_DRIVER_NAME:
-            case OsgiPackage.EVENT_STORAGE_JDBC__DRIVER_BUNDLES:
             case OsgiPackage.EVENT_STORAGE_JDBC__MAX_FIELD_LENGTH:
             case OsgiPackage.EVENT_STORAGE_JDBC__QUERY_FETCH_SIZE:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );

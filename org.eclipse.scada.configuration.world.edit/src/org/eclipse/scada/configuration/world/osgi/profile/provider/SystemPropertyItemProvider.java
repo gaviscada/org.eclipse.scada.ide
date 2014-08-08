@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -169,15 +169,26 @@ public class SystemPropertyItemProvider extends ItemProviderAdapter implements
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     *
+     * @generated NOT
      */
     @Override
-    public String getText ( Object object )
+    public String getText ( final Object object )
     {
-        String label = ( (SystemProperty)object ).getKey ();
-        return label == null || label.length () == 0 ?
-                getString ( "_UI_SystemProperty_type" ) : //$NON-NLS-1$
-                getString ( "_UI_SystemProperty_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        final StringBuilder sb = new StringBuilder ( getString ( "_UI_SystemProperty_type" ) ); //$NON-NLS-1$
+
+        if ( ( (SystemProperty)object ).getKey () != null )
+        {
+            sb.append ( ' ' );
+            sb.append ( ( (SystemProperty)object ).getKey () );
+        }
+        sb.append ( " = " ); //$NON-NLS-1$
+        if ( ( (SystemProperty)object ).getValue () != null )
+        {
+            sb.append ( ( (SystemProperty)object ).getValue () );
+        }
+
+        return sb.toString ();
     }
 
     /**

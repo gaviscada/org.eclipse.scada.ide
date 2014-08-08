@@ -104,6 +104,53 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Settings" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A generic marker interface for settings elements. Like database settings.&#xA;&#xA;Settings objects should be referenced when required and contained in some sort of settings container."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseSettings" abstract="true" interface="true"
+      eSuperTypes="#//Settings">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An interface for JDBC based database settings.&#xA;&#xA;Implementations may provide specific attributes and provide the name using the properties. If they also allow to enter arbitrary properties in addition, then the specifc entries should override the generic attributes. (e.g. if the user specifies a username and a property &quot;username&quot;, then the specific attribute &quot;username&quot; should win over the generic properties entry for &quot;username&quot;)."/>
+    </eAnnotations>
+    <eOperations name="getDriverName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getProperties" upperBound="-1" eType="#//PropertyEntry"/>
+    <eOperations name="getUrl" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getLoginTimeout" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The login timeout in milliseconds."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getBundles" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericSettingsContainer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A generic settings container. It can be use to host all kinds of settings in a dedicated resource (file) since the World itself has not container for settings."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settings" eType="#//Settings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericDatabaseSettings" eSuperTypes="#//AbstractGenericDatabaseSettings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverName" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundles" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractGenericDatabaseSettings" abstract="true"
+      eSuperTypes="#//DatabaseSettings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loginTimeout" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalProperties" upperBound="-1"
+        eType="#//PropertyEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="databaseName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PostgresDatabaseSettings" eSuperTypes="#//AbstractGenericDatabaseSettings"/>
   <eSubpackages name="osgi" nsURI="http://eclipse.org/SCADA/Configuration/World/OSGi"
       nsPrefix="osgi">
     <eClassifiers xsi:type="ecore:EEnum" name="AverageReferenceType">
@@ -645,13 +692,11 @@
           defaultValueLiteral="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PullEvents" eSuperTypes="#//NamedDocumentable">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="jdbcDriverName" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="jdbcProperties" upperBound="-1"
-          eType="#//PropertyEntry" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobInterval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="customSelectSql" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="customDeleteSql" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+          eType="#//DatabaseSettings"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="JdbcUserServiceModule" eSuperTypes="#//osgi/ApplicationModule">
       <eStructuralFeatures xsi:type="ecore:EReference" name="userServices" upperBound="-1"
@@ -734,38 +779,20 @@
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EventStorageJdbc" eSuperTypes="#//osgi/AbstractEventStorageJdbc">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="jdbcDriverName" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverBundles" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Defines a list of OSGi bundles to start automatically."/>
-        </eAnnotations>
-      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxFieldLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="queryFetchSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EventStoragePostgres" eSuperTypes="#//osgi/AbstractEventStorageJdbc">
-      <eOperations name="getJdbcDriverName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return &quot;org.postgresql.Driver&quot;;"/>
-        </eAnnotations>
-      </eOperations>
-      <eOperations name="getDriverBundles" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return getPostgresDriverBundles();"/>
-        </eAnnotations>
-      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="batchSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="postgresDriverBundles"
-          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ReplicationDataFormat">
+      <eLiterals name="BLOB" literal="BLOB"/>
+      <eLiterals name="BYTES" value="1" literal="BYTES"/>
+      <eLiterals name="JSON" value="2" literal="JSON"/>
+      <eLiterals name="ARRAY" value="3" literal="ARRAY"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AbstractEventStorageJdbc" abstract="true"
         eSuperTypes="#//osgi/EventStorage">
-      <eOperations name="getJdbcDriverName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eOperations name="getDriverBundles" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="jdbcProperties" upperBound="-1"
-          eType="#//PropertyEntry" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="schema" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="An optional database schema."/>
@@ -780,6 +807,10 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="archiveDays" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="cleanupPeriodSeconds"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+          eType="#//DatabaseSettings"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="replicationDataFormat"
+          eType="#//osgi/ReplicationDataFormat" defaultValueLiteral="JSON"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ApplicationConfiguration" abstract="true"
         interface="true" eSuperTypes="#//osgi/ApplicationModule">
@@ -871,6 +902,31 @@
           defaultValueLiteral="localhost"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EventInjector" abstract="true" eSuperTypes="#//osgi/IndependentConfiguration">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+          eType="#//DatabaseSettings"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="loopDelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="schema" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="replicationSchema" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="deleteFailed" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EventInjectorPostgres" eSuperTypes="#//osgi/EventInjector">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EventInjectorJdbc" eSuperTypes="#//osgi/EventInjector">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="selectSql" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="deleteSql" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="existsSql" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProfileConfiguration" eSuperTypes="#//osgi/IndependentConfiguration">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="startBundles" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="installBundles" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//PropertyEntry" containment="true"/>
     </eClassifiers>
     <eSubpackages name="profile" nsURI="http://eclipse.org/SCADA/Configuration/World/OSGi/Profile"
         nsPrefix="profile">
@@ -997,7 +1053,9 @@
       nsPrefix="deployment">
     <eClassifiers xsi:type="ecore:EClass" name="DeploymentMechanism" abstract="true"
         interface="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="DebianDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DebianDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="setup" eType="#//setup/SetupModuleContainer"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Author">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -1027,6 +1085,16 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalDependencies"
           ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="startupMechanism" eType="#//deployment/StartupMechanism"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiUserScreen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Wether to enable the multiuser functionality of the &quot;screen&quot; command for the Eclipse SCADA user."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operatingSystem" eType="#//setup/OperatingSystemDescriptor"
+          eKeys="#//setup/OperatingSystemDescriptor/id"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="automaticCreate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="recreateBackups" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ChangeEntry">
       <eStructuralFeatures xsi:type="ecore:EReference" name="author" lowerBound="1"
@@ -1111,5 +1179,45 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="fallbackMode" lowerBound="1"
           eType="#//deployment/FallbackMappingMode" defaultValueLiteral="FAIL"/>
     </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="setup" nsURI="http://eclipse.org/SCADA/Configuration/World/Setup"
+      nsPrefix="setup">
+    <eClassifiers xsi:type="ecore:EClass" name="OperatingSystemDescriptor">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//setup/OperatingSystemDescriptor"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//PropertyEntry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetupModuleContainer">
+      <eOperations name="validateOperatingSystem" eType="#//setup/Status">
+        <eParameters name="descriptor" eType="#//setup/OperatingSystemDescriptor"/>
+        <eParameters name="context" eType="#//setup/ValidationContext"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
+          eType="#//setup/SetupModule" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetupModule" abstract="true" interface="true">
+      <eOperations name="validateOperatingSystem" eType="#//setup/Status">
+        <eParameters name="descriptor" eType="#//setup/OperatingSystemDescriptor"/>
+        <eParameters name="context" eType="#//setup/ValidationContext"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SubContainerModule" eSuperTypes="#//setup/SetupModule">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//setup/SetupModuleContainer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetupDefinitions">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="containers" upperBound="-1"
+          eType="#//setup/SetupModuleContainer" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operationSystemDefinitions"
+          upperBound="-1" eType="#//setup/OperatingSystemDescriptor" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="ValidationContext" instanceClassName="org.eclipse.emf.validation.IValidationContext"
+        serializable="false"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Status" instanceClassName="org.eclipse.core.runtime.IStatus"
+        serializable="false"/>
   </eSubpackages>
 </ecore:EPackage>

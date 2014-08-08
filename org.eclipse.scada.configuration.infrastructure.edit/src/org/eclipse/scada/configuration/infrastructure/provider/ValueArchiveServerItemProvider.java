@@ -15,12 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.scada.configuration.infrastructure.Node;
 import org.eclipse.scada.configuration.infrastructure.ValueArchiveServer;
 
@@ -30,7 +25,7 @@ import org.eclipse.scada.configuration.infrastructure.ValueArchiveServer;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ValueArchiveServerItemProvider extends EquinoxApplicationItemProvider implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource
+public class ValueArchiveServerItemProvider extends EquinoxApplicationItemProvider
 {
     /**
      * This constructs an instance from a factory and a notifier.
@@ -64,19 +59,31 @@ public class ValueArchiveServerItemProvider extends EquinoxApplicationItemProvid
      * This returns ValueArchiveServer.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * 
+     * @generated NOT
+     */
+    @Override
+    public Object getImage ( final Object object )
+    {
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ValueArchiveServer.png" ) ); //$NON-NLS-1$
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
-    public Object getImage ( Object object )
+    protected boolean shouldComposeCreationImage ()
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ValueArchiveServer" ) ); //$NON-NLS-1$
+        return true;
     }
 
     /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
+     *
      * @generated NOT
      */
     @Override

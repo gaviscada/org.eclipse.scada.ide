@@ -3,12 +3,19 @@
 
 set -e
 
+multiuserScreen="$$multiuserScreen$$"
+
 case "$1" in
     configure)
-$$postinst.restart$$
+$$create.apps$$
+
+	if [ ! -f ~eclipsescada/.screenrc ]; then
+		test "$multiuserScreen" -eq "1" && echo "multiuser on\nacladd root" > ~eclipsescada/.screenrc
+	fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
+$$stop.apps$$
     ;;
 
     *)
@@ -18,5 +25,12 @@ $$postinst.restart$$
 esac
 
 $$postinst.scripts$$
+
+# start apps last
+case "$1" in
+	configure)
+	$$start.apps$$
+	;;
+esac
 
 exit 0

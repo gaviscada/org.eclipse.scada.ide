@@ -72,6 +72,10 @@ public class CommonDeploymentMechanismItemProvider extends ItemProviderAdapter
             addMaintainerPropertyDescriptor ( object );
             addAdditionalDependenciesPropertyDescriptor ( object );
             addStartupMechanismPropertyDescriptor ( object );
+            addMultiUserScreenPropertyDescriptor ( object );
+            addOperatingSystemPropertyDescriptor ( object );
+            addAutomaticCreatePropertyDescriptor ( object );
+            addRecreateBackupsPropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
     }
@@ -95,7 +99,7 @@ public class CommonDeploymentMechanismItemProvider extends ItemProviderAdapter
                         false,
                         true,
                         null,
-                        null,
+                        getString ( "_UI_legalPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -118,7 +122,7 @@ public class CommonDeploymentMechanismItemProvider extends ItemProviderAdapter
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_informationPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -141,7 +145,99 @@ public class CommonDeploymentMechanismItemProvider extends ItemProviderAdapter
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                        getString ( "_UI_informationPropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
+     * This adds a property descriptor for the Multi User Screen feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addMultiUserScreenPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_CommonDeploymentMechanism_multiUserScreen_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_CommonDeploymentMechanism_multiUserScreen_feature", "_UI_CommonDeploymentMechanism_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        DeploymentPackage.Literals.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN,
+                        true,
+                        false,
+                        false,
+                        ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+                        getString ( "_UI_setupPropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
+     * This adds a property descriptor for the Operating System feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addOperatingSystemPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_CommonDeploymentMechanism_operatingSystem_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_CommonDeploymentMechanism_operatingSystem_feature", "_UI_CommonDeploymentMechanism_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        DeploymentPackage.Literals.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM,
+                        true,
+                        false,
+                        true,
                         null,
+                        getString ( "_UI_setupPropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
+     * This adds a property descriptor for the Automatic Create feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addAutomaticCreatePropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_CommonDeploymentMechanism_automaticCreate_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_CommonDeploymentMechanism_automaticCreate_feature", "_UI_CommonDeploymentMechanism_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        DeploymentPackage.Literals.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE,
+                        true,
+                        false,
+                        false,
+                        ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+                        getString ( "_UI_setupPropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
+     * This adds a property descriptor for the Recreate Backups feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addRecreateBackupsPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_CommonDeploymentMechanism_recreateBackups_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_CommonDeploymentMechanism_recreateBackups_feature", "_UI_CommonDeploymentMechanism_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        DeploymentPackage.Literals.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS,
+                        true,
+                        false,
+                        false,
+                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                        getString ( "_UI_setupPropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -234,6 +330,9 @@ public class CommonDeploymentMechanismItemProvider extends ItemProviderAdapter
         {
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES:
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__STARTUP_MECHANISM:
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN:
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE:
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
                 return;
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__CHANGES:

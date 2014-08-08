@@ -10,34 +10,31 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.world.osgi.impl;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.scada.configuration.world.PropertyEntry;
+import org.eclipse.scada.configuration.world.DatabaseSettings;
 import org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc;
 import org.eclipse.scada.configuration.world.osgi.OsgiPackage;
+import org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Event Storage Jdbc</b></em>'.
+ * An implementation of the model object '
+ * <em><b>Abstract Event Storage Jdbc</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getJdbcProperties <em>Jdbc Properties</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getSchema <em>Schema</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getInstanceName <em>Instance Name</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#isEnableReplication <em>Enable Replication</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getArchiveDays <em>Archive Days</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getCleanupPeriodSeconds <em>Cleanup Period Seconds</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getDatabase <em>Database</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl#getReplicationDataFormat <em>Replication Data Format</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,16 +43,6 @@ import org.eclipse.scada.configuration.world.osgi.OsgiPackage;
 public abstract class AbstractEventStorageJdbcImpl extends
         MinimalEObjectImpl.Container implements AbstractEventStorageJdbc
 {
-    /**
-     * The cached value of the '{@link #getJdbcProperties() <em>Jdbc Properties</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getJdbcProperties()
-     * @generated
-     * @ordered
-     */
-    protected EList<PropertyEntry> jdbcProperties;
-
     /**
      * The default value of the '{@link #getSchema() <em>Schema</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -157,6 +144,36 @@ public abstract class AbstractEventStorageJdbcImpl extends
     protected Integer cleanupPeriodSeconds = CLEANUP_PERIOD_SECONDS_EDEFAULT;
 
     /**
+     * The cached value of the '{@link #getDatabase() <em>Database</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getDatabase()
+     * @generated
+     * @ordered
+     */
+    protected DatabaseSettings database;
+
+    /**
+     * The default value of the '{@link #getReplicationDataFormat() <em>Replication Data Format</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getReplicationDataFormat()
+     * @generated
+     * @ordered
+     */
+    protected static final ReplicationDataFormat REPLICATION_DATA_FORMAT_EDEFAULT = ReplicationDataFormat.JSON;
+
+    /**
+     * The cached value of the '{@link #getReplicationDataFormat() <em>Replication Data Format</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getReplicationDataFormat()
+     * @generated
+     * @ordered
+     */
+    protected ReplicationDataFormat replicationDataFormat = REPLICATION_DATA_FORMAT_EDEFAULT;
+
+    /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -182,20 +199,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<PropertyEntry> getJdbcProperties ()
-    {
-        if ( jdbcProperties == null )
-        {
-            jdbcProperties = new EObjectContainmentEList.Resolving<PropertyEntry> ( PropertyEntry.class, this, OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES );
-        }
-        return jdbcProperties;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
+    @Override
     public String getSchema ()
     {
         return schema;
@@ -206,6 +210,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setSchema ( String newSchema )
     {
         String oldSchema = schema;
@@ -219,6 +224,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getInstanceName ()
     {
         return instanceName;
@@ -229,6 +235,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setInstanceName ( String newInstanceName )
     {
         String oldInstanceName = instanceName;
@@ -242,6 +249,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean isEnableReplication ()
     {
         return enableReplication;
@@ -252,6 +260,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setEnableReplication ( boolean newEnableReplication )
     {
         boolean oldEnableReplication = enableReplication;
@@ -265,6 +274,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Integer getArchiveDays ()
     {
         return archiveDays;
@@ -275,6 +285,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setArchiveDays ( Integer newArchiveDays )
     {
         Integer oldArchiveDays = archiveDays;
@@ -288,6 +299,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Integer getCleanupPeriodSeconds ()
     {
         return cleanupPeriodSeconds;
@@ -298,6 +310,7 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setCleanupPeriodSeconds ( Integer newCleanupPeriodSeconds )
     {
         Integer oldCleanupPeriodSeconds = cleanupPeriodSeconds;
@@ -311,11 +324,20 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getJdbcDriverName ()
+    @Override
+    public DatabaseSettings getDatabase ()
     {
-        // TODO: implement this method
-        // Ensure that you remove @generated or mark it @generated NOT
-        throw new UnsupportedOperationException ();
+        if ( database != null && database.eIsProxy () )
+        {
+            InternalEObject oldDatabase = (InternalEObject)database;
+            database = (DatabaseSettings)eResolveProxy ( oldDatabase );
+            if ( database != oldDatabase )
+            {
+                if ( eNotificationRequired () )
+                    eNotify ( new ENotificationImpl ( this, Notification.RESOLVE, OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__DATABASE, oldDatabase, database ) );
+            }
+        }
+        return database;
     }
 
     /**
@@ -323,11 +345,9 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<String> getDriverBundles ()
+    public DatabaseSettings basicGetDatabase ()
     {
-        // TODO: implement this method
-        // Ensure that you remove @generated or mark it @generated NOT
-        throw new UnsupportedOperationException ();
+        return database;
     }
 
     /**
@@ -336,15 +356,35 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * @generated
      */
     @Override
-    public NotificationChain eInverseRemove ( InternalEObject otherEnd,
-            int featureID, NotificationChain msgs )
+    public void setDatabase ( DatabaseSettings newDatabase )
     {
-        switch ( featureID )
-        {
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES:
-                return ( (InternalEList<?>)getJdbcProperties () ).basicRemove ( otherEnd, msgs );
-        }
-        return super.eInverseRemove ( otherEnd, featureID, msgs );
+        DatabaseSettings oldDatabase = database;
+        database = newDatabase;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__DATABASE, oldDatabase, database ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ReplicationDataFormat getReplicationDataFormat ()
+    {
+        return replicationDataFormat;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setReplicationDataFormat ( ReplicationDataFormat newReplicationDataFormat )
+    {
+        ReplicationDataFormat oldReplicationDataFormat = replicationDataFormat;
+        replicationDataFormat = newReplicationDataFormat == null ? REPLICATION_DATA_FORMAT_EDEFAULT : newReplicationDataFormat;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT, oldReplicationDataFormat, replicationDataFormat ) );
     }
 
     /**
@@ -357,8 +397,6 @@ public abstract class AbstractEventStorageJdbcImpl extends
     {
         switch ( featureID )
         {
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES:
-                return getJdbcProperties ();
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA:
                 return getSchema ();
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__INSTANCE_NAME:
@@ -369,6 +407,12 @@ public abstract class AbstractEventStorageJdbcImpl extends
                 return getArchiveDays ();
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS:
                 return getCleanupPeriodSeconds ();
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__DATABASE:
+                if ( resolve )
+                    return getDatabase ();
+                return basicGetDatabase ();
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT:
+                return getReplicationDataFormat ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -378,16 +422,11 @@ public abstract class AbstractEventStorageJdbcImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings ( "unchecked" )
     @Override
     public void eSet ( int featureID, Object newValue )
     {
         switch ( featureID )
         {
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES:
-                getJdbcProperties ().clear ();
-                getJdbcProperties ().addAll ( (Collection<? extends PropertyEntry>)newValue );
-                return;
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA:
                 setSchema ( (String)newValue );
                 return;
@@ -403,6 +442,12 @@ public abstract class AbstractEventStorageJdbcImpl extends
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS:
                 setCleanupPeriodSeconds ( (Integer)newValue );
                 return;
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__DATABASE:
+                setDatabase ( (DatabaseSettings)newValue );
+                return;
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT:
+                setReplicationDataFormat ( (ReplicationDataFormat)newValue );
+                return;
         }
         super.eSet ( featureID, newValue );
     }
@@ -417,9 +462,6 @@ public abstract class AbstractEventStorageJdbcImpl extends
     {
         switch ( featureID )
         {
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES:
-                getJdbcProperties ().clear ();
-                return;
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA:
                 setSchema ( SCHEMA_EDEFAULT );
                 return;
@@ -435,6 +477,12 @@ public abstract class AbstractEventStorageJdbcImpl extends
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS:
                 setCleanupPeriodSeconds ( CLEANUP_PERIOD_SECONDS_EDEFAULT );
                 return;
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__DATABASE:
+                setDatabase ( (DatabaseSettings)null );
+                return;
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT:
+                setReplicationDataFormat ( REPLICATION_DATA_FORMAT_EDEFAULT );
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -449,8 +497,6 @@ public abstract class AbstractEventStorageJdbcImpl extends
     {
         switch ( featureID )
         {
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES:
-                return jdbcProperties != null && !jdbcProperties.isEmpty ();
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA:
                 return SCHEMA_EDEFAULT == null ? schema != null : !SCHEMA_EDEFAULT.equals ( schema );
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__INSTANCE_NAME:
@@ -461,27 +507,12 @@ public abstract class AbstractEventStorageJdbcImpl extends
                 return ARCHIVE_DAYS_EDEFAULT == null ? archiveDays != null : !ARCHIVE_DAYS_EDEFAULT.equals ( archiveDays );
             case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS:
                 return CLEANUP_PERIOD_SECONDS_EDEFAULT == null ? cleanupPeriodSeconds != null : !CLEANUP_PERIOD_SECONDS_EDEFAULT.equals ( cleanupPeriodSeconds );
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__DATABASE:
+                return database != null;
+            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT:
+                return replicationDataFormat != REPLICATION_DATA_FORMAT_EDEFAULT;
         }
         return super.eIsSet ( featureID );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Object eInvoke ( int operationID, EList<?> arguments )
-            throws InvocationTargetException
-    {
-        switch ( operationID )
-        {
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC___GET_JDBC_DRIVER_NAME:
-                return getJdbcDriverName ();
-            case OsgiPackage.ABSTRACT_EVENT_STORAGE_JDBC___GET_DRIVER_BUNDLES:
-                return getDriverBundles ();
-        }
-        return super.eInvoke ( operationID, arguments );
     }
 
     /**
@@ -506,6 +537,8 @@ public abstract class AbstractEventStorageJdbcImpl extends
         result.append ( archiveDays );
         result.append ( ", cleanupPeriodSeconds: " ); //$NON-NLS-1$
         result.append ( cleanupPeriodSeconds );
+        result.append ( ", replicationDataFormat: " ); //$NON-NLS-1$
+        result.append ( replicationDataFormat );
         result.append ( ')' );
         return result.toString ();
     }

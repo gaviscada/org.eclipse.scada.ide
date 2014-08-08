@@ -122,12 +122,13 @@ public class AuthorItemProvider extends ItemProviderAdapter implements
      * This returns Author.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/Author" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/Author.png" ) ); //$NON-NLS-1$
     }
 
     /**
@@ -145,7 +146,7 @@ public class AuthorItemProvider extends ItemProviderAdapter implements
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
+     *
      * @generated NOT
      */
     @Override

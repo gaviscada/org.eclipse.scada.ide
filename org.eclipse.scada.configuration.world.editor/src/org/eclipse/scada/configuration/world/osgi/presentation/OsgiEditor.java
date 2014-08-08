@@ -126,11 +126,13 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.eclipse.scada.configuration.world.osgi.profile.provider.ProfileItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.world.osgi.provider.OsgiItemProviderAdapterFactory;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.security.provider.SecurityItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.world.deployment.provider.DeploymentItemProviderAdapterFactory;
 import org.eclipse.scada.da.exec.configuration.provider.ConfigurationItemProviderAdapterFactory;
 import org.eclipse.scada.configuration.world.presentation.WorldEditorPlugin;
 import org.eclipse.scada.configuration.world.provider.WorldItemProviderAdapterFactory;
+import org.eclipse.scada.configuration.world.setup.provider.SetupItemProviderAdapterFactory;
 
 /**
  * This is an example of a Osgi model editor.
@@ -759,6 +761,8 @@ public class OsgiEditor extends MultiPageEditorPart implements
         adapterFactory.addAdapterFactory ( new OsgiItemProviderAdapterFactory () );
         adapterFactory.addAdapterFactory ( new ProfileItemProviderAdapterFactory () );
         adapterFactory.addAdapterFactory ( new DeploymentItemProviderAdapterFactory () );
+        adapterFactory.addAdapterFactory ( new SetupItemProviderAdapterFactory () );
+        adapterFactory.addAdapterFactory ( new EcoreItemProviderAdapterFactory () );
         adapterFactory.addAdapterFactory ( new ConfigurationItemProviderAdapterFactory () );
         adapterFactory.addAdapterFactory ( new SecurityItemProviderAdapterFactory () );
         adapterFactory.addAdapterFactory ( new ReflectiveItemProviderAdapterFactory () );

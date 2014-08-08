@@ -44,6 +44,8 @@ import org.eclipse.scada.configuration.world.osgi.OsgiPackage;
 import org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl;
 import org.eclipse.scada.configuration.world.osgi.profile.ProfilePackage;
 import org.eclipse.scada.configuration.world.osgi.profile.impl.ProfilePackageImpl;
+import org.eclipse.scada.configuration.world.setup.SetupPackage;
+import org.eclipse.scada.configuration.world.setup.impl.SetupPackageImpl;
 import org.eclipse.scada.da.exec.configuration.ConfigurationPackage;
 
 /**
@@ -235,18 +237,21 @@ public class DeploymentPackageImpl extends EPackageImpl implements
         WorldPackageImpl theWorldPackage = (WorldPackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI ) instanceof WorldPackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI ) : WorldPackage.eINSTANCE );
         OsgiPackageImpl theOsgiPackage = (OsgiPackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( OsgiPackage.eNS_URI ) instanceof OsgiPackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( OsgiPackage.eNS_URI ) : OsgiPackage.eINSTANCE );
         ProfilePackageImpl theProfilePackage = (ProfilePackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( ProfilePackage.eNS_URI ) instanceof ProfilePackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( ProfilePackage.eNS_URI ) : ProfilePackage.eINSTANCE );
+        SetupPackageImpl theSetupPackage = (SetupPackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( SetupPackage.eNS_URI ) instanceof SetupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( SetupPackage.eNS_URI ) : SetupPackage.eINSTANCE );
 
         // Create package meta-data objects
         theDeploymentPackage.createPackageContents ();
         theWorldPackage.createPackageContents ();
         theOsgiPackage.createPackageContents ();
         theProfilePackage.createPackageContents ();
+        theSetupPackage.createPackageContents ();
 
         // Initialize created meta-data
         theDeploymentPackage.initializePackageContents ();
         theWorldPackage.initializePackageContents ();
         theOsgiPackage.initializePackageContents ();
         theProfilePackage.initializePackageContents ();
+        theSetupPackage.initializePackageContents ();
 
         // Mark meta-data to indicate it can't be changed
         theDeploymentPackage.freeze ();
@@ -276,6 +281,16 @@ public class DeploymentPackageImpl extends EPackageImpl implements
     public EClass getDebianDeploymentMechanism ()
     {
         return debianDeploymentMechanismEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getDebianDeploymentMechanism_Setup ()
+    {
+        return (EReference)debianDeploymentMechanismEClass.getEStructuralFeatures ().get ( 0 );
     }
 
     /**
@@ -405,6 +420,46 @@ public class DeploymentPackageImpl extends EPackageImpl implements
     public EAttribute getCommonDeploymentMechanism_StartupMechanism ()
     {
         return (EAttribute)commonDeploymentMechanismEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCommonDeploymentMechanism_MultiUserScreen ()
+    {
+        return (EAttribute)commonDeploymentMechanismEClass.getEStructuralFeatures ().get ( 4 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getCommonDeploymentMechanism_OperatingSystem ()
+    {
+        return (EReference)commonDeploymentMechanismEClass.getEStructuralFeatures ().get ( 5 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCommonDeploymentMechanism_AutomaticCreate ()
+    {
+        return (EAttribute)commonDeploymentMechanismEClass.getEStructuralFeatures ().get ( 6 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getCommonDeploymentMechanism_RecreateBackups ()
+    {
+        return (EAttribute)commonDeploymentMechanismEClass.getEStructuralFeatures ().get ( 7 );
     }
 
     /**
@@ -794,6 +849,7 @@ public class DeploymentPackageImpl extends EPackageImpl implements
         deploymentMechanismEClass = createEClass ( DEPLOYMENT_MECHANISM );
 
         debianDeploymentMechanismEClass = createEClass ( DEBIAN_DEPLOYMENT_MECHANISM );
+        createEReference ( debianDeploymentMechanismEClass, DEBIAN_DEPLOYMENT_MECHANISM__SETUP );
 
         authorEClass = createEClass ( AUTHOR );
         createEAttribute ( authorEClass, AUTHOR__NAME );
@@ -810,6 +866,10 @@ public class DeploymentPackageImpl extends EPackageImpl implements
         createEReference ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__MAINTAINER );
         createEAttribute ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_DEPENDENCIES );
         createEAttribute ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__STARTUP_MECHANISM );
+        createEAttribute ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN );
+        createEReference ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM );
+        createEAttribute ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE );
+        createEAttribute ( commonDeploymentMechanismEClass, COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS );
 
         changeEntryEClass = createEClass ( CHANGE_ENTRY );
         createEReference ( changeEntryEClass, CHANGE_ENTRY__AUTHOR );
@@ -882,6 +942,7 @@ public class DeploymentPackageImpl extends EPackageImpl implements
         setNsURI ( eNS_URI );
 
         // Obtain other dependent packages
+        SetupPackage theSetupPackage = (SetupPackage)EPackage.Registry.INSTANCE.getEPackage ( SetupPackage.eNS_URI );
         WorldPackage theWorldPackage = (WorldPackage)EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI );
 
         // Create type parameters
@@ -901,6 +962,7 @@ public class DeploymentPackageImpl extends EPackageImpl implements
         initEClass ( deploymentMechanismEClass, DeploymentMechanism.class, "DeploymentMechanism", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
 
         initEClass ( debianDeploymentMechanismEClass, DebianDeploymentMechanism.class, "DebianDeploymentMechanism", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getDebianDeploymentMechanism_Setup (), theSetupPackage.getSetupModuleContainer (), null, "setup", null, 0, 1, DebianDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( authorEClass, Author.class, "Author", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getAuthor_Name (), ecorePackage.getEString (), "name", null, 1, 1, Author.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -918,6 +980,11 @@ public class DeploymentPackageImpl extends EPackageImpl implements
         getCommonDeploymentMechanism_Maintainer ().getEKeys ().add ( this.getAuthor_Email () );
         initEAttribute ( getCommonDeploymentMechanism_AdditionalDependencies (), ecorePackage.getEString (), "additionalDependencies", null, 0, -1, CommonDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getCommonDeploymentMechanism_StartupMechanism (), this.getStartupMechanism (), "startupMechanism", null, 0, 1, CommonDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getCommonDeploymentMechanism_MultiUserScreen (), ecorePackage.getEBoolean (), "multiUserScreen", null, 0, 1, CommonDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getCommonDeploymentMechanism_OperatingSystem (), theSetupPackage.getOperatingSystemDescriptor (), null, "operatingSystem", null, 0, 1, CommonDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        getCommonDeploymentMechanism_OperatingSystem ().getEKeys ().add ( theSetupPackage.getOperatingSystemDescriptor_Id () );
+        initEAttribute ( getCommonDeploymentMechanism_AutomaticCreate (), ecorePackage.getEBoolean (), "automaticCreate", "false", 0, 1, CommonDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute ( getCommonDeploymentMechanism_RecreateBackups (), ecorePackage.getEIntegerObject (), "recreateBackups", null, 0, 1, CommonDeploymentMechanism.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( changeEntryEClass, ChangeEntry.class, "ChangeEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getChangeEntry_Author (), this.getAuthor (), null, "author", null, 1, 1, ChangeEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$

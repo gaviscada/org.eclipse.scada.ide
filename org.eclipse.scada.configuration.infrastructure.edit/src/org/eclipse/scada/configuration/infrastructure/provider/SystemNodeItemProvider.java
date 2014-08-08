@@ -12,16 +12,10 @@ package org.eclipse.scada.configuration.infrastructure.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.scada.configuration.infrastructure.InfrastructureFactory;
 import org.eclipse.scada.configuration.infrastructure.InfrastructurePackage;
@@ -35,7 +29,7 @@ import org.eclipse.scada.configuration.world.deployment.DeploymentFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SystemNodeItemProvider extends NodeItemProvider implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource
+public class SystemNodeItemProvider extends NodeItemProvider
 {
     /**
      * This constructs an instance from a factory and a notifier.
@@ -114,6 +108,17 @@ public class SystemNodeItemProvider extends NodeItemProvider implements IEditing
     public Object getImage ( final Object object )
     {
         return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/SystemNode.png" ) ); //$NON-NLS-1$
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
     }
 
     /**

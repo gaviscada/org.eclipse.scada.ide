@@ -27,6 +27,7 @@ import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
 import org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
 import org.eclipse.scada.configuration.world.deployment.StartupMechanism;
+import org.eclipse.scada.configuration.world.setup.OperatingSystemDescriptor;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,6 +40,10 @@ import org.eclipse.scada.configuration.world.deployment.StartupMechanism;
  *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#getMaintainer <em>Maintainer</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#getAdditionalDependencies <em>Additional Dependencies</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#getStartupMechanism <em>Startup Mechanism</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#isMultiUserScreen <em>Multi User Screen</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#getOperatingSystem <em>Operating System</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#isAutomaticCreate <em>Automatic Create</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.world.deployment.impl.CommonDeploymentMechanismImpl#getRecreateBackups <em>Recreate Backups</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,6 +101,76 @@ public abstract class CommonDeploymentMechanismImpl extends
      * @ordered
      */
     protected StartupMechanism startupMechanism = STARTUP_MECHANISM_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #isMultiUserScreen() <em>Multi User Screen</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isMultiUserScreen()
+     * @generated
+     * @ordered
+     */
+    protected static final boolean MULTI_USER_SCREEN_EDEFAULT = false;
+
+    /**
+     * The cached value of the '{@link #isMultiUserScreen() <em>Multi User Screen</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isMultiUserScreen()
+     * @generated
+     * @ordered
+     */
+    protected boolean multiUserScreen = MULTI_USER_SCREEN_EDEFAULT;
+
+    /**
+     * The cached value of the '{@link #getOperatingSystem() <em>Operating System</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOperatingSystem()
+     * @generated
+     * @ordered
+     */
+    protected OperatingSystemDescriptor operatingSystem;
+
+    /**
+     * The default value of the '{@link #isAutomaticCreate() <em>Automatic Create</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isAutomaticCreate()
+     * @generated
+     * @ordered
+     */
+    protected static final boolean AUTOMATIC_CREATE_EDEFAULT = false;
+
+    /**
+     * The cached value of the '{@link #isAutomaticCreate() <em>Automatic Create</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isAutomaticCreate()
+     * @generated
+     * @ordered
+     */
+    protected boolean automaticCreate = AUTOMATIC_CREATE_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getRecreateBackups() <em>Recreate Backups</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getRecreateBackups()
+     * @generated
+     * @ordered
+     */
+    protected static final Integer RECREATE_BACKUPS_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getRecreateBackups() <em>Recreate Backups</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getRecreateBackups()
+     * @generated
+     * @ordered
+     */
+    protected Integer recreateBackups = RECREATE_BACKUPS_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -217,6 +292,118 @@ public abstract class CommonDeploymentMechanismImpl extends
      * <!-- end-user-doc -->
      * @generated
      */
+    public boolean isMultiUserScreen ()
+    {
+        return multiUserScreen;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setMultiUserScreen ( boolean newMultiUserScreen )
+    {
+        boolean oldMultiUserScreen = multiUserScreen;
+        multiUserScreen = newMultiUserScreen;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN, oldMultiUserScreen, multiUserScreen ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public OperatingSystemDescriptor getOperatingSystem ()
+    {
+        if ( operatingSystem != null && operatingSystem.eIsProxy () )
+        {
+            InternalEObject oldOperatingSystem = (InternalEObject)operatingSystem;
+            operatingSystem = (OperatingSystemDescriptor)eResolveProxy ( oldOperatingSystem );
+            if ( operatingSystem != oldOperatingSystem )
+            {
+                if ( eNotificationRequired () )
+                    eNotify ( new ENotificationImpl ( this, Notification.RESOLVE, DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM, oldOperatingSystem, operatingSystem ) );
+            }
+        }
+        return operatingSystem;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public OperatingSystemDescriptor basicGetOperatingSystem ()
+    {
+        return operatingSystem;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setOperatingSystem ( OperatingSystemDescriptor newOperatingSystem )
+    {
+        OperatingSystemDescriptor oldOperatingSystem = operatingSystem;
+        operatingSystem = newOperatingSystem;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM, oldOperatingSystem, operatingSystem ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean isAutomaticCreate ()
+    {
+        return automaticCreate;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setAutomaticCreate ( boolean newAutomaticCreate )
+    {
+        boolean oldAutomaticCreate = automaticCreate;
+        automaticCreate = newAutomaticCreate;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE, oldAutomaticCreate, automaticCreate ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Integer getRecreateBackups ()
+    {
+        return recreateBackups;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setRecreateBackups ( Integer newRecreateBackups )
+    {
+        Integer oldRecreateBackups = recreateBackups;
+        recreateBackups = newRecreateBackups;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS, oldRecreateBackups, recreateBackups ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public NotificationChain eInverseRemove ( InternalEObject otherEnd,
             int featureID, NotificationChain msgs )
@@ -249,6 +436,16 @@ public abstract class CommonDeploymentMechanismImpl extends
                 return getAdditionalDependencies ();
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__STARTUP_MECHANISM:
                 return getStartupMechanism ();
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN:
+                return isMultiUserScreen ();
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM:
+                if ( resolve )
+                    return getOperatingSystem ();
+                return basicGetOperatingSystem ();
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE:
+                return isAutomaticCreate ();
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS:
+                return getRecreateBackups ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -278,6 +475,18 @@ public abstract class CommonDeploymentMechanismImpl extends
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__STARTUP_MECHANISM:
                 setStartupMechanism ( (StartupMechanism)newValue );
                 return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN:
+                setMultiUserScreen ( (Boolean)newValue );
+                return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM:
+                setOperatingSystem ( (OperatingSystemDescriptor)newValue );
+                return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE:
+                setAutomaticCreate ( (Boolean)newValue );
+                return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS:
+                setRecreateBackups ( (Integer)newValue );
+                return;
         }
         super.eSet ( featureID, newValue );
     }
@@ -304,6 +513,18 @@ public abstract class CommonDeploymentMechanismImpl extends
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__STARTUP_MECHANISM:
                 setStartupMechanism ( STARTUP_MECHANISM_EDEFAULT );
                 return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN:
+                setMultiUserScreen ( MULTI_USER_SCREEN_EDEFAULT );
+                return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM:
+                setOperatingSystem ( (OperatingSystemDescriptor)null );
+                return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE:
+                setAutomaticCreate ( AUTOMATIC_CREATE_EDEFAULT );
+                return;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS:
+                setRecreateBackups ( RECREATE_BACKUPS_EDEFAULT );
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -326,6 +547,14 @@ public abstract class CommonDeploymentMechanismImpl extends
                 return additionalDependencies != null && !additionalDependencies.isEmpty ();
             case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__STARTUP_MECHANISM:
                 return startupMechanism != STARTUP_MECHANISM_EDEFAULT;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__MULTI_USER_SCREEN:
+                return multiUserScreen != MULTI_USER_SCREEN_EDEFAULT;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__OPERATING_SYSTEM:
+                return operatingSystem != null;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__AUTOMATIC_CREATE:
+                return automaticCreate != AUTOMATIC_CREATE_EDEFAULT;
+            case DeploymentPackage.COMMON_DEPLOYMENT_MECHANISM__RECREATE_BACKUPS:
+                return RECREATE_BACKUPS_EDEFAULT == null ? recreateBackups != null : !RECREATE_BACKUPS_EDEFAULT.equals ( recreateBackups );
         }
         return super.eIsSet ( featureID );
     }
@@ -346,6 +575,12 @@ public abstract class CommonDeploymentMechanismImpl extends
         result.append ( additionalDependencies );
         result.append ( ", startupMechanism: " ); //$NON-NLS-1$
         result.append ( startupMechanism );
+        result.append ( ", multiUserScreen: " ); //$NON-NLS-1$
+        result.append ( multiUserScreen );
+        result.append ( ", automaticCreate: " ); //$NON-NLS-1$
+        result.append ( automaticCreate );
+        result.append ( ", recreateBackups: " ); //$NON-NLS-1$
+        result.append ( recreateBackups );
         result.append ( ')' );
         return result.toString ();
     }

@@ -25,9 +25,115 @@ import org.eclipse.scada.configuration.world.WorldPackage;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
 import org.eclipse.scada.configuration.world.deployment.impl.DeploymentPackageImpl;
 import org.eclipse.scada.configuration.world.impl.WorldPackageImpl;
-import org.eclipse.scada.configuration.world.osgi.*;
+import org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc;
+import org.eclipse.scada.configuration.world.osgi.AknProxy;
+import org.eclipse.scada.configuration.world.osgi.AlarmsEventsConnection;
+import org.eclipse.scada.configuration.world.osgi.AlarmsEventsExporter;
+import org.eclipse.scada.configuration.world.osgi.AlarmsEventsModule;
+import org.eclipse.scada.configuration.world.osgi.ApplicationConfiguration;
+import org.eclipse.scada.configuration.world.osgi.ApplicationModule;
+import org.eclipse.scada.configuration.world.osgi.AttributesSummary;
+import org.eclipse.scada.configuration.world.osgi.Average;
+import org.eclipse.scada.configuration.world.osgi.AverageItem;
+import org.eclipse.scada.configuration.world.osgi.AverageReferenceType;
+import org.eclipse.scada.configuration.world.osgi.Block;
+import org.eclipse.scada.configuration.world.osgi.BlockGroup;
+import org.eclipse.scada.configuration.world.osgi.BlockHandler;
+import org.eclipse.scada.configuration.world.osgi.Blockings;
+import org.eclipse.scada.configuration.world.osgi.BooleanMonitor;
+import org.eclipse.scada.configuration.world.osgi.BufferedValue;
+import org.eclipse.scada.configuration.world.osgi.ChangeCounterItem;
+import org.eclipse.scada.configuration.world.osgi.ChangeType;
+import org.eclipse.scada.configuration.world.osgi.CodeFragment;
+import org.eclipse.scada.configuration.world.osgi.ConfigurationAdministratorExporter;
+import org.eclipse.scada.configuration.world.osgi.Connection;
+import org.eclipse.scada.configuration.world.osgi.ConstantItem;
+import org.eclipse.scada.configuration.world.osgi.CustomMasterServer;
+import org.eclipse.scada.configuration.world.osgi.DataAccessConnection;
+import org.eclipse.scada.configuration.world.osgi.DataAccessExporter;
+import org.eclipse.scada.configuration.world.osgi.DataMapper;
+import org.eclipse.scada.configuration.world.osgi.DataMapperEntry;
+import org.eclipse.scada.configuration.world.osgi.DataType;
+import org.eclipse.scada.configuration.world.osgi.DefaultEquinoxApplication;
+import org.eclipse.scada.configuration.world.osgi.DefaultMasterServer;
+import org.eclipse.scada.configuration.world.osgi.DefaultValueArchiveServer;
+import org.eclipse.scada.configuration.world.osgi.EquinoxApplication;
+import org.eclipse.scada.configuration.world.osgi.ErrorHandling;
+import org.eclipse.scada.configuration.world.osgi.EventInjector;
+import org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc;
+import org.eclipse.scada.configuration.world.osgi.EventInjectorPostgres;
+import org.eclipse.scada.configuration.world.osgi.EventLogger;
+import org.eclipse.scada.configuration.world.osgi.EventPool;
+import org.eclipse.scada.configuration.world.osgi.EventPoolProxy;
+import org.eclipse.scada.configuration.world.osgi.EventStorage;
+import org.eclipse.scada.configuration.world.osgi.EventStorageJdbc;
+import org.eclipse.scada.configuration.world.osgi.EventStoragePostgres;
+import org.eclipse.scada.configuration.world.osgi.Exporter;
+import org.eclipse.scada.configuration.world.osgi.ExternalEventFilter;
+import org.eclipse.scada.configuration.world.osgi.ExternalEventMonitor;
+import org.eclipse.scada.configuration.world.osgi.FormulaItem;
+import org.eclipse.scada.configuration.world.osgi.FormulaItemInbound;
+import org.eclipse.scada.configuration.world.osgi.FormulaItemOutbound;
+import org.eclipse.scada.configuration.world.osgi.GlobalSummaryItem;
+import org.eclipse.scada.configuration.world.osgi.HistoricalDataExporter;
+import org.eclipse.scada.configuration.world.osgi.HttpService;
+import org.eclipse.scada.configuration.world.osgi.ImportItem;
+import org.eclipse.scada.configuration.world.osgi.IndependentConfiguration;
+import org.eclipse.scada.configuration.world.osgi.Item;
+import org.eclipse.scada.configuration.world.osgi.ItemExport;
+import org.eclipse.scada.configuration.world.osgi.ItemFeatureEntry;
+import org.eclipse.scada.configuration.world.osgi.ItemInformation;
+import org.eclipse.scada.configuration.world.osgi.ItemReference;
+import org.eclipse.scada.configuration.world.osgi.JdbcDataMapper;
+import org.eclipse.scada.configuration.world.osgi.JdbcUserService;
+import org.eclipse.scada.configuration.world.osgi.JdbcUserServiceModule;
+import org.eclipse.scada.configuration.world.osgi.LevelMonitor;
+import org.eclipse.scada.configuration.world.osgi.ListMonitor;
+import org.eclipse.scada.configuration.world.osgi.ListMonitorEntry;
+import org.eclipse.scada.configuration.world.osgi.ManualOverride;
+import org.eclipse.scada.configuration.world.osgi.MarkerEntry;
+import org.eclipse.scada.configuration.world.osgi.MarkerGroup;
+import org.eclipse.scada.configuration.world.osgi.Markers;
+import org.eclipse.scada.configuration.world.osgi.MasterServer;
+import org.eclipse.scada.configuration.world.osgi.MonitorPool;
+import org.eclipse.scada.configuration.world.osgi.MonitorPoolProxy;
+import org.eclipse.scada.configuration.world.osgi.MovingAverage;
+import org.eclipse.scada.configuration.world.osgi.MovingAverageItem;
+import org.eclipse.scada.configuration.world.osgi.MovingAverageReferenceType;
+import org.eclipse.scada.configuration.world.osgi.Negate;
+import org.eclipse.scada.configuration.world.osgi.OsgiFactory;
+import org.eclipse.scada.configuration.world.osgi.OsgiPackage;
+import org.eclipse.scada.configuration.world.osgi.PasswordType;
+import org.eclipse.scada.configuration.world.osgi.Persistence;
+import org.eclipse.scada.configuration.world.osgi.PersistentItem;
+import org.eclipse.scada.configuration.world.osgi.ProfileConfiguration;
+import org.eclipse.scada.configuration.world.osgi.ProxyItem;
+import org.eclipse.scada.configuration.world.osgi.PullEvents;
+import org.eclipse.scada.configuration.world.osgi.ReferenceItem;
+import org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat;
+import org.eclipse.scada.configuration.world.osgi.RestExporter;
+import org.eclipse.scada.configuration.world.osgi.Rounding;
+import org.eclipse.scada.configuration.world.osgi.RoundingType;
+import org.eclipse.scada.configuration.world.osgi.Scale;
+import org.eclipse.scada.configuration.world.osgi.ScriptItem;
+import org.eclipse.scada.configuration.world.osgi.ScriptTimer;
+import org.eclipse.scada.configuration.world.osgi.SimpleDataMapper;
+import org.eclipse.scada.configuration.world.osgi.SimpleExternalEventFilter;
+import org.eclipse.scada.configuration.world.osgi.SourceItem;
+import org.eclipse.scada.configuration.world.osgi.StaticExternalEventFilter;
+import org.eclipse.scada.configuration.world.osgi.SummaryGroup;
+import org.eclipse.scada.configuration.world.osgi.SummaryItem;
+import org.eclipse.scada.configuration.world.osgi.TelnetConsole;
+import org.eclipse.scada.configuration.world.osgi.TransientItem;
+import org.eclipse.scada.configuration.world.osgi.TypedItemReference;
+import org.eclipse.scada.configuration.world.osgi.ValueArchive;
+import org.eclipse.scada.configuration.world.osgi.ValueArchiveServer;
+import org.eclipse.scada.configuration.world.osgi.ValueMapper;
+import org.eclipse.scada.configuration.world.osgi.WeakReferenceDataSourceItem;
 import org.eclipse.scada.configuration.world.osgi.profile.ProfilePackage;
 import org.eclipse.scada.configuration.world.osgi.profile.impl.ProfilePackageImpl;
+import org.eclipse.scada.configuration.world.setup.SetupPackage;
+import org.eclipse.scada.configuration.world.setup.impl.SetupPackageImpl;
 import org.eclipse.scada.core.Variant;
 import org.eclipse.scada.da.exec.configuration.ConfigurationPackage;
 
@@ -674,6 +780,34 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass eventInjectorEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass eventInjectorPostgresEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass eventInjectorJdbcEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass profileConfigurationEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EEnum averageReferenceTypeEEnum = null;
 
     /**
@@ -703,6 +837,13 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     private EEnum passwordTypeEEnum = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EEnum replicationDataFormatEEnum = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -800,18 +941,21 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         WorldPackageImpl theWorldPackage = (WorldPackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI ) instanceof WorldPackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI ) : WorldPackage.eINSTANCE );
         ProfilePackageImpl theProfilePackage = (ProfilePackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( ProfilePackage.eNS_URI ) instanceof ProfilePackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( ProfilePackage.eNS_URI ) : ProfilePackage.eINSTANCE );
         DeploymentPackageImpl theDeploymentPackage = (DeploymentPackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( DeploymentPackage.eNS_URI ) instanceof DeploymentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( DeploymentPackage.eNS_URI ) : DeploymentPackage.eINSTANCE );
+        SetupPackageImpl theSetupPackage = (SetupPackageImpl) ( EPackage.Registry.INSTANCE.getEPackage ( SetupPackage.eNS_URI ) instanceof SetupPackageImpl ? EPackage.Registry.INSTANCE.getEPackage ( SetupPackage.eNS_URI ) : SetupPackage.eINSTANCE );
 
         // Create package meta-data objects
         theOsgiPackage.createPackageContents ();
         theWorldPackage.createPackageContents ();
         theProfilePackage.createPackageContents ();
         theDeploymentPackage.createPackageContents ();
+        theSetupPackage.createPackageContents ();
 
         // Initialize created meta-data
         theOsgiPackage.initializePackageContents ();
         theWorldPackage.initializePackageContents ();
         theProfilePackage.initializePackageContents ();
         theDeploymentPackage.initializePackageContents ();
+        theSetupPackage.initializePackageContents ();
 
         // Mark meta-data to indicate it can't be changed
         theOsgiPackage.freeze ();
@@ -3466,7 +3610,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     @Override
-    public EAttribute getPullEvents_JdbcDriverName ()
+    public EAttribute getPullEvents_JobInterval ()
     {
         return (EAttribute)pullEventsEClass.getEStructuralFeatures ().get ( 0 );
     }
@@ -3477,31 +3621,9 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     @Override
-    public EReference getPullEvents_JdbcProperties ()
-    {
-        return (EReference)pullEventsEClass.getEStructuralFeatures ().get ( 1 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public EAttribute getPullEvents_JobInterval ()
-    {
-        return (EAttribute)pullEventsEClass.getEStructuralFeatures ().get ( 2 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EAttribute getPullEvents_CustomSelectSql ()
     {
-        return (EAttribute)pullEventsEClass.getEStructuralFeatures ().get ( 3 );
+        return (EAttribute)pullEventsEClass.getEStructuralFeatures ().get ( 1 );
     }
 
     /**
@@ -3512,7 +3634,17 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     @Override
     public EAttribute getPullEvents_CustomDeleteSql ()
     {
-        return (EAttribute)pullEventsEClass.getEStructuralFeatures ().get ( 4 );
+        return (EAttribute)pullEventsEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getPullEvents_Database ()
+    {
+        return (EReference)pullEventsEClass.getEStructuralFeatures ().get ( 3 );
     }
 
     /**
@@ -3774,7 +3906,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     @Override
-    public EAttribute getEventStorageJdbc_JdbcDriverName ()
+    public EAttribute getEventStorageJdbc_MaxFieldLength ()
     {
         return (EAttribute)eventStorageJdbcEClass.getEStructuralFeatures ().get ( 0 );
     }
@@ -3785,31 +3917,9 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     @Override
-    public EAttribute getEventStorageJdbc_DriverBundles ()
-    {
-        return (EAttribute)eventStorageJdbcEClass.getEStructuralFeatures ().get ( 1 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public EAttribute getEventStorageJdbc_MaxFieldLength ()
-    {
-        return (EAttribute)eventStorageJdbcEClass.getEStructuralFeatures ().get ( 2 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EAttribute getEventStorageJdbc_QueryFetchSize ()
     {
-        return (EAttribute)eventStorageJdbcEClass.getEStructuralFeatures ().get ( 3 );
+        return (EAttribute)eventStorageJdbcEClass.getEStructuralFeatures ().get ( 1 );
     }
 
     /**
@@ -3840,39 +3950,6 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     @Override
-    public EAttribute getEventStoragePostgres_PostgresDriverBundles ()
-    {
-        return (EAttribute)eventStoragePostgresEClass.getEStructuralFeatures ().get ( 1 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public EOperation getEventStoragePostgres__GetJdbcDriverName ()
-    {
-        return eventStoragePostgresEClass.getEOperations ().get ( 0 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public EOperation getEventStoragePostgres__GetDriverBundles ()
-    {
-        return eventStoragePostgresEClass.getEOperations ().get ( 1 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EClass getAbstractEventStorageJdbc ()
     {
         return abstractEventStorageJdbcEClass;
@@ -3884,20 +3961,9 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * @generated
      */
     @Override
-    public EReference getAbstractEventStorageJdbc_JdbcProperties ()
-    {
-        return (EReference)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 0 );
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EAttribute getAbstractEventStorageJdbc_Schema ()
     {
-        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 1 );
+        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 0 );
     }
 
     /**
@@ -3908,7 +3974,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     @Override
     public EAttribute getAbstractEventStorageJdbc_InstanceName ()
     {
-        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 2 );
+        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 1 );
     }
 
     /**
@@ -3919,7 +3985,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     @Override
     public EAttribute getAbstractEventStorageJdbc_EnableReplication ()
     {
-        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 3 );
+        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 2 );
     }
 
     /**
@@ -3930,7 +3996,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     @Override
     public EAttribute getAbstractEventStorageJdbc_ArchiveDays ()
     {
-        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 4 );
+        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 3 );
     }
 
     /**
@@ -3941,7 +4007,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     @Override
     public EAttribute getAbstractEventStorageJdbc_CleanupPeriodSeconds ()
     {
-        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 5 );
+        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 4 );
     }
 
     /**
@@ -3949,10 +4015,9 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    public EOperation getAbstractEventStorageJdbc__GetJdbcDriverName ()
+    public EReference getAbstractEventStorageJdbc_Database ()
     {
-        return abstractEventStorageJdbcEClass.getEOperations ().get ( 0 );
+        return (EReference)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 5 );
     }
 
     /**
@@ -3960,10 +4025,9 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    public EOperation getAbstractEventStorageJdbc__GetDriverBundles ()
+    public EAttribute getAbstractEventStorageJdbc_ReplicationDataFormat ()
     {
-        return abstractEventStorageJdbcEClass.getEOperations ().get ( 1 );
+        return (EAttribute)abstractEventStorageJdbcEClass.getEStructuralFeatures ().get ( 6 );
     }
 
     /**
@@ -4242,6 +4306,176 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getEventInjector ()
+    {
+        return eventInjectorEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getEventInjector_Database ()
+    {
+        return (EReference)eventInjectorEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjector_LoopDelay ()
+    {
+        return (EAttribute)eventInjectorEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjector_InstanceName ()
+    {
+        return (EAttribute)eventInjectorEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjector_Schema ()
+    {
+        return (EAttribute)eventInjectorEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjector_ReplicationSchema ()
+    {
+        return (EAttribute)eventInjectorEClass.getEStructuralFeatures ().get ( 4 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjector_DeleteFailed ()
+    {
+        return (EAttribute)eventInjectorEClass.getEStructuralFeatures ().get ( 5 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getEventInjectorPostgres ()
+    {
+        return eventInjectorPostgresEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjectorPostgres_Limit ()
+    {
+        return (EAttribute)eventInjectorPostgresEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getEventInjectorJdbc ()
+    {
+        return eventInjectorJdbcEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjectorJdbc_SelectSql ()
+    {
+        return (EAttribute)eventInjectorJdbcEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjectorJdbc_DeleteSql ()
+    {
+        return (EAttribute)eventInjectorJdbcEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjectorJdbc_ExistsSql ()
+    {
+        return (EAttribute)eventInjectorJdbcEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getProfileConfiguration ()
+    {
+        return profileConfigurationEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getProfileConfiguration_StartBundles ()
+    {
+        return (EAttribute)profileConfigurationEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getProfileConfiguration_InstallBundles ()
+    {
+        return (EAttribute)profileConfigurationEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getProfileConfiguration_Properties ()
+    {
+        return (EReference)profileConfigurationEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public EEnum getAverageReferenceType ()
     {
@@ -4290,6 +4524,16 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     public EEnum getPasswordType ()
     {
         return passwordTypeEEnum;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EEnum getReplicationDataFormat ()
+    {
+        return replicationDataFormatEEnum;
     }
 
     /**
@@ -4697,11 +4941,10 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         createEAttribute ( aknProxyEClass, AKN_PROXY__AUTHORATIVE );
 
         pullEventsEClass = createEClass ( PULL_EVENTS );
-        createEAttribute ( pullEventsEClass, PULL_EVENTS__JDBC_DRIVER_NAME );
-        createEReference ( pullEventsEClass, PULL_EVENTS__JDBC_PROPERTIES );
         createEAttribute ( pullEventsEClass, PULL_EVENTS__JOB_INTERVAL );
         createEAttribute ( pullEventsEClass, PULL_EVENTS__CUSTOM_SELECT_SQL );
         createEAttribute ( pullEventsEClass, PULL_EVENTS__CUSTOM_DELETE_SQL );
+        createEReference ( pullEventsEClass, PULL_EVENTS__DATABASE );
 
         jdbcUserServiceModuleEClass = createEClass ( JDBC_USER_SERVICE_MODULE );
         createEReference ( jdbcUserServiceModuleEClass, JDBC_USER_SERVICE_MODULE__USER_SERVICES );
@@ -4734,26 +4977,20 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         eventStorageEClass = createEClass ( EVENT_STORAGE );
 
         eventStorageJdbcEClass = createEClass ( EVENT_STORAGE_JDBC );
-        createEAttribute ( eventStorageJdbcEClass, EVENT_STORAGE_JDBC__JDBC_DRIVER_NAME );
-        createEAttribute ( eventStorageJdbcEClass, EVENT_STORAGE_JDBC__DRIVER_BUNDLES );
         createEAttribute ( eventStorageJdbcEClass, EVENT_STORAGE_JDBC__MAX_FIELD_LENGTH );
         createEAttribute ( eventStorageJdbcEClass, EVENT_STORAGE_JDBC__QUERY_FETCH_SIZE );
 
         eventStoragePostgresEClass = createEClass ( EVENT_STORAGE_POSTGRES );
         createEAttribute ( eventStoragePostgresEClass, EVENT_STORAGE_POSTGRES__BATCH_SIZE );
-        createEAttribute ( eventStoragePostgresEClass, EVENT_STORAGE_POSTGRES__POSTGRES_DRIVER_BUNDLES );
-        createEOperation ( eventStoragePostgresEClass, EVENT_STORAGE_POSTGRES___GET_JDBC_DRIVER_NAME );
-        createEOperation ( eventStoragePostgresEClass, EVENT_STORAGE_POSTGRES___GET_DRIVER_BUNDLES );
 
         abstractEventStorageJdbcEClass = createEClass ( ABSTRACT_EVENT_STORAGE_JDBC );
-        createEReference ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES );
         createEAttribute ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA );
         createEAttribute ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__INSTANCE_NAME );
         createEAttribute ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__ENABLE_REPLICATION );
         createEAttribute ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__ARCHIVE_DAYS );
         createEAttribute ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS );
-        createEOperation ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC___GET_JDBC_DRIVER_NAME );
-        createEOperation ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC___GET_DRIVER_BUNDLES );
+        createEReference ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__DATABASE );
+        createEAttribute ( abstractEventStorageJdbcEClass, ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT );
 
         applicationConfigurationEClass = createEClass ( APPLICATION_CONFIGURATION );
 
@@ -4790,12 +5027,34 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         createEAttribute ( telnetConsoleEClass, TELNET_CONSOLE__HOST );
         createEAttribute ( telnetConsoleEClass, TELNET_CONSOLE__PORT );
 
+        eventInjectorEClass = createEClass ( EVENT_INJECTOR );
+        createEReference ( eventInjectorEClass, EVENT_INJECTOR__DATABASE );
+        createEAttribute ( eventInjectorEClass, EVENT_INJECTOR__LOOP_DELAY );
+        createEAttribute ( eventInjectorEClass, EVENT_INJECTOR__INSTANCE_NAME );
+        createEAttribute ( eventInjectorEClass, EVENT_INJECTOR__SCHEMA );
+        createEAttribute ( eventInjectorEClass, EVENT_INJECTOR__REPLICATION_SCHEMA );
+        createEAttribute ( eventInjectorEClass, EVENT_INJECTOR__DELETE_FAILED );
+
+        eventInjectorPostgresEClass = createEClass ( EVENT_INJECTOR_POSTGRES );
+        createEAttribute ( eventInjectorPostgresEClass, EVENT_INJECTOR_POSTGRES__LIMIT );
+
+        eventInjectorJdbcEClass = createEClass ( EVENT_INJECTOR_JDBC );
+        createEAttribute ( eventInjectorJdbcEClass, EVENT_INJECTOR_JDBC__SELECT_SQL );
+        createEAttribute ( eventInjectorJdbcEClass, EVENT_INJECTOR_JDBC__DELETE_SQL );
+        createEAttribute ( eventInjectorJdbcEClass, EVENT_INJECTOR_JDBC__EXISTS_SQL );
+
+        profileConfigurationEClass = createEClass ( PROFILE_CONFIGURATION );
+        createEAttribute ( profileConfigurationEClass, PROFILE_CONFIGURATION__START_BUNDLES );
+        createEAttribute ( profileConfigurationEClass, PROFILE_CONFIGURATION__INSTALL_BUNDLES );
+        createEReference ( profileConfigurationEClass, PROFILE_CONFIGURATION__PROPERTIES );
+
         // Create enums
         averageReferenceTypeEEnum = createEEnum ( AVERAGE_REFERENCE_TYPE );
         movingAverageReferenceTypeEEnum = createEEnum ( MOVING_AVERAGE_REFERENCE_TYPE );
         roundingTypeEEnum = createEEnum ( ROUNDING_TYPE );
         dataTypeEEnum = createEEnum ( DATA_TYPE );
         passwordTypeEEnum = createEEnum ( PASSWORD_TYPE );
+        replicationDataFormatEEnum = createEEnum ( REPLICATION_DATA_FORMAT );
         persistenceEEnum = createEEnum ( PERSISTENCE );
         errorHandlingEEnum = createEEnum ( ERROR_HANDLING );
         changeTypeEEnum = createEEnum ( CHANGE_TYPE );
@@ -4834,6 +5093,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         ProfilePackage theProfilePackage = (ProfilePackage)EPackage.Registry.INSTANCE.getEPackage ( ProfilePackage.eNS_URI );
         WorldPackage theWorldPackage = (WorldPackage)EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI );
         SecurityPackage theSecurityPackage = (SecurityPackage)EPackage.Registry.INSTANCE.getEPackage ( SecurityPackage.eNS_URI );
+        EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage ( EcorePackage.eNS_URI );
 
         // Add subpackages
         getESubpackages ().add ( theProfilePackage );
@@ -4917,6 +5177,10 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         changeCounterItemEClass.getESuperTypes ().add ( this.getItem () );
         bufferedValueEClass.getESuperTypes ().add ( theWorldPackage.getNamedDocumentable () );
         telnetConsoleEClass.getESuperTypes ().add ( this.getIndependentConfiguration () );
+        eventInjectorEClass.getESuperTypes ().add ( this.getIndependentConfiguration () );
+        eventInjectorPostgresEClass.getESuperTypes ().add ( this.getEventInjector () );
+        eventInjectorJdbcEClass.getESuperTypes ().add ( this.getEventInjector () );
+        profileConfigurationEClass.getESuperTypes ().add ( this.getIndependentConfiguration () );
 
         // Initialize classes, features, and operations; add parameters
         initEClass ( equinoxApplicationEClass, EquinoxApplication.class, "EquinoxApplication", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
@@ -5249,11 +5513,10 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         initEAttribute ( getAknProxy_Authorative (), ecorePackage.getEBoolean (), "authorative", "true", 1, 1, AknProxy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
 
         initEClass ( pullEventsEClass, PullEvents.class, "PullEvents", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
-        initEAttribute ( getPullEvents_JdbcDriverName (), ecorePackage.getEString (), "jdbcDriverName", null, 1, 1, PullEvents.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-        initEReference ( getPullEvents_JdbcProperties (), theWorldPackage.getPropertyEntry (), null, "jdbcProperties", null, 0, -1, PullEvents.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getPullEvents_JobInterval (), ecorePackage.getEIntegerObject (), "jobInterval", null, 0, 1, PullEvents.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getPullEvents_CustomSelectSql (), ecorePackage.getEString (), "customSelectSql", null, 0, 1, PullEvents.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getPullEvents_CustomDeleteSql (), ecorePackage.getEString (), "customDeleteSql", null, 0, 1, PullEvents.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getPullEvents_Database (), theWorldPackage.getDatabaseSettings (), null, "database", null, 1, 1, PullEvents.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( jdbcUserServiceModuleEClass, JdbcUserServiceModule.class, "JdbcUserServiceModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getJdbcUserServiceModule_UserServices (), this.getJdbcUserService (), null, "userServices", null, 0, -1, JdbcUserServiceModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -5288,30 +5551,20 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         initEClass ( eventStorageEClass, EventStorage.class, "EventStorage", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
 
         initEClass ( eventStorageJdbcEClass, EventStorageJdbc.class, "EventStorageJdbc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
-        initEAttribute ( getEventStorageJdbc_JdbcDriverName (), ecorePackage.getEString (), "jdbcDriverName", null, 1, 1, EventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-        initEAttribute ( getEventStorageJdbc_DriverBundles (), ecorePackage.getEString (), "driverBundles", null, 0, -1, EventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getEventStorageJdbc_MaxFieldLength (), ecorePackage.getEIntegerObject (), "maxFieldLength", null, 0, 1, EventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getEventStorageJdbc_QueryFetchSize (), ecorePackage.getEIntegerObject (), "queryFetchSize", null, 0, 1, EventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( eventStoragePostgresEClass, EventStoragePostgres.class, "EventStoragePostgres", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getEventStoragePostgres_BatchSize (), ecorePackage.getEIntegerObject (), "batchSize", null, 0, 1, EventStoragePostgres.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-        initEAttribute ( getEventStoragePostgres_PostgresDriverBundles (), ecorePackage.getEString (), "postgresDriverBundles", null, 0, -1, EventStoragePostgres.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-
-        initEOperation ( getEventStoragePostgres__GetJdbcDriverName (), ecorePackage.getEString (), "getJdbcDriverName", 1, 1, IS_UNIQUE, IS_ORDERED ); //$NON-NLS-1$
-
-        initEOperation ( getEventStoragePostgres__GetDriverBundles (), ecorePackage.getEString (), "getDriverBundles", 0, -1, IS_UNIQUE, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( abstractEventStorageJdbcEClass, AbstractEventStorageJdbc.class, "AbstractEventStorageJdbc", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
-        initEReference ( getAbstractEventStorageJdbc_JdbcProperties (), theWorldPackage.getPropertyEntry (), null, "jdbcProperties", null, 0, -1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getAbstractEventStorageJdbc_Schema (), ecorePackage.getEString (), "schema", null, 0, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getAbstractEventStorageJdbc_InstanceName (), ecorePackage.getEString (), "instanceName", "default", 1, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
         initEAttribute ( getAbstractEventStorageJdbc_EnableReplication (), ecorePackage.getEBoolean (), "enableReplication", "false", 1, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
         initEAttribute ( getAbstractEventStorageJdbc_ArchiveDays (), ecorePackage.getEIntegerObject (), "archiveDays", null, 0, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getAbstractEventStorageJdbc_CleanupPeriodSeconds (), ecorePackage.getEIntegerObject (), "cleanupPeriodSeconds", null, 0, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
-
-        initEOperation ( getAbstractEventStorageJdbc__GetJdbcDriverName (), ecorePackage.getEString (), "getJdbcDriverName", 1, 1, IS_UNIQUE, IS_ORDERED ); //$NON-NLS-1$
-
-        initEOperation ( getAbstractEventStorageJdbc__GetDriverBundles (), ecorePackage.getEString (), "getDriverBundles", 0, -1, IS_UNIQUE, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getAbstractEventStorageJdbc_Database (), theWorldPackage.getDatabaseSettings (), null, "database", null, 1, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getAbstractEventStorageJdbc_ReplicationDataFormat (), this.getReplicationDataFormat (), "replicationDataFormat", "JSON", 0, 1, AbstractEventStorageJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
 
         initEClass ( applicationConfigurationEClass, ApplicationConfiguration.class, "ApplicationConfiguration", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
 
@@ -5347,6 +5600,27 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         initEClass ( telnetConsoleEClass, TelnetConsole.class, "TelnetConsole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getTelnetConsole_Host (), ecorePackage.getEString (), "host", "localhost", 0, 1, TelnetConsole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
         initEAttribute ( getTelnetConsole_Port (), ecorePackage.getEShort (), "port", null, 1, 1, TelnetConsole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventInjectorEClass, EventInjector.class, "EventInjector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getEventInjector_Database (), theWorldPackage.getDatabaseSettings (), null, "database", null, 1, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjector_LoopDelay (), ecorePackage.getEIntegerObject (), "loopDelay", null, 0, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjector_InstanceName (), ecorePackage.getEString (), "instanceName", null, 0, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjector_Schema (), ecorePackage.getEString (), "schema", null, 0, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjector_ReplicationSchema (), ecorePackage.getEString (), "replicationSchema", null, 0, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjector_DeleteFailed (), theEcorePackage.getEBoolean (), "deleteFailed", null, 0, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventInjectorPostgresEClass, EventInjectorPostgres.class, "EventInjectorPostgres", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorPostgres_Limit (), ecorePackage.getEIntegerObject (), "limit", null, 0, 1, EventInjectorPostgres.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventInjectorJdbcEClass, EventInjectorJdbc.class, "EventInjectorJdbc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorJdbc_SelectSql (), ecorePackage.getEString (), "selectSql", null, 0, 1, EventInjectorJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorJdbc_DeleteSql (), ecorePackage.getEString (), "deleteSql", null, 0, 1, EventInjectorJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorJdbc_ExistsSql (), ecorePackage.getEString (), "existsSql", null, 0, 1, EventInjectorJdbc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( profileConfigurationEClass, ProfileConfiguration.class, "ProfileConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getProfileConfiguration_StartBundles (), ecorePackage.getEString (), "startBundles", null, 0, -1, ProfileConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getProfileConfiguration_InstallBundles (), ecorePackage.getEString (), "installBundles", null, 0, -1, ProfileConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getProfileConfiguration_Properties (), theWorldPackage.getPropertyEntry (), null, "properties", null, 0, -1, ProfileConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         // Initialize enums and add enum literals
         initEEnum ( averageReferenceTypeEEnum, AverageReferenceType.class, "AverageReferenceType" ); //$NON-NLS-1$
@@ -5387,6 +5661,12 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         addEEnumLiteral ( passwordTypeEEnum, PasswordType.MD5_HEX );
         addEEnumLiteral ( passwordTypeEEnum, PasswordType.SHA1_HEX );
 
+        initEEnum ( replicationDataFormatEEnum, ReplicationDataFormat.class, "ReplicationDataFormat" ); //$NON-NLS-1$
+        addEEnumLiteral ( replicationDataFormatEEnum, ReplicationDataFormat.BLOB );
+        addEEnumLiteral ( replicationDataFormatEEnum, ReplicationDataFormat.BYTES );
+        addEEnumLiteral ( replicationDataFormatEEnum, ReplicationDataFormat.JSON );
+        addEEnumLiteral ( replicationDataFormatEEnum, ReplicationDataFormat.ARRAY );
+
         initEEnum ( persistenceEEnum, Persistence.class, "Persistence" ); //$NON-NLS-1$
         addEEnumLiteral ( persistenceEEnum, Persistence.NONE );
         addEEnumLiteral ( persistenceEEnum, Persistence.LAZY );
@@ -5419,7 +5699,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      */
     protected void createExclusiveGroupAnnotations ()
     {
-        String source = "http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup"; //$NON-NLS-1$																				
+        String source = "http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup"; //$NON-NLS-1$	
         addAnnotation ( eventStorageEClass,
                 source,
                 new String[]

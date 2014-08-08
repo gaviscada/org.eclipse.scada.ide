@@ -10,37 +10,47 @@
  *******************************************************************************/
 package org.eclipse.scada.configuration.world.lib.deployment;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.scada.configuration.lib.Nodes;
 import org.eclipse.scada.configuration.world.ApplicationNode;
 import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
 import org.eclipse.scada.configuration.world.deployment.DebianDeploymentMechanism;
 import org.eclipse.scada.configuration.world.deployment.StartupMechanism;
 import org.eclipse.scada.configuration.world.lib.deployment.startup.StartupHandler;
-import org.eclipse.scada.configuration.world.lib.utils.Helper;
-import org.eclipse.scada.configuration.world.lib.utils.ProcessRunner;
+import org.eclipse.scada.configuration.world.lib.setup.SubModuleHandler;
+import org.eclipse.scada.configuration.world.setup.OperatingSystemDescriptor;
+import org.eclipse.scada.configuration.world.setup.SetupModuleContainer;
+import org.eclipse.scada.utils.pkg.deb.DebianPackageWriter;
+import org.eclipse.scada.utils.pkg.deb.control.BinaryPackageControlFile;
 import org.eclipse.scada.utils.str.StringHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.google.common.io.ByteStreams;
+import com.google.common.io.CharStreams;
 
 public class DebianHandler extends CommonPackageHandler
 {
-
-    private final static Logger logger = LoggerFactory.getLogger ( DebianHandler.class );
+    private static final String CONTROL_SCRIPTS_DIR = "/usr/lib/eclipsescada/packagescripts";
 
     private final DebianDeploymentMechanism deploy;
 
@@ -63,77 +73,176 @@ public class DebianHandler extends CommonPackageHandler
 
         final String packageName = getPackageName ();
 
+        final String version = findVersion ();
+
+        final BinaryPackageControlFile packageControlFile = new BinaryPackageControlFile ();
+        packageControlFile.setPackage ( packageName );
+        packageControlFile.setArchitecture ( "all" ); //$NON-NLS-1$
+        packageControlFile.setVersion ( version );
+        packageControlFile.setPriority ( "required" ); //$NON-NLS-1$
+        packageControlFile.setSection ( "misc" ); //$NON-NLS-1$
+        packageControlFile.setMaintainer ( String.format ( "%s <%s>", this.deploy.getMaintainer ().getName (), this.deploy.getMaintainer ().getEmail () ) ); //$NON-NLS-1$
+        packageControlFile.setDescription ( String.format ( "Configuration package for %s", Nodes.makeName ( this.applicationNode ) ), "This is an automatically generated configuration package" );
+
+        packageControlFile.set ( BinaryPackageControlFile.Fields.CONFLICTS, "org.openscada.drivers.common, org.openscada" ); //$NON-NLS-1$
+
         final Map<String, String> replacements = new HashMap<> ();
         replacements.put ( "packageName", packageName ); //$NON-NLS-1$
         replacements.put ( "authorName", this.deploy.getMaintainer ().getName () ); //$NON-NLS-1$
         replacements.put ( "authorEmail", this.deploy.getMaintainer ().getEmail () ); //$NON-NLS-1$
         replacements.put ( "nodeName", this.applicationNode.getName () == null ? this.applicationNode.getHostName () : this.applicationNode.getName () ); //$NON-NLS-1$
-        replacements.put ( "postinst.restart", createPostInst () ); //$NON-NLS-1$
-        replacements.put ( "prerm.stop", createPreRm () ); //$NON-NLS-1$
-        replacements.put ( "depends", makeDependencies () ); //$NON-NLS-1$
 
-        replacements.put ( "postinst.scripts", createScriptFile ( packageFolder, "postinst" ) );
-        replacements.put ( "prerm.scripts", createScriptFile ( packageFolder, "prerm" ) );
-        replacements.put ( "postrm.scripts", createScriptFile ( packageFolder, "postrm" ) );
+        replacements.put ( "stop.apps", createStopApps () ); //$NON-NLS-1$
+        replacements.put ( "start.apps", createStartApps () ); //$NON-NLS-1$
+        replacements.put ( "create.apps", makeCreate ( this.deploy ) ); //$NON-NLS-1$
+        replacements.put ( "multiuserScreen", this.deploy.isMultiUserScreen () ? "1" : "0" );
 
-        Helper.createFile ( new File ( packageFolder, "debian/source/format" ), "3.0 (native)", monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/compat" ), "8", monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/docs" ), "", monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/" + packageName + ".install" ), "src/* /", monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/postinst" ), DebianHandler.class.getResourceAsStream ( "templates/deb/postinst" ), replacements, monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/prerm" ), DebianHandler.class.getResourceAsStream ( "templates/deb/prerm" ), replacements, monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/postrm" ), DebianHandler.class.getResourceAsStream ( "templates/deb/postrm" ), replacements, monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/rules" ), DebianHandler.class.getResourceAsStream ( "templates/deb/rules" ), monitor, true );
-        Helper.createFile ( new File ( packageFolder, "debian/control" ), DebianHandler.class.getResourceAsStream ( "templates/deb/control" ), replacements, monitor );
-        Helper.createFile ( new File ( packageFolder, "debian/changelog" ), createChangeLog ( packageName, this.deploy.getChanges () ), monitor );
+        final Set<String> dependencies = new HashSet<> ();
 
-        final BinaryPackageBuilderWrapper builder = new BinaryPackageBuilderWrapper ( new File ( packageFolder, "src" ) );
+        final StringBuilder postInstallation = new StringBuilder ();
 
-        createDrivers ( builder, nodeDir, monitor, packageFolder, replacements );
-        createEquinox ( builder, nodeDir.getLocation ().toFile (), packageFolder, replacements, monitor );
+        final Map<String, File> tempFiles = new HashMap<> ();
 
-        // run debuild
-
-        if ( !Boolean.parseBoolean ( properties.get ( "skipRunDeployment" ) ) ) //$NON-NLS-1$
+        final SetupModuleContainer setup = this.deploy.getSetup ();
+        if ( setup != null )
         {
+            final DeploymentContext context = new DeploymentContext () {
 
-            monitor.setTaskName ( "Running \"debuild -us -uc\"" ); //$NON-NLS-1$
+                @Override
+                public void addInstallDependency ( final String packageName )
+                {
+                    dependencies.add ( packageName );
+                }
 
-            final ProcessBuilder processBuilder = new ProcessBuilder ( Arrays.asList ( "debuild", "-us", "-uc" ) );
-            processBuilder.directory ( packageFolder );
-            try
-            {
-                new ProcessRunner ( processBuilder ).run ();
-            }
-            catch ( final Exception e )
-            {
-                logger.warn ( "Failed to generate debian package", e ); //$NON-NLS-1$
-            }
+                @Override
+                public void addPostInstallationScript ( final Reader reader ) throws IOException
+                {
+                    CharStreams.copy ( reader, postInstallation );
+                }
 
-            nodeDir.refreshLocal ( IResource.DEPTH_INFINITE, monitor );
+                @Override
+                public void runAfterInstallation ( final String script )
+                {
+                    postInstallation.append ( "if test \"$1\" = configure ; then\n" );
+                    postInstallation.append ( script );
+                    postInstallation.append ( "\nfi\n" );
+                }
+
+                @Override
+                public void addFile ( final InputStream resource, final String targetFile ) throws IOException
+                {
+                    final File tmp = Files.createTempFile ( "data", "" ).toFile ();
+                    final File old = tempFiles.put ( targetFile, tmp );
+                    if ( old != null )
+                    {
+                        old.delete ();
+                    }
+                    try ( BufferedOutputStream os = new BufferedOutputStream ( new FileOutputStream ( tmp ) ) )
+                    {
+                        ByteStreams.copy ( resource, os );
+                    }
+                }
+            };
+            runSetup ( setup, this.deploy.getOperatingSystem (), context, new SubProgressMonitor ( monitor, 1 ) );
         }
+
+        replacements.put ( "postinst.scripts", postInstallation.toString () + "\n" + createUserScriptCallbacks ( packageFolder, "postinst" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+        replacements.put ( "preinst.scripts", createUserScriptCallbacks ( packageFolder, "preinst" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+        replacements.put ( "prerm.scripts", createUserScriptCallbacks ( packageFolder, "prerm" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+        replacements.put ( "postrm.scripts", createUserScriptCallbacks ( packageFolder, "postrm" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+
+        packageControlFile.set ( BinaryPackageControlFile.Fields.DEPENDS, makeDependencies ( dependencies ) );
+
+        final File outputFile = new File ( nodeDir.getLocation ().toFile (), packageControlFile.makeFileName () );
+        outputFile.getParentFile ().mkdirs ();
+        try ( DebianPackageWriter deb = new DebianPackageWriter ( new FileOutputStream ( outputFile ), packageControlFile ) )
+        {
+            deb.setPostinstScript ( Contents.createContent ( DebianHandler.class.getResourceAsStream ( "templates/deb/postinst" ), replacements ) ); //$NON-NLS-1$
+            deb.setPostrmScript ( Contents.createContent ( DebianHandler.class.getResourceAsStream ( "templates/deb/postrm" ), replacements ) ); //$NON-NLS-1$
+            deb.setPrermScript ( Contents.createContent ( DebianHandler.class.getResourceAsStream ( "templates/deb/prerm" ), replacements ) ); //$NON-NLS-1$
+            deb.setPreinstScript ( Contents.createContent ( DebianHandler.class.getResourceAsStream ( "templates/deb/preinst" ), replacements ) ); //$NON-NLS-1$
+
+            if ( !makeEquinoxList ().isEmpty () )
+            {
+                deb.addFile ( StringHelper.join ( makeEquinoxList (), "\n" ) + "\n", "/etc/eclipsescada/applications", null );
+            }
+
+            for ( final Map.Entry<String, File> entry : tempFiles.entrySet () )
+            {
+                deb.addFile ( entry.getValue (), entry.getKey (), null );
+            }
+
+            createDrivers ( deb, nodeDir, monitor, packageFolder, replacements );
+            createEquinox ( deb, nodeDir.getLocation ().toFile (), packageFolder, replacements, monitor );
+
+            // scoop up "src" files
+            final Path src = new File ( packageFolder, "src" ).toPath (); //$NON-NLS-1$
+            if ( src.toFile ().isDirectory () )
+            {
+                final ScoopFilesVisitor scoop = new ScoopFilesVisitor ( src, deb, null );
+                scoop.getIgnorePrefix ().add ( CONTROL_SCRIPTS_DIR );
+                Files.walkFileTree ( src, scoop );
+            }
+        }
+
+        nodeDir.refreshLocal ( IResource.DEPTH_INFINITE, monitor );
     }
 
-    private String createScriptFile ( final File packageFolder, final String type )
+    private void runSetup ( final SetupModuleContainer setup, final OperatingSystemDescriptor operatingSystem, final DeploymentContext context, final IProgressMonitor monitor ) throws Exception
     {
-        final File dir = new File ( packageFolder, "src/usr/lib/eclipsescada/packagescripts/" + getPackageName () + "/" + type );
-        final List<String> scripts = new LinkedList<> ();
+        SubModuleHandler.runSetup ( context, setup.getModules (), operatingSystem );
+        monitor.done ();
+    }
+
+    private String findVersion ()
+    {
+        final ArrayList<ChangeEntry> sortedChanges = new ArrayList<> ( this.deploy.getChanges () );
+        if ( sortedChanges.isEmpty () )
+        {
+            throw new IllegalStateException ( String.format ( "No change record found" ) );
+        }
+
+        Collections.sort ( sortedChanges, new ChangeEntryComparator ( true ) );
+        return sortedChanges.get ( 0 ).getVersion ();
+    }
+
+    /**
+     * This method scoops up all package scripts and create the calls in the
+     * corresponding package scripts
+     *
+     * @throws IOException
+     */
+    private String createUserScriptCallbacks ( final File packageFolder, final String type ) throws IOException
+    {
+        final File dir = new File ( packageFolder, "src" + CONTROL_SCRIPTS_DIR + "/" + getPackageName () + "/" + type ); //$NON-NLS-1$ //$NON-NLS-2$
 
         if ( !dir.isDirectory () )
         {
             return "";
         }
 
-        for ( final File file : dir.listFiles () )
+        final StringWriter sw = new StringWriter ();
+        final Charset cs = Charset.forName ( "UTF-8" );
+
+        final File[] files = dir.listFiles ();
+        Arrays.sort ( files );
+        for ( final File file : files )
         {
             if ( !file.isFile () )
             {
                 continue;
             }
+
+            sw.write ( String.format ( "# ================== START - %s ==================\n", file ) );
+
+            CharStreams.copy ( Files.newBufferedReader ( file.toPath (), cs ), sw );
+
+            sw.write ( String.format ( "# ==================  END - %s  ==================\n", file ) );
+
             file.setExecutable ( true );
-            scripts.add ( "/usr/lib/eclipsescada/packagescripts/" + getPackageName () + "/" + type + "/" + file.getName () + " $@" );
         }
-        return StringHelper.join ( scripts, "\n" );
+
+        return sw.toString ();
     }
 
     @Override
@@ -142,7 +251,7 @@ public class DebianHandler extends CommonPackageHandler
         return StartupMechanism.UPSTART;
     }
 
-    private String makeDependencies ()
+    private String makeDependencies ( final Set<String> dependencies )
     {
         final Set<String> result = new HashSet<> ();
 
@@ -161,55 +270,67 @@ public class DebianHandler extends CommonPackageHandler
         {
             result.addAll ( sh.getAdditionalPackageDependencies () );
         }
+        result.addAll ( dependencies );
 
         return StringHelper.join ( result, ", " ); //$NON-NLS-1$
     }
 
-    private String createPostInst ()
+    private String createStopApps ()
     {
-        final StartupHandler sh = getStartupHandler ();
-        if ( sh == null )
-        {
-            return "";
-        }
-
         final StringBuilder sb = new StringBuilder ();
-
-        for ( final String driver : makeDriverList () )
-        {
-            final String cmd = sh.restartDriverCommand ( driver );
-            if ( cmd == null )
-            {
-                continue;
-            }
-
-            sb.append ( String.format ( "    %s || echo failed to restart %s", cmd, driver ) );
-            sb.append ( '\n' );
-        }
-
-        for ( final String app : makeEquinoxList () )
-        {
-            final String cmd = sh.restartEquinoxCommand ( app );
-            if ( cmd == null )
-            {
-                continue;
-            }
-
-            sb.append ( String.format ( "    %s || echo failed to restart %s", cmd, app ) );
-            sb.append ( '\n' );
-        }
-
+        stopApplications ( sb );
         return sb.toString ();
     }
 
-    private String createPreRm ()
+    private String createStartApps ()
     {
         final StringBuilder sb = new StringBuilder ();
+        startApplications ( sb );
+        return sb.toString ();
+    }
 
+    protected void startApplications ( final StringBuilder sb )
+    {
         final StartupHandler sh = getStartupHandler ();
         if ( sh == null )
         {
-            return "";
+            return;
+        }
+
+        for ( final String driver : makeDriverList () )
+        {
+            final String cmd = sh.startDriverCommand ( driver );
+            if ( cmd == null )
+            {
+                continue;
+            }
+
+            sb.append ( String.format ( "    %s || echo failed to start %s", cmd, driver ) ); //$NON-NLS-1$
+            sb.append ( '\n' );
+        }
+
+        if ( this.deploy.isAutomaticCreate () )
+        {
+            for ( final String app : makeEquinoxList () )
+            {
+                final String cmd = sh.startEquinoxCommand ( app );
+                if ( cmd == null )
+                {
+                    continue;
+                }
+
+                sb.append ( String.format ( "    %s || echo failed to start %s", cmd, app ) ); //$NON-NLS-1$
+                sb.append ( '\n' );
+            }
+        }
+    }
+
+    protected void stopApplications ( final StringBuilder sb )
+    {
+        final StartupHandler sh = getStartupHandler ();
+        if ( sh == null )
+        {
+            return;
         }
 
         for ( final String driver : makeDriverList () )
@@ -219,24 +340,26 @@ public class DebianHandler extends CommonPackageHandler
             {
                 continue;
             }
-            sb.append ( String.format ( "    %s || echo failed to stop %s", cmd, driver ) );
+            sb.append ( String.format ( "    %s || echo failed to stop %s", cmd, driver ) ); //$NON-NLS-1$
             sb.append ( '\n' );
         }
 
-        for ( final String app : makeEquinoxList () )
+        if ( this.deploy.isAutomaticCreate () )
         {
-            final String cmd = sh.stopEquinoxCommand ( app );
-            if ( cmd == null )
+            for ( final String app : makeEquinoxList () )
             {
-                continue;
+                final String cmd = sh.stopEquinoxCommand ( app );
+                if ( cmd == null )
+                {
+                    continue;
+                }
+                sb.append ( String.format ( "    %s || echo failed to stop %s", cmd, app ) ); //$NON-NLS-1$
+                sb.append ( '\n' );
             }
-            sb.append ( String.format ( "    %s || echo failed to stop %s", cmd, app ) );
-            sb.append ( '\n' );
         }
-
-        return sb.toString ();
     }
 
+    /*
     private String createChangeLog ( final String packageName, final List<ChangeEntry> changes )
     {
         final StringBuilder sb = new StringBuilder ();
@@ -262,4 +385,5 @@ public class DebianHandler extends CommonPackageHandler
 
         return sb.toString ();
     }
+     */
 }

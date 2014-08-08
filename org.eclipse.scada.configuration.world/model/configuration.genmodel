@@ -5,7 +5,8 @@
     creationSubmenus="true" modelPluginID="org.eclipse.scada.configuration.world"
     modelName="World" nonNLSMarkers="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
-    complianceLevel="7.0" copyrightFields="false" tableProviders="true" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.scada.da.server.exec/model/exec.genmodel#//configuration ../../org.eclipse.scada.configuration.security/model/sec.genmodel#//security"
+    complianceLevel="7.0" copyrightFields="false" tableProviders="true" runtimeVersion="2.9"
+    usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.scada.da.server.exec/model/exec.genmodel#//configuration ../../org.eclipse.scada.configuration.security/model/sec.genmodel#//security"
     operationReflection="true" importOrganizing="true" pluginKey="world">
   <foreignModel>configuration.ecore</foreignModel>
   <genPackages prefix="World" basePackage="org.eclipse.scada.configuration" resource="XMI"
@@ -77,7 +78,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//PropertyEntry/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//PropertyEntry/value"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="configuration.ecore#//ServiceBinding"/>
+    <genClasses image="false" ecoreClass="configuration.ecore#//ServiceBinding">
+      <genOperations ecoreOperation="configuration.ecore#//ServiceBinding/getService"/>
+    </genClasses>
     <genClasses ecoreClass="configuration.ecore#//ContainedServiceBinding">
       <genFeatures property="Readonly" children="true" createChild="false" ecoreFeature="ecore:EReference configuration.ecore#//ContainedServiceBinding/service"/>
     </genClasses>
@@ -85,6 +88,33 @@
       <genFeatures property="Readonly" children="true" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference configuration.ecore#//ReferencedServiceBinding/service"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="configuration.ecore#//Settings"/>
+    <genClasses image="false" ecoreClass="configuration.ecore#//DatabaseSettings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//DatabaseSettings/id"/>
+      <genOperations ecoreOperation="configuration.ecore#//DatabaseSettings/getDriverName"/>
+      <genOperations ecoreOperation="configuration.ecore#//DatabaseSettings/getProperties"/>
+      <genOperations ecoreOperation="configuration.ecore#//DatabaseSettings/getUrl"/>
+      <genOperations ecoreOperation="configuration.ecore#//DatabaseSettings/getLoginTimeout"/>
+      <genOperations ecoreOperation="configuration.ecore#//DatabaseSettings/getBundles"/>
+    </genClasses>
+    <genClasses ecoreClass="configuration.ecore#//GenericSettingsContainer">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference configuration.ecore#//GenericSettingsContainer/settings"/>
+    </genClasses>
+    <genClasses ecoreClass="configuration.ecore#//GenericDatabaseSettings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//GenericDatabaseSettings/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//GenericDatabaseSettings/driverName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//GenericDatabaseSettings/bundles"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="configuration.ecore#//AbstractGenericDatabaseSettings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//AbstractGenericDatabaseSettings/username"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//AbstractGenericDatabaseSettings/password"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//AbstractGenericDatabaseSettings/loginTimeout"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//AbstractGenericDatabaseSettings/additionalProperties"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//AbstractGenericDatabaseSettings/databaseName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//AbstractGenericDatabaseSettings/serverName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//AbstractGenericDatabaseSettings/portNumber"/>
+    </genClasses>
+    <genClasses ecoreClass="configuration.ecore#//PostgresDatabaseSettings"/>
     <nestedGenPackages prefix="Osgi" basePackage="org.eclipse.scada.configuration.world"
         resource="XMI" disposableProviderFactory="true" generateModelWizard="false"
         extensibleProviderFactory="true" childCreationExtenders="true" ecorePackage="configuration.ecore#//osgi">
@@ -125,6 +155,12 @@
         <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/PasswordType/PLAIN_IGNORE_CASE"/>
         <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/PasswordType/MD5_HEX"/>
         <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/PasswordType/SHA1_HEX"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="configuration.ecore#//osgi/ReplicationDataFormat">
+        <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/ReplicationDataFormat/BLOB"/>
+        <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/ReplicationDataFormat/BYTES"/>
+        <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/ReplicationDataFormat/JSON"/>
+        <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/ReplicationDataFormat/ARRAY"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="configuration.ecore#//osgi/Persistence">
         <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//osgi/Persistence/NONE"/>
@@ -483,11 +519,11 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AknProxy/authorative"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//osgi/PullEvents">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/PullEvents/jdbcDriverName"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//osgi/PullEvents/jdbcProperties"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/PullEvents/jobInterval"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/PullEvents/customSelectSql"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/PullEvents/customDeleteSql"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//osgi/PullEvents/database"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//osgi/JdbcUserServiceModule">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//osgi/JdbcUserServiceModule/userServices"/>
@@ -520,26 +556,21 @@
       </genClasses>
       <genClasses image="false" ecoreClass="configuration.ecore#//osgi/EventStorage"/>
       <genClasses ecoreClass="configuration.ecore#//osgi/EventStorageJdbc">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventStorageJdbc/jdbcDriverName"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventStorageJdbc/driverBundles"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventStorageJdbc/maxFieldLength"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventStorageJdbc/queryFetchSize"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//osgi/EventStoragePostgres">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventStoragePostgres/batchSize"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventStoragePostgres/postgresDriverBundles"/>
-        <genOperations ecoreOperation="configuration.ecore#//osgi/EventStoragePostgres/getJdbcDriverName"/>
-        <genOperations ecoreOperation="configuration.ecore#//osgi/EventStoragePostgres/getDriverBundles"/>
       </genClasses>
       <genClasses image="false" ecoreClass="configuration.ecore#//osgi/AbstractEventStorageJdbc">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//osgi/AbstractEventStorageJdbc/jdbcProperties"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AbstractEventStorageJdbc/schema"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AbstractEventStorageJdbc/instanceName"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AbstractEventStorageJdbc/enableReplication"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AbstractEventStorageJdbc/archiveDays"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AbstractEventStorageJdbc/cleanupPeriodSeconds"/>
-        <genOperations ecoreOperation="configuration.ecore#//osgi/AbstractEventStorageJdbc/getJdbcDriverName"/>
-        <genOperations ecoreOperation="configuration.ecore#//osgi/AbstractEventStorageJdbc/getDriverBundles"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//osgi/AbstractEventStorageJdbc/database"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/AbstractEventStorageJdbc/replicationDataFormat"/>
       </genClasses>
       <genClasses image="false" ecoreClass="configuration.ecore#//osgi/ApplicationConfiguration"/>
       <genClasses ecoreClass="configuration.ecore#//osgi/RestExporter">
@@ -577,6 +608,28 @@
       <genClasses ecoreClass="configuration.ecore#//osgi/TelnetConsole">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/TelnetConsole/host"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/TelnetConsole/port"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="configuration.ecore#//osgi/EventInjector">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//osgi/EventInjector/database"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjector/loopDelay"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjector/instanceName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjector/schema"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjector/replicationSchema"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjector/deleteFailed"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/EventInjectorPostgres">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjectorPostgres/limit"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/EventInjectorJdbc">
+        <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjectorJdbc/selectSql"/>
+        <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjectorJdbc/deleteSql"/>
+        <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjectorJdbc/existsSql"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/ProfileConfiguration">
+        <genFeatures children="true" createChild="true" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/ProfileConfiguration/startBundles"/>
+        <genFeatures children="true" createChild="true" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/ProfileConfiguration/installBundles"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//osgi/ProfileConfiguration/properties"/>
       </genClasses>
       <nestedGenPackages prefix="Profile" basePackage="org.eclipse.scada.configuration.world.osgi"
           resource="XML" disposableProviderFactory="true" generateModelWizard="false"
@@ -633,23 +686,33 @@
         <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//deployment/StartupMechanism/LSB_SYSV"/>
       </genEnums>
       <genClasses image="false" ecoreClass="configuration.ecore#//deployment/DeploymentMechanism"/>
-      <genClasses ecoreClass="configuration.ecore#//deployment/DebianDeploymentMechanism"/>
+      <genClasses ecoreClass="configuration.ecore#//deployment/DebianDeploymentMechanism">
+        <genFeatures notify="false" createChild="false" propertyCategory="setup" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//deployment/DebianDeploymentMechanism/setup"/>
+      </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/Author">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/Author/name"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/Author/email"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/RedhatDeploymentMechanism">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/RedhatDeploymentMechanism/license"/>
+        <genFeatures createChild="false" propertyCategory="legal" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/RedhatDeploymentMechanism/license"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/DeploymentInformation">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//deployment/DeploymentInformation/authors"/>
+        <genFeatures property="None" children="true" createChild="true" propertyCategory="legal"
+            ecoreFeature="ecore:EReference configuration.ecore#//deployment/DeploymentInformation/authors"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/CommonDeploymentMechanism">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//deployment/CommonDeploymentMechanism/changes"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+        <genFeatures property="None" children="true" createChild="true" propertyCategory="information"
+            ecoreFeature="ecore:EReference configuration.ecore#//deployment/CommonDeploymentMechanism/changes"/>
+        <genFeatures notify="false" createChild="false" propertyCategory="legal" propertySortChoices="true"
             ecoreFeature="ecore:EReference configuration.ecore#//deployment/CommonDeploymentMechanism/maintainer"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/additionalDependencies"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/startupMechanism"/>
+        <genFeatures createChild="false" propertyCategory="information" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/additionalDependencies"/>
+        <genFeatures createChild="false" propertyCategory="information" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/startupMechanism"/>
+        <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/multiUserScreen"/>
+        <genFeatures notify="false" createChild="false" propertyCategory="setup" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//deployment/CommonDeploymentMechanism/operatingSystem"/>
+        <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/automaticCreate"/>
+        <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/recreateBackups"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/ChangeEntry">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -674,16 +737,17 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/SimpleNodeMappingEntry/ignoreCase"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/MsiDeploymentMechanism">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/version"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/upgradeCode"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/manufacturer"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+        <genFeatures createChild="false" propertyCategory="information" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/version"/>
+        <genFeatures createChild="false" propertyCategory="information" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/upgradeCode"/>
+        <genFeatures createChild="false" propertyCategory="legal" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/manufacturer"/>
+        <genFeatures notify="false" createChild="false" propertyCategory="p2" propertySortChoices="true"
             ecoreFeature="ecore:EReference configuration.ecore#//deployment/MsiDeploymentMechanism/sharedPlatform"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//deployment/MsiDeploymentMechanism/localPlatform"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/architecture"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/enableFirewall"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/enableUserInterface"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/licenseFile"/>
+        <genFeatures property="None" children="true" createChild="true" propertyCategory="p2"
+            ecoreFeature="ecore:EReference configuration.ecore#//deployment/MsiDeploymentMechanism/localPlatform"/>
+        <genFeatures createChild="false" propertyCategory="information" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/architecture"/>
+        <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/enableFirewall"/>
+        <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/enableUserInterface"/>
+        <genFeatures createChild="false" propertyCategory="legal" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/MsiDeploymentMechanism/licenseFile"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/P2Platform">
         <genFeatures children="true" createChild="true" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/P2Platform/repositories"/>
@@ -692,6 +756,42 @@
       <genClasses ecoreClass="configuration.ecore#//deployment/Mappings">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//deployment/Mappings/entries"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/Mappings/fallbackMode"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Setup" resource="XMI" disposableProviderFactory="true"
+        generateModelWizard="false" extensibleProviderFactory="true" childCreationExtenders="true"
+        ecorePackage="configuration.ecore#//setup">
+      <genDataTypes ecoreDataType="configuration.ecore#//setup/ValidationContext"/>
+      <genDataTypes ecoreDataType="configuration.ecore#//setup/Status"/>
+      <genClasses ecoreClass="configuration.ecore#//setup/OperatingSystemDescriptor"
+          labelFeature="#//world/setup/OperatingSystemDescriptor/label">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//setup/OperatingSystemDescriptor/parent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//setup/OperatingSystemDescriptor/properties"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//setup/OperatingSystemDescriptor/id"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//setup/OperatingSystemDescriptor/label"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//setup/SetupModuleContainer">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//setup/SetupModuleContainer/modules"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//setup/SetupModuleContainer/id"/>
+        <genOperations ecoreOperation="configuration.ecore#//setup/SetupModuleContainer/validateOperatingSystem">
+          <genParameters ecoreParameter="configuration.ecore#//setup/SetupModuleContainer/validateOperatingSystem/descriptor"/>
+          <genParameters ecoreParameter="configuration.ecore#//setup/SetupModuleContainer/validateOperatingSystem/context"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="configuration.ecore#//setup/SetupModule">
+        <genOperations ecoreOperation="configuration.ecore#//setup/SetupModule/validateOperatingSystem">
+          <genParameters ecoreParameter="configuration.ecore#//setup/SetupModule/validateOperatingSystem/descriptor"/>
+          <genParameters ecoreParameter="configuration.ecore#//setup/SetupModule/validateOperatingSystem/context"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//setup/SubContainerModule">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//setup/SubContainerModule/container"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//setup/SetupDefinitions">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//setup/SetupDefinitions/containers"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//setup/SetupDefinitions/operationSystemDefinitions"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

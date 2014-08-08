@@ -5153,31 +5153,13 @@ public interface OsgiPackage extends EPackage
     int PULL_EVENTS__NAME = WorldPackage.NAMED_DOCUMENTABLE__NAME;
 
     /**
-     * The feature id for the '<em><b>Jdbc Driver Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int PULL_EVENTS__JDBC_DRIVER_NAME = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 0;
-
-    /**
-     * The feature id for the '<em><b>Jdbc Properties</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int PULL_EVENTS__JDBC_PROPERTIES = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 1;
-
-    /**
      * The feature id for the '<em><b>Job Interval</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int PULL_EVENTS__JOB_INTERVAL = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 2;
+    int PULL_EVENTS__JOB_INTERVAL = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Custom Select Sql</b></em>' attribute.
@@ -5186,7 +5168,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int PULL_EVENTS__CUSTOM_SELECT_SQL = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 3;
+    int PULL_EVENTS__CUSTOM_SELECT_SQL = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Custom Delete Sql</b></em>' attribute.
@@ -5195,7 +5177,16 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int PULL_EVENTS__CUSTOM_DELETE_SQL = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 4;
+    int PULL_EVENTS__CUSTOM_DELETE_SQL = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Database</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PULL_EVENTS__DATABASE = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 3;
 
     /**
      * The number of structural features of the '<em>Pull Events</em>' class.
@@ -5204,7 +5195,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int PULL_EVENTS_FEATURE_COUNT = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 5;
+    int PULL_EVENTS_FEATURE_COUNT = WorldPackage.NAMED_DOCUMENTABLE_FEATURE_COUNT + 4;
 
     /**
      * The number of operations of the '<em>Pull Events</em>' class.
@@ -5830,22 +5821,13 @@ public interface OsgiPackage extends EPackage
     int ABSTRACT_EVENT_STORAGE_JDBC = 80;
 
     /**
-     * The feature id for the '<em><b>Jdbc Properties</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES = EVENT_STORAGE_FEATURE_COUNT + 0;
-
-    /**
      * The feature id for the '<em><b>Schema</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA = EVENT_STORAGE_FEATURE_COUNT + 1;
+    int ABSTRACT_EVENT_STORAGE_JDBC__SCHEMA = EVENT_STORAGE_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Instance Name</b></em>' attribute.
@@ -5854,7 +5836,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC__INSTANCE_NAME = EVENT_STORAGE_FEATURE_COUNT + 2;
+    int ABSTRACT_EVENT_STORAGE_JDBC__INSTANCE_NAME = EVENT_STORAGE_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Enable Replication</b></em>' attribute.
@@ -5863,7 +5845,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC__ENABLE_REPLICATION = EVENT_STORAGE_FEATURE_COUNT + 3;
+    int ABSTRACT_EVENT_STORAGE_JDBC__ENABLE_REPLICATION = EVENT_STORAGE_FEATURE_COUNT + 2;
 
     /**
      * The feature id for the '<em><b>Archive Days</b></em>' attribute.
@@ -5872,7 +5854,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC__ARCHIVE_DAYS = EVENT_STORAGE_FEATURE_COUNT + 4;
+    int ABSTRACT_EVENT_STORAGE_JDBC__ARCHIVE_DAYS = EVENT_STORAGE_FEATURE_COUNT + 3;
 
     /**
      * The feature id for the '<em><b>Cleanup Period Seconds</b></em>' attribute.
@@ -5881,7 +5863,25 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS = EVENT_STORAGE_FEATURE_COUNT + 5;
+    int ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS = EVENT_STORAGE_FEATURE_COUNT + 4;
+
+    /**
+     * The feature id for the '<em><b>Database</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ABSTRACT_EVENT_STORAGE_JDBC__DATABASE = EVENT_STORAGE_FEATURE_COUNT + 5;
+
+    /**
+     * The feature id for the '<em><b>Replication Data Format</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT = EVENT_STORAGE_FEATURE_COUNT + 6;
 
     /**
      * The number of structural features of the '<em>Abstract Event Storage Jdbc</em>' class.
@@ -5890,25 +5890,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT = EVENT_STORAGE_FEATURE_COUNT + 6;
-
-    /**
-     * The operation id for the '<em>Get Jdbc Driver Name</em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ABSTRACT_EVENT_STORAGE_JDBC___GET_JDBC_DRIVER_NAME = EVENT_STORAGE_OPERATION_COUNT + 0;
-
-    /**
-     * The operation id for the '<em>Get Driver Bundles</em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ABSTRACT_EVENT_STORAGE_JDBC___GET_DRIVER_BUNDLES = EVENT_STORAGE_OPERATION_COUNT + 1;
+    int ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT = EVENT_STORAGE_FEATURE_COUNT + 7;
 
     /**
      * The number of operations of the '<em>Abstract Event Storage Jdbc</em>' class.
@@ -5917,7 +5899,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int ABSTRACT_EVENT_STORAGE_JDBC_OPERATION_COUNT = EVENT_STORAGE_OPERATION_COUNT + 2;
+    int ABSTRACT_EVENT_STORAGE_JDBC_OPERATION_COUNT = EVENT_STORAGE_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventStorageJdbcImpl <em>Event Storage Jdbc</em>}' class.
@@ -5928,15 +5910,6 @@ public interface OsgiPackage extends EPackage
      * @generated
      */
     int EVENT_STORAGE_JDBC = 78;
-
-    /**
-     * The feature id for the '<em><b>Jdbc Properties</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_JDBC__JDBC_PROPERTIES = ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES;
 
     /**
      * The feature id for the '<em><b>Schema</b></em>' attribute.
@@ -5984,22 +5957,22 @@ public interface OsgiPackage extends EPackage
     int EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS = ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS;
 
     /**
-     * The feature id for the '<em><b>Jdbc Driver Name</b></em>' attribute.
+     * The feature id for the '<em><b>Database</b></em>' reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_JDBC__JDBC_DRIVER_NAME = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 0;
+    int EVENT_STORAGE_JDBC__DATABASE = ABSTRACT_EVENT_STORAGE_JDBC__DATABASE;
 
     /**
-     * The feature id for the '<em><b>Driver Bundles</b></em>' attribute list.
+     * The feature id for the '<em><b>Replication Data Format</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_JDBC__DRIVER_BUNDLES = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 1;
+    int EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT = ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT;
 
     /**
      * The feature id for the '<em><b>Max Field Length</b></em>' attribute.
@@ -6008,7 +5981,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_JDBC__MAX_FIELD_LENGTH = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 2;
+    int EVENT_STORAGE_JDBC__MAX_FIELD_LENGTH = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Query Fetch Size</b></em>' attribute.
@@ -6017,7 +5990,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_JDBC__QUERY_FETCH_SIZE = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 3;
+    int EVENT_STORAGE_JDBC__QUERY_FETCH_SIZE = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 1;
 
     /**
      * The number of structural features of the '<em>Event Storage Jdbc</em>' class.
@@ -6026,25 +5999,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_JDBC_FEATURE_COUNT = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 4;
-
-    /**
-     * The operation id for the '<em>Get Jdbc Driver Name</em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_JDBC___GET_JDBC_DRIVER_NAME = ABSTRACT_EVENT_STORAGE_JDBC___GET_JDBC_DRIVER_NAME;
-
-    /**
-     * The operation id for the '<em>Get Driver Bundles</em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_JDBC___GET_DRIVER_BUNDLES = ABSTRACT_EVENT_STORAGE_JDBC___GET_DRIVER_BUNDLES;
+    int EVENT_STORAGE_JDBC_FEATURE_COUNT = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 2;
 
     /**
      * The number of operations of the '<em>Event Storage Jdbc</em>' class.
@@ -6064,15 +6019,6 @@ public interface OsgiPackage extends EPackage
      * @generated
      */
     int EVENT_STORAGE_POSTGRES = 79;
-
-    /**
-     * The feature id for the '<em><b>Jdbc Properties</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_POSTGRES__JDBC_PROPERTIES = ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES;
 
     /**
      * The feature id for the '<em><b>Schema</b></em>' attribute.
@@ -6120,6 +6066,24 @@ public interface OsgiPackage extends EPackage
     int EVENT_STORAGE_POSTGRES__CLEANUP_PERIOD_SECONDS = ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS;
 
     /**
+     * The feature id for the '<em><b>Database</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_STORAGE_POSTGRES__DATABASE = ABSTRACT_EVENT_STORAGE_JDBC__DATABASE;
+
+    /**
+     * The feature id for the '<em><b>Replication Data Format</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_STORAGE_POSTGRES__REPLICATION_DATA_FORMAT = ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT;
+
+    /**
      * The feature id for the '<em><b>Batch Size</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6129,40 +6093,13 @@ public interface OsgiPackage extends EPackage
     int EVENT_STORAGE_POSTGRES__BATCH_SIZE = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 0;
 
     /**
-     * The feature id for the '<em><b>Postgres Driver Bundles</b></em>' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_POSTGRES__POSTGRES_DRIVER_BUNDLES = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 1;
-
-    /**
      * The number of structural features of the '<em>Event Storage Postgres</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_POSTGRES_FEATURE_COUNT = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 2;
-
-    /**
-     * The operation id for the '<em>Get Jdbc Driver Name</em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_POSTGRES___GET_JDBC_DRIVER_NAME = ABSTRACT_EVENT_STORAGE_JDBC_OPERATION_COUNT + 0;
-
-    /**
-     * The operation id for the '<em>Get Driver Bundles</em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int EVENT_STORAGE_POSTGRES___GET_DRIVER_BUNDLES = ABSTRACT_EVENT_STORAGE_JDBC_OPERATION_COUNT + 1;
+    int EVENT_STORAGE_POSTGRES_FEATURE_COUNT = ABSTRACT_EVENT_STORAGE_JDBC_FEATURE_COUNT + 1;
 
     /**
      * The number of operations of the '<em>Event Storage Postgres</em>' class.
@@ -6171,7 +6108,7 @@ public interface OsgiPackage extends EPackage
      * @generated
      * @ordered
      */
-    int EVENT_STORAGE_POSTGRES_OPERATION_COUNT = ABSTRACT_EVENT_STORAGE_JDBC_OPERATION_COUNT + 2;
+    int EVENT_STORAGE_POSTGRES_OPERATION_COUNT = ABSTRACT_EVENT_STORAGE_JDBC_OPERATION_COUNT + 0;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.RestExporterImpl <em>Rest Exporter</em>}' class.
@@ -6667,6 +6604,343 @@ public interface OsgiPackage extends EPackage
     int TELNET_CONSOLE_OPERATION_COUNT = INDEPENDENT_CONFIGURATION_OPERATION_COUNT + 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorImpl <em>Event Injector</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjector()
+     * @generated
+     */
+    int EVENT_INJECTOR = 90;
+
+    /**
+     * The feature id for the '<em><b>Database</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR__DATABASE = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Loop Delay</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR__LOOP_DELAY = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Instance Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR__INSTANCE_NAME = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Schema</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR__SCHEMA = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 3;
+
+    /**
+     * The feature id for the '<em><b>Replication Schema</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR__REPLICATION_SCHEMA = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 4;
+
+    /**
+     * The feature id for the '<em><b>Delete Failed</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR__DELETE_FAILED = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 5;
+
+    /**
+     * The number of structural features of the '<em>Event Injector</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_FEATURE_COUNT = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 6;
+
+    /**
+     * The number of operations of the '<em>Event Injector</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_OPERATION_COUNT = INDEPENDENT_CONFIGURATION_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorPostgresImpl <em>Event Injector Postgres</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorPostgresImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorPostgres()
+     * @generated
+     */
+    int EVENT_INJECTOR_POSTGRES = 91;
+
+    /**
+     * The feature id for the '<em><b>Database</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__DATABASE = EVENT_INJECTOR__DATABASE;
+
+    /**
+     * The feature id for the '<em><b>Loop Delay</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__LOOP_DELAY = EVENT_INJECTOR__LOOP_DELAY;
+
+    /**
+     * The feature id for the '<em><b>Instance Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__INSTANCE_NAME = EVENT_INJECTOR__INSTANCE_NAME;
+
+    /**
+     * The feature id for the '<em><b>Schema</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__SCHEMA = EVENT_INJECTOR__SCHEMA;
+
+    /**
+     * The feature id for the '<em><b>Replication Schema</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__REPLICATION_SCHEMA = EVENT_INJECTOR__REPLICATION_SCHEMA;
+
+    /**
+     * The feature id for the '<em><b>Delete Failed</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__DELETE_FAILED = EVENT_INJECTOR__DELETE_FAILED;
+
+    /**
+     * The feature id for the '<em><b>Limit</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES__LIMIT = EVENT_INJECTOR_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Event Injector Postgres</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES_FEATURE_COUNT = EVENT_INJECTOR_FEATURE_COUNT + 1;
+
+    /**
+     * The number of operations of the '<em>Event Injector Postgres</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_POSTGRES_OPERATION_COUNT = EVENT_INJECTOR_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorJdbcImpl <em>Event Injector Jdbc</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorJdbcImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorJdbc()
+     * @generated
+     */
+    int EVENT_INJECTOR_JDBC = 92;
+
+    /**
+     * The feature id for the '<em><b>Database</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__DATABASE = EVENT_INJECTOR__DATABASE;
+
+    /**
+     * The feature id for the '<em><b>Loop Delay</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__LOOP_DELAY = EVENT_INJECTOR__LOOP_DELAY;
+
+    /**
+     * The feature id for the '<em><b>Instance Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__INSTANCE_NAME = EVENT_INJECTOR__INSTANCE_NAME;
+
+    /**
+     * The feature id for the '<em><b>Schema</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__SCHEMA = EVENT_INJECTOR__SCHEMA;
+
+    /**
+     * The feature id for the '<em><b>Replication Schema</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__REPLICATION_SCHEMA = EVENT_INJECTOR__REPLICATION_SCHEMA;
+
+    /**
+     * The feature id for the '<em><b>Delete Failed</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__DELETE_FAILED = EVENT_INJECTOR__DELETE_FAILED;
+
+    /**
+     * The feature id for the '<em><b>Select Sql</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__SELECT_SQL = EVENT_INJECTOR_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Delete Sql</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__DELETE_SQL = EVENT_INJECTOR_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Exists Sql</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC__EXISTS_SQL = EVENT_INJECTOR_FEATURE_COUNT + 2;
+
+    /**
+     * The number of structural features of the '<em>Event Injector Jdbc</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC_FEATURE_COUNT = EVENT_INJECTOR_FEATURE_COUNT + 3;
+
+    /**
+     * The number of operations of the '<em>Event Injector Jdbc</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_JDBC_OPERATION_COUNT = EVENT_INJECTOR_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.ProfileConfigurationImpl <em>Profile Configuration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.ProfileConfigurationImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getProfileConfiguration()
+     * @generated
+     */
+    int PROFILE_CONFIGURATION = 93;
+
+    /**
+     * The feature id for the '<em><b>Start Bundles</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROFILE_CONFIGURATION__START_BUNDLES = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Install Bundles</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROFILE_CONFIGURATION__INSTALL_BUNDLES = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROFILE_CONFIGURATION__PROPERTIES = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 2;
+
+    /**
+     * The number of structural features of the '<em>Profile Configuration</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROFILE_CONFIGURATION_FEATURE_COUNT = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 3;
+
+    /**
+     * The number of operations of the '<em>Profile Configuration</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROFILE_CONFIGURATION_OPERATION_COUNT = INDEPENDENT_CONFIGURATION_OPERATION_COUNT + 0;
+
+    /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.AverageReferenceType <em>Average Reference Type</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6674,7 +6948,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getAverageReferenceType()
      * @generated
      */
-    int AVERAGE_REFERENCE_TYPE = 90;
+    int AVERAGE_REFERENCE_TYPE = 94;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.MovingAverageReferenceType <em>Moving Average Reference Type</em>}' enum.
@@ -6684,7 +6958,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getMovingAverageReferenceType()
      * @generated
      */
-    int MOVING_AVERAGE_REFERENCE_TYPE = 91;
+    int MOVING_AVERAGE_REFERENCE_TYPE = 95;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.RoundingType <em>Rounding Type</em>}' enum.
@@ -6694,7 +6968,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getRoundingType()
      * @generated
      */
-    int ROUNDING_TYPE = 92;
+    int ROUNDING_TYPE = 96;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.DataType <em>Data Type</em>}' enum.
@@ -6704,7 +6978,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getDataType()
      * @generated
      */
-    int DATA_TYPE = 93;
+    int DATA_TYPE = 97;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.PasswordType <em>Password Type</em>}' enum.
@@ -6714,7 +6988,17 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getPasswordType()
      * @generated
      */
-    int PASSWORD_TYPE = 94;
+    int PASSWORD_TYPE = 98;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat <em>Replication Data Format</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getReplicationDataFormat()
+     * @generated
+     */
+    int REPLICATION_DATA_FORMAT = 99;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.Persistence <em>Persistence</em>}' enum.
@@ -6724,7 +7008,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getPersistence()
      * @generated
      */
-    int PERSISTENCE = 95;
+    int PERSISTENCE = 100;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.ErrorHandling <em>Error Handling</em>}' enum.
@@ -6734,7 +7018,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getErrorHandling()
      * @generated
      */
-    int ERROR_HANDLING = 96;
+    int ERROR_HANDLING = 101;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.ChangeType <em>Change Type</em>}' enum.
@@ -6744,7 +7028,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getChangeType()
      * @generated
      */
-    int CHANGE_TYPE = 97;
+    int CHANGE_TYPE = 102;
 
     /**
      * The meta object id for the '<em>Severity</em>' data type.
@@ -6754,7 +7038,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getSeverity()
      * @generated
      */
-    int SEVERITY = 98;
+    int SEVERITY = 103;
 
     /**
      * The meta object id for the '<em>Variant</em>' data type.
@@ -6764,7 +7048,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getVariant()
      * @generated
      */
-    int VARIANT = 99;
+    int VARIANT = 104;
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EquinoxApplication <em>Equinox Application</em>}'.
@@ -9325,28 +9609,6 @@ public interface OsgiPackage extends EPackage
     EClass getPullEvents ();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.PullEvents#getJdbcDriverName <em>Jdbc Driver Name</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Jdbc Driver Name</em>'.
-     * @see org.eclipse.scada.configuration.world.osgi.PullEvents#getJdbcDriverName()
-     * @see #getPullEvents()
-     * @generated
-     */
-    EAttribute getPullEvents_JdbcDriverName ();
-
-    /**
-     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.world.osgi.PullEvents#getJdbcProperties <em>Jdbc Properties</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Jdbc Properties</em>'.
-     * @see org.eclipse.scada.configuration.world.osgi.PullEvents#getJdbcProperties()
-     * @see #getPullEvents()
-     * @generated
-     */
-    EReference getPullEvents_JdbcProperties ();
-
-    /**
      * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.PullEvents#getJobInterval <em>Job Interval</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9378,6 +9640,17 @@ public interface OsgiPackage extends EPackage
      * @generated
      */
     EAttribute getPullEvents_CustomDeleteSql ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.world.osgi.PullEvents#getDatabase <em>Database</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Database</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.PullEvents#getDatabase()
+     * @see #getPullEvents()
+     * @generated
+     */
+    EReference getPullEvents_Database ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.JdbcUserServiceModule <em>Jdbc User Service Module</em>}'.
@@ -9622,28 +9895,6 @@ public interface OsgiPackage extends EPackage
     EClass getEventStorageJdbc ();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventStorageJdbc#getJdbcDriverName <em>Jdbc Driver Name</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Jdbc Driver Name</em>'.
-     * @see org.eclipse.scada.configuration.world.osgi.EventStorageJdbc#getJdbcDriverName()
-     * @see #getEventStorageJdbc()
-     * @generated
-     */
-    EAttribute getEventStorageJdbc_JdbcDriverName ();
-
-    /**
-     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.osgi.EventStorageJdbc#getDriverBundles <em>Driver Bundles</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute list '<em>Driver Bundles</em>'.
-     * @see org.eclipse.scada.configuration.world.osgi.EventStorageJdbc#getDriverBundles()
-     * @see #getEventStorageJdbc()
-     * @generated
-     */
-    EAttribute getEventStorageJdbc_DriverBundles ();
-
-    /**
      * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventStorageJdbc#getMaxFieldLength <em>Max Field Length</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9687,37 +9938,6 @@ public interface OsgiPackage extends EPackage
     EAttribute getEventStoragePostgres_BatchSize ();
 
     /**
-     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getPostgresDriverBundles <em>Postgres Driver Bundles</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute list '<em>Postgres Driver Bundles</em>'.
-     * @see org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getPostgresDriverBundles()
-     * @see #getEventStoragePostgres()
-     * @generated
-     */
-    EAttribute getEventStoragePostgres_PostgresDriverBundles ();
-
-    /**
-     * Returns the meta object for the '{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getJdbcDriverName() <em>Get Jdbc Driver Name</em>}' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the '<em>Get Jdbc Driver Name</em>' operation.
-     * @see org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getJdbcDriverName()
-     * @generated
-     */
-    EOperation getEventStoragePostgres__GetJdbcDriverName ();
-
-    /**
-     * Returns the meta object for the '{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getDriverBundles() <em>Get Driver Bundles</em>}' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the '<em>Get Driver Bundles</em>' operation.
-     * @see org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getDriverBundles()
-     * @generated
-     */
-    EOperation getEventStoragePostgres__GetDriverBundles ();
-
-    /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc <em>Abstract Event Storage Jdbc</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9726,17 +9946,6 @@ public interface OsgiPackage extends EPackage
      * @generated
      */
     EClass getAbstractEventStorageJdbc ();
-
-    /**
-     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getJdbcProperties <em>Jdbc Properties</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Jdbc Properties</em>'.
-     * @see org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getJdbcProperties()
-     * @see #getAbstractEventStorageJdbc()
-     * @generated
-     */
-    EReference getAbstractEventStorageJdbc_JdbcProperties ();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getSchema <em>Schema</em>}'.
@@ -9794,24 +10003,26 @@ public interface OsgiPackage extends EPackage
     EAttribute getAbstractEventStorageJdbc_CleanupPeriodSeconds ();
 
     /**
-     * Returns the meta object for the '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getJdbcDriverName() <em>Get Jdbc Driver Name</em>}' operation.
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getDatabase <em>Database</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the '<em>Get Jdbc Driver Name</em>' operation.
-     * @see org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getJdbcDriverName()
+     * @return the meta object for the reference '<em>Database</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getDatabase()
+     * @see #getAbstractEventStorageJdbc()
      * @generated
      */
-    EOperation getAbstractEventStorageJdbc__GetJdbcDriverName ();
+    EReference getAbstractEventStorageJdbc_Database ();
 
     /**
-     * Returns the meta object for the '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getDriverBundles() <em>Get Driver Bundles</em>}' operation.
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getReplicationDataFormat <em>Replication Data Format</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the '<em>Get Driver Bundles</em>' operation.
-     * @see org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getDriverBundles()
+     * @return the meta object for the attribute '<em>Replication Data Format</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.AbstractEventStorageJdbc#getReplicationDataFormat()
+     * @see #getAbstractEventStorageJdbc()
      * @generated
      */
-    EOperation getAbstractEventStorageJdbc__GetDriverBundles ();
+    EAttribute getAbstractEventStorageJdbc_ReplicationDataFormat ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.ApplicationConfiguration <em>Application Configuration</em>}'.
@@ -10091,6 +10302,189 @@ public interface OsgiPackage extends EPackage
     EAttribute getTelnetConsole_Port ();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EventInjector <em>Event Injector</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector
+     * @generated
+     */
+    EClass getEventInjector ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.world.osgi.EventInjector#getDatabase <em>Database</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Database</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector#getDatabase()
+     * @see #getEventInjector()
+     * @generated
+     */
+    EReference getEventInjector_Database ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjector#getLoopDelay <em>Loop Delay</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Loop Delay</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector#getLoopDelay()
+     * @see #getEventInjector()
+     * @generated
+     */
+    EAttribute getEventInjector_LoopDelay ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjector#getInstanceName <em>Instance Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Instance Name</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector#getInstanceName()
+     * @see #getEventInjector()
+     * @generated
+     */
+    EAttribute getEventInjector_InstanceName ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjector#getSchema <em>Schema</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Schema</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector#getSchema()
+     * @see #getEventInjector()
+     * @generated
+     */
+    EAttribute getEventInjector_Schema ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjector#getReplicationSchema <em>Replication Schema</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Replication Schema</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector#getReplicationSchema()
+     * @see #getEventInjector()
+     * @generated
+     */
+    EAttribute getEventInjector_ReplicationSchema ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjector#isDeleteFailed <em>Delete Failed</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Delete Failed</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjector#isDeleteFailed()
+     * @see #getEventInjector()
+     * @generated
+     */
+    EAttribute getEventInjector_DeleteFailed ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorPostgres <em>Event Injector Postgres</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector Postgres</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorPostgres
+     * @generated
+     */
+    EClass getEventInjectorPostgres ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorPostgres#getLimit <em>Limit</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Limit</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorPostgres#getLimit()
+     * @see #getEventInjectorPostgres()
+     * @generated
+     */
+    EAttribute getEventInjectorPostgres_Limit ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc <em>Event Injector Jdbc</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector Jdbc</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc
+     * @generated
+     */
+    EClass getEventInjectorJdbc ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc#getSelectSql <em>Select Sql</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Select Sql</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc#getSelectSql()
+     * @see #getEventInjectorJdbc()
+     * @generated
+     */
+    EAttribute getEventInjectorJdbc_SelectSql ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc#getDeleteSql <em>Delete Sql</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Delete Sql</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc#getDeleteSql()
+     * @see #getEventInjectorJdbc()
+     * @generated
+     */
+    EAttribute getEventInjectorJdbc_DeleteSql ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc#getExistsSql <em>Exists Sql</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Exists Sql</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc#getExistsSql()
+     * @see #getEventInjectorJdbc()
+     * @generated
+     */
+    EAttribute getEventInjectorJdbc_ExistsSql ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.ProfileConfiguration <em>Profile Configuration</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Profile Configuration</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ProfileConfiguration
+     * @generated
+     */
+    EClass getProfileConfiguration ();
+
+    /**
+     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.osgi.ProfileConfiguration#getStartBundles <em>Start Bundles</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Start Bundles</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ProfileConfiguration#getStartBundles()
+     * @see #getProfileConfiguration()
+     * @generated
+     */
+    EAttribute getProfileConfiguration_StartBundles ();
+
+    /**
+     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.osgi.ProfileConfiguration#getInstallBundles <em>Install Bundles</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Install Bundles</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ProfileConfiguration#getInstallBundles()
+     * @see #getProfileConfiguration()
+     * @generated
+     */
+    EAttribute getProfileConfiguration_InstallBundles ();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.world.osgi.ProfileConfiguration#getProperties <em>Properties</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Properties</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ProfileConfiguration#getProperties()
+     * @see #getProfileConfiguration()
+     * @generated
+     */
+    EReference getProfileConfiguration_Properties ();
+
+    /**
      * Returns the meta object for enum '{@link org.eclipse.scada.configuration.world.osgi.AverageReferenceType <em>Average Reference Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -10139,6 +10533,16 @@ public interface OsgiPackage extends EPackage
      * @generated
      */
     EEnum getPasswordType ();
+
+    /**
+     * Returns the meta object for enum '{@link org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat <em>Replication Data Format</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for enum '<em>Replication Data Format</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat
+     * @generated
+     */
+    EEnum getReplicationDataFormat ();
 
     /**
      * Returns the meta object for enum '{@link org.eclipse.scada.configuration.world.osgi.Persistence <em>Persistence</em>}'.
@@ -12288,22 +12692,6 @@ public interface OsgiPackage extends EPackage
         EClass PULL_EVENTS = eINSTANCE.getPullEvents ();
 
         /**
-         * The meta object literal for the '<em><b>Jdbc Driver Name</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute PULL_EVENTS__JDBC_DRIVER_NAME = eINSTANCE.getPullEvents_JdbcDriverName ();
-
-        /**
-         * The meta object literal for the '<em><b>Jdbc Properties</b></em>' containment reference list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EReference PULL_EVENTS__JDBC_PROPERTIES = eINSTANCE.getPullEvents_JdbcProperties ();
-
-        /**
          * The meta object literal for the '<em><b>Job Interval</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -12326,6 +12714,14 @@ public interface OsgiPackage extends EPackage
          * @generated
          */
         EAttribute PULL_EVENTS__CUSTOM_DELETE_SQL = eINSTANCE.getPullEvents_CustomDeleteSql ();
+
+        /**
+         * The meta object literal for the '<em><b>Database</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference PULL_EVENTS__DATABASE = eINSTANCE.getPullEvents_Database ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.JdbcUserServiceModuleImpl <em>Jdbc User Service Module</em>}' class.
@@ -12530,22 +12926,6 @@ public interface OsgiPackage extends EPackage
         EClass EVENT_STORAGE_JDBC = eINSTANCE.getEventStorageJdbc ();
 
         /**
-         * The meta object literal for the '<em><b>Jdbc Driver Name</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute EVENT_STORAGE_JDBC__JDBC_DRIVER_NAME = eINSTANCE.getEventStorageJdbc_JdbcDriverName ();
-
-        /**
-         * The meta object literal for the '<em><b>Driver Bundles</b></em>' attribute list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute EVENT_STORAGE_JDBC__DRIVER_BUNDLES = eINSTANCE.getEventStorageJdbc_DriverBundles ();
-
-        /**
          * The meta object literal for the '<em><b>Max Field Length</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -12580,30 +12960,6 @@ public interface OsgiPackage extends EPackage
         EAttribute EVENT_STORAGE_POSTGRES__BATCH_SIZE = eINSTANCE.getEventStoragePostgres_BatchSize ();
 
         /**
-         * The meta object literal for the '<em><b>Postgres Driver Bundles</b></em>' attribute list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute EVENT_STORAGE_POSTGRES__POSTGRES_DRIVER_BUNDLES = eINSTANCE.getEventStoragePostgres_PostgresDriverBundles ();
-
-        /**
-         * The meta object literal for the '<em><b>Get Jdbc Driver Name</b></em>' operation.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EOperation EVENT_STORAGE_POSTGRES___GET_JDBC_DRIVER_NAME = eINSTANCE.getEventStoragePostgres__GetJdbcDriverName ();
-
-        /**
-         * The meta object literal for the '<em><b>Get Driver Bundles</b></em>' operation.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EOperation EVENT_STORAGE_POSTGRES___GET_DRIVER_BUNDLES = eINSTANCE.getEventStoragePostgres__GetDriverBundles ();
-
-        /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.AbstractEventStorageJdbcImpl <em>Abstract Event Storage Jdbc</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -12612,14 +12968,6 @@ public interface OsgiPackage extends EPackage
          * @generated
          */
         EClass ABSTRACT_EVENT_STORAGE_JDBC = eINSTANCE.getAbstractEventStorageJdbc ();
-
-        /**
-         * The meta object literal for the '<em><b>Jdbc Properties</b></em>' containment reference list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EReference ABSTRACT_EVENT_STORAGE_JDBC__JDBC_PROPERTIES = eINSTANCE.getAbstractEventStorageJdbc_JdbcProperties ();
 
         /**
          * The meta object literal for the '<em><b>Schema</b></em>' attribute feature.
@@ -12662,20 +13010,20 @@ public interface OsgiPackage extends EPackage
         EAttribute ABSTRACT_EVENT_STORAGE_JDBC__CLEANUP_PERIOD_SECONDS = eINSTANCE.getAbstractEventStorageJdbc_CleanupPeriodSeconds ();
 
         /**
-         * The meta object literal for the '<em><b>Get Jdbc Driver Name</b></em>' operation.
+         * The meta object literal for the '<em><b>Database</b></em>' reference feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EOperation ABSTRACT_EVENT_STORAGE_JDBC___GET_JDBC_DRIVER_NAME = eINSTANCE.getAbstractEventStorageJdbc__GetJdbcDriverName ();
+        EReference ABSTRACT_EVENT_STORAGE_JDBC__DATABASE = eINSTANCE.getAbstractEventStorageJdbc_Database ();
 
         /**
-         * The meta object literal for the '<em><b>Get Driver Bundles</b></em>' operation.
+         * The meta object literal for the '<em><b>Replication Data Format</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EOperation ABSTRACT_EVENT_STORAGE_JDBC___GET_DRIVER_BUNDLES = eINSTANCE.getAbstractEventStorageJdbc__GetDriverBundles ();
+        EAttribute ABSTRACT_EVENT_STORAGE_JDBC__REPLICATION_DATA_FORMAT = eINSTANCE.getAbstractEventStorageJdbc_ReplicationDataFormat ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.ApplicationConfiguration <em>Application Configuration</em>}' class.
@@ -12904,6 +13252,150 @@ public interface OsgiPackage extends EPackage
         EAttribute TELNET_CONSOLE__PORT = eINSTANCE.getTelnetConsole_Port ();
 
         /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorImpl <em>Event Injector</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjector()
+         * @generated
+         */
+        EClass EVENT_INJECTOR = eINSTANCE.getEventInjector ();
+
+        /**
+         * The meta object literal for the '<em><b>Database</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference EVENT_INJECTOR__DATABASE = eINSTANCE.getEventInjector_Database ();
+
+        /**
+         * The meta object literal for the '<em><b>Loop Delay</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR__LOOP_DELAY = eINSTANCE.getEventInjector_LoopDelay ();
+
+        /**
+         * The meta object literal for the '<em><b>Instance Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR__INSTANCE_NAME = eINSTANCE.getEventInjector_InstanceName ();
+
+        /**
+         * The meta object literal for the '<em><b>Schema</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR__SCHEMA = eINSTANCE.getEventInjector_Schema ();
+
+        /**
+         * The meta object literal for the '<em><b>Replication Schema</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR__REPLICATION_SCHEMA = eINSTANCE.getEventInjector_ReplicationSchema ();
+
+        /**
+         * The meta object literal for the '<em><b>Delete Failed</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR__DELETE_FAILED = eINSTANCE.getEventInjector_DeleteFailed ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorPostgresImpl <em>Event Injector Postgres</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorPostgresImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorPostgres()
+         * @generated
+         */
+        EClass EVENT_INJECTOR_POSTGRES = eINSTANCE.getEventInjectorPostgres ();
+
+        /**
+         * The meta object literal for the '<em><b>Limit</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_POSTGRES__LIMIT = eINSTANCE.getEventInjectorPostgres_Limit ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorJdbcImpl <em>Event Injector Jdbc</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorJdbcImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorJdbc()
+         * @generated
+         */
+        EClass EVENT_INJECTOR_JDBC = eINSTANCE.getEventInjectorJdbc ();
+
+        /**
+         * The meta object literal for the '<em><b>Select Sql</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_JDBC__SELECT_SQL = eINSTANCE.getEventInjectorJdbc_SelectSql ();
+
+        /**
+         * The meta object literal for the '<em><b>Delete Sql</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_JDBC__DELETE_SQL = eINSTANCE.getEventInjectorJdbc_DeleteSql ();
+
+        /**
+         * The meta object literal for the '<em><b>Exists Sql</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_JDBC__EXISTS_SQL = eINSTANCE.getEventInjectorJdbc_ExistsSql ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.ProfileConfigurationImpl <em>Profile Configuration</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.ProfileConfigurationImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getProfileConfiguration()
+         * @generated
+         */
+        EClass PROFILE_CONFIGURATION = eINSTANCE.getProfileConfiguration ();
+
+        /**
+         * The meta object literal for the '<em><b>Start Bundles</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute PROFILE_CONFIGURATION__START_BUNDLES = eINSTANCE.getProfileConfiguration_StartBundles ();
+
+        /**
+         * The meta object literal for the '<em><b>Install Bundles</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute PROFILE_CONFIGURATION__INSTALL_BUNDLES = eINSTANCE.getProfileConfiguration_InstallBundles ();
+
+        /**
+         * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference PROFILE_CONFIGURATION__PROPERTIES = eINSTANCE.getProfileConfiguration_Properties ();
+
+        /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.AverageReferenceType <em>Average Reference Type</em>}' enum.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -12952,6 +13444,16 @@ public interface OsgiPackage extends EPackage
          * @generated
          */
         EEnum PASSWORD_TYPE = eINSTANCE.getPasswordType ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat <em>Replication Data Format</em>}' enum.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getReplicationDataFormat()
+         * @generated
+         */
+        EEnum REPLICATION_DATA_FORMAT = eINSTANCE.getReplicationDataFormat ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.Persistence <em>Persistence</em>}' enum.

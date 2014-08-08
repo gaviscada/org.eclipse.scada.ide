@@ -19,13 +19,6 @@ import org.eclipse.scada.configuration.world.osgi.OsgiFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>Event Storage Postgres</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following operations are tested:
- * <ul>
- *   <li>{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getJdbcDriverName() <em>Get Jdbc Driver Name</em>}</li>
- *   <li>{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getDriverBundles() <em>Get Driver Bundles</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
 public class EventStoragePostgresTest extends AbstractEventStorageJdbcTest
@@ -86,34 +79,6 @@ public class EventStoragePostgresTest extends AbstractEventStorageJdbcTest
     protected void tearDown () throws Exception
     {
         setFixture ( null );
-    }
-
-    /**
-     * Tests the '{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getJdbcDriverName() <em>Get Jdbc Driver Name</em>}' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getJdbcDriverName()
-     * @generated
-     */
-    public void testGetJdbcDriverName ()
-    {
-        // TODO: implement this operation test method
-        // Ensure that you remove @generated or mark it @generated NOT
-        fail ();
-    }
-
-    /**
-     * Tests the '{@link org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getDriverBundles() <em>Get Driver Bundles</em>}' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.scada.configuration.world.osgi.EventStoragePostgres#getDriverBundles()
-     * @generated
-     */
-    public void testGetDriverBundles ()
-    {
-        // TODO: implement this operation test method
-        // Ensure that you remove @generated or mark it @generated NOT
-        fail ();
     }
 
 } //EventStoragePostgresTest
