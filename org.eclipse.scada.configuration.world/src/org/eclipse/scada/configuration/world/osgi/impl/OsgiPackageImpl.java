@@ -56,21 +56,27 @@ import org.eclipse.scada.configuration.world.osgi.DataMapperEntry;
 import org.eclipse.scada.configuration.world.osgi.DataType;
 import org.eclipse.scada.configuration.world.osgi.DefaultEquinoxApplication;
 import org.eclipse.scada.configuration.world.osgi.DefaultMasterServer;
+import org.eclipse.scada.configuration.world.osgi.DefaultStorageHandler;
 import org.eclipse.scada.configuration.world.osgi.DefaultValueArchiveServer;
 import org.eclipse.scada.configuration.world.osgi.EquinoxApplication;
 import org.eclipse.scada.configuration.world.osgi.ErrorHandling;
+import org.eclipse.scada.configuration.world.osgi.EventHandler;
 import org.eclipse.scada.configuration.world.osgi.EventInjector;
 import org.eclipse.scada.configuration.world.osgi.EventInjectorJdbc;
+import org.eclipse.scada.configuration.world.osgi.EventInjectorManager;
 import org.eclipse.scada.configuration.world.osgi.EventInjectorPostgres;
+import org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog;
 import org.eclipse.scada.configuration.world.osgi.EventLogger;
 import org.eclipse.scada.configuration.world.osgi.EventPool;
 import org.eclipse.scada.configuration.world.osgi.EventPoolProxy;
 import org.eclipse.scada.configuration.world.osgi.EventStorage;
 import org.eclipse.scada.configuration.world.osgi.EventStorageJdbc;
 import org.eclipse.scada.configuration.world.osgi.EventStoragePostgres;
+import org.eclipse.scada.configuration.world.osgi.ExcludeEventFilter;
 import org.eclipse.scada.configuration.world.osgi.Exporter;
 import org.eclipse.scada.configuration.world.osgi.ExternalEventFilter;
 import org.eclipse.scada.configuration.world.osgi.ExternalEventMonitor;
+import org.eclipse.scada.configuration.world.osgi.FilterEventHandler;
 import org.eclipse.scada.configuration.world.osgi.FormulaItem;
 import org.eclipse.scada.configuration.world.osgi.FormulaItemInbound;
 import org.eclipse.scada.configuration.world.osgi.FormulaItemOutbound;
@@ -78,6 +84,7 @@ import org.eclipse.scada.configuration.world.osgi.GlobalSummaryItem;
 import org.eclipse.scada.configuration.world.osgi.HistoricalDataExporter;
 import org.eclipse.scada.configuration.world.osgi.HttpService;
 import org.eclipse.scada.configuration.world.osgi.ImportItem;
+import org.eclipse.scada.configuration.world.osgi.IncludeEventFilter;
 import org.eclipse.scada.configuration.world.osgi.IndependentConfiguration;
 import org.eclipse.scada.configuration.world.osgi.Item;
 import org.eclipse.scada.configuration.world.osgi.ItemExport;
@@ -90,6 +97,7 @@ import org.eclipse.scada.configuration.world.osgi.JdbcUserServiceModule;
 import org.eclipse.scada.configuration.world.osgi.LevelMonitor;
 import org.eclipse.scada.configuration.world.osgi.ListMonitor;
 import org.eclipse.scada.configuration.world.osgi.ListMonitorEntry;
+import org.eclipse.scada.configuration.world.osgi.MailEventHandler;
 import org.eclipse.scada.configuration.world.osgi.ManualOverride;
 import org.eclipse.scada.configuration.world.osgi.MarkerEntry;
 import org.eclipse.scada.configuration.world.osgi.MarkerGroup;
@@ -115,6 +123,7 @@ import org.eclipse.scada.configuration.world.osgi.RestExporter;
 import org.eclipse.scada.configuration.world.osgi.Rounding;
 import org.eclipse.scada.configuration.world.osgi.RoundingType;
 import org.eclipse.scada.configuration.world.osgi.Scale;
+import org.eclipse.scada.configuration.world.osgi.ScriptEventHandler;
 import org.eclipse.scada.configuration.world.osgi.ScriptItem;
 import org.eclipse.scada.configuration.world.osgi.ScriptTimer;
 import org.eclipse.scada.configuration.world.osgi.SimpleDataMapper;
@@ -808,6 +817,69 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass eventInjectorSyslogEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass eventInjectorManagerEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass eventHandlerEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass defaultStorageHandlerEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass filterEventHandlerEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass includeEventFilterEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass excludeEventFilterEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass scriptEventHandlerEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass mailEventHandlerEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EEnum averageReferenceTypeEEnum = null;
 
     /**
@@ -935,6 +1007,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         // Initialize simple dependencies
         EcorePackage.eINSTANCE.eClass ();
         ConfigurationPackage.eINSTANCE.eClass ();
+        org.eclipse.scada.configuration.script.ScriptPackage.eINSTANCE.eClass ();
         SecurityPackage.eINSTANCE.eClass ();
 
         // Obtain or create and register interdependencies
@@ -4476,6 +4549,206 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getEventInjectorSyslog ()
+    {
+        return eventInjectorSyslogEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getEventInjectorSyslog_Endpoint ()
+    {
+        return (EReference)eventInjectorSyslogEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getEventInjectorSyslog_BindAddress ()
+    {
+        return (EAttribute)eventInjectorSyslogEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getEventInjectorManager ()
+    {
+        return eventInjectorManagerEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getEventInjectorManager_Handler ()
+    {
+        return (EReference)eventInjectorManagerEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getEventHandler ()
+    {
+        return eventHandlerEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getDefaultStorageHandler ()
+    {
+        return defaultStorageHandlerEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getFilterEventHandler ()
+    {
+        return filterEventHandlerEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getFilterEventHandler_Filter ()
+    {
+        return (EAttribute)filterEventHandlerEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getIncludeEventFilter ()
+    {
+        return includeEventFilterEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getExcludeEventFilter ()
+    {
+        return excludeEventFilterEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getScriptEventHandler ()
+    {
+        return scriptEventHandlerEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getScriptEventHandler_Script ()
+    {
+        return (EReference)scriptEventHandlerEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getMailEventHandler ()
+    {
+        return mailEventHandlerEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getMailEventHandler_SessionProperties ()
+    {
+        return (EReference)mailEventHandlerEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMailEventHandler_From ()
+    {
+        return (EAttribute)mailEventHandlerEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMailEventHandler_To ()
+    {
+        return (EAttribute)mailEventHandlerEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMailEventHandler_Username ()
+    {
+        return (EAttribute)mailEventHandlerEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMailEventHandler_Password ()
+    {
+        return (EAttribute)mailEventHandlerEClass.getEStructuralFeatures ().get ( 4 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMailEventHandler_QueueId ()
+    {
+        return (EAttribute)mailEventHandlerEClass.getEStructuralFeatures ().get ( 5 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public EEnum getAverageReferenceType ()
     {
@@ -5048,6 +5321,35 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         createEAttribute ( profileConfigurationEClass, PROFILE_CONFIGURATION__INSTALL_BUNDLES );
         createEReference ( profileConfigurationEClass, PROFILE_CONFIGURATION__PROPERTIES );
 
+        eventInjectorSyslogEClass = createEClass ( EVENT_INJECTOR_SYSLOG );
+        createEReference ( eventInjectorSyslogEClass, EVENT_INJECTOR_SYSLOG__ENDPOINT );
+        createEAttribute ( eventInjectorSyslogEClass, EVENT_INJECTOR_SYSLOG__BIND_ADDRESS );
+
+        eventInjectorManagerEClass = createEClass ( EVENT_INJECTOR_MANAGER );
+        createEReference ( eventInjectorManagerEClass, EVENT_INJECTOR_MANAGER__HANDLER );
+
+        eventHandlerEClass = createEClass ( EVENT_HANDLER );
+
+        defaultStorageHandlerEClass = createEClass ( DEFAULT_STORAGE_HANDLER );
+
+        filterEventHandlerEClass = createEClass ( FILTER_EVENT_HANDLER );
+        createEAttribute ( filterEventHandlerEClass, FILTER_EVENT_HANDLER__FILTER );
+
+        includeEventFilterEClass = createEClass ( INCLUDE_EVENT_FILTER );
+
+        excludeEventFilterEClass = createEClass ( EXCLUDE_EVENT_FILTER );
+
+        scriptEventHandlerEClass = createEClass ( SCRIPT_EVENT_HANDLER );
+        createEReference ( scriptEventHandlerEClass, SCRIPT_EVENT_HANDLER__SCRIPT );
+
+        mailEventHandlerEClass = createEClass ( MAIL_EVENT_HANDLER );
+        createEReference ( mailEventHandlerEClass, MAIL_EVENT_HANDLER__SESSION_PROPERTIES );
+        createEAttribute ( mailEventHandlerEClass, MAIL_EVENT_HANDLER__FROM );
+        createEAttribute ( mailEventHandlerEClass, MAIL_EVENT_HANDLER__TO );
+        createEAttribute ( mailEventHandlerEClass, MAIL_EVENT_HANDLER__USERNAME );
+        createEAttribute ( mailEventHandlerEClass, MAIL_EVENT_HANDLER__PASSWORD );
+        createEAttribute ( mailEventHandlerEClass, MAIL_EVENT_HANDLER__QUEUE_ID );
+
         // Create enums
         averageReferenceTypeEEnum = createEEnum ( AVERAGE_REFERENCE_TYPE );
         movingAverageReferenceTypeEEnum = createEEnum ( MOVING_AVERAGE_REFERENCE_TYPE );
@@ -5094,6 +5396,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         WorldPackage theWorldPackage = (WorldPackage)EPackage.Registry.INSTANCE.getEPackage ( WorldPackage.eNS_URI );
         SecurityPackage theSecurityPackage = (SecurityPackage)EPackage.Registry.INSTANCE.getEPackage ( SecurityPackage.eNS_URI );
         EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage ( EcorePackage.eNS_URI );
+        org.eclipse.scada.configuration.script.ScriptPackage theScriptPackage = (org.eclipse.scada.configuration.script.ScriptPackage)EPackage.Registry.INSTANCE.getEPackage ( org.eclipse.scada.configuration.script.ScriptPackage.eNS_URI );
 
         // Add subpackages
         getESubpackages ().add ( theProfilePackage );
@@ -5181,6 +5484,14 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         eventInjectorPostgresEClass.getESuperTypes ().add ( this.getEventInjector () );
         eventInjectorJdbcEClass.getESuperTypes ().add ( this.getEventInjector () );
         profileConfigurationEClass.getESuperTypes ().add ( this.getIndependentConfiguration () );
+        eventInjectorSyslogEClass.getESuperTypes ().add ( this.getApplicationConfiguration () );
+        eventInjectorManagerEClass.getESuperTypes ().add ( this.getIndependentConfiguration () );
+        defaultStorageHandlerEClass.getESuperTypes ().add ( this.getEventHandler () );
+        filterEventHandlerEClass.getESuperTypes ().add ( this.getEventHandler () );
+        includeEventFilterEClass.getESuperTypes ().add ( this.getFilterEventHandler () );
+        excludeEventFilterEClass.getESuperTypes ().add ( this.getFilterEventHandler () );
+        scriptEventHandlerEClass.getESuperTypes ().add ( this.getEventHandler () );
+        mailEventHandlerEClass.getESuperTypes ().add ( this.getEventHandler () );
 
         // Initialize classes, features, and operations; add parameters
         initEClass ( equinoxApplicationEClass, EquinoxApplication.class, "EquinoxApplication", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
@@ -5599,7 +5910,7 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
 
         initEClass ( telnetConsoleEClass, TelnetConsole.class, "TelnetConsole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getTelnetConsole_Host (), ecorePackage.getEString (), "host", "localhost", 0, 1, TelnetConsole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
-        initEAttribute ( getTelnetConsole_Port (), ecorePackage.getEShort (), "port", null, 1, 1, TelnetConsole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getTelnetConsole_Port (), ecorePackage.getEInt (), "port", null, 1, 1, TelnetConsole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( eventInjectorEClass, EventInjector.class, "EventInjector", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getEventInjector_Database (), theWorldPackage.getDatabaseSettings (), null, "database", null, 1, 1, EventInjector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -5621,6 +5932,35 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
         initEAttribute ( getProfileConfiguration_StartBundles (), ecorePackage.getEString (), "startBundles", null, 0, -1, ProfileConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getProfileConfiguration_InstallBundles (), ecorePackage.getEString (), "installBundles", null, 0, -1, ProfileConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getProfileConfiguration_Properties (), theWorldPackage.getPropertyEntry (), null, "properties", null, 0, -1, ProfileConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventInjectorSyslogEClass, EventInjectorSyslog.class, "EventInjectorSyslog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getEventInjectorSyslog_Endpoint (), theWorldPackage.getEndpoint (), null, "endpoint", null, 1, 1, EventInjectorSyslog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorSyslog_BindAddress (), ecorePackage.getEString (), "bindAddress", null, 0, 1, EventInjectorSyslog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventInjectorManagerEClass, EventInjectorManager.class, "EventInjectorManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getEventInjectorManager_Handler (), this.getEventHandler (), null, "handler", null, 0, -1, EventInjectorManager.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventHandlerEClass, EventHandler.class, "EventHandler", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+
+        initEClass ( defaultStorageHandlerEClass, DefaultStorageHandler.class, "DefaultStorageHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+
+        initEClass ( filterEventHandlerEClass, FilterEventHandler.class, "FilterEventHandler", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getFilterEventHandler_Filter (), ecorePackage.getEString (), "filter", null, 1, 1, FilterEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( includeEventFilterEClass, IncludeEventFilter.class, "IncludeEventFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+
+        initEClass ( excludeEventFilterEClass, ExcludeEventFilter.class, "ExcludeEventFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+
+        initEClass ( scriptEventHandlerEClass, ScriptEventHandler.class, "ScriptEventHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getScriptEventHandler_Script (), theScriptPackage.getJavaScript (), null, "script", null, 1, 1, ScriptEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( mailEventHandlerEClass, MailEventHandler.class, "MailEventHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getMailEventHandler_SessionProperties (), theWorldPackage.getPropertyEntry (), null, "sessionProperties", null, 0, -1, MailEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getMailEventHandler_From (), ecorePackage.getEString (), "from", null, 0, 1, MailEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getMailEventHandler_To (), ecorePackage.getEString (), "to", null, 1, -1, MailEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getMailEventHandler_Username (), ecorePackage.getEString (), "username", null, 0, 1, MailEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getMailEventHandler_Password (), ecorePackage.getEString (), "password", null, 0, 1, MailEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getMailEventHandler_QueueId (), ecorePackage.getEString (), "queueId", null, 0, 1, MailEventHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         // Initialize enums and add enum literals
         initEEnum ( averageReferenceTypeEEnum, AverageReferenceType.class, "AverageReferenceType" ); //$NON-NLS-1$
@@ -5700,21 +6040,12 @@ public class OsgiPackageImpl extends EPackageImpl implements OsgiPackage
     protected void createExclusiveGroupAnnotations ()
     {
         String source = "http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup"; //$NON-NLS-1$	
-        addAnnotation ( eventStorageEClass,
-                source,
-                new String[]
-                {       "groupId", "ae.storage" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
-        addAnnotation ( httpServiceEClass,
-                source,
-                new String[]
-                {       "groupId", "http.service" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
-        addAnnotation ( telnetConsoleEClass,
-                source,
-                new String[]
-                {       "groupId", "telnet.console" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
+        addAnnotation ( eventStorageEClass, source, new String[] { "groupId", "ae.storage" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
+        addAnnotation ( httpServiceEClass, source, new String[] { "groupId", "http.service" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
+        addAnnotation ( telnetConsoleEClass, source, new String[] { "groupId", "telnet.console" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
     }
 
 } //OsgiPackageImpl

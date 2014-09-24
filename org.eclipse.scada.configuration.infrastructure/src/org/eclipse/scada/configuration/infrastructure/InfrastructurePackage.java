@@ -331,13 +331,22 @@ public interface InfrastructurePackage extends EPackage
     int EQUINOX_APPLICATION__SECURITY_CONFIGURATION = 5;
 
     /**
+     * The feature id for the '<em><b>Modules</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EQUINOX_APPLICATION__MODULES = 6;
+
+    /**
      * The number of structural features of the '<em>Equinox Application</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int EQUINOX_APPLICATION_FEATURE_COUNT = 6;
+    int EQUINOX_APPLICATION_FEATURE_COUNT = 7;
 
     /**
      * The number of operations of the '<em>Equinox Application</em>' class.
@@ -411,6 +420,15 @@ public interface InfrastructurePackage extends EPackage
      * @ordered
      */
     int MASTER_SERVER__SECURITY_CONFIGURATION = EQUINOX_APPLICATION__SECURITY_CONFIGURATION;
+
+    /**
+     * The feature id for the '<em><b>Modules</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MASTER_SERVER__MODULES = EQUINOX_APPLICATION__MODULES;
 
     /**
      * The feature id for the '<em><b>Authoratives</b></em>' containment reference list.
@@ -1226,6 +1244,15 @@ public interface InfrastructurePackage extends EPackage
     int VALUE_ARCHIVE_SERVER__SECURITY_CONFIGURATION = EQUINOX_APPLICATION__SECURITY_CONFIGURATION;
 
     /**
+     * The feature id for the '<em><b>Modules</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALUE_ARCHIVE_SERVER__MODULES = EQUINOX_APPLICATION__MODULES;
+
+    /**
      * The number of structural features of the '<em>Value Archive Server</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1812,6 +1839,15 @@ public interface InfrastructurePackage extends EPackage
     int VALUE_ARCHIVE_SLAVE__SECURITY_CONFIGURATION = EQUINOX_APPLICATION__SECURITY_CONFIGURATION;
 
     /**
+     * The feature id for the '<em><b>Modules</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALUE_ARCHIVE_SLAVE__MODULES = EQUINOX_APPLICATION__MODULES;
+
+    /**
      * The feature id for the '<em><b>Storage Path</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2169,6 +2205,89 @@ public interface InfrastructurePackage extends EPackage
     int ABSTRACT_COMMON_DRIVER_OPERATION_COUNT = DRIVER_OPERATION_COUNT + 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.infrastructure.impl.EventInjectorHttpImpl <em>Event Injector Http</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.infrastructure.impl.EventInjectorHttpImpl
+     * @see org.eclipse.scada.configuration.infrastructure.impl.InfrastructurePackageImpl#getEventInjectorHttp()
+     * @generated
+     */
+    int EVENT_INJECTOR_HTTP = 32;
+
+    /**
+     * The feature id for the '<em><b>Http Service</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_HTTP__HTTP_SERVICE = MODULE_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Event Injector Http</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_HTTP_FEATURE_COUNT = MODULE_FEATURE_COUNT + 1;
+
+    /**
+     * The number of operations of the '<em>Event Injector Http</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_HTTP_OPERATION_COUNT = MODULE_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.infrastructure.impl.EventInjectorSyslogImpl <em>Event Injector Syslog</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.infrastructure.impl.EventInjectorSyslogImpl
+     * @see org.eclipse.scada.configuration.infrastructure.impl.InfrastructurePackageImpl#getEventInjectorSyslog()
+     * @generated
+     */
+    int EVENT_INJECTOR_SYSLOG = 33;
+
+    /**
+     * The feature id for the '<em><b>Bind Address</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG__BIND_ADDRESS = MODULE_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Port</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG__PORT = MODULE_FEATURE_COUNT + 1;
+
+    /**
+     * The number of structural features of the '<em>Event Injector Syslog</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG_FEATURE_COUNT = MODULE_FEATURE_COUNT + 2;
+
+    /**
+     * The number of operations of the '<em>Event Injector Syslog</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG_OPERATION_COUNT = MODULE_OPERATION_COUNT + 0;
+
+    /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.infrastructure.SlaveStorageLayout <em>Slave Storage Layout</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2176,7 +2295,7 @@ public interface InfrastructurePackage extends EPackage
      * @see org.eclipse.scada.configuration.infrastructure.impl.InfrastructurePackageImpl#getSlaveStorageLayout()
      * @generated
      */
-    int SLAVE_STORAGE_LAYOUT = 32;
+    int SLAVE_STORAGE_LAYOUT = 34;
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.infrastructure.World <em>World</em>}'.
@@ -2611,6 +2730,17 @@ public interface InfrastructurePackage extends EPackage
      * @generated
      */
     EReference getEquinoxApplication_SecurityConfiguration ();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.infrastructure.EquinoxApplication#getModules <em>Modules</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Modules</em>'.
+     * @see org.eclipse.scada.configuration.infrastructure.EquinoxApplication#getModules()
+     * @see #getEquinoxApplication()
+     * @generated
+     */
+    EReference getEquinoxApplication_Modules ();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.infrastructure.CommonDriver <em>Common Driver</em>}'.
@@ -3335,6 +3465,59 @@ public interface InfrastructurePackage extends EPackage
     EReference getAbstractCommonDriver_Password ();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.infrastructure.EventInjectorHttp <em>Event Injector Http</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector Http</em>'.
+     * @see org.eclipse.scada.configuration.infrastructure.EventInjectorHttp
+     * @generated
+     */
+    EClass getEventInjectorHttp ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.infrastructure.EventInjectorHttp#getHttpService <em>Http Service</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Http Service</em>'.
+     * @see org.eclipse.scada.configuration.infrastructure.EventInjectorHttp#getHttpService()
+     * @see #getEventInjectorHttp()
+     * @generated
+     */
+    EReference getEventInjectorHttp_HttpService ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog <em>Event Injector Syslog</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector Syslog</em>'.
+     * @see org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog
+     * @generated
+     */
+    EClass getEventInjectorSyslog ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog#getBindAddress <em>Bind Address</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Bind Address</em>'.
+     * @see org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog#getBindAddress()
+     * @see #getEventInjectorSyslog()
+     * @generated
+     */
+    EAttribute getEventInjectorSyslog_BindAddress ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog#getPort <em>Port</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Port</em>'.
+     * @see org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog#getPort()
+     * @see #getEventInjectorSyslog()
+     * @generated
+     */
+    EAttribute getEventInjectorSyslog_Port ();
+
+    /**
      * Returns the meta object for enum '{@link org.eclipse.scada.configuration.infrastructure.SlaveStorageLayout <em>Slave Storage Layout</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3699,6 +3882,14 @@ public interface InfrastructurePackage extends EPackage
          * @generated
          */
         EReference EQUINOX_APPLICATION__SECURITY_CONFIGURATION = eINSTANCE.getEquinoxApplication_SecurityConfiguration ();
+
+        /**
+         * The meta object literal for the '<em><b>Modules</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference EQUINOX_APPLICATION__MODULES = eINSTANCE.getEquinoxApplication_Modules ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.infrastructure.impl.CommonDriverImpl <em>Common Driver</em>}' class.
@@ -4295,6 +4486,50 @@ public interface InfrastructurePackage extends EPackage
          * @generated
          */
         EReference ABSTRACT_COMMON_DRIVER__PASSWORD = eINSTANCE.getAbstractCommonDriver_Password ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.infrastructure.impl.EventInjectorHttpImpl <em>Event Injector Http</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.infrastructure.impl.EventInjectorHttpImpl
+         * @see org.eclipse.scada.configuration.infrastructure.impl.InfrastructurePackageImpl#getEventInjectorHttp()
+         * @generated
+         */
+        EClass EVENT_INJECTOR_HTTP = eINSTANCE.getEventInjectorHttp ();
+
+        /**
+         * The meta object literal for the '<em><b>Http Service</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference EVENT_INJECTOR_HTTP__HTTP_SERVICE = eINSTANCE.getEventInjectorHttp_HttpService ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.infrastructure.impl.EventInjectorSyslogImpl <em>Event Injector Syslog</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.infrastructure.impl.EventInjectorSyslogImpl
+         * @see org.eclipse.scada.configuration.infrastructure.impl.InfrastructurePackageImpl#getEventInjectorSyslog()
+         * @generated
+         */
+        EClass EVENT_INJECTOR_SYSLOG = eINSTANCE.getEventInjectorSyslog ();
+
+        /**
+         * The meta object literal for the '<em><b>Bind Address</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_SYSLOG__BIND_ADDRESS = eINSTANCE.getEventInjectorSyslog_BindAddress ();
+
+        /**
+         * The meta object literal for the '<em><b>Port</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_SYSLOG__PORT = eINSTANCE.getEventInjectorSyslog_Port ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.infrastructure.SlaveStorageLayout <em>Slave Storage Layout</em>}' enum.

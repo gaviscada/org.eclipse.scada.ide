@@ -901,7 +901,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="host" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           defaultValueLiteral="localhost"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EventInjector" abstract="true" eSuperTypes="#//osgi/IndependentConfiguration">
       <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
@@ -927,6 +927,40 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
           eType="#//PropertyEntry" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EventInjectorSyslog" eSuperTypes="#//osgi/ApplicationConfiguration">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint" lowerBound="1"
+          eType="#//Endpoint"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bindAddress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EventInjectorManager" eSuperTypes="#//osgi/IndependentConfiguration">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="handler" upperBound="-1"
+          eType="#//osgi/EventHandler" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EventHandler" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DefaultStorageHandler" eSuperTypes="#//osgi/EventHandler"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FilterEventHandler" abstract="true"
+        eSuperTypes="#//osgi/EventHandler">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IncludeEventFilter" eSuperTypes="#//osgi/FilterEventHandler"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExcludeEventFilter" eSuperTypes="#//osgi/FilterEventHandler"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ScriptEventHandler" eSuperTypes="#//osgi/EventHandler">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="script" lowerBound="1"
+          eType="ecore:EClass ../../org.eclipse.scada.configuration.script/model/script.ecore#//JavaScript"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MailEventHandler" eSuperTypes="#//osgi/EventHandler">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sessionProperties" upperBound="-1"
+          eType="#//PropertyEntry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" lowerBound="1" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="queueId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
     </eClassifiers>
     <eSubpackages name="profile" nsURI="http://eclipse.org/SCADA/Configuration/World/OSGi/Profile"
         nsPrefix="profile">
@@ -1053,9 +1087,7 @@
       nsPrefix="deployment">
     <eClassifiers xsi:type="ecore:EClass" name="DeploymentMechanism" abstract="true"
         interface="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="DebianDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="setup" eType="#//setup/SetupModuleContainer"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DebianDeploymentMechanism" eSuperTypes="#//deployment/CommonDeploymentMechanism"/>
     <eClassifiers xsi:type="ecore:EClass" name="Author">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -1095,6 +1127,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="automaticCreate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="recreateBackups" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="setup" eType="#//setup/SetupModuleContainer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ChangeEntry">
       <eStructuralFeatures xsi:type="ecore:EReference" name="author" lowerBound="1"

@@ -162,11 +162,11 @@
 		<module>../org.eclipse.scada.ide.hd.hdsspy</module>
 		<module>../org.eclipse.scada.ide.pde</module>
 		<module>../org.eclipse.scada.ide.vi.preview.editor</module>
+		<module>../org.eclipse.scada.ide.validation</module>
 		
-		<!--
-		fails with some strange error: 
+		<!-- still some strange error
 		<module>../org.eclipse.scada.configuration.world.lib.test</module>
-		 -->
+		-->
 		 
 	 	<module>../org.eclipse.scada.configuration.driver.jdbc</module>
 		<module>../org.eclipse.scada.configuration.driver.jdbc.edit</module>
@@ -184,6 +184,7 @@
 		
 		<module>../org.eclipse.scada.configuration.setup.common</module>
 		<module>../org.eclipse.scada.configuration.setup.common.edit</module>
+		<module>../org.eclipse.scada.configuration.setup.common.lib</module>
 		
 	</modules>
 

@@ -16,35 +16,44 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.scada.configuration.world.lib.deployment.Contents;
-import org.eclipse.scada.configuration.world.lib.deployment.startup.ResourceInformation.Type;
-import org.eclipse.scada.utils.pkg.deb.BinaryPackageBuilder;
-import org.eclipse.scada.utils.pkg.deb.EntryInformation;
+import org.eclipse.scada.configuration.world.lib.deployment.DeploymentContext;
+import org.eclipse.scada.configuration.world.lib.deployment.FileInformation;
+import org.eclipse.scada.configuration.world.lib.deployment.FileOptions;
+import org.eclipse.scada.configuration.world.lib.deployment.OperatingSystemDescriptors;
+import org.eclipse.scada.configuration.world.setup.OperatingSystemDescriptor;
 
 public class UpstartHandler implements StartupHandler
 {
 
-    @Override
-    public void createDriver ( final BinaryPackageBuilder builder, final String driverName, final Map<String, String> replacements, final IProgressMonitor monitor ) throws Exception
+    private final OperatingSystemDescriptor operatingSystem;
+
+    public UpstartHandler ( final OperatingSystemDescriptor operatingSystem )
     {
-        builder.addFile ( Contents.createContent ( RedhatSystemVHandler.class.getResourceAsStream ( "templates/upstart/driver.upstart.conf" ), replacements ), "/etc/init/scada.driver." + driverName + ".conf", EntryInformation.DEFAULT_FILE_CONF );
+        this.operatingSystem = operatingSystem;
+    }
+
+    protected boolean needScreenFix ()
+    {
+        return OperatingSystemDescriptors.isProperty ( this.operatingSystem, "screen.pre.start", false ); //$NON-NLS-1$
     }
 
     @Override
-    public void createEquinox ( final BinaryPackageBuilder builder, final String appName, final Map<String, String> replacements, final IProgressMonitor monitor ) throws Exception
+    public void createDriver ( final DeploymentContext context, final String driverName, final Map<String, String> replacements, final IProgressMonitor monitor ) throws Exception
     {
-        builder.addFile ( Contents.createContent ( RedhatSystemVHandler.class.getResourceAsStream ( "templates/upstart/app.upstart.conf" ), replacements ), "/etc/init/scada.app." + appName + ".conf", EntryInformation.DEFAULT_FILE_CONF );
+        context.addFile ( Contents.createContent ( UpstartHandler.class.getResourceAsStream ( "templates/upstart/driver.upstart.conf" ), replacements ), "/etc/init/scada.driver." + driverName + ".conf", new FileInformation ( 0644, null, null, FileOptions.CONFIGURATION ) );
     }
 
     @Override
-    public Set<ResourceInformation> getDriverFiles ( final String driverName )
+    public void createEquinox ( final DeploymentContext context, final String appName, final Map<String, String> replacements, final IProgressMonitor monitor ) throws Exception
     {
-        return Collections.singleton ( new ResourceInformation ( "/etc/init/scada.driver." + driverName + ".conf", Type.FILE ) );
-    }
-
-    @Override
-    public Set<ResourceInformation> getEquinoxFiles ( final String appName )
-    {
-        return Collections.singleton ( new ResourceInformation ( "/etc/init/scada.app." + appName + ".conf", Type.FILE ) );
+        if ( needScreenFix () )
+        {
+            context.addFile ( Contents.createContent ( UpstartHandler.class.getResourceAsStream ( "templates/upstart/app.upstart.sf.conf" ), replacements ), "/etc/init/scada.app." + appName + ".conf", new FileInformation ( 0644, null, null, FileOptions.CONFIGURATION ) );
+        }
+        else
+        {
+            context.addFile ( Contents.createContent ( UpstartHandler.class.getResourceAsStream ( "templates/upstart/app.upstart.conf" ), replacements ), "/etc/init/scada.app." + appName + ".conf", new FileInformation ( 0644, null, null, FileOptions.CONFIGURATION ) );
+        }
     }
 
     @Override

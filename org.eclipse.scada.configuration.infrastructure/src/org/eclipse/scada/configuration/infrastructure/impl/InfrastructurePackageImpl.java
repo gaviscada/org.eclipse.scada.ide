@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.scada.configuration.globalization.GlobalizePackage;
@@ -29,6 +30,8 @@ import org.eclipse.scada.configuration.infrastructure.Driver;
 import org.eclipse.scada.configuration.infrastructure.EquinoxApplication;
 import org.eclipse.scada.configuration.infrastructure.EquinoxBase;
 import org.eclipse.scada.configuration.infrastructure.EquinoxDriver;
+import org.eclipse.scada.configuration.infrastructure.EventInjectorHttp;
+import org.eclipse.scada.configuration.infrastructure.EventInjectorSyslog;
 import org.eclipse.scada.configuration.infrastructure.ExternalDriver;
 import org.eclipse.scada.configuration.infrastructure.ExternalDriverPlaceholder;
 import org.eclipse.scada.configuration.infrastructure.ExternalNode;
@@ -58,6 +61,7 @@ import org.eclipse.scada.configuration.world.WorldPackage;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
 import org.eclipse.scada.configuration.world.osgi.OsgiPackage;
 import org.eclipse.scada.configuration.world.osgi.profile.ProfilePackage;
+import org.eclipse.scada.ide.validation.ExtensibleValidationDescriptor;
 
 /**
  * <!-- begin-user-doc -->
@@ -296,6 +300,20 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass eventInjectorHttpEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass eventInjectorSyslogEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EEnum slaveStorageLayoutEEnum = null;
 
     /**
@@ -308,7 +326,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * method {@link #init init()}, which also performs initialization of the
      * package, or returns the registered package, if one already exists. <!--
      * begin-user-doc --> <!-- end-user-doc -->
-     * 
+     *
      * @see org.eclipse.emf.ecore.EPackage.Registry
      * @see org.eclipse.scada.configuration.infrastructure.InfrastructurePackage#eNS_URI
      * @see #init()
@@ -334,19 +352,21 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * when that field is accessed. Clients should not invoke it directly.
      * Instead, they should simply access that field to obtain the package. <!--
      * begin-user-doc --> <!-- end-user-doc -->
-     * 
+     *
      * @see #eNS_URI
      * @see #createPackageContents()
      * @see #initializePackageContents()
-     * @generated
+     * @generated NOT
      */
     public static InfrastructurePackage init ()
     {
         if ( isInited )
+        {
             return (InfrastructurePackage)EPackage.Registry.INSTANCE.getEPackage ( InfrastructurePackage.eNS_URI );
+        }
 
         // Obtain or create and register package
-        InfrastructurePackageImpl theInfrastructurePackage = (InfrastructurePackageImpl) ( EPackage.Registry.INSTANCE.get ( eNS_URI ) instanceof InfrastructurePackageImpl ? EPackage.Registry.INSTANCE.get ( eNS_URI ) : new InfrastructurePackageImpl () );
+        final InfrastructurePackageImpl theInfrastructurePackage = (InfrastructurePackageImpl) ( EPackage.Registry.INSTANCE.get ( eNS_URI ) instanceof InfrastructurePackageImpl ? EPackage.Registry.INSTANCE.get ( eNS_URI ) : new InfrastructurePackageImpl () );
 
         isInited = true;
 
@@ -359,12 +379,20 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         // Initialize created meta-data
         theInfrastructurePackage.initializePackageContents ();
 
+        // Register package validator
+        registerPackageValidator ( theInfrastructurePackage );
+
         // Mark meta-data to indicate it can't be changed
         theInfrastructurePackage.freeze ();
 
         // Update the registry and return the package
         EPackage.Registry.INSTANCE.put ( InfrastructurePackage.eNS_URI, theInfrastructurePackage );
         return theInfrastructurePackage;
+    }
+
+    protected static void registerPackageValidator ( final InfrastructurePackageImpl theInfrastructurePackage )
+    {
+        EValidator.Registry.INSTANCE.put ( theInfrastructurePackage, new ExtensibleValidationDescriptor () );
     }
 
     /**
@@ -790,6 +818,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getEquinoxApplication_LocalCredentials ()
     {
         return (EReference)equinoxApplicationEClass.getEStructuralFeatures ().get ( 4 );
@@ -800,9 +829,21 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getEquinoxApplication_SecurityConfiguration ()
     {
         return (EReference)equinoxApplicationEClass.getEStructuralFeatures ().get ( 5 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EReference getEquinoxApplication_Modules ()
+    {
+        return (EReference)equinoxApplicationEClass.getEStructuralFeatures ().get ( 6 );
     }
 
     /**
@@ -1162,6 +1203,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getExternalDriver_Binding ()
     {
         return (EAttribute)externalDriverEClass.getEStructuralFeatures ().get ( 2 );
@@ -1249,6 +1291,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getApplicationConfiguration_Configurations ()
     {
         return (EReference)applicationConfigurationEClass.getEStructuralFeatures ().get ( 1 );
@@ -1281,6 +1324,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getConfigurations_Settings ()
     {
         return (EReference)configurationsEClass.getEStructuralFeatures ().get ( 1 );
@@ -1379,6 +1423,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getWebAdminConsole ()
     {
         return webAdminConsoleEClass;
@@ -1389,6 +1434,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getWebAdminConsole_HttpService ()
     {
         return (EReference)webAdminConsoleEClass.getEStructuralFeatures ().get ( 0 );
@@ -1399,6 +1445,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getOracleVMSettings ()
     {
         return oracleVMSettingsEClass;
@@ -1409,6 +1456,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getOracleVMSettings_InitialHeapSize ()
     {
         return (EAttribute)oracleVMSettingsEClass.getEStructuralFeatures ().get ( 0 );
@@ -1419,6 +1467,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getOracleVMSettings_MaximumHeapSize ()
     {
         return (EAttribute)oracleVMSettingsEClass.getEStructuralFeatures ().get ( 1 );
@@ -1429,6 +1478,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getGenericVMSettings ()
     {
         return genericVMSettingsEClass;
@@ -1439,6 +1489,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGenericVMSettings_Arguments ()
     {
         return (EAttribute)genericVMSettingsEClass.getEStructuralFeatures ().get ( 0 );
@@ -1449,6 +1500,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getAbstractEquinoxDriver ()
     {
         return abstractEquinoxDriverEClass;
@@ -1459,6 +1511,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getAbstractEquinoxDriver_AccessCredentials ()
     {
         return (EReference)abstractEquinoxDriverEClass.getEStructuralFeatures ().get ( 0 );
@@ -1469,6 +1522,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getEquinoxBase ()
     {
         return equinoxBaseEClass;
@@ -1479,6 +1533,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getEquinoxBase_InstanceNumber ()
     {
         return (EAttribute)equinoxBaseEClass.getEStructuralFeatures ().get ( 0 );
@@ -1489,6 +1544,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getEquinoxBase_UserService ()
     {
         return (EReference)equinoxBaseEClass.getEStructuralFeatures ().get ( 1 );
@@ -1499,6 +1555,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getEquinoxBase_SecurityConfiguration ()
     {
         return (EReference)equinoxBaseEClass.getEStructuralFeatures ().get ( 2 );
@@ -1509,6 +1566,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getAbstractCommonDriver ()
     {
         return abstractCommonDriverEClass;
@@ -1519,6 +1577,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getAbstractCommonDriver_PortNumber ()
     {
         return (EAttribute)abstractCommonDriverEClass.getEStructuralFeatures ().get ( 0 );
@@ -1529,9 +1588,65 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getAbstractCommonDriver_Password ()
     {
         return (EReference)abstractCommonDriverEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EClass getEventInjectorHttp ()
+    {
+        return eventInjectorHttpEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EReference getEventInjectorHttp_HttpService ()
+    {
+        return (EReference)eventInjectorHttpEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EClass getEventInjectorSyslog ()
+    {
+        return eventInjectorSyslogEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EAttribute getEventInjectorSyslog_BindAddress ()
+    {
+        return (EAttribute)eventInjectorSyslogEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EAttribute getEventInjectorSyslog_Port ()
+    {
+        return (EAttribute)eventInjectorSyslogEClass.getEStructuralFeatures ().get ( 1 );
     }
 
     /**
@@ -1622,6 +1737,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         createEReference ( equinoxApplicationEClass, EQUINOX_APPLICATION__CONFIGURATION );
         createEReference ( equinoxApplicationEClass, EQUINOX_APPLICATION__LOCAL_CREDENTIALS );
         createEReference ( equinoxApplicationEClass, EQUINOX_APPLICATION__SECURITY_CONFIGURATION );
+        createEReference ( equinoxApplicationEClass, EQUINOX_APPLICATION__MODULES );
 
         commonDriverEClass = createEClass ( COMMON_DRIVER );
         createEReference ( commonDriverEClass, COMMON_DRIVER__PASSWORD );
@@ -1717,6 +1833,13 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         createEAttribute ( abstractCommonDriverEClass, ABSTRACT_COMMON_DRIVER__PORT_NUMBER );
         createEReference ( abstractCommonDriverEClass, ABSTRACT_COMMON_DRIVER__PASSWORD );
 
+        eventInjectorHttpEClass = createEClass ( EVENT_INJECTOR_HTTP );
+        createEReference ( eventInjectorHttpEClass, EVENT_INJECTOR_HTTP__HTTP_SERVICE );
+
+        eventInjectorSyslogEClass = createEClass ( EVENT_INJECTOR_SYSLOG );
+        createEAttribute ( eventInjectorSyslogEClass, EVENT_INJECTOR_SYSLOG__BIND_ADDRESS );
+        createEAttribute ( eventInjectorSyslogEClass, EVENT_INJECTOR_SYSLOG__PORT );
+
         // Create enums
         slaveStorageLayoutEEnum = createEEnum ( SLAVE_STORAGE_LAYOUT );
     }
@@ -1784,6 +1907,8 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         abstractEquinoxDriverEClass.getESuperTypes ().add ( this.getDriver () );
         abstractEquinoxDriverEClass.getESuperTypes ().add ( this.getEquinoxBase () );
         abstractCommonDriverEClass.getESuperTypes ().add ( this.getDriver () );
+        eventInjectorHttpEClass.getESuperTypes ().add ( this.getModule () );
+        eventInjectorSyslogEClass.getESuperTypes ().add ( this.getModule () );
 
         // Initialize classes, features, and operations; add parameters
         initEClass ( worldEClass, World.class, "World", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
@@ -1831,6 +1956,7 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEReference ( getEquinoxApplication_Configuration (), this.getApplicationConfiguration (), null, "configuration", null, 0, 1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getEquinoxApplication_LocalCredentials (), theWorldPackage.getCredentials (), null, "localCredentials", null, 0, 1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getEquinoxApplication_SecurityConfiguration (), theSecurityPackage.getConfiguration (), null, "securityConfiguration", null, 0, 1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEReference ( getEquinoxApplication_Modules (), this.getModule (), null, "modules", null, 0, -1, EquinoxApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( commonDriverEClass, CommonDriver.class, "CommonDriver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getCommonDriver_Password (), theWorldPackage.getPasswordCredentials (), null, "password", null, 0, 1, CommonDriver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1926,6 +2052,13 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
         initEAttribute ( getAbstractCommonDriver_PortNumber (), ecorePackage.getEShort (), "portNumber", null, 1, 1, AbstractCommonDriver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getAbstractCommonDriver_Password (), theWorldPackage.getPasswordCredentials (), null, "password", null, 0, 1, AbstractCommonDriver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
+        initEClass ( eventInjectorHttpEClass, EventInjectorHttp.class, "EventInjectorHttp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEReference ( getEventInjectorHttp_HttpService (), this.getHttpServiceModule (), null, "httpService", null, 1, 1, EventInjectorHttp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( eventInjectorSyslogEClass, EventInjectorSyslog.class, "EventInjectorSyslog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorSyslog_BindAddress (), ecorePackage.getEString (), "bindAddress", null, 0, 1, EventInjectorSyslog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getEventInjectorSyslog_Port (), ecorePackage.getEInt (), "port", "20514", 1, 1, EventInjectorSyslog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
+
         // Initialize enums and add enum literals
         initEEnum ( slaveStorageLayoutEEnum, SlaveStorageLayout.class, "SlaveStorageLayout" ); //$NON-NLS-1$
         addEEnumLiteral ( slaveStorageLayoutEEnum, SlaveStorageLayout.SINGLE );
@@ -1950,21 +2083,12 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
     protected void createExtendedMetaDataAnnotations ()
     {
         String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$	
-        addAnnotation ( getSystemNode_Masters (),
-                source,
-                new String[]
-                {       "group", "#applications" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
-        addAnnotation ( getSystemNode_ValueArchives (),
-                source,
-                new String[]
-                {       "group", "#applications" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
-        addAnnotation ( getSystemNode_Applications (),
-                source,
-                new String[]
-                {       "kind", "group" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
+        addAnnotation ( getSystemNode_Masters (), source, new String[] { "group", "#applications" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
+        addAnnotation ( getSystemNode_ValueArchives (), source, new String[] { "group", "#applications" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
+        addAnnotation ( getSystemNode_Applications (), source, new String[] { "kind", "group" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
     }
 
     /**
@@ -1976,11 +2100,8 @@ public class InfrastructurePackageImpl extends EPackageImpl implements Infrastru
     protected void createExclusiveGroupAnnotations ()
     {
         String source = "http://eclipse.org/SCADA/Configuration/World/ExclusiveGroup"; //$NON-NLS-1$	
-        addAnnotation ( oracleVMSettingsEClass,
-                source,
-                new String[]
-                {       "groupId", "oracle.vm.settings" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
+        addAnnotation ( oracleVMSettingsEClass, source, new String[] { "groupId", "oracle.vm.settings" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
     }
 
 } //InfrastructurePackageImpl

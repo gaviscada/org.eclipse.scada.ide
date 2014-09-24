@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     IBH SYSTEMS GmbH - initial API and implementation and/or initial documentation
- * 
+ *
  */
 package org.eclipse.scada.configuration.infrastructure.provider;
 
@@ -17,8 +17,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -29,8 +27,8 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.scada.configuration.infrastructure.HttpServices;
 import org.eclipse.scada.configuration.infrastructure.InfrastructurePackage;
-import org.eclipse.scada.configuration.infrastructure.WebAdminConsole;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.infrastructure.WebAdminConsole} object.
@@ -38,14 +36,7 @@ import org.eclipse.scada.configuration.infrastructure.WebAdminConsole;
  * <!-- end-user-doc -->
  * @generated
  */
-public class WebAdminConsoleItemProvider
-        extends ItemProviderAdapter
-        implements
-        IEditingDomainItemProvider,
-        IStructuredItemContentProvider,
-        ITreeItemContentProvider,
-        IItemLabelProvider,
-        IItemPropertySource
+public class WebAdminConsoleItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource
 {
     /**
      * This constructs an instance from a factory and a notifier.
@@ -80,35 +71,18 @@ public class WebAdminConsoleItemProvider
      * This adds a property descriptor for the Http Service feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
+     *
      * @generated NOT
      */
     protected void addHttpServicePropertyDescriptor ( final Object object )
     {
-        this.itemPropertyDescriptors.add
-                ( new ItemPropertyDescriptor (
-                        ( (ComposeableAdapterFactory)this.adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_WebAdminConsole_httpService_feature" ),
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_WebAdminConsole_httpService_feature", "_UI_WebAdminConsole_type" ),
-                        InfrastructurePackage.Literals.WEB_ADMIN_CONSOLE__HTTP_SERVICE,
-                        true,
-                        false,
-                        true,
-                        null,
-                        null,
-                        null ) {
-                    @Override
-                    protected Collection<?> getComboBoxObjects ( final Object object )
-                    {
-                        if ( object instanceof WebAdminConsole )
-                        {
-                            final EObject parent = ( (WebAdminConsole)object ).eContainer ();
-                            return EcoreUtil.getObjectsByType ( parent.eContents (), InfrastructurePackage.Literals.HTTP_SERVICE_MODULE );
-                        }
-                        return super.getComboBoxObjects ( object );
-                    }
-                } );
+        this.itemPropertyDescriptors.add ( new ItemPropertyDescriptor ( ( (ComposeableAdapterFactory)this.adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_WebAdminConsole_httpService_feature" ), getString ( "_UI_PropertyDescriptor_description", "_UI_WebAdminConsole_httpService_feature", "_UI_WebAdminConsole_type" ), InfrastructurePackage.Literals.WEB_ADMIN_CONSOLE__HTTP_SERVICE, true, false, true, null, null, null ) {
+            @Override
+            protected Collection<?> getComboBoxObjects ( final Object object )
+            {
+                return HttpServices.findLocal ( object );
+            }
+        } );
     }
 
     /**

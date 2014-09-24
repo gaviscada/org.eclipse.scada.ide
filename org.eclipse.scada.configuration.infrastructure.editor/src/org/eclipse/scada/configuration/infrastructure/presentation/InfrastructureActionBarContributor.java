@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -26,7 +25,6 @@ import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.ValidateAction;
-import org.eclipse.emf.edit.ui.provider.DiagnosticDecorator;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -183,7 +181,6 @@ public class InfrastructureActionBarContributor extends EditingDomainActionBarCo
         super ( ADDITIONS_LAST_STYLE );
         loadResourceAction = new LoadResourceAction ();
         validateAction = new ValidateAction ();
-        liveValidationAction = new DiagnosticDecorator.LiveValidator.LiveValidationAction ( InfrastructureEditorPlugin.getPlugin ().getDialogSettings () );
         controlAction = new ControlAction ();
     }
 
@@ -231,14 +228,12 @@ public class InfrastructureActionBarContributor extends EditingDomainActionBarCo
 
         // Force an update because Eclipse hides empty menus now.
         //
-        submenuManager.addMenuListener
-                ( new IMenuListener ()
-                {
-                    public void menuAboutToShow ( IMenuManager menuManager )
-                    {
-                        menuManager.updateAll ( true );
-                    }
-                } );
+        submenuManager.addMenuListener ( new IMenuListener () {
+            public void menuAboutToShow ( IMenuManager menuManager )
+            {
+                menuManager.updateAll ( true );
+            }
+        } );
 
         addGlobalActions ( submenuManager );
     }

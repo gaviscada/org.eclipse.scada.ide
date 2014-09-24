@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     IBH SYSTEMS GmbH - initial API and implementation and/or initial documentation
- * 
+ *
  */
 package org.eclipse.scada.configuration.component.provider;
 
@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -63,6 +64,7 @@ public class GlobalizeComponentItemProvider
             addNamePropertyDescriptor ( object );
             addComponentsPropertyDescriptor ( object );
             addSourceMasterPropertyDescriptor ( object );
+            addMasterOnPropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
     }
@@ -94,7 +96,7 @@ public class GlobalizeComponentItemProvider
      * This adds a property descriptor for the Components feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
+     *
      * @generated NOT
      */
     protected void addComponentsPropertyDescriptor ( final Object object )
@@ -110,7 +112,7 @@ public class GlobalizeComponentItemProvider
                         false,
                         true,
                         null,
-                        null,
+                        getString ( "_UI_dataPropertyCategory" ),
                         null ) {
 
                     @Override
@@ -172,7 +174,30 @@ public class GlobalizeComponentItemProvider
                         false,
                         true,
                         null,
+                        getString ( "_UI_runtimePropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
+     * This adds a property descriptor for the Master On feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addMasterOnPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_GlobalizeComponent_masterOn_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_masterOn_feature", "_UI_GlobalizeComponent_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        ComponentPackage.Literals.GLOBALIZE_COMPONENT__MASTER_ON,
+                        false,
+                        false,
+                        false,
                         null,
+                        getString ( "_UI_runtimePropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 

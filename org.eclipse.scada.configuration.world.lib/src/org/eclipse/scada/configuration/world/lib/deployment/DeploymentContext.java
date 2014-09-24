@@ -11,8 +11,9 @@
 package org.eclipse.scada.configuration.world.lib.deployment;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
+
+import org.eclipse.scada.utils.pkg.deb.ContentProvider;
 
 /**
  * Allow access to the context of the deployment <br/>
@@ -26,6 +27,18 @@ public interface DeploymentContext
 {
     public void addInstallDependency ( String packageName );
 
+    /**
+     * Add a script as post installation script
+     * <p>
+     * The method has to close the reader before it returns. Even in the case of
+     * an exception.
+     * </p>
+     *
+     * @param reader
+     *            the content to add
+     * @throws IOException
+     *             if anything goes wrong
+     */
     public void addPostInstallationScript ( Reader reader ) throws IOException;
 
     /**
@@ -37,5 +50,24 @@ public interface DeploymentContext
      */
     public void runAfterInstallation ( String script );
 
-    public void addFile ( InputStream resource, String targetFile ) throws IOException;
+    /**
+     * Add a file to the deployment package <br/>
+     * Add the content of the input stream as a file in the target system
+     * <p>
+     * The method has to close the input stream before it returns. Even in the
+     * case of an exception.
+     * </p>
+     *
+     * @param content
+     *            the content to add
+     * @param targetFile
+     *            the name of the file in the target system
+     * @param options
+     *            a list of options
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public void addFile ( ContentProvider content, String targetFile, FileInformation fileInformation ) throws IOException;
+
+    public void addDirectory ( String targetDirectory, FileInformation fileInformation );
 }

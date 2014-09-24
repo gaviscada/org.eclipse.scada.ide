@@ -31,6 +31,11 @@ public final class Properties
         return prop;
     }
 
+    public static String getProperty ( final Collection<PropertyEntry> properties, final String name, final String defaultValue )
+    {
+        return get ( properties, name, defaultValue );
+    }
+
     public static String get ( final Collection<PropertyEntry> properties, final String key, final String defaultValue )
     {
         if ( properties == null )
@@ -72,4 +77,25 @@ public final class Properties
 
         return result;
     }
+
+    public static Boolean isProperty ( final Collection<PropertyEntry> properties, final String name, final Boolean defaultValue )
+    {
+        for ( final PropertyEntry pe : properties )
+        {
+            if ( pe.getKey ().equals ( name ) )
+            {
+                return Boolean.parseBoolean ( pe.getValue () );
+            }
+        }
+        return defaultValue;
+    }
+
+    public static void putNonEmpty ( final Map<String, String> properties, final String key, final String value )
+    {
+        if ( value != null && !value.isEmpty () )
+        {
+            properties.put ( key, value );
+        }
+    }
+
 }

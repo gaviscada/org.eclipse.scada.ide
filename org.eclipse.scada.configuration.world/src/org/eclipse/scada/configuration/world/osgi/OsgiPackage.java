@@ -6941,6 +6941,375 @@ public interface OsgiPackage extends EPackage
     int PROFILE_CONFIGURATION_OPERATION_COUNT = INDEPENDENT_CONFIGURATION_OPERATION_COUNT + 0;
 
     /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorSyslogImpl <em>Event Injector Syslog</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorSyslogImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorSyslog()
+     * @generated
+     */
+    int EVENT_INJECTOR_SYSLOG = 94;
+
+    /**
+     * The feature id for the '<em><b>Endpoint</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG__ENDPOINT = APPLICATION_CONFIGURATION_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Bind Address</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG__BIND_ADDRESS = APPLICATION_CONFIGURATION_FEATURE_COUNT + 1;
+
+    /**
+     * The number of structural features of the '<em>Event Injector Syslog</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG_FEATURE_COUNT = APPLICATION_CONFIGURATION_FEATURE_COUNT + 2;
+
+    /**
+     * The number of operations of the '<em>Event Injector Syslog</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_SYSLOG_OPERATION_COUNT = APPLICATION_CONFIGURATION_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorManagerImpl <em>Event Injector Manager</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorManagerImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorManager()
+     * @generated
+     */
+    int EVENT_INJECTOR_MANAGER = 95;
+
+    /**
+     * The feature id for the '<em><b>Handler</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_MANAGER__HANDLER = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Event Injector Manager</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_MANAGER_FEATURE_COUNT = INDEPENDENT_CONFIGURATION_FEATURE_COUNT + 1;
+
+    /**
+     * The number of operations of the '<em>Event Injector Manager</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_INJECTOR_MANAGER_OPERATION_COUNT = INDEPENDENT_CONFIGURATION_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.EventHandler <em>Event Handler</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.EventHandler
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventHandler()
+     * @generated
+     */
+    int EVENT_HANDLER = 96;
+
+    /**
+     * The number of structural features of the '<em>Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_HANDLER_FEATURE_COUNT = 0;
+
+    /**
+     * The number of operations of the '<em>Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EVENT_HANDLER_OPERATION_COUNT = 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.DefaultStorageHandlerImpl <em>Default Storage Handler</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.DefaultStorageHandlerImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getDefaultStorageHandler()
+     * @generated
+     */
+    int DEFAULT_STORAGE_HANDLER = 97;
+
+    /**
+     * The number of structural features of the '<em>Default Storage Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int DEFAULT_STORAGE_HANDLER_FEATURE_COUNT = EVENT_HANDLER_FEATURE_COUNT + 0;
+
+    /**
+     * The number of operations of the '<em>Default Storage Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int DEFAULT_STORAGE_HANDLER_OPERATION_COUNT = EVENT_HANDLER_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.FilterEventHandlerImpl <em>Filter Event Handler</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.FilterEventHandlerImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getFilterEventHandler()
+     * @generated
+     */
+    int FILTER_EVENT_HANDLER = 98;
+
+    /**
+     * The feature id for the '<em><b>Filter</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FILTER_EVENT_HANDLER__FILTER = EVENT_HANDLER_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Filter Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FILTER_EVENT_HANDLER_FEATURE_COUNT = EVENT_HANDLER_FEATURE_COUNT + 1;
+
+    /**
+     * The number of operations of the '<em>Filter Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FILTER_EVENT_HANDLER_OPERATION_COUNT = EVENT_HANDLER_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.IncludeEventFilterImpl <em>Include Event Filter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.IncludeEventFilterImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getIncludeEventFilter()
+     * @generated
+     */
+    int INCLUDE_EVENT_FILTER = 99;
+
+    /**
+     * The feature id for the '<em><b>Filter</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int INCLUDE_EVENT_FILTER__FILTER = FILTER_EVENT_HANDLER__FILTER;
+
+    /**
+     * The number of structural features of the '<em>Include Event Filter</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int INCLUDE_EVENT_FILTER_FEATURE_COUNT = FILTER_EVENT_HANDLER_FEATURE_COUNT + 0;
+
+    /**
+     * The number of operations of the '<em>Include Event Filter</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int INCLUDE_EVENT_FILTER_OPERATION_COUNT = FILTER_EVENT_HANDLER_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.ExcludeEventFilterImpl <em>Exclude Event Filter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.ExcludeEventFilterImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getExcludeEventFilter()
+     * @generated
+     */
+    int EXCLUDE_EVENT_FILTER = 100;
+
+    /**
+     * The feature id for the '<em><b>Filter</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EXCLUDE_EVENT_FILTER__FILTER = FILTER_EVENT_HANDLER__FILTER;
+
+    /**
+     * The number of structural features of the '<em>Exclude Event Filter</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EXCLUDE_EVENT_FILTER_FEATURE_COUNT = FILTER_EVENT_HANDLER_FEATURE_COUNT + 0;
+
+    /**
+     * The number of operations of the '<em>Exclude Event Filter</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EXCLUDE_EVENT_FILTER_OPERATION_COUNT = FILTER_EVENT_HANDLER_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.ScriptEventHandlerImpl <em>Script Event Handler</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.ScriptEventHandlerImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getScriptEventHandler()
+     * @generated
+     */
+    int SCRIPT_EVENT_HANDLER = 101;
+
+    /**
+     * The feature id for the '<em><b>Script</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCRIPT_EVENT_HANDLER__SCRIPT = EVENT_HANDLER_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Script Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCRIPT_EVENT_HANDLER_FEATURE_COUNT = EVENT_HANDLER_FEATURE_COUNT + 1;
+
+    /**
+     * The number of operations of the '<em>Script Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCRIPT_EVENT_HANDLER_OPERATION_COUNT = EVENT_HANDLER_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.impl.MailEventHandlerImpl <em>Mail Event Handler</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.scada.configuration.world.osgi.impl.MailEventHandlerImpl
+     * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getMailEventHandler()
+     * @generated
+     */
+    int MAIL_EVENT_HANDLER = 102;
+
+    /**
+     * The feature id for the '<em><b>Session Properties</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER__SESSION_PROPERTIES = EVENT_HANDLER_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>From</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER__FROM = EVENT_HANDLER_FEATURE_COUNT + 1;
+
+    /**
+     * The feature id for the '<em><b>To</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER__TO = EVENT_HANDLER_FEATURE_COUNT + 2;
+
+    /**
+     * The feature id for the '<em><b>Username</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER__USERNAME = EVENT_HANDLER_FEATURE_COUNT + 3;
+
+    /**
+     * The feature id for the '<em><b>Password</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER__PASSWORD = EVENT_HANDLER_FEATURE_COUNT + 4;
+
+    /**
+     * The feature id for the '<em><b>Queue Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER__QUEUE_ID = EVENT_HANDLER_FEATURE_COUNT + 5;
+
+    /**
+     * The number of structural features of the '<em>Mail Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER_FEATURE_COUNT = EVENT_HANDLER_FEATURE_COUNT + 6;
+
+    /**
+     * The number of operations of the '<em>Mail Event Handler</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MAIL_EVENT_HANDLER_OPERATION_COUNT = EVENT_HANDLER_OPERATION_COUNT + 0;
+
+    /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.AverageReferenceType <em>Average Reference Type</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6948,7 +7317,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getAverageReferenceType()
      * @generated
      */
-    int AVERAGE_REFERENCE_TYPE = 94;
+    int AVERAGE_REFERENCE_TYPE = 103;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.MovingAverageReferenceType <em>Moving Average Reference Type</em>}' enum.
@@ -6958,7 +7327,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getMovingAverageReferenceType()
      * @generated
      */
-    int MOVING_AVERAGE_REFERENCE_TYPE = 95;
+    int MOVING_AVERAGE_REFERENCE_TYPE = 104;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.RoundingType <em>Rounding Type</em>}' enum.
@@ -6968,7 +7337,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getRoundingType()
      * @generated
      */
-    int ROUNDING_TYPE = 96;
+    int ROUNDING_TYPE = 105;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.DataType <em>Data Type</em>}' enum.
@@ -6978,7 +7347,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getDataType()
      * @generated
      */
-    int DATA_TYPE = 97;
+    int DATA_TYPE = 106;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.PasswordType <em>Password Type</em>}' enum.
@@ -6988,7 +7357,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getPasswordType()
      * @generated
      */
-    int PASSWORD_TYPE = 98;
+    int PASSWORD_TYPE = 107;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.ReplicationDataFormat <em>Replication Data Format</em>}' enum.
@@ -6998,7 +7367,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getReplicationDataFormat()
      * @generated
      */
-    int REPLICATION_DATA_FORMAT = 99;
+    int REPLICATION_DATA_FORMAT = 108;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.Persistence <em>Persistence</em>}' enum.
@@ -7008,7 +7377,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getPersistence()
      * @generated
      */
-    int PERSISTENCE = 100;
+    int PERSISTENCE = 109;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.ErrorHandling <em>Error Handling</em>}' enum.
@@ -7018,7 +7387,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getErrorHandling()
      * @generated
      */
-    int ERROR_HANDLING = 101;
+    int ERROR_HANDLING = 110;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.configuration.world.osgi.ChangeType <em>Change Type</em>}' enum.
@@ -7028,7 +7397,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getChangeType()
      * @generated
      */
-    int CHANGE_TYPE = 102;
+    int CHANGE_TYPE = 111;
 
     /**
      * The meta object id for the '<em>Severity</em>' data type.
@@ -7038,7 +7407,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getSeverity()
      * @generated
      */
-    int SEVERITY = 103;
+    int SEVERITY = 112;
 
     /**
      * The meta object id for the '<em>Variant</em>' data type.
@@ -7048,7 +7417,7 @@ public interface OsgiPackage extends EPackage
      * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getVariant()
      * @generated
      */
-    int VARIANT = 104;
+    int VARIANT = 113;
 
     /**
      * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EquinoxApplication <em>Equinox Application</em>}'.
@@ -10485,6 +10854,217 @@ public interface OsgiPackage extends EPackage
     EReference getProfileConfiguration_Properties ();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog <em>Event Injector Syslog</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector Syslog</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog
+     * @generated
+     */
+    EClass getEventInjectorSyslog ();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog#getEndpoint <em>Endpoint</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Endpoint</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog#getEndpoint()
+     * @see #getEventInjectorSyslog()
+     * @generated
+     */
+    EReference getEventInjectorSyslog_Endpoint ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog#getBindAddress <em>Bind Address</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Bind Address</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorSyslog#getBindAddress()
+     * @see #getEventInjectorSyslog()
+     * @generated
+     */
+    EAttribute getEventInjectorSyslog_BindAddress ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorManager <em>Event Injector Manager</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Injector Manager</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorManager
+     * @generated
+     */
+    EClass getEventInjectorManager ();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.world.osgi.EventInjectorManager#getHandler <em>Handler</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Handler</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventInjectorManager#getHandler()
+     * @see #getEventInjectorManager()
+     * @generated
+     */
+    EReference getEventInjectorManager_Handler ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.EventHandler <em>Event Handler</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Event Handler</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.EventHandler
+     * @generated
+     */
+    EClass getEventHandler ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.DefaultStorageHandler <em>Default Storage Handler</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Default Storage Handler</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.DefaultStorageHandler
+     * @generated
+     */
+    EClass getDefaultStorageHandler ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.FilterEventHandler <em>Filter Event Handler</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Filter Event Handler</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.FilterEventHandler
+     * @generated
+     */
+    EClass getFilterEventHandler ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.FilterEventHandler#getFilter <em>Filter</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Filter</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.FilterEventHandler#getFilter()
+     * @see #getFilterEventHandler()
+     * @generated
+     */
+    EAttribute getFilterEventHandler_Filter ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.IncludeEventFilter <em>Include Event Filter</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Include Event Filter</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.IncludeEventFilter
+     * @generated
+     */
+    EClass getIncludeEventFilter ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.ExcludeEventFilter <em>Exclude Event Filter</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Exclude Event Filter</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ExcludeEventFilter
+     * @generated
+     */
+    EClass getExcludeEventFilter ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.ScriptEventHandler <em>Script Event Handler</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Script Event Handler</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ScriptEventHandler
+     * @generated
+     */
+    EClass getScriptEventHandler ();
+
+    /**
+     * Returns the meta object for the containment reference '{@link org.eclipse.scada.configuration.world.osgi.ScriptEventHandler#getScript <em>Script</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Script</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.ScriptEventHandler#getScript()
+     * @see #getScriptEventHandler()
+     * @generated
+     */
+    EReference getScriptEventHandler_Script ();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler <em>Mail Event Handler</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Mail Event Handler</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler
+     * @generated
+     */
+    EClass getMailEventHandler ();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler#getSessionProperties <em>Session Properties</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Session Properties</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler#getSessionProperties()
+     * @see #getMailEventHandler()
+     * @generated
+     */
+    EReference getMailEventHandler_SessionProperties ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler#getFrom <em>From</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>From</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler#getFrom()
+     * @see #getMailEventHandler()
+     * @generated
+     */
+    EAttribute getMailEventHandler_From ();
+
+    /**
+     * Returns the meta object for the attribute list '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler#getTo <em>To</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>To</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler#getTo()
+     * @see #getMailEventHandler()
+     * @generated
+     */
+    EAttribute getMailEventHandler_To ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler#getUsername <em>Username</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Username</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler#getUsername()
+     * @see #getMailEventHandler()
+     * @generated
+     */
+    EAttribute getMailEventHandler_Username ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler#getPassword <em>Password</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Password</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler#getPassword()
+     * @see #getMailEventHandler()
+     * @generated
+     */
+    EAttribute getMailEventHandler_Password ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.configuration.world.osgi.MailEventHandler#getQueueId <em>Queue Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Queue Id</em>'.
+     * @see org.eclipse.scada.configuration.world.osgi.MailEventHandler#getQueueId()
+     * @see #getMailEventHandler()
+     * @generated
+     */
+    EAttribute getMailEventHandler_QueueId ();
+
+    /**
      * Returns the meta object for enum '{@link org.eclipse.scada.configuration.world.osgi.AverageReferenceType <em>Average Reference Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -13394,6 +13974,184 @@ public interface OsgiPackage extends EPackage
          * @generated
          */
         EReference PROFILE_CONFIGURATION__PROPERTIES = eINSTANCE.getProfileConfiguration_Properties ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorSyslogImpl <em>Event Injector Syslog</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorSyslogImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorSyslog()
+         * @generated
+         */
+        EClass EVENT_INJECTOR_SYSLOG = eINSTANCE.getEventInjectorSyslog ();
+
+        /**
+         * The meta object literal for the '<em><b>Endpoint</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference EVENT_INJECTOR_SYSLOG__ENDPOINT = eINSTANCE.getEventInjectorSyslog_Endpoint ();
+
+        /**
+         * The meta object literal for the '<em><b>Bind Address</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EVENT_INJECTOR_SYSLOG__BIND_ADDRESS = eINSTANCE.getEventInjectorSyslog_BindAddress ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.EventInjectorManagerImpl <em>Event Injector Manager</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.EventInjectorManagerImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventInjectorManager()
+         * @generated
+         */
+        EClass EVENT_INJECTOR_MANAGER = eINSTANCE.getEventInjectorManager ();
+
+        /**
+         * The meta object literal for the '<em><b>Handler</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference EVENT_INJECTOR_MANAGER__HANDLER = eINSTANCE.getEventInjectorManager_Handler ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.EventHandler <em>Event Handler</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.EventHandler
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getEventHandler()
+         * @generated
+         */
+        EClass EVENT_HANDLER = eINSTANCE.getEventHandler ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.DefaultStorageHandlerImpl <em>Default Storage Handler</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.DefaultStorageHandlerImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getDefaultStorageHandler()
+         * @generated
+         */
+        EClass DEFAULT_STORAGE_HANDLER = eINSTANCE.getDefaultStorageHandler ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.FilterEventHandlerImpl <em>Filter Event Handler</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.FilterEventHandlerImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getFilterEventHandler()
+         * @generated
+         */
+        EClass FILTER_EVENT_HANDLER = eINSTANCE.getFilterEventHandler ();
+
+        /**
+         * The meta object literal for the '<em><b>Filter</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FILTER_EVENT_HANDLER__FILTER = eINSTANCE.getFilterEventHandler_Filter ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.IncludeEventFilterImpl <em>Include Event Filter</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.IncludeEventFilterImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getIncludeEventFilter()
+         * @generated
+         */
+        EClass INCLUDE_EVENT_FILTER = eINSTANCE.getIncludeEventFilter ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.ExcludeEventFilterImpl <em>Exclude Event Filter</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.ExcludeEventFilterImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getExcludeEventFilter()
+         * @generated
+         */
+        EClass EXCLUDE_EVENT_FILTER = eINSTANCE.getExcludeEventFilter ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.ScriptEventHandlerImpl <em>Script Event Handler</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.ScriptEventHandlerImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getScriptEventHandler()
+         * @generated
+         */
+        EClass SCRIPT_EVENT_HANDLER = eINSTANCE.getScriptEventHandler ();
+
+        /**
+         * The meta object literal for the '<em><b>Script</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference SCRIPT_EVENT_HANDLER__SCRIPT = eINSTANCE.getScriptEventHandler_Script ();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.impl.MailEventHandlerImpl <em>Mail Event Handler</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.scada.configuration.world.osgi.impl.MailEventHandlerImpl
+         * @see org.eclipse.scada.configuration.world.osgi.impl.OsgiPackageImpl#getMailEventHandler()
+         * @generated
+         */
+        EClass MAIL_EVENT_HANDLER = eINSTANCE.getMailEventHandler ();
+
+        /**
+         * The meta object literal for the '<em><b>Session Properties</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference MAIL_EVENT_HANDLER__SESSION_PROPERTIES = eINSTANCE.getMailEventHandler_SessionProperties ();
+
+        /**
+         * The meta object literal for the '<em><b>From</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MAIL_EVENT_HANDLER__FROM = eINSTANCE.getMailEventHandler_From ();
+
+        /**
+         * The meta object literal for the '<em><b>To</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MAIL_EVENT_HANDLER__TO = eINSTANCE.getMailEventHandler_To ();
+
+        /**
+         * The meta object literal for the '<em><b>Username</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MAIL_EVENT_HANDLER__USERNAME = eINSTANCE.getMailEventHandler_Username ();
+
+        /**
+         * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MAIL_EVENT_HANDLER__PASSWORD = eINSTANCE.getMailEventHandler_Password ();
+
+        /**
+         * The meta object literal for the '<em><b>Queue Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MAIL_EVENT_HANDLER__QUEUE_ID = eINSTANCE.getMailEventHandler_QueueId ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.configuration.world.osgi.AverageReferenceType <em>Average Reference Type</em>}' enum.

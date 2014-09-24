@@ -6,8 +6,8 @@
     modelName="World" nonNLSMarkers="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
     complianceLevel="7.0" copyrightFields="false" tableProviders="true" runtimeVersion="2.9"
-    usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.scada.da.server.exec/model/exec.genmodel#//configuration ../../org.eclipse.scada.configuration.security/model/sec.genmodel#//security"
-    operationReflection="true" importOrganizing="true" pluginKey="world">
+    usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.scada.da.server.exec/model/exec.genmodel#//configuration ../../org.eclipse.scada.configuration.script/model/script.genmodel#//script ../../org.eclipse.scada.configuration.security/model/sec.genmodel#//security"
+    operationReflection="true" importOrganizing="true" pluginKey="world" decoration="Manual">
   <foreignModel>configuration.ecore</foreignModel>
   <genPackages prefix="World" basePackage="org.eclipse.scada.configuration" resource="XMI"
       disposableProviderFactory="true" generateModelWizard="false" extensibleProviderFactory="true"
@@ -631,6 +631,34 @@
         <genFeatures children="true" createChild="true" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/ProfileConfiguration/installBundles"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//osgi/ProfileConfiguration/properties"/>
       </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/EventInjectorSyslog">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//osgi/EventInjectorSyslog/endpoint"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/EventInjectorSyslog/bindAddress"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/EventInjectorManager">
+        <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//osgi/EventInjectorManager/handler"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="configuration.ecore#//osgi/EventHandler"/>
+      <genClasses ecoreClass="configuration.ecore#//osgi/DefaultStorageHandler"/>
+      <genClasses image="false" ecoreClass="configuration.ecore#//osgi/FilterEventHandler">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/FilterEventHandler/filter"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/IncludeEventFilter"/>
+      <genClasses ecoreClass="configuration.ecore#//osgi/ExcludeEventFilter"/>
+      <genClasses ecoreClass="configuration.ecore#//osgi/ScriptEventHandler">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//osgi/ScriptEventHandler/script"/>
+      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//osgi/MailEventHandler">
+        <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//osgi/MailEventHandler/sessionProperties"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/MailEventHandler/from"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/MailEventHandler/to"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/MailEventHandler/username"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/MailEventHandler/password"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//osgi/MailEventHandler/queueId"/>
+      </genClasses>
       <nestedGenPackages prefix="Profile" basePackage="org.eclipse.scada.configuration.world.osgi"
           resource="XML" disposableProviderFactory="true" generateModelWizard="false"
           extensibleProviderFactory="true" childCreationExtenders="true" contentTypeIdentifier="org.eclipse.scada.configuration.world.osgi.profile"
@@ -686,10 +714,7 @@
         <genEnumLiterals ecoreEnumLiteral="configuration.ecore#//deployment/StartupMechanism/LSB_SYSV"/>
       </genEnums>
       <genClasses image="false" ecoreClass="configuration.ecore#//deployment/DeploymentMechanism"/>
-      <genClasses ecoreClass="configuration.ecore#//deployment/DebianDeploymentMechanism">
-        <genFeatures notify="false" createChild="false" propertyCategory="setup" propertySortChoices="true"
-            ecoreFeature="ecore:EReference configuration.ecore#//deployment/DebianDeploymentMechanism/setup"/>
-      </genClasses>
+      <genClasses ecoreClass="configuration.ecore#//deployment/DebianDeploymentMechanism"/>
       <genClasses ecoreClass="configuration.ecore#//deployment/Author">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/Author/name"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/Author/email"/>
@@ -713,6 +738,8 @@
             ecoreFeature="ecore:EReference configuration.ecore#//deployment/CommonDeploymentMechanism/operatingSystem"/>
         <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/automaticCreate"/>
         <genFeatures createChild="false" propertyCategory="setup" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/CommonDeploymentMechanism/recreateBackups"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference configuration.ecore#//deployment/CommonDeploymentMechanism/setup"/>
       </genClasses>
       <genClasses ecoreClass="configuration.ecore#//deployment/ChangeEntry">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -758,9 +785,9 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//deployment/Mappings/fallbackMode"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Setup" resource="XMI" disposableProviderFactory="true"
-        generateModelWizard="false" extensibleProviderFactory="true" childCreationExtenders="true"
-        ecorePackage="configuration.ecore#//setup">
+    <nestedGenPackages prefix="Setup" basePackage="org.eclipse.scada.configuration.world"
+        resource="XMI" disposableProviderFactory="true" generateModelWizard="false"
+        extensibleProviderFactory="true" childCreationExtenders="true" ecorePackage="configuration.ecore#//setup">
       <genDataTypes ecoreDataType="configuration.ecore#//setup/ValidationContext"/>
       <genDataTypes ecoreDataType="configuration.ecore#//setup/Status"/>
       <genClasses ecoreClass="configuration.ecore#//setup/OperatingSystemDescriptor"

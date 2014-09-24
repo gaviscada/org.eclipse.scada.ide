@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.scada.configuration.infrastructure.ApplicationConfiguration;
 import org.eclipse.scada.configuration.infrastructure.EquinoxApplication;
 import org.eclipse.scada.configuration.infrastructure.InfrastructurePackage;
+import org.eclipse.scada.configuration.infrastructure.Module;
 import org.eclipse.scada.configuration.security.Configuration;
 import org.eclipse.scada.configuration.world.Credentials;
 import org.eclipse.scada.configuration.world.osgi.IndependentConfiguration;
@@ -40,6 +41,7 @@ import org.eclipse.scada.configuration.world.osgi.IndependentConfiguration;
  *   <li>{@link org.eclipse.scada.configuration.infrastructure.impl.EquinoxApplicationImpl#getConfiguration <em>Configuration</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.infrastructure.impl.EquinoxApplicationImpl#getLocalCredentials <em>Local Credentials</em>}</li>
  *   <li>{@link org.eclipse.scada.configuration.infrastructure.impl.EquinoxApplicationImpl#getSecurityConfiguration <em>Security Configuration</em>}</li>
+ *   <li>{@link org.eclipse.scada.configuration.infrastructure.impl.EquinoxApplicationImpl#getModules <em>Modules</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,6 +128,16 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
      * @ordered
      */
     protected Configuration securityConfiguration;
+
+    /**
+     * The cached value of the '{@link #getModules() <em>Modules</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getModules()
+     * @generated
+     * @ordered
+     */
+    protected EList<Module> modules;
 
     /**
      * <!-- begin-user-doc -->
@@ -342,6 +354,20 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
      * <!-- end-user-doc -->
      * @generated
      */
+    public EList<Module> getModules ()
+    {
+        if ( modules == null )
+        {
+            modules = new EObjectContainmentEList.Resolving<Module> ( Module.class, this, InfrastructurePackage.EQUINOX_APPLICATION__MODULES );
+        }
+        return modules;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public NotificationChain eInverseRemove ( InternalEObject otherEnd, int featureID, NotificationChain msgs )
     {
@@ -349,6 +375,8 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
         {
             case InfrastructurePackage.EQUINOX_APPLICATION__CONFIGURATIONS:
                 return ( (InternalEList<?>)getConfigurations () ).basicRemove ( otherEnd, msgs );
+            case InfrastructurePackage.EQUINOX_APPLICATION__MODULES:
+                return ( (InternalEList<?>)getModules () ).basicRemove ( otherEnd, msgs );
         }
         return super.eInverseRemove ( otherEnd, featureID, msgs );
     }
@@ -381,6 +409,8 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
                 if ( resolve )
                     return getSecurityConfiguration ();
                 return basicGetSecurityConfiguration ();
+            case InfrastructurePackage.EQUINOX_APPLICATION__MODULES:
+                return getModules ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -415,6 +445,10 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
             case InfrastructurePackage.EQUINOX_APPLICATION__SECURITY_CONFIGURATION:
                 setSecurityConfiguration ( (Configuration)newValue );
                 return;
+            case InfrastructurePackage.EQUINOX_APPLICATION__MODULES:
+                getModules ().clear ();
+                getModules ().addAll ( (Collection<? extends Module>)newValue );
+                return;
         }
         super.eSet ( featureID, newValue );
     }
@@ -447,6 +481,9 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
             case InfrastructurePackage.EQUINOX_APPLICATION__SECURITY_CONFIGURATION:
                 setSecurityConfiguration ( (Configuration)null );
                 return;
+            case InfrastructurePackage.EQUINOX_APPLICATION__MODULES:
+                getModules ().clear ();
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -473,6 +510,8 @@ public abstract class EquinoxApplicationImpl extends MinimalEObjectImpl.Containe
                 return localCredentials != null;
             case InfrastructurePackage.EQUINOX_APPLICATION__SECURITY_CONFIGURATION:
                 return securityConfiguration != null;
+            case InfrastructurePackage.EQUINOX_APPLICATION__MODULES:
+                return modules != null && !modules.isEmpty ();
         }
         return super.eIsSet ( featureID );
     }
