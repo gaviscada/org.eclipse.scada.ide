@@ -15,7 +15,7 @@ import org.eclipse.emf.edit.ui.provider.PropertyDescriptor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
 
-public class ExtendedPropertyDescriptor extends PropertyDescriptor
+public class ExtendedPropertyDescriptor extends PropertyDescriptor implements ISortedPropertyDescriptor
 {
     public ExtendedPropertyDescriptor ( final Object object, final IItemPropertyDescriptor itemPropertyDescriptor )
     {
@@ -27,12 +27,25 @@ public class ExtendedPropertyDescriptor extends PropertyDescriptor
     {
         if ( this.itemPropertyDescriptor instanceof IItemPropertyDescriptor2 )
         {
-            final CellEditor editor = ( (IItemPropertyDescriptor2)this.itemPropertyDescriptor ).createPropertyEditor ( composite );
+            final CellEditor editor = ( (IItemPropertyDescriptor2)this.itemPropertyDescriptor ).createPropertyEditor ( composite, this.object );
             if ( editor != null )
             {
                 return editor;
             }
         }
         return super.createPropertyEditor ( composite );
+    }
+
+    @Override
+    public int getSortKey ()
+    {
+        if ( this.itemPropertyDescriptor instanceof ISortedPropertyDescriptor )
+        {
+            return ( (ISortedPropertyDescriptor)this.itemPropertyDescriptor ).getSortKey ();
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

@@ -24,8 +24,7 @@ import org.eclipse.scada.configuration.component.TransientValue;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TransientValueItemProvider
-        extends SingleValueItemProvider
+public class TransientValueItemProvider extends SingleValueItemProvider
 {
     /**
      * This constructs an instance from a factory and a notifier.
@@ -68,6 +67,17 @@ public class TransientValueItemProvider
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -77,9 +87,8 @@ public class TransientValueItemProvider
     public String getText ( Object object )
     {
         String label = ( (TransientValue)object ).getName ();
-        return label == null || label.length () == 0 ?
-                getString ( "_UI_TransientValue_type" ) : //$NON-NLS-1$
-                getString ( "_UI_TransientValue_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return label == null || label.length () == 0 ? getString ( "_UI_TransientValue_type" ) : //$NON-NLS-1$
+        getString ( "_UI_TransientValue_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

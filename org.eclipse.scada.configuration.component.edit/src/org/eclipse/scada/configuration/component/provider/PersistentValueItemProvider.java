@@ -66,6 +66,17 @@ public class PersistentValueItemProvider extends SingleValueItemProvider
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -75,9 +86,8 @@ public class PersistentValueItemProvider extends SingleValueItemProvider
     public String getText ( Object object )
     {
         String label = ( (PersistentValue)object ).getName ();
-        return label == null || label.length () == 0 ?
-                getString ( "_UI_PersistentValue_type" ) : //$NON-NLS-1$
-                getString ( "_UI_PersistentValue_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return label == null || label.length () == 0 ? getString ( "_UI_PersistentValue_type" ) : //$NON-NLS-1$
+        getString ( "_UI_PersistentValue_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

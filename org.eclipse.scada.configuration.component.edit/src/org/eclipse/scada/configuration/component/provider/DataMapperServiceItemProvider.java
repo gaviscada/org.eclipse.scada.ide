@@ -76,19 +76,9 @@ public class DataMapperServiceItemProvider extends ItemProviderAdapter implement
      */
     protected void addMasterOnPropertyDescriptor ( Object object )
     {
-        itemPropertyDescriptors.add
-                ( createItemPropertyDescriptor
-                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_DataMapperService_masterOn_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_DataMapperService_masterOn_feature", "_UI_DataMapperService_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        ComponentPackage.Literals.DATA_MAPPER_SERVICE__MASTER_ON,
-                        true,
-                        false,
-                        true,
-                        null,
-                        null,
-                        null ) );
+        itemPropertyDescriptors.add ( createItemPropertyDescriptor ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_DataMapperService_masterOn_feature" ), //$NON-NLS-1$
+                getString ( "_UI_PropertyDescriptor_description", "_UI_DataMapperService_masterOn_feature", "_UI_DataMapperService_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                ComponentPackage.Literals.DATA_MAPPER_SERVICE__MASTER_ON, true, false, true, null, null, null ) );
     }
 
     /**
@@ -137,6 +127,17 @@ public class DataMapperServiceItemProvider extends ItemProviderAdapter implement
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -181,15 +182,9 @@ public class DataMapperServiceItemProvider extends ItemProviderAdapter implement
     {
         super.collectNewChildDescriptors ( newChildDescriptors, object );
 
-        newChildDescriptors.add
-                ( createChildParameter
-                ( ComponentPackage.Literals.DATA_MAPPER_SERVICE__DATA_MAPPER,
-                        OsgiFactory.eINSTANCE.createSimpleDataMapper () ) );
+        newChildDescriptors.add ( createChildParameter ( ComponentPackage.Literals.DATA_MAPPER_SERVICE__DATA_MAPPER, OsgiFactory.eINSTANCE.createSimpleDataMapper () ) );
 
-        newChildDescriptors.add
-                ( createChildParameter
-                ( ComponentPackage.Literals.DATA_MAPPER_SERVICE__DATA_MAPPER,
-                        OsgiFactory.eINSTANCE.createJdbcDataMapper () ) );
+        newChildDescriptors.add ( createChildParameter ( ComponentPackage.Literals.DATA_MAPPER_SERVICE__DATA_MAPPER, OsgiFactory.eINSTANCE.createJdbcDataMapper () ) );
     }
 
     /**

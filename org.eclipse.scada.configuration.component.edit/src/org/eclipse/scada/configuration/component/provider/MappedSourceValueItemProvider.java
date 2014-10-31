@@ -67,19 +67,9 @@ public class MappedSourceValueItemProvider extends SingleValueItemProvider
      */
     protected void addMapperPropertyDescriptor ( Object object )
     {
-        itemPropertyDescriptors.add
-                ( createItemPropertyDescriptor
-                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_MappedSourceValue_mapper_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_MappedSourceValue_mapper_feature", "_UI_MappedSourceValue_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        ComponentPackage.Literals.MAPPED_SOURCE_VALUE__MAPPER,
-                        true,
-                        false,
-                        true,
-                        null,
-                        null,
-                        null ) );
+        itemPropertyDescriptors.add ( createItemPropertyDescriptor ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_MappedSourceValue_mapper_feature" ), //$NON-NLS-1$
+                getString ( "_UI_PropertyDescriptor_description", "_UI_MappedSourceValue_mapper_feature", "_UI_MappedSourceValue_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                ComponentPackage.Literals.MAPPED_SOURCE_VALUE__MAPPER, true, false, true, null, null, null ) );
     }
 
     /**
@@ -128,6 +118,17 @@ public class MappedSourceValueItemProvider extends SingleValueItemProvider
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -137,9 +138,8 @@ public class MappedSourceValueItemProvider extends SingleValueItemProvider
     public String getText ( Object object )
     {
         String label = ( (MappedSourceValue)object ).getName ();
-        return label == null || label.length () == 0 ?
-                getString ( "_UI_MappedSourceValue_type" ) : //$NON-NLS-1$
-                getString ( "_UI_MappedSourceValue_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return label == null || label.length () == 0 ? getString ( "_UI_MappedSourceValue_type" ) : //$NON-NLS-1$
+        getString ( "_UI_MappedSourceValue_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -175,15 +175,9 @@ public class MappedSourceValueItemProvider extends SingleValueItemProvider
     {
         super.collectNewChildDescriptors ( newChildDescriptors, object );
 
-        newChildDescriptors.add
-                ( createChildParameter
-                ( ComponentPackage.Literals.MAPPED_SOURCE_VALUE__INPUT,
-                        ComponentFactory.eINSTANCE.createItemReferenceInputDefinition () ) );
+        newChildDescriptors.add ( createChildParameter ( ComponentPackage.Literals.MAPPED_SOURCE_VALUE__INPUT, ComponentFactory.eINSTANCE.createItemReferenceInputDefinition () ) );
 
-        newChildDescriptors.add
-                ( createChildParameter
-                ( ComponentPackage.Literals.MAPPED_SOURCE_VALUE__INPUT,
-                        ComponentFactory.eINSTANCE.createComponentReferenceInputDefinition () ) );
+        newChildDescriptors.add ( createChildParameter ( ComponentPackage.Literals.MAPPED_SOURCE_VALUE__INPUT, ComponentFactory.eINSTANCE.createComponentReferenceInputDefinition () ) );
     }
 
 }

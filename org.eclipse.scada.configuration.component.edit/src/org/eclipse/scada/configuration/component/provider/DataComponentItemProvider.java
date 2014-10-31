@@ -54,6 +54,17 @@ public class DataComponentItemProvider extends ComponentItemProvider
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -63,9 +74,8 @@ public class DataComponentItemProvider extends ComponentItemProvider
     public String getText ( Object object )
     {
         String label = ( (DataComponent)object ).getShortDescription ();
-        return label == null || label.length () == 0 ?
-                getString ( "_UI_DataComponent_type" ) : //$NON-NLS-1$
-                getString ( "_UI_DataComponent_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return label == null || label.length () == 0 ? getString ( "_UI_DataComponent_type" ) : //$NON-NLS-1$
+        getString ( "_UI_DataComponent_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

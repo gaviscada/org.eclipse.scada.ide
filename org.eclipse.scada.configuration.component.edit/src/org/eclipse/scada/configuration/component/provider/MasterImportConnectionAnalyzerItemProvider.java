@@ -64,19 +64,9 @@ public class MasterImportConnectionAnalyzerItemProvider extends MasterComponentI
      */
     protected void addConnectionPropertyDescriptor ( Object object )
     {
-        itemPropertyDescriptors.add
-                ( createItemPropertyDescriptor
-                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
-                        getResourceLocator (),
-                        getString ( "_UI_MasterImportConnectionAnalyzer_connection_feature" ), //$NON-NLS-1$
-                        getString ( "_UI_PropertyDescriptor_description", "_UI_MasterImportConnectionAnalyzer_connection_feature", "_UI_MasterImportConnectionAnalyzer_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                        ComponentPackage.Literals.MASTER_IMPORT_CONNECTION_ANALYZER__CONNECTION,
-                        true,
-                        false,
-                        true,
-                        null,
-                        null,
-                        null ) );
+        itemPropertyDescriptors.add ( createItemPropertyDescriptor ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_MasterImportConnectionAnalyzer_connection_feature" ), //$NON-NLS-1$
+                getString ( "_UI_PropertyDescriptor_description", "_UI_MasterImportConnectionAnalyzer_connection_feature", "_UI_MasterImportConnectionAnalyzer_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                ComponentPackage.Literals.MASTER_IMPORT_CONNECTION_ANALYZER__CONNECTION, true, false, true, null, null, null ) );
     }
 
     /**
@@ -92,6 +82,17 @@ public class MasterImportConnectionAnalyzerItemProvider extends MasterComponentI
     }
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected boolean shouldComposeCreationImage ()
+    {
+        return true;
+    }
+
+    /**
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -101,9 +102,8 @@ public class MasterImportConnectionAnalyzerItemProvider extends MasterComponentI
     public String getText ( Object object )
     {
         String label = ( (MasterImportConnectionAnalyzer)object ).getShortDescription ();
-        return label == null || label.length () == 0 ?
-                getString ( "_UI_MasterImportConnectionAnalyzer_type" ) : //$NON-NLS-1$
-                getString ( "_UI_MasterImportConnectionAnalyzer_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+        return label == null || label.length () == 0 ? getString ( "_UI_MasterImportConnectionAnalyzer_type" ) : //$NON-NLS-1$
+        getString ( "_UI_MasterImportConnectionAnalyzer_type" ) + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

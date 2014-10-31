@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -86,11 +86,28 @@ public class ModbusDriverProcessor extends EquinoxApplicationProcessor
             toks.add ( "" + block.getCount () );
             toks.add ( "" + block.getPeriod () );
             toks.add ( "" + block.getTimeout () );
-            toks.add ( "" + block.getType ().getName () );
+            toks.add ( "" + check ( "Type name", block.getType ().getName () ) );
+
+            if ( block.getName () != null && !block.getName ().isEmpty () )
+            {
+                toks.add ( check ( "Block name", block.getName () ) );
+            }
 
             data.put ( "block." + block.getId (), StringHelper.join ( toks, ":" ) );
         }
 
         ctx.addData ( "org.eclipse.scada.da.server.osgi.modbus.slaveDevice", id, data );
+    }
+
+    private String check ( final String field, final String string )
+    {
+        if ( string != null )
+        {
+            if ( string.contains ( ":" ) )
+            {
+                throw new IllegalArgumentException ( String.format ( "'%s' must not contain the character ':'", field ) );
+            }
+        }
+        return string;
     }
 }

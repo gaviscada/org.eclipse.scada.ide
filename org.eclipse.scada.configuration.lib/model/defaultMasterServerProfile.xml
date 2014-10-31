@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profile:profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:profile="http://eclipse.org/SCADA/Configuration/World/OSGi/Profile" xsi:schemaLocation="http://eclipse.org/SCADA/Configuration/World/OSGi/Profile http://eclipse.org/SCADA/Configuration/World#//osgi/profile" includes="common.profile.xml#/" name="Default Master Server Profile">
   <start>org.eclipse.scada.sec.audit.log.ae</start>
+  <start>org.eclipse.scada.da.buffer</start>
   <start>org.eclipse.scada.da.server.exporter.ngp</start>
   <start>org.eclipse.scada.da.client.ngp</start>
+  <start>org.eclipse.scada.da.client.sfp</start>
   <start>org.eclipse.scada.da.server.common.osgi</start>
   <start>org.eclipse.scada.da.connection.provider</start>
   <start>org.eclipse.scada.da.client.connection.service</start>
@@ -14,6 +16,7 @@
   <start>org.eclipse.scada.da.datasource.proxy</start>
   <start>org.eclipse.scada.da.datasource.item</start>
   <start>org.eclipse.scada.da.datasource.sum</start>
+  <start>org.eclipse.scada.da.datasource.delta</start>
   <start>org.eclipse.scada.da.datasource.ds</start>
   <start>org.eclipse.scada.da.datasource.constant</start>
   <start>org.eclipse.scada.da.datasource.average</start>

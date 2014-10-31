@@ -242,7 +242,6 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
         // Initialize simple dependencies
         ComponentPackage.eINSTANCE.eClass ();
         MemoryPackage.eINSTANCE.eClass ();
-        ScriptPackage.eINSTANCE.eClass ();
         XMLTypePackage.eINSTANCE.eClass ();
 
         // Create package meta-data objects
@@ -487,7 +486,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     @Override
     public EReference getModbusBlock_Type ()
     {
-        return (EReference)modbusBlockEClass.getEStructuralFeatures ().get ( 6 );
+        return (EReference)modbusBlockEClass.getEStructuralFeatures ().get ( 7 );
     }
 
     /**
@@ -784,7 +783,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     @Override
     public EAttribute getModbusBlock_BlockType ()
     {
-        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 1 );
+        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 2 );
     }
 
     /**
@@ -795,7 +794,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     @Override
     public EAttribute getModbusBlock_StartAddress ()
     {
-        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 2 );
+        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 3 );
     }
 
     /**
@@ -806,7 +805,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     @Override
     public EAttribute getModbusBlock_Count ()
     {
-        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 3 );
+        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 4 );
     }
 
     /**
@@ -817,7 +816,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     @Override
     public EAttribute getModbusBlock_Period ()
     {
-        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 4 );
+        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 5 );
     }
 
     /**
@@ -828,7 +827,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     @Override
     public EAttribute getModbusBlock_Timeout ()
     {
-        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 5 );
+        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 6 );
     }
 
     /**
@@ -840,6 +839,16 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
     public EAttribute getModbusBlock_Id ()
     {
         return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getModbusBlock_Name ()
+    {
+        return (EAttribute)modbusBlockEClass.getEStructuralFeatures ().get ( 1 );
     }
 
     /**
@@ -932,6 +941,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
 
         modbusBlockEClass = createEClass ( MODBUS_BLOCK );
         createEAttribute ( modbusBlockEClass, MODBUS_BLOCK__ID );
+        createEAttribute ( modbusBlockEClass, MODBUS_BLOCK__NAME );
         createEAttribute ( modbusBlockEClass, MODBUS_BLOCK__BLOCK_TYPE );
         createEAttribute ( modbusBlockEClass, MODBUS_BLOCK__START_ADDRESS );
         createEAttribute ( modbusBlockEClass, MODBUS_BLOCK__COUNT );
@@ -1061,6 +1071,7 @@ public class ModbusPackageImpl extends EPackageImpl implements ModbusPackage
 
         initEClass ( modbusBlockEClass, ModbusBlock.class, "ModbusBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getModbusBlock_Id (), ecorePackage.getEString (), "id", null, 1, 1, ModbusBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getModbusBlock_Name (), ecorePackage.getEString (), "name", null, 0, 1, ModbusBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getModbusBlock_BlockType (), this.getRequestType (), "blockType", null, 1, 1, ModbusBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getModbusBlock_StartAddress (), ecorePackage.getEInt (), "startAddress", null, 1, 1, ModbusBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getModbusBlock_Count (), ecorePackage.getEInt (), "count", null, 1, 1, ModbusBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
