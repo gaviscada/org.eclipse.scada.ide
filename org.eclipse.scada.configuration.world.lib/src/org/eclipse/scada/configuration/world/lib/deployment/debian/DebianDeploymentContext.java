@@ -34,12 +34,29 @@ public class DebianDeploymentContext extends CommonPackageDeploymentContext
 
     private final Map<String, File> tempFiles = new HashMap<> ();
 
+    public DebianDeploymentContext ( final String packageName )
+    {
+        super ( packageName );
+    }
+
     @Override
     public void runAfterInstallation ( final String script )
     {
+        this.postInstallation.append ( '\n' );
         this.postInstallation.append ( "if test \"$1\" = configure ; then\n" );
         this.postInstallation.append ( script );
         this.postInstallation.append ( "\nfi\n" );
+    }
+
+    @Override
+    public void runAfterRemoval ( final String script )
+    {
+        this.postRemoval.append ( '\n' );
+        this.postRemoval.append ( "case \"$1\" in\n" );
+        this.postRemoval.append ( "\tremove|purge)\n" );
+        this.postRemoval.append ( script );
+        this.postRemoval.append ( "\n\t;;\n" );
+        this.postRemoval.append ( "\nesac\n" );
     }
 
     public void scoopFiles ( final DebianPackageWriter deb ) throws IOException

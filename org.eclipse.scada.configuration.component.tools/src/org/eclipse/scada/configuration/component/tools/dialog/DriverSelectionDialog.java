@@ -52,6 +52,7 @@ public class DriverSelectionDialog extends TitleAreaDialog
     {
         super ( parentShell );
         this.world = world;
+        setHelpAvailable ( false );
     }
 
     public Driver getDriver ()

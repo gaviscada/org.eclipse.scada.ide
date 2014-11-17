@@ -13,11 +13,11 @@ package org.eclipse.scada.configuration.world.deployment.provider;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -30,7 +30,6 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.scada.configuration.world.deployment.ChangeEntry;
 import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
-import org.eclipse.scada.configuration.world.provider.WorldEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.scada.configuration.world.deployment.ChangeEntry} object.
@@ -128,12 +127,13 @@ public class ChangeEntryItemProvider extends ItemProviderAdapter implements IEdi
      * This returns ChangeEntry.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT
      */
     @Override
-    public Object getImage ( Object object )
+    public Object getImage ( final Object object )
     {
-        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ChangeEntry" ) ); //$NON-NLS-1$
+        return overlayImage ( object, getResourceLocator ().getImage ( "full/obj16/ChangeEntry.png" ) ); //$NON-NLS-1$
     }
 
     /**
@@ -207,7 +207,7 @@ public class ChangeEntryItemProvider extends ItemProviderAdapter implements IEdi
     @Override
     public ResourceLocator getResourceLocator ()
     {
-        return WorldEditPlugin.INSTANCE;
+        return ( (IChildCreationExtender)adapterFactory ).getResourceLocator ();
     }
 
 }

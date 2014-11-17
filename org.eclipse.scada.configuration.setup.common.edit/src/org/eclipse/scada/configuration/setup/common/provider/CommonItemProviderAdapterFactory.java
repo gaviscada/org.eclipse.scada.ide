@@ -46,6 +46,9 @@ import org.eclipse.scada.configuration.setup.common.CommonPackage;
 
 import org.eclipse.scada.configuration.setup.common.util.CommonAdapterFactory;
 
+import org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism;
+import org.eclipse.scada.configuration.world.deployment.DeploymentPackage;
+import org.eclipse.scada.configuration.world.deployment.util.DeploymentSwitch;
 import org.eclipse.scada.configuration.world.setup.SetupModuleContainer;
 import org.eclipse.scada.configuration.world.setup.SetupPackage;
 
@@ -132,6 +135,56 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
         }
 
         return postgresSetupModuleItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.setup.common.SerialToNetworkSetupModule} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected SerialToNetworkSetupModuleItemProvider serialToNetworkSetupModuleItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.setup.common.SerialToNetworkSetupModule}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createSerialToNetworkSetupModuleAdapter ()
+    {
+        if ( serialToNetworkSetupModuleItemProvider == null )
+        {
+            serialToNetworkSetupModuleItemProvider = new SerialToNetworkSetupModuleItemProvider ( this );
+        }
+
+        return serialToNetworkSetupModuleItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.scada.configuration.setup.common.SerialToNetworkMapping} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected SerialToNetworkMappingItemProvider serialToNetworkMappingItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.scada.configuration.setup.common.SerialToNetworkMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createSerialToNetworkMappingAdapter ()
+    {
+        if ( serialToNetworkMappingItemProvider == null )
+        {
+            serialToNetworkMappingItemProvider = new SerialToNetworkMappingItemProvider ( this );
+        }
+
+        return serialToNetworkMappingItemProvider;
     }
 
     /**
@@ -285,6 +338,104 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
     {
         if ( postgresSetupModuleItemProvider != null )
             postgresSetupModuleItemProvider.dispose ();
+        if ( serialToNetworkSetupModuleItemProvider != null )
+            serialToNetworkSetupModuleItemProvider.dispose ();
+        if ( serialToNetworkMappingItemProvider != null )
+            serialToNetworkMappingItemProvider.dispose ();
+    }
+
+    /**
+     * A child creation extender for the {@link DeploymentPackage}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static class DeploymentChildCreationExtender implements IChildCreationExtender
+    {
+        /**
+         * The switch for creating child descriptors specific to each extended class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        protected static class CreationSwitch extends DeploymentSwitch<Object>
+        {
+            /**
+             * The child descriptors being populated.
+             * <!-- begin-user-doc -->
+             * <!-- end-user-doc -->
+             * @generated
+             */
+            protected List<Object> newChildDescriptors;
+
+            /**
+             * The domain in which to create the children.
+             * <!-- begin-user-doc -->
+             * <!-- end-user-doc -->
+             * @generated
+             */
+            protected EditingDomain editingDomain;
+
+            /**
+             * Creates the a switch for populating child descriptors in the given domain.
+             * <!-- begin-user-doc -->
+             * <!-- end-user-doc -->
+             * @generated
+             */
+            CreationSwitch ( List<Object> newChildDescriptors, EditingDomain editingDomain )
+            {
+                this.newChildDescriptors = newChildDescriptors;
+                this.editingDomain = editingDomain;
+            }
+
+            /**
+             * <!-- begin-user-doc -->
+             * <!-- end-user-doc -->
+             * @generated
+             */
+            @Override
+            public Object caseCommonDeploymentMechanism ( CommonDeploymentMechanism object )
+            {
+                newChildDescriptors.add ( createChildParameter ( DeploymentPackage.Literals.COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_SETUP_MODULES, CommonFactory.eINSTANCE.createPostgresSetupModule () ) );
+
+                newChildDescriptors.add ( createChildParameter ( DeploymentPackage.Literals.COMMON_DEPLOYMENT_MECHANISM__ADDITIONAL_SETUP_MODULES, CommonFactory.eINSTANCE.createSerialToNetworkSetupModule () ) );
+
+                return null;
+            }
+
+            /**
+             * <!-- begin-user-doc -->
+             * <!-- end-user-doc -->
+             * @generated
+             */
+            protected CommandParameter createChildParameter ( Object feature, Object child )
+            {
+                return new CommandParameter ( null, feature, child );
+            }
+
+        }
+
+        /**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public Collection<Object> getNewChildDescriptors ( Object object, EditingDomain editingDomain )
+        {
+            ArrayList<Object> result = new ArrayList<Object> ();
+            new CreationSwitch ( result, editingDomain ).doSwitch ( (EObject)object );
+            return result;
+        }
+
+        /**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public ResourceLocator getResourceLocator ()
+        {
+            return CommonEditPlugin.INSTANCE;
+        }
     }
 
     /**
@@ -339,10 +490,9 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
             @Override
             public Object caseSetupModuleContainer ( SetupModuleContainer object )
             {
-                newChildDescriptors.add
-                        ( createChildParameter
-                        ( SetupPackage.Literals.SETUP_MODULE_CONTAINER__MODULES,
-                                CommonFactory.eINSTANCE.createPostgresSetupModule () ) );
+                newChildDescriptors.add ( createChildParameter ( SetupPackage.Literals.SETUP_MODULE_CONTAINER__MODULES, CommonFactory.eINSTANCE.createPostgresSetupModule () ) );
+
+                newChildDescriptors.add ( createChildParameter ( SetupPackage.Literals.SETUP_MODULE_CONTAINER__MODULES, CommonFactory.eINSTANCE.createSerialToNetworkSetupModule () ) );
 
                 return null;
             }

@@ -67,6 +67,11 @@
 					<layout>p2</layout>
 					<url>https://hudson.eclipse.org/eclipsescada/job/org.eclipse.scada.hmi-master/lastSuccessfulBuild/artifact/output/p2</url>
 				</repository>
+				<repository>
+					<id>eclipse.scada.deploy</id>
+					<layout>p2</layout>
+					<url>https://hudson.eclipse.org/eclipsescada/job/org.eclipse.scada.deploy-master/lastSuccessfulBuild/artifact/output/p2</url>
+				</repository>
 			</repositories>
 		</profile>
 	</profiles>
@@ -164,7 +169,6 @@
 		<module>../org.eclipse.scada.ide.hd.hdsspy</module>
 		<module>../org.eclipse.scada.ide.pde</module>
 		<module>../org.eclipse.scada.ide.vi.preview.editor</module>
-		<module>../org.eclipse.scada.ide.validation</module>
 		
 		<!-- still some strange error
 		<module>../org.eclipse.scada.configuration.world.lib.test</module>
@@ -183,6 +187,7 @@
 		<module>../org.eclipse.scada.configuration.setup.common</module>
 		<module>../org.eclipse.scada.configuration.setup.common.edit</module>
 		<module>../org.eclipse.scada.configuration.setup.common.lib</module>
+		<module>../org.eclipse.scada.configuration.setup.common.validation</module>
 		
 	</modules>
 
