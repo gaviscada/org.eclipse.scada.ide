@@ -5,7 +5,7 @@
 # description: Eclipse SCADA application instance @@appName@@
 #
 # processname: /usr/bin/scada.app.@@appName@@.launcher
-# pidfile: /var/run/eclipsescada/scada.app.@@appName@@.pid
+# pidfile: /var/run/scada.app.@@appName@@.pid
 
 ### BEGIN INIT INFO
 # Provides: scada.app.@@appName@@
@@ -44,7 +44,7 @@ fi
 
 RETVAL=0
 instanceName="@@appName@@"
-pidfile="/var/run/eclipsescada/scada.app.@@appName@@.pid"
+pidfile="/var/run/scada.app.@@appName@@.pid"
 prog="/usr/bin/scada.app.@@appName@@.launcher"
 
 start (){
