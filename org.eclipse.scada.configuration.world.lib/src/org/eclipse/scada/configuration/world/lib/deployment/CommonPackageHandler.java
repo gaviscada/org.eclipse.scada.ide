@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH and others.
+ * Copyright (c) 2013, 2015 IBH SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,18 +26,18 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.scada.configuration.generator.Profiles;
 import org.eclipse.scada.configuration.world.ApplicationNode;
 import org.eclipse.scada.configuration.world.deployment.CommonDeploymentMechanism;
 import org.eclipse.scada.configuration.world.deployment.StartupMechanism;
 import org.eclipse.scada.configuration.world.lib.deployment.startup.LSBSystemVHandler;
 import org.eclipse.scada.configuration.world.lib.deployment.startup.RedhatSystemVHandler;
 import org.eclipse.scada.configuration.world.lib.deployment.startup.StartupHandler;
+import org.eclipse.scada.configuration.world.lib.deployment.startup.SystemdHandler;
 import org.eclipse.scada.configuration.world.lib.deployment.startup.UpstartHandler;
 import org.eclipse.scada.configuration.world.lib.setup.SubModuleHandler;
 import org.eclipse.scada.configuration.world.osgi.profile.Profile;
-import org.eclipse.scada.configuration.world.osgi.profile.ProfileFactory;
 import org.eclipse.scada.configuration.world.osgi.profile.ProfilePackage;
-import org.eclipse.scada.configuration.world.osgi.profile.SystemProperty;
 import org.eclipse.scada.utils.pkg.deb.FileContentProvider;
 import org.eclipse.scada.utils.pkg.deb.StaticContentProvider;
 import org.eclipse.scada.utils.str.StringHelper;
@@ -160,7 +160,7 @@ public abstract class CommonPackageHandler extends CommonHandler
      * Inject the CA bootstrap property to the profile
      *
      * @param file
-     *            the profile.xml file in the debian package target
+     *            the profile.xml file in the package target
      * @throws IOException
      */
     protected void patchProfile ( final String appName, final File file ) throws IOException
@@ -170,10 +170,7 @@ public abstract class CommonPackageHandler extends CommonHandler
         r.load ( null );
 
         final Profile profile = (Profile)EcoreUtil.getObjectByType ( r.getContents (), ProfilePackage.Literals.PROFILE );
-        final SystemProperty bootstrap = ProfileFactory.eINSTANCE.createSystemProperty ();
-        bootstrap.setKey ( "org.eclipse.scada.ca.file.provisionJsonUrl" );
-        bootstrap.setValue ( "file:///usr/share/eclipsescada/ca.bootstrap/bootstrap." + appName + ".json" );
-        profile.getProperty ().add ( bootstrap );
+        Profiles.addSystemProperty ( profile, "org.eclipse.scada.ca.file.provisionJsonUrl", "file:///usr/share/eclipsescada/ca.bootstrap/bootstrap." + appName + ".json" );
         r.save ( null );
     }
 
@@ -210,6 +207,8 @@ public abstract class CommonPackageHandler extends CommonHandler
                 return new UpstartHandler ( this.deploy.getOperatingSystem () );
             case LSB_SYSV:
                 return new LSBSystemVHandler ();
+            case SYSTEMD:
+                return new SystemdHandler ();
             case DEFAULT:
                 return null; // we ran of options here
         }
@@ -274,6 +273,56 @@ public abstract class CommonPackageHandler extends CommonHandler
         }
         SubModuleHandler.runSetup ( context, deploy.getAdditionalSetupModules (), deploy.getOperatingSystem () );
         monitor.done ();
+    }
+
+    protected String createStopApps ()
+    {
+        final StringBuilder sb = new StringBuilder ();
+        stopApplications ( sb );
+        return sb.toString ();
+    }
+
+    protected String createStartApps ()
+    {
+        final StringBuilder sb = new StringBuilder ();
+        startApplications ( sb );
+        return sb.toString ();
+    }
+
+    protected void startApplications ( final StringBuilder sb )
+    {
+        final ScriptMaker sm = new ScriptMaker ( getStartupHandler () );
+
+        for ( final String driver : makeDriverList () )
+        {
+            sm.appendStartDriver ( sb, driver );
+        }
+
+        if ( this.deploy.isAutomaticCreate () )
+        {
+            for ( final String app : makeEquinoxList () )
+            {
+                sm.appendStartApp ( sb, app );
+            }
+        }
+    }
+
+    protected void stopApplications ( final StringBuilder sb )
+    {
+        final ScriptMaker sm = new ScriptMaker ( getStartupHandler () );
+
+        for ( final String driver : makeDriverList () )
+        {
+            sm.appendStopDriver ( sb, driver );
+        }
+
+        if ( this.deploy.isAutomaticCreate () )
+        {
+            for ( final String app : makeEquinoxList () )
+            {
+                sm.appendStopApp ( sb, app );
+            }
+        }
     }
 
 }
