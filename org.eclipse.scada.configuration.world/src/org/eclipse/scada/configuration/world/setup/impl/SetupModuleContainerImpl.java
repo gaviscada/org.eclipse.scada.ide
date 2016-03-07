@@ -145,9 +145,12 @@ public class SetupModuleContainerImpl extends MinimalEObjectImpl.Container imple
     @Override
     public void validateOperatingSystem ( final OperatingSystemDescriptor descriptor, final ValidationContext context )
     {
-        for ( final SetupModule module : this.modules )
+        if ( modules != null )
         {
-            module.validateOperatingSystem ( descriptor, context );
+            for ( final SetupModule module : this.modules )
+            {
+                module.validateOperatingSystem ( descriptor, context );
+            }
         }
     }
 
