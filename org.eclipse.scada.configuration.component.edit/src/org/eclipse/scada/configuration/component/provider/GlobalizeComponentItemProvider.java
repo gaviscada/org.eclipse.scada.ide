@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2014 IBH SYSTEMS GmbH.
+ * Copyright (c) 2013, 2016 IBH SYSTEMS GmbH.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,11 +19,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.scada.configuration.component.Component;
 import org.eclipse.scada.configuration.component.ComponentPackage;
+import org.eclipse.scada.configuration.component.Components;
 import org.eclipse.scada.configuration.component.DataComponent;
 import org.eclipse.scada.configuration.component.GlobalizeComponent;
 import org.eclipse.scada.configuration.infrastructure.MasterServer;
@@ -78,9 +81,9 @@ public class GlobalizeComponentItemProvider extends DataComponentItemProvider
     protected void addNamePropertyDescriptor ( Object object )
     {
         itemPropertyDescriptors.add ( createItemPropertyDescriptor ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_NamedDocumentable_name_feature" ), //$NON-NLS-1$
-        getString ( "_UI_PropertyDescriptor_description", "_UI_NamedDocumentable_name_feature", "_UI_NamedDocumentable_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        WorldPackage.Literals.NAMED_DOCUMENTABLE__NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, getString ( "_UI_namingPropertyCategory" ), //$NON-NLS-1$
-        null ) );
+                getString ( "_UI_PropertyDescriptor_description", "_UI_NamedDocumentable_name_feature", "_UI_NamedDocumentable_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                WorldPackage.Literals.NAMED_DOCUMENTABLE__NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, getString ( "_UI_namingPropertyCategory" ), //$NON-NLS-1$
+                null ) );
     }
 
     /**
@@ -92,7 +95,35 @@ public class GlobalizeComponentItemProvider extends DataComponentItemProvider
      */
     protected void addComponentsPropertyDescriptor ( final Object object )
     {
-        this.itemPropertyDescriptors.add ( new ItemPropertyDescriptor ( ( (ComposeableAdapterFactory)this.adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_GlobalizeComponent_components_feature" ), getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_components_feature", "_UI_GlobalizeComponent_type" ), ComponentPackage.Literals.GLOBALIZE_COMPONENT__COMPONENTS, true, false, true, null, getString ( "_UI_dataPropertyCategory" ), null) {
+        this.itemPropertyDescriptors.add ( new ItemPropertyDescriptor ( ( (ComposeableAdapterFactory)this.adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_GlobalizeComponent_components_feature" ), getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_components_feature", "_UI_GlobalizeComponent_type" ), ComponentPackage.Literals.GLOBALIZE_COMPONENT__COMPONENTS, true, false, true, null, getString ( "_UI_dataPropertyCategory" ), null ) {
+
+            @Override
+            public IItemLabelProvider getLabelProvider ( final Object object )
+            {
+                final IItemLabelProvider labelProvider = super.getLabelProvider ( object );
+
+                return new IItemLabelProvider () {
+
+                    @Override
+                    public String getText ( final Object object )
+                    {
+                        String label = labelProvider.getText ( object );
+
+                        if ( label != null && object instanceof Component )
+                        {
+                            label = String.format ( "%s \u2219 %s", label, Components.makeFullQualified ( (Component)object ) );
+                        }
+
+                        return label;
+                    }
+
+                    @Override
+                    public Object getImage ( final Object object )
+                    {
+                        return labelProvider.getImage ( object );
+                    }
+                };
+            }
 
             @Override
             public java.util.Collection<?> getChoiceOfValues ( final Object object )
@@ -124,12 +155,12 @@ public class GlobalizeComponentItemProvider extends DataComponentItemProvider
                     {
                         if ( ! ( (DataComponent)o ).getMasterOn ().contains ( im ) )
                         {
-                            i.remove ( );
+                            i.remove ();
                         }
                     }
                 }
                 return result;
-            };
+            }
 
         } );
     }
@@ -143,9 +174,9 @@ public class GlobalizeComponentItemProvider extends DataComponentItemProvider
     protected void addSourceMasterPropertyDescriptor ( Object object )
     {
         itemPropertyDescriptors.add ( createItemPropertyDescriptor ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_GlobalizeComponent_sourceMaster_feature" ), //$NON-NLS-1$
-        getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_sourceMaster_feature", "_UI_GlobalizeComponent_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        ComponentPackage.Literals.GLOBALIZE_COMPONENT__SOURCE_MASTER, true, false, true, null, getString ( "_UI_runtimePropertyCategory" ), //$NON-NLS-1$
-        null ) );
+                getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_sourceMaster_feature", "_UI_GlobalizeComponent_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                ComponentPackage.Literals.GLOBALIZE_COMPONENT__SOURCE_MASTER, true, false, true, null, getString ( "_UI_runtimePropertyCategory" ), //$NON-NLS-1$
+                null ) );
     }
 
     /**
@@ -157,9 +188,9 @@ public class GlobalizeComponentItemProvider extends DataComponentItemProvider
     protected void addMasterOnPropertyDescriptor ( Object object )
     {
         itemPropertyDescriptors.add ( createItemPropertyDescriptor ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (), getResourceLocator (), getString ( "_UI_GlobalizeComponent_masterOn_feature" ), //$NON-NLS-1$
-        getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_masterOn_feature", "_UI_GlobalizeComponent_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        ComponentPackage.Literals.GLOBALIZE_COMPONENT__MASTER_ON, false, false, false, null, getString ( "_UI_runtimePropertyCategory" ), //$NON-NLS-1$
-        null ) );
+                getString ( "_UI_PropertyDescriptor_description", "_UI_GlobalizeComponent_masterOn_feature", "_UI_GlobalizeComponent_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                ComponentPackage.Literals.GLOBALIZE_COMPONENT__MASTER_ON, false, false, false, null, getString ( "_UI_runtimePropertyCategory" ), //$NON-NLS-1$
+                null ) );
     }
 
     /**
