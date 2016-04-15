@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -141,7 +142,8 @@ public class RedhatHandler extends CommonPackageHandler
                 @Override
                 public FileVisitResult visitFile ( final Path file, final BasicFileAttributes attrs ) throws IOException
                 {
-                    final String targetName = "/" + base.relativize ( file ).toString ();
+                    final Path localPath = Paths.get ( "/" ).resolve ( base.relativize ( file ) ).normalize ();
+                    final String targetName = localPath.toString ().replace ( File.separator, "/" );
                     final FileInformation i = context.getFiles ().get ( targetName );
                     ctx.addFile ( targetName, file, BuilderContext.simpleFileProvider ().customize ( fi -> applyFileInformation ( fi, i, true ) ) );
                     return FileVisitResult.CONTINUE;
