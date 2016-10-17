@@ -269,11 +269,11 @@ public class WixDeploymentSetupBuilder extends XMLBase
         Element cond;
 
         cond = createElement ( product, "Condition" ); //$NON-NLS-1$
-        cond.setAttribute ( "Message", "You need to install the Eclipse SCADA Common Driver package first (jar)" ); //$NON-NLS-1$ //$NON-NLS-2$
+        cond.setAttribute ( "Message", "You need to install the Eclipse NeoSCADA Common Driver package first (jar)" ); //$NON-NLS-1$ //$NON-NLS-2$
         cond.appendChild ( product.getOwnerDocument ().createCDATASection ( "ES_JARS OR Installed" ) ); //$NON-NLS-1$
 
         cond = createElement ( product, "Condition" ); //$NON-NLS-1$
-        cond.setAttribute ( "Message", "You need to install the Eclipse SCADA Common Driver package first (extra-jars)" ); //$NON-NLS-1$ //$NON-NLS-2$
+        cond.setAttribute ( "Message", "You need to install the Eclipse NeoSCADA Common Driver package first (extra-jars)" ); //$NON-NLS-1$ //$NON-NLS-2$
         cond.appendChild ( product.getOwnerDocument ().createCDATASection ( "ES_EXTRA_JARS OR Installed" ) ); //$NON-NLS-1$
     }
 
